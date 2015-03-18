@@ -16,7 +16,6 @@
 #include "nodeidentificationindicator.h"
 #include "remotecommandresponse.h"
 
-
 #include <QDebug>
 #include <QTimer>
 #include <QTime>

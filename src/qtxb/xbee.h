@@ -4,21 +4,15 @@
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "digimeshpacket.h"
 
-#include "atcommand.h"
-#include "atcommandqueueparam.h"
-#include "txrequest.h"
-#include "txrequestexplicit.h"
-#include "remotecommandrequest.h"
-
-#include "atcommandresponse.h"
-#include "modemstatus.h"
-#include "transmitstatus.h"
-#include "rxindicator.h"
-#include "rxindicatorexplicit.h"
-#include "nodeidentificationindicator.h"
-#include "remotecommandresponse.h"
+class DigiMeshPacket;
+class ATCommandResponse;
+class ModemStatus;
+class TransmitStatus;
+class RXIndicator;
+class RXIndicatorExplicit;
+class NodeIdentificationIndicator;
+class RemoteCommandResponse;
 
 class XBee : public QObject
 {

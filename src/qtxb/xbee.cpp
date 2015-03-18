@@ -349,7 +349,7 @@ void XBee::processATCommandRespone(const ATCommandResponse *rep) {
     ATCommand::ATCommandType at = rep->atCommand();
     QByteArray data = rep->data();
 
-    qDebug() << Q_FUNC_INFO << "AT command" << ATCommand::atCommandToByteArray(at) << " : " << data.toHex();
+    qDebug() << Q_FUNC_INFO << "AT command" << ATCommand::atCommandToString(at) << QString("0x%1").arg(at , 0, 16) << " : " << data.toHex();
 
     switch(at) {
     // Addressing
@@ -369,7 +369,7 @@ void XBee::processATCommandRespone(const ATCommandResponse *rep) {
     case ATCommand::Command_DD : m_dd = data.toInt(); emit DDChanged(m_dd); break;
     case ATCommand::Command_CR : m_cr = data.toInt(); emit CRChanged(m_cr); break;
     default:
-        qWarning() << Q_FUNC_INFO << "Unhandled AT command " << at;
+        qWarning() << Q_FUNC_INFO << "Unhandled AT command " <<  QString("0x%1").arg(at , 0, 16);;
     }
 }
 

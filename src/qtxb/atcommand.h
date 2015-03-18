@@ -124,6 +124,7 @@ public:
 
     static QString atCommandToString(const ATCommandType command);
     static QByteArray atCommandToByteArray(const ATCommandType command);
+    static ATCommandType atCommandFromByteArray(const QByteArray & command);
 
  private:
     QByteArray m_command;

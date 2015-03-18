@@ -59,7 +59,15 @@ QString ATCommand::atCommandToString(const ATCommandType command)
 QByteArray ATCommand::atCommandToByteArray(const ATCommandType command)
 {
     QByteArray at;
-    at.append(command&0xFF);
     at.append((command>>8)&0xFF);
+    at.append(command&0xFF);
+    return at;
+}
+
+ATCommand::ATCommandType ATCommand::atCommandFromByteArray(const QByteArray &command)
+{
+    ATCommand::ATCommandType at;
+    at = (ATCommand::ATCommandType) ( ( (command.at(0)&0xFF)<<8) + command.at(1) );
+
     return at;
 }

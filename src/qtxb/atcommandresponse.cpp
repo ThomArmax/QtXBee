@@ -16,6 +16,7 @@ bool ATCommandResponse::setPacket(const QByteArray &packet)
 Q_DECL_OVERRIDE
 {
     bool bRet = false;
+    QByteArray at;
     m_packet.clear();
     m_packet.append(packet);
     setStartDelimiter(packet.at(0));
@@ -23,7 +24,9 @@ Q_DECL_OVERRIDE
     if(packet.size() == packet.at(2)+4) {
         setFrameType((APIFrameType)(packet.at(3)&0xFF));
         setFrameId(packet.at(4));
-        setATCommand(QByteArray().append(packet.at(5)).append(packet.at(6)));
+        at.append(packet.at(5));
+        at.append(packet.at(6));
+        setATCommand(at);
         setCommandStatus(packet.at(7));
         int count = 8;
         while(count < packet.size()-1) {
@@ -57,14 +60,14 @@ void ATCommandResponse::setATCommand(const QByteArray &at)
         return;
     }
 
-    m_atCommand = (ATCommand::ATCommandType) ( ( (at.at(0)&0xFF)<<8) + at.at(1) );
+    m_atCommand = ATCommand::atCommandFromByteArray(at);
 }
 
 ATCommand::ATCommandType ATCommandResponse::atCommand() const {
     return m_atCommand;
 }
 
-unsigned ATCommandResponse::commandStatus() const{
+unsigned ATCommandResponse::commandStatus() const {
     return m_commandStatus;
 }
 

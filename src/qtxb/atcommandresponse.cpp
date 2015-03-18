@@ -52,15 +52,16 @@ void ATCommandResponse::setATCommand(ATCommand::ATCommandType at)
 
 void ATCommandResponse::setATCommand(const QByteArray &at)
 {
-    if(at.isNull() || at.isEmpty())
+    if(at.isNull() || at.isEmpty() || at.size() != 2) {
+        qWarning() << Q_FUNC_INFO << "invalid at command" << at;
         return;
+    }
 
-    if(at.size() == 2) {
-        m_atCommand = (ATCommand::ATCommandType) ( ( (at.at(1)&0xFF)<<8) + at.at(0) );
-    }
-    else {
-        m_atCommand = (ATCommand::ATCommandType)at.at(0);
-    }
+    m_atCommand = (ATCommand::ATCommandType) ( ( (at.at(0)&0xFF)<<8) + at.at(1) );
+}
+
+ATCommand::ATCommandType ATCommandResponse::atCommand() const {
+    return m_atCommand;
 }
 
 unsigned ATCommandResponse::commandStatus() const{

@@ -3,6 +3,7 @@
 #include "xbeeparamitem.h"
 #include "xbeeparamstablemodel.h"
 
+#include <QMessageBox>
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QtArmax-1.0/datamodels/listmodel.h>
@@ -13,9 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
     xbee(NULL)
 {
     xbee = new XBee(this);
-    paramsModel = new XBeeParamsTableModel(new XBeeParamItem, this);
+    //paramsModel = new XBeeParamsTableModel(new XBeeParamItem, this);
+    paramsModel = new XBeeParamsTableModel(xbee, this);
 
-    paramsModel->appendRow(new XBeeParamItem("PanID", QVariant(), paramsModel));
+    //paramsModel->appendRow(new XBeeParamItem("PanID", QVariant(), paramsModel));
 
     ui->setupUi(this);
     QHeaderView * header = new QHeaderView(Qt::Horizontal, ui->tableView);
@@ -37,5 +39,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::openSelectedSerialPort()
 {
-    xbee->setSerialPort(ui->serialPortSelection->currentData().toString());
+    if(!xbee->setSerialPort(ui->serialPortSelection->currentData().toString())) {
+        QMessageBox::information(
+            this,
+            "Error",
+            QString("Failed to open serial port \"%1\"").arg(ui->serialPortSelection->currentData().toString()));
+    }
+    xbee->loadAddressingProperties();
 }

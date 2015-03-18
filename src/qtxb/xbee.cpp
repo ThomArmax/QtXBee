@@ -17,12 +17,8 @@
 #include "remotecommandresponse.h"
 
 #include <QDebug>
-#include <QTimer>
-#include <QTime>
-#include <QList>
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
-#include <QCoreApplication>
+#include <QSerialPort>
+#include <QSerialPortInfo>
 
 XBee::XBee(QObject *parent) :
     QObject(parent),
@@ -43,7 +39,7 @@ XBee::XBee(const QString &serialPort, QObject *parent) :
 
 XBee::~XBee()
 {
-    if(serial->isOpen())
+    if(serial && serial->isOpen())
     {
         serial->close();
         qDebug() << "XBEE: Serial Port closed successfully";

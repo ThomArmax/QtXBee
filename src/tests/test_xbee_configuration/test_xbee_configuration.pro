@@ -18,9 +18,11 @@ LIBS += -lQtArmaxCore
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    xbeeparamitem.cpp
+    xbeeparamitem.cpp \
+    xbeeparamstablemodel.cpp
 
 HEADERS  += mainwindow.h \
-    xbeeparamitem.h
+    xbeeparamitem.h \
+    xbeeparamstablemodel.h
 
 FORMS    += mainwindow.ui

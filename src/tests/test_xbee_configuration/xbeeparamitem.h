@@ -9,7 +9,7 @@ class XBeeParamItem : public Armax::Datamodels::AbstractListItem
     Q_OBJECT
 public:
     enum Roles {
-        NameRole,
+        NameRole = /*Qt::UserRole+1*/0,
         ValueRole
     };
 

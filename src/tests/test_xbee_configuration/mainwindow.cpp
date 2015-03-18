@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "xbeeparamitem.h"
+#include "xbeeparamstablemodel.h"
 
 #include <QSerialPort>
 #include <QSerialPortInfo>
@@ -12,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     xbee(NULL)
 {
     xbee = new XBee(this);
-    paramsModel = new Armax::Datamodels::ListModel(new XBeeParamItem, this);
+    paramsModel = new XBeeParamsTableModel(new XBeeParamItem, this);
 
     paramsModel->appendRow(new XBeeParamItem("PanID", QVariant(), paramsModel));
 

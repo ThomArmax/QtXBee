@@ -1,5 +1,5 @@
-#ifndef QTXB_H
-#define QTXB_H
+#ifndef XBEE_H
+#define XBEE_H
 
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
@@ -20,19 +20,19 @@
 #include "nodeidentificationindicator.h"
 #include "remotecommandresponse.h"
 
-class QtXB : public QObject
+class XBee : public QObject
 {
     Q_OBJECT
 public:
-    explicit QtXB(QObject *parent = 0);
-    QtXB(const QString & serialPort, QObject * parent = 0);
+    explicit XBee(QObject *parent = 0);
+    XBee(const QString & serialPort, QObject * parent = 0);
 
     bool setSerialPort(const QString & serialPort);
     bool applyDefaultSerialPortConfig();
     void send(DigiMeshPacket *request);
     void broadcast(QString data);
     void unicast(QByteArray address, QString data);
-    ~QtXB();
+    ~XBee();
 
 signals:
     void receivedATCommandResponse(ATCommandResponse *response);

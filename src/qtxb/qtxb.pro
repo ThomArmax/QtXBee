@@ -32,8 +32,8 @@ SOURCES += \
     rxindicatorexplicit.cpp \
     nodeidentificationindicator.cpp \
     remotecommandresponse.cpp \
-    qtxb.cpp \
-    digimeshpacketresponse.cpp
+    digimeshpacketresponse.cpp \
+    xbee.cpp
 
 HEADERS += \
     digimeshpacket.h \
@@ -50,8 +50,8 @@ HEADERS += \
     rxindicatorexplicit.h \
     nodeidentificationindicator.h \
     remotecommandresponse.h \
-    qtxb.h \
-    digimeshpacketresponse.h
+    digimeshpacketresponse.h \
+    xbee.h
 
 OTHER_FILES += \
     qtxb.pri \

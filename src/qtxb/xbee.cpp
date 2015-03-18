@@ -1,4 +1,4 @@
-#include "qtxb.h"
+#include "xbee.h"
 
 #include "digimeshpacket.h"
 
@@ -25,14 +25,14 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <QCoreApplication>
 
-QtXB::QtXB(QObject *parent) :
+XBee::XBee(QObject *parent) :
     QObject(parent),
     serial(NULL),
     xbeeFound(false)
 {
 }
 
-QtXB::QtXB(const QString &serialPort, QObject *parent) :
+XBee::XBee(const QString &serialPort, QObject *parent) :
     QObject(parent),
     serial(NULL),
     xbeeFound(false)
@@ -42,7 +42,7 @@ QtXB::QtXB(const QString &serialPort, QObject *parent) :
     initSerialConnection();
 }
 
-QtXB::~QtXB()
+XBee::~XBee()
 {
     if(serial->isOpen())
     {
@@ -51,7 +51,7 @@ QtXB::~QtXB()
     }
 }
 
-bool QtXB::setSerialPort(const QString &serialPort)
+bool XBee::setSerialPort(const QString &serialPort)
 {
     if(serial) {
         serial->close();
@@ -65,7 +65,7 @@ bool QtXB::setSerialPort(const QString &serialPort)
     return initSerialConnection();
 }
 
-bool QtXB::applyDefaultSerialPortConfig()
+bool XBee::applyDefaultSerialPortConfig()
 {
     if(serial == NULL)
         return false;
@@ -77,30 +77,30 @@ bool QtXB::applyDefaultSerialPortConfig()
             serial->setFlowControl(QSerialPort::NoFlowControl);
 }
 
-void QtXB::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
+void XBee::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
     qDebug() << "Received ATCommandResponse: ";
     qDebug() << qPrintable(digiMeshPacket->toString());
 }
-void QtXB::displayModemStatus(ModemStatus *digiMeshPacket){
+void XBee::displayModemStatus(ModemStatus *digiMeshPacket){
     qDebug() << "Received ModemStatus: " << digiMeshPacket->packet().toHex();
 }
-void QtXB::displayTransmitStatus(TransmitStatus *digiMeshPacket){
+void XBee::displayTransmitStatus(TransmitStatus *digiMeshPacket){
     qDebug() << "Received TransmitStatus: " << digiMeshPacket->packet().toHex();
 }
-void QtXB::displayRXIndicator(RXIndicator *digiMeshPacket){
+void XBee::displayRXIndicator(RXIndicator *digiMeshPacket){
     qDebug() << "Received RXIndicator: " << digiMeshPacket->data().toHex();
 }
-void QtXB::displayRXIndicatorExplicit(RXIndicatorExplicit *digiMeshPacket){
+void XBee::displayRXIndicatorExplicit(RXIndicatorExplicit *digiMeshPacket){
     qDebug() << "Received RXIndicatorExplicit: " << digiMeshPacket->packet().toHex();
 }
-void QtXB::displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket){
+void XBee::displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket){
     qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->packet().toHex();
 }
-void QtXB::displayRemoteCommandResponse(RemoteCommandResponse *digiMeshPacket){
+void XBee::displayRemoteCommandResponse(RemoteCommandResponse *digiMeshPacket){
     qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->packet().toHex();
 }
 
-void QtXB::send(DigiMeshPacket *request)
+void XBee::send(DigiMeshPacket *request)
 {
     request->assemblePacket();
     if(xbeeFound && serial->isOpen())
@@ -115,14 +115,14 @@ void QtXB::send(DigiMeshPacket *request)
     }
 }
 
-void QtXB::broadcast(QString data)
+void XBee::broadcast(QString data)
 {
     TXRequest *request = new TXRequest(this);
     request->setData(data.toLatin1());
     send(request);
 }
 
-void QtXB::unicast(QByteArray address, QString data)
+void XBee::unicast(QByteArray address, QString data)
 {
     TXRequest *request = new TXRequest(this);
     request->setDestAddr64(address);
@@ -130,7 +130,7 @@ void QtXB::unicast(QByteArray address, QString data)
     send(request);
 }
 
-void QtXB::readData()
+void XBee::readData()
 {
     unsigned startDelimiter = 0x7E;
 
@@ -152,7 +152,7 @@ void QtXB::readData()
     }
 }
 
-void QtXB::processPacket(QByteArray packet)
+void XBee::processPacket(QByteArray packet)
 {
 
     unsigned packetType = (unsigned char)packet.at(3);
@@ -211,7 +211,7 @@ void QtXB::processPacket(QByteArray packet)
 //___________________________________________PRIVATE API___________________________________________
 //_________________________________________________________________________________________________
 
-bool QtXB::initSerialConnection()
+bool XBee::initSerialConnection()
 {
     if(!serial)
         return false;

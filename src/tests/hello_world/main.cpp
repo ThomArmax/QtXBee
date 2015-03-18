@@ -2,13 +2,13 @@
 #include <QtSerialPort/QSerialPort>
 #include <QTime>
 
-#include "qtxb.h"
+#include "xbee.h"
 #include "txrequest.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    QtXB xb("/dev/ttyUSB0");
+    XBee xb("/dev/ttyUSB0");
 
     QObject::connect(&xb, SIGNAL(receivedATCommandResponse(ATCommandResponse*)), &xb, SLOT(displayATCommandResponse(ATCommandResponse*)));
     QObject::connect(&xb, SIGNAL(receivedModemStatus(ModemStatus*)), &xb, SLOT(displayModemStatus(ModemStatus*)));

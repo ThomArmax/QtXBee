@@ -9,6 +9,7 @@ class ATCommand : public DigiMeshPacket
     Q_OBJECT
 public:
     enum ATCommandType {
+        Command_Undefined = 0,
         // Addressing
         Command_DH = 0x4448,
         Command_DL = 0x444C,
@@ -27,6 +28,7 @@ public:
         Command_CR = 0x4352,
         // Networking
         Command_CH = 0x4348,
+        Command_DA = 0x4441,
         Command_ID = 0x4944,
         Command_OP = 0x4F50,
         Command_NH = 0x4E48,

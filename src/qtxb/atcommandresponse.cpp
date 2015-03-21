@@ -2,12 +2,16 @@
 #include <QDebug>
 
 ATCommandResponse::ATCommandResponse(QObject *parent) :
-    DigiMeshPacketResponse(parent)
+    DigiMeshPacketResponse(parent),
+    m_atCommand(ATCommand::Command_Undefined),
+    m_commandStatus(InvalidCommand)
 {
 }
 
 ATCommandResponse::ATCommandResponse(const QByteArray &data, QObject *parent)  :
-    DigiMeshPacketResponse(data, parent)
+    DigiMeshPacketResponse(data, parent),
+    m_atCommand(ATCommand::Command_Undefined),
+    m_commandStatus(InvalidCommand)
 {
     setPacket(data);
 }
@@ -27,7 +31,7 @@ Q_DECL_OVERRIDE
         at.append(packet.at(5));
         at.append(packet.at(6));
         setATCommand(at);
-        setCommandStatus(packet.at(7));
+        setCommandStatus((Status)packet.at(7));
         int count = 8;
         while(count < packet.size()-1) {
             m_data.append(packet.at(count));
@@ -44,7 +48,7 @@ Q_DECL_OVERRIDE
     return bRet;
 }
 
-void ATCommandResponse::setCommandStatus(unsigned cs){
+void ATCommandResponse::setCommandStatus(Status cs){
     m_commandStatus = cs;
 }
 
@@ -79,7 +83,21 @@ QString ATCommandResponse::toString() {
     str.append(QString("Start delimiter : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
     str.append(QString("Length : %1 bytes\n").arg(m_length));
     str.append(QString("Data : 0x%1 (%2)\n").arg(QString(m_data.toHex())).arg(QString(m_data)));
-    str.append(QString("Checksum : %1").arg(checksum()));
+    str.append(QString("Checksum : %1\n").arg(checksum()));
+    str.append(QString("Command Status : %1 (0x%2)\n").arg(statusToString(m_commandStatus)).arg(m_commandStatus,0,16));
 
     return str;
+}
+
+QString ATCommandResponse::statusToString(const ATCommandResponse::Status status) {
+    QString st = "Unknown";
+    switch(status) {
+    case Ok : st = "OK"; break;
+    case Error : st = "Error"; break;
+    case InvalidCommand : st = "Invalid Command"; break;
+    case InvalidParameter : st = "Invalid Parameter"; break;
+    case TXFailure : st = "Tx Failure"; break;
+    }
+
+    return st;
 }

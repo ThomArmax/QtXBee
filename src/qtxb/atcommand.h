@@ -125,7 +125,7 @@ public:
 
     void setCommand(const ATCommandType command);
     void setCommand(const QString &command);
-    void setParameter(const QByteArray &array);
+    void setParameter(const QByteArray &param);
 
     QByteArray command() const;
     QByteArray parameter() const;

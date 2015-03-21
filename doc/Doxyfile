@@ -1146,29 +1146,7 @@ HTML_EXTRA_STYLESHEET  =
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = src/res/full-kernel-mx6sl-labs.pdf \
-                         src/res/qt-yocto-imx6dlsabresd.tar.gz \
-                         src/res/canbus.png \
-                         src/res/canbus_send-receive.png \
-                         src/res/ClickClick_CanBusProtocol_1.2draft.pdf \
-                         src/res/recipeclasses_sprint3.jpg \
-                         src/res/recipe_sequence_managements.jpg \
-                         src/res/recipe_database_design.png \
-                         src/res/recipeclasses_sprint4.jpg \
-                         src/res/statemachine.jpg \
-                         src/res/layout.png \
-                         src/res/application_functional_archi.jpg \
-                         src/res/gui_archi.jpg \
-                         src/res/configsgroup_structure.jpg \
-                         src/res/configsgroup_database.jpg \
-                         src/res/customization_class_design.jpg \
-                         src/res/rc.local \
-                         src/res/BOARD_COMMUNICATION.pdf \
-                         src/res/brewer_ES_FB_param_explanation.pdf \
-                         src/res/CPUandACTUATBStates.pdf \
-                         src/res/TreeItem_Classes.jpg \
-                         src/res/full-kernel-mx6sl-labs.pdf \
-                         src/res/nw_mercurial_workflow.png
+HTML_EXTRA_FILES       = 
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the stylesheet and background images according to

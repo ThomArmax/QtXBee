@@ -23,14 +23,44 @@
 XBee::XBee(QObject *parent) :
     QObject(parent),
     serial(NULL),
-    xbeeFound(false)
+    xbeeFound(false),
+    m_dh(0),
+    m_dl(0),
+    m_my(0),
+    m_mp(0),
+    m_nc(0),
+    m_sh(0),
+    m_sl(0),
+    m_ni(QString()),
+    m_se(0),
+    m_de(0),
+    m_ci(0),
+    m_to(0),
+    m_np(0),
+    m_dd(0),
+    m_cr(0)
 {
 }
 
 XBee::XBee(const QString &serialPort, QObject *parent) :
     QObject(parent),
     serial(NULL),
-    xbeeFound(false)
+    xbeeFound(false),
+    m_dh(0),
+    m_dl(0),
+    m_my(0),
+    m_mp(0),
+    m_nc(0),
+    m_sh(0),
+    m_sl(0),
+    m_ni(QString()),
+    m_se(0),
+    m_de(0),
+    m_ci(0),
+    m_to(0),
+    m_np(0),
+    m_dd(0),
+    m_cr(0)
 {
     serial = new QSerialPort(serialPort, this);
     connect(serial, SIGNAL(readyRead()), SLOT(readData()));
@@ -73,8 +103,10 @@ bool XBee::applyDefaultSerialPortConfig()
 }
 
 void XBee::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
+    qDebug() << "*********************************************";
     qDebug() << "Received ATCommandResponse: ";
     qDebug() << qPrintable(digiMeshPacket->toString());
+    qDebug() << "*********************************************";
 }
 void XBee::displayModemStatus(ModemStatus *digiMeshPacket){
     qDebug() << "Received ModemStatus: " << digiMeshPacket->packet().toHex();
@@ -100,13 +132,13 @@ void XBee::send(DigiMeshPacket *request)
     request->assemblePacket();
     if(xbeeFound && serial->isOpen())
     {
-        qDebug() << Q_FUNC_INFO << "Transmit: " << request->packet().toHex();
+        qDebug() << Q_FUNC_INFO << "Transmit: " << QString("0x").append(request->packet().toHex());
         serial->write(request->packet());
         serial->flush();
     }
     else
     {
-        qDebug() << "XBEE: Cannot write to Serial Port - closed";
+        qDebug() << "XBEE: Cannot write to Serial Port" << serial->portName();
     }
 }
 
@@ -284,6 +316,7 @@ void XBee::readData()
         unsigned length = buffer.at(2)+4;
         if((unsigned char)buffer.size() >= (unsigned char)length){
             packet.append(buffer.left(length));
+            qDebug() << Q_FUNC_INFO << QString("0x").append(packet.toHex());
             processPacket(packet);
             buffer.remove(0, length);
         }
@@ -298,7 +331,6 @@ void XBee::processPacket(QByteArray packet)
     switch (packetType) {
     case DigiMeshPacket::ATCommandResponseFrame : {
         ATCommandResponse *response = new ATCommandResponse(packet);
-        emit receivedATCommandResponse(response);
         processATCommandRespone(response);
         response->deleteLater();
         break;
@@ -344,33 +376,35 @@ void XBee::processPacket(QByteArray packet)
     }
 }
 
-void XBee::processATCommandRespone(const ATCommandResponse *rep) {
+void XBee::processATCommandRespone(ATCommandResponse *rep) {
     Q_ASSERT(rep);
     ATCommand::ATCommandType at = rep->atCommand();
-    QByteArray data = rep->data();
+    QByteArray data = rep->data().toHex();
+    quint32 dataInt = QString(data).toInt(0, 16);
 
-    qDebug() << Q_FUNC_INFO << "AT command" << ATCommand::atCommandToString(at) << QString("0x%1").arg(at , 0, 16) << " : " << data.toHex();
+    qDebug() << Q_FUNC_INFO << "AT command" << ATCommand::atCommandToString(at) << QString("0x%1").arg(at , 0, 16) << " : " << data << dataInt;
 
     switch(at) {
     // Addressing
-    case ATCommand::Command_DH : m_dh = data.toInt(); emit DHChanged(m_dh); break;
-    case ATCommand::Command_DL : m_dl = data.toInt(); emit DLChanged(m_dl); break;
-    case ATCommand::Command_MY : m_my = data.toInt(); emit MYChanged(m_my); break;
-    case ATCommand::Command_MP : m_mp = data.toInt(); emit MPChanged(m_mp); break;
-    case ATCommand::Command_NC : m_nc = data.toInt(); emit NCChanged(m_nc); break;
-    case ATCommand::Command_SH : m_sh = data.toInt(); emit SHChanged(m_sh); break;
-    case ATCommand::Command_SL : m_sl = data.toInt(); emit SLChanged(m_sl); break;
+    case ATCommand::Command_DH : m_dh = dataInt; emit DHChanged(m_dh); break;
+    case ATCommand::Command_DL : m_dl = dataInt; emit DLChanged(m_dl); break;
+    case ATCommand::Command_MY : m_my = dataInt; emit MYChanged(m_my); break;
+    case ATCommand::Command_MP : m_mp = dataInt; emit MPChanged(m_mp); break;
+    case ATCommand::Command_NC : m_nc = dataInt; emit NCChanged(m_nc); break;
+    case ATCommand::Command_SH : m_sh = dataInt; emit SHChanged(m_sh); break;
+    case ATCommand::Command_SL : m_sl = dataInt; emit SLChanged(m_sl); break;
     case ATCommand::Command_NI : m_ni = data; emit NIChanged(m_ni); break;
-    case ATCommand::Command_SE : m_se = data.toInt(); emit SEChanged(m_se); break;
-    case ATCommand::Command_DE : m_de = data.toInt(); emit DEChanged(m_de); break;
-    case ATCommand::Command_CI : m_ci = data.toInt(); emit CIChanged(m_ci); break;
-    case ATCommand::Command_TO : m_to = data.toInt(); emit TOChanged(m_to); break;
-    case ATCommand::Command_NP : m_np = data.toInt(); emit NPChanged(m_np); break;
-    case ATCommand::Command_DD : m_dd = data.toInt(); emit DDChanged(m_dd); break;
-    case ATCommand::Command_CR : m_cr = data.toInt(); emit CRChanged(m_cr); break;
+    case ATCommand::Command_SE : m_se = dataInt; emit SEChanged(m_se); break;
+    case ATCommand::Command_DE : m_de = dataInt; emit DEChanged(m_de); break;
+    case ATCommand::Command_CI : m_ci = dataInt; emit CIChanged(m_ci); break;
+    case ATCommand::Command_TO : m_to = dataInt; emit TOChanged(m_to); break;
+    case ATCommand::Command_NP : m_np = dataInt; emit NPChanged(m_np); break;
+    case ATCommand::Command_DD : m_dd = dataInt; emit DDChanged(m_dd); break;
+    case ATCommand::Command_CR : m_cr = dataInt; emit CRChanged(m_cr); break;
     default:
-        qWarning() << Q_FUNC_INFO << "Unhandled AT command " <<  QString("0x%1").arg(at , 0, 16);;
+        qWarning() << Q_FUNC_INFO << "Unhandled AT command" <<  QString("0x%1 (%2)").arg(at , 0, 16).arg(ATCommand::atCommandToString(at));
     }
+    emit receivedATCommandResponse(rep);
 }
 
 bool XBee::initSerialConnection()
@@ -393,7 +427,7 @@ bool XBee::initSerialConnection()
     }
     else
     {
-        qDebug() << "XBEE: Serial Port could not be opened";
+        qDebug() << "XBEE: Serial Port" << serial->portName() << "could not be opened";
     }
 
     return false;

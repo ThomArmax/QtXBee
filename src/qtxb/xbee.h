@@ -102,7 +102,7 @@ private slots:
 private:
     bool initSerialConnection();
     void processPacket(QByteArray packet);
-    void processATCommandRespone(const ATCommandResponse * rep);
+    void processATCommandRespone(ATCommandResponse *rep);
 
 private:
     QSerialPort *serial;

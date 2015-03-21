@@ -77,14 +77,14 @@ unsigned ATCommandResponse::commandStatus() const {
 
 QString ATCommandResponse::toString() {
     QString str;
-    str.append(QString("Packet %1\n").arg(QString(packet().toHex())));
-    str.append(QString("Frame type : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
-    str.append(QString("AT command : %1 (0x%2)\n").arg(ATCommand::atCommandToString(m_atCommand)).arg(QString::number(m_atCommand, 16)));
+    str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));
+    str.append(QString("Frame type      : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
+    str.append(QString("AT command      : %1 (0x%2)\n").arg(ATCommand::atCommandToString(m_atCommand)).arg(QString::number(m_atCommand, 16)));
     str.append(QString("Start delimiter : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
-    str.append(QString("Length : %1 bytes\n").arg(m_length));
-    str.append(QString("Data : 0x%1 (%2)\n").arg(QString(m_data.toHex())).arg(QString(m_data)));
-    str.append(QString("Checksum : %1\n").arg(checksum()));
-    str.append(QString("Command Status : %1 (0x%2)\n").arg(statusToString(m_commandStatus)).arg(m_commandStatus,0,16));
+    str.append(QString("Length          : %1 bytes\n").arg(m_length));
+    str.append(QString("Data            : 0x%1 (%2)\n").arg(QString(m_data.toHex())).arg(QString(m_data)));
+    str.append(QString("Checksum        : %1\n").arg(checksum()));
+    str.append(QString("Command Status  : %1 (0x%2)").arg(statusToString(m_commandStatus)).arg(m_commandStatus,0,16));
 
     return str;
 }

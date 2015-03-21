@@ -4,6 +4,11 @@
 #include "digimeshpacket.h"
 #include <QByteArray>
 
+/**
+ * @brief The ModemStatus class represent the XBee module status.
+ *
+ * RF module status messages are sent from the module in response to specific conditions.
+ */
 class ModemStatus : public DigiMeshPacket
 {
     Q_OBJECT

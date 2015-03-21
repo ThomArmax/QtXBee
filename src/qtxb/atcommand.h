@@ -4,6 +4,14 @@
 #include "digimeshpacket.h"
 #include <QByteArray>
 
+/**
+ * @brief The ATCommand class is used to query or set module parameters on the local device.
+ *
+ * This API command applies changes after executing the command.
+ * (Changes made to module parameters take effect once changes are applied.)
+ *
+ * @sa ATCommandResponse
+ */
 class ATCommand : public DigiMeshPacket
 {
     Q_OBJECT

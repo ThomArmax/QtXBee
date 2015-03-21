@@ -3,6 +3,13 @@
 #include "digimeshpacket.h"
 #include <QByteArray>
 
+/**
+ * @brief The TransmitStatus class indicate if the packet was transmitted successfully or not.
+ *
+ * When a TXRequest is completed, the module sends a TX Status message.
+ * This message will indicate if the packet was transmitted successfully or if there was a failure.
+ * @sa TXRequest
+ */
 class TransmitStatus : public DigiMeshPacket
 {
     Q_OBJECT

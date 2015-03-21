@@ -43,6 +43,17 @@ XBeeParamsTableModel::XBeeParamsTableModel(XBee *bee, QObject *parent) :
 //    appendRow(new XBeeParamItem("CR", QVariant(), this));
 }
 
+QVariant XBeeParamsTableModel::headerData( int section, Qt::Orientation orientation, int role) const {
+    if(role == Qt::DisplayRole && orientation == Qt::Horizontal) {
+        switch(section) {
+        case XBeeParamItem::NameRole        : return "Name";
+        case XBeeParamItem::AtCommandRole   : return "AT Code";
+        case XBeeParamItem::ValueRole       : return "Value";
+        }
+    }
+    return QVariant();
+}
+
 QHash<int,QByteArray> XBeeParamsTableModel::roleNames() const {
     return m_prototype->roleNames();
 }

@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     header->setModel(paramsModel);
     ui->tableView->setHorizontalHeader(header);
     ui->tableView->setModel(paramsModel);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     connect(ui->openSerialButton, SIGNAL(clicked()), this, SLOT(openSelectedSerialPort()));
 
     foreach(QSerialPortInfo port, QSerialPortInfo::availablePorts())

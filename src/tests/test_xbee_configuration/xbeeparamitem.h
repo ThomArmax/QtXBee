@@ -12,8 +12,8 @@ class XBeeParamItem : public Armax::Datamodels::AbstractListItem
 public:
     enum Roles {
         NameRole = /*Qt::UserRole+1*/0,
-        ValueRole,
-        AtCommandRole
+        AtCommandRole,
+        ValueRole
     };
 
     explicit XBeeParamItem(QObject *parent = 0);

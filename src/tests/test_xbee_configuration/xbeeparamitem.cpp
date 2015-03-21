@@ -39,7 +39,7 @@ QVariant XBeeParamItem::data(int role) const
     switch(role) {
     case NameRole: return name();
     case ValueRole: return value();
-    case AtCommandRole: return atCommand();
+    case AtCommandRole: return QString::number(atCommand(), 16).prepend("0x");
     }
     return QVariant();
 }

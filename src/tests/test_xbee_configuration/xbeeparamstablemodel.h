@@ -9,8 +9,6 @@ class XBeeParamsTableModel : public Armax::Datamodels::ListModel
 {
     Q_OBJECT
 public:
-//    explicit XBeeParamsTableModel(QObject *parent = 0);
-//    XBeeParamsTableModel(Armax::Datamodels::AbstractListItem * proto, QObject * parent = 0);
     XBeeParamsTableModel(XBee * bee, QObject * parent = 0);
 
     QVariant data(const QModelIndex &index, int role) const;
@@ -36,6 +34,7 @@ private slots:
     void onNPChanged(const quint8 np);
     void onDDChanged(const quint16 dd);
     void onCRChanged(const quint8 cr);
+    void onReceivedATCommandResponse(ATCommandResponse*rep);
 
 private:
     XBee * m_xbee;

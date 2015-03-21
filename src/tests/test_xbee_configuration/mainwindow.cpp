@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "xbeeparamitem.h"
 #include "xbeeparamstablemodel.h"
+#include "atcommand.h"
 
 #include <QMessageBox>
 #include <QSerialPort>
@@ -45,5 +46,12 @@ void MainWindow::openSelectedSerialPort()
             "Error",
             QString("Failed to open serial port \"%1\"").arg(ui->serialPortSelection->currentData().toString()));
     }
+    ATCommand atapi;
+    atapi.setCommand(ATCommand::Command_AP);
+    atapi.setParameter("1");
+    //xbee->send(&atapi);
     xbee->loadAddressingProperties();
+
+    atapi.setCommand(ATCommand::Command_ID);
+    xbee->send(&atapi);
 }

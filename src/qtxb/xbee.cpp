@@ -20,6 +20,15 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
+/**
+ * @brief XBee's default constructor.
+ *
+ * Allocates and initializes all parameters to there default values.
+ * @note At this stage, no serial communication is initialized, so you can't communicate with your physical XBee until the serial port is initialized.
+ * @param parent parent object
+ * @sa XBee::XBee(const QString &serialPort, QObject *parent)
+ * @sa XBee::setSerialPort()
+ */
 XBee::XBee(QObject *parent) :
     QObject(parent),
     serial(NULL),
@@ -42,6 +51,13 @@ XBee::XBee(QObject *parent) :
 {
 }
 
+/**
+ * @brief XBee's constructor
+ *
+ * Allocates and initializes all parameters to there default values and try to open the serial port specified in argument.
+ * @param serialPort serial port path (eg. /dev/ttyUSB0) on with the XBee is plugged.
+ * @param parent parent object
+ */
 XBee::XBee(const QString &serialPort, QObject *parent) :
     QObject(parent),
     serial(NULL),
@@ -67,6 +83,9 @@ XBee::XBee(const QString &serialPort, QObject *parent) :
     initSerialConnection();
 }
 
+/**
+ * @brief Destroyes the XBee instance, frees allocated resources and close the serial port.
+ */
 XBee::~XBee()
 {
     if(serial && serial->isOpen())
@@ -103,6 +122,21 @@ bool XBee::close()
     return true;
 }
 
+/**
+ * @brief Sets the XBee's serial port, which we be used to communicate with it.
+ * @note Default serial port will be used :
+ * <ul>
+ * <li><b>Baud Rate</b> : 9600</li>
+ * <li><b>Data Bits</b> : 8 bits</li>
+ * <li><b>Parity</b> : No</li>
+ * <li><b>Stop Bits</b> : One stop bit</li>
+ * <li><b>Flow Control</b> : No flow control</li>
+ * </ul>
+ * @param serialPort path to the serial port
+ * @return true if succeeded; false otherwise
+ * @sa XBee::setSerialPort(const QString &serialPort, const QSerialPort::BaudRate baudRate, const QSerialPort::DataBits dataBits, const QSerialPort::Parity parity, const QSerialPort::StopBits stopBits, const QSerialPort::FlowControl flowControl)
+ * @sa XBee::applyDefaultSerialPortConfig()
+ */
 bool XBee::setSerialPort(const QString &serialPort)
 {
     if(serial) {
@@ -117,6 +151,16 @@ bool XBee::setSerialPort(const QString &serialPort)
     return initSerialConnection();
 }
 
+/**
+ * @brief Configures the serial port used to communicate with the XBee.
+ * @param serialPort path to the serial port
+ * @param baudRate the baud rate
+ * @param dataBits the data bits
+ * @param parity the parity
+ * @param stopBits the stop bits
+ * @param flowControl the flow control
+ * @return true if succeeded; false otherwise
+ */
 bool XBee::setSerialPort(const QString &serialPort, const QSerialPort::BaudRate baudRate, const QSerialPort::DataBits dataBits, const QSerialPort::Parity parity, const QSerialPort::StopBits stopBits, const QSerialPort::FlowControl flowControl)
 {
     bool bRet = false;
@@ -126,7 +170,17 @@ bool XBee::setSerialPort(const QString &serialPort, const QSerialPort::BaudRate 
     return bRet;
 }
 
-
+/**
+ * @brief Configures the serial port used to communicate with the XBee.
+ * @note This method must be called after have defining the serial port
+ * @param baudRate the baud rate
+ * @param dataBits the data bits
+ * @param parity the parity
+ * @param stopBits the stop bits
+ * @param flowControl the flow control
+ * @return true if succeeded; false otherwise.
+ * @sa XBee::setSerialPort()
+ */
 bool XBee::setSerialPortConfiguration(const QSerialPort::BaudRate baudRate, const QSerialPort::DataBits dataBits, const QSerialPort::Parity parity, const QSerialPort::StopBits stopBits, const QSerialPort::FlowControl flowControl)
 {
     if(serial == NULL)
@@ -139,6 +193,19 @@ bool XBee::setSerialPortConfiguration(const QSerialPort::BaudRate baudRate, cons
             serial->setFlowControl(flowControl);
 }
 
+/**
+ * @brief Applies the default configuration to the serial port.
+ * <ul>
+ * <li><b>Baud Rate</b> : 9600</li>
+ * <li><b>Data Bits</b> : 8 bits</li>
+ * <li><b>Parity</b> : No</li>
+ * <li><b>Stop Bits</b> : One stop bit</li>
+ * <li><b>Flow Control</b> : No flow control</li>
+ * </ul>
+ * @note You serial port must be set before calling this method
+ * @return true if succeeded; false otherwise.
+ * @sa XBee::setSerialPort()
+ */
 bool XBee::applyDefaultSerialPortConfig()
 {
     if(serial == NULL)
@@ -206,6 +273,26 @@ void XBee::unicast(QByteArray address, QString data)
     send(&request);
 }
 
+/**
+ * @brief Loads the XBee's addressing properties
+ * <ul>
+ * <li>DH</li>
+ * <li>DL</li>
+ * <li>MY</li>
+ * <li>MP</li>
+ * <li>NC</li>
+ * <li>SH</li>
+ * <li>SL</li>
+ * <li>NI</li>
+ * <li>SE</li>
+ * <li>DE</li>
+ * <li>CI</li>
+ * <li>TO</li>
+ * <li>NP</li>
+ * <li>DD</li>
+ * <li>CR</li>
+ * </ul>
+ */
 void XBee::loadAddressingProperties() {
     ATCommand at;
     at.setCommand(ATCommand::Command_DH); send(&at);

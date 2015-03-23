@@ -14,6 +14,16 @@ class RXIndicatorExplicit;
 class NodeIdentificationIndicator;
 class RemoteCommandResponse;
 
+/**
+ * @brief The XBee class is used to represents the local XBee.
+ *
+ * You can :
+ * <ul>
+ * <li>Open/Close and configure the serial interface</li>
+ * <li>Get/Set all XBee's parameters</li>
+ * <li>Send/Receive packets to/from other remote XBees</li>
+ * </ul>
+ */
 class XBee : public QObject
 {
     Q_OBJECT
@@ -73,31 +83,32 @@ public:
     quint8 NO() const { return m_np;}
     quint16 DD() const { return m_dd;}
     quint8 CR() const { return m_cr;}
-signals:
-    void DHChanged(const quint32 dh);
-    void DLChanged(const quint32 dh);
-    void MYChanged(const quint16 my);
-    void MPChanged(const quint16 mp);
-    void NCChanged(const quint32 nc);
-    void SHChanged(const quint32 sh);
-    void SLChanged(const quint32 sl);
-    void NIChanged(const QString & ni);
-    void SEChanged(const quint8 se);
-    void DEChanged(const quint8 de);
-    void CIChanged(const quint8 ci);
-    void TOChanged(const quint8 to);
-    void NPChanged(const quint8 np);
-    void DDChanged(const quint16 dd);
-    void CRChanged(const quint8 cr);
 
 signals:
-    void receivedATCommandResponse(ATCommandResponse *response);
-    void receivedModemStatus(ModemStatus *response);
-    void receivedTransmitStatus(TransmitStatus *response);
-    void receivedRXIndicator(RXIndicator *response);
-    void receivedRXIndicatorExplicit(RXIndicatorExplicit *response);
-    void receivedNodeIdentificationIndicator(NodeIdentificationIndicator *response);
-    void receivedRemoteCommandResponse(RemoteCommandResponse *response);
+    void receivedATCommandResponse(ATCommandResponse *response);                        /**< @brief Emitted when at ATCommandResponse frame is received*/
+    void receivedModemStatus(ModemStatus *response);                                    /**< @brief Emitted when at ModemStatus frame is received*/
+    void receivedTransmitStatus(TransmitStatus *response);                              /**< @brief Emitted when at TransmitStatus frame is received*/
+    void receivedRXIndicator(RXIndicator *response);                                    /**< @brief Emitted when at RXIndicator frame is received*/
+    void receivedRXIndicatorExplicit(RXIndicatorExplicit *response);                    /**< @brief Emitted when at RXIndicatorExplicit frame is received*/
+    void receivedNodeIdentificationIndicator(NodeIdentificationIndicator *response);    /**< @brief Emitted when at NodeIdentificationIndicator frame is received*/
+    void receivedRemoteCommandResponse(RemoteCommandResponse *response);                /**< @brief Emitted when at RemoteCommandResponse frame is received*/
+    // Addressing signals
+    void DHChanged(const quint32 dh);   /**< @brief Emitted when DH property changes. @sa XBee::setDH() @sa XBee::DH()*/
+    void DLChanged(const quint32 dl);   /**< @brief Emitted when DL property changes. @sa XBee::setDL() @sa XBee::DL()*/
+    void MYChanged(const quint16 my);   /**< @brief Emitted when MY property changes. @sa XBee::setMY() @sa XBee::MY()*/
+    void MPChanged(const quint16 mp);   /**< @brief Emitted when MP property changes. @sa XBee::setMP() @sa XBee::MP()*/
+    void NCChanged(const quint32 nc);   /**< @brief Emitted when NC property changes. @sa XBee::setNC() @sa XBee::NC()*/
+    void SHChanged(const quint32 sh);   /**< @brief Emitted when SH property changes. @sa XBee::setSH() @sa XBee::SH()*/
+    void SLChanged(const quint32 sl);   /**< @brief Emitted when SL property changes. @sa XBee::setSL() @sa XBee::SL()*/
+    void NIChanged(const QString & ni); /**< @brief Emitted when NI property changes. @sa XBee::setNI() @sa XBee::NI()*/
+    void SEChanged(const quint8 se);    /**< @brief Emitted when SE property changes. @sa XBee::setSE() @sa XBee::SE()*/
+    void DEChanged(const quint8 de);    /**< @brief Emitted when DE property changes. @sa XBee::setDE() @sa XBee::DE()*/
+    void CIChanged(const quint8 ci);    /**< @brief Emitted when CI property changes. @sa XBee::setCI() @sa XBee::CI()*/
+    void TOChanged(const quint8 to);    /**< @brief Emitted when TO property changes. @sa XBee::setTO() @sa XBee::TO()*/
+    void NPChanged(const quint8 np);    /**< @brief Emitted when NP property changes. @sa XBee::setNP() @sa XBee::NP()*/
+    void DDChanged(const quint16 dd);   /**< @brief Emitted when DD property changes. @sa XBee::setDD() @sa XBee::DD()*/
+    void CRChanged(const quint8 cr);    /**< @brief Emitted when CR property changes. @sa XBee::setCR() @sa XBee::CR()*/
+
 
 public slots:
     void loadAddressingProperties();

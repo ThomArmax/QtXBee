@@ -76,6 +76,33 @@ XBee::~XBee()
     }
 }
 
+/**
+ * @brief Opens the XBee' serial port
+ * @return true if succeeded; false otherwise.
+ * @sa XBee::close()
+ * @sa XBee::setSerialPort()
+ */
+bool XBee::open()
+{
+    bool bRet = false;
+    if(serial) {
+        bRet = serial->open(QIODevice::ReadWrite);
+    }
+    return bRet;
+}
+
+/**
+ * @brief Closes the XBee' serial port
+ * @return true if succeeded; false otherwise
+ */
+bool XBee::close()
+{
+    if(serial) {
+        serial->close();
+    }
+    return true;
+}
+
 bool XBee::setSerialPort(const QString &serialPort)
 {
     if(serial) {
@@ -144,17 +171,17 @@ void XBee::send(DigiMeshPacket *request)
 
 void XBee::broadcast(QString data)
 {
-    TXRequest *request = new TXRequest(this);
-    request->setData(data.toLatin1());
-    send(request);
+    TXRequest request;
+    request.setData(data.toLatin1());
+    send(&request);
 }
 
 void XBee::unicast(QByteArray address, QString data)
 {
-    TXRequest *request = new TXRequest(this);
-    request->setDestAddr64(address);
-    request->setData(data.toLatin1());
-    send(request);
+    TXRequest request;
+    request.setDestAddr64(address);
+    request.setData(data.toLatin1());
+    send(&request);
 }
 
 void XBee::loadAddressingProperties() {
@@ -372,7 +399,9 @@ void XBee::processPacket(QByteArray packet)
         break;
     }
     default:
-        qDebug() << "Error:  Unknown Packet: " << packet.toHex();
+        qDebug() << Q_FUNC_INFO << qPrintable(QString("Error: Unknown or Unhandled Packet (type=%1): 0x%2").
+                                              arg(packetType,0,16).
+                                              arg(QString(packet.toHex())));
     }
 }
 

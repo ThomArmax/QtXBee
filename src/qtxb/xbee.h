@@ -88,6 +88,9 @@ signals:
 
 public slots:
     void loadAddressingProperties();
+    bool open();
+    bool close();
+
     void displayATCommandResponse(ATCommandResponse *digiMeshPacket);
     void displayModemStatus(ModemStatus *digiMeshPacket);
     void displayTransmitStatus(TransmitStatus *digiMeshPacket);

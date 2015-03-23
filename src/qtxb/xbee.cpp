@@ -117,6 +117,28 @@ bool XBee::setSerialPort(const QString &serialPort)
     return initSerialConnection();
 }
 
+bool XBee::setSerialPort(const QString &serialPort, const QSerialPort::BaudRate baudRate, const QSerialPort::DataBits dataBits, const QSerialPort::Parity parity, const QSerialPort::StopBits stopBits, const QSerialPort::FlowControl flowControl)
+{
+    bool bRet = false;
+    if(setSerialPort(serialPort)) {
+        bRet = setSerialPortConfiguration(baudRate, dataBits, parity, stopBits, flowControl);
+    }
+    return bRet;
+}
+
+
+bool XBee::setSerialPortConfiguration(const QSerialPort::BaudRate baudRate, const QSerialPort::DataBits dataBits, const QSerialPort::Parity parity, const QSerialPort::StopBits stopBits, const QSerialPort::FlowControl flowControl)
+{
+    if(serial == NULL)
+        return false;
+
+    return  serial->setBaudRate(baudRate) &&
+            serial->setDataBits(dataBits) &&
+            serial->setParity(parity) &&
+            serial->setStopBits(stopBits) &&
+            serial->setFlowControl(flowControl);
+}
+
 bool XBee::applyDefaultSerialPortConfig()
 {
     if(serial == NULL)

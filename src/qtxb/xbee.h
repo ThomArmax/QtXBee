@@ -28,6 +28,19 @@ public:
     void send(DigiMeshPacket *request);
 
     bool setSerialPort(const QString & serialPort);
+    bool setSerialPort(
+            const QString &serialPort,
+            const QSerialPort::BaudRate baudRate,
+            const QSerialPort::DataBits dataBits,
+            const QSerialPort::Parity parity,
+            const QSerialPort::StopBits stopBits,
+            const QSerialPort::FlowControl flowControl);
+    bool setSerialPortConfiguration(
+            const QSerialPort::BaudRate baudRate,
+            const QSerialPort::DataBits dataBits,
+            const QSerialPort::Parity parity,
+            const QSerialPort::StopBits stopBits,
+            const QSerialPort::FlowControl flowControl);
 
     // Adressing
     bool setDH(const quint32 dh);

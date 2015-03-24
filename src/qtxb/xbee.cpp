@@ -31,8 +31,9 @@
  */
 XBee::XBee(QObject *parent) :
     QObject(parent),
-    serial(NULL),
+    m_serial(NULL),
     xbeeFound(false),
+    m_mode(NormalMode),
     m_dh(0),
     m_dl(0),
     m_my(0),
@@ -60,8 +61,9 @@ XBee::XBee(QObject *parent) :
  */
 XBee::XBee(const QString &serialPort, QObject *parent) :
     QObject(parent),
-    serial(NULL),
+    m_serial(NULL),
     xbeeFound(false),
+    m_mode(NormalMode),
     m_dh(0),
     m_dl(0),
     m_my(0),
@@ -78,8 +80,8 @@ XBee::XBee(const QString &serialPort, QObject *parent) :
     m_dd(0),
     m_cr(0)
 {
-    serial = new QSerialPort(serialPort, this);
-    connect(serial, SIGNAL(readyRead()), SLOT(readData()));
+    m_serial = new QSerialPort(serialPort, this);
+    connect(m_serial, SIGNAL(readyRead()), SLOT(readData()));
     initSerialConnection();
 }
 
@@ -88,9 +90,9 @@ XBee::XBee(const QString &serialPort, QObject *parent) :
  */
 XBee::~XBee()
 {
-    if(serial && serial->isOpen())
+    if(m_serial && m_serial->isOpen())
     {
-        serial->close();
+        m_serial->close();
         qDebug() << "XBEE: Serial Port closed successfully";
     }
 }
@@ -104,8 +106,8 @@ XBee::~XBee()
 bool XBee::open()
 {
     bool bRet = false;
-    if(serial) {
-        bRet = serial->open(QIODevice::ReadWrite);
+    if(m_serial) {
+        bRet = m_serial->open(QIODevice::ReadWrite);
     }
     return bRet;
 }
@@ -116,8 +118,8 @@ bool XBee::open()
  */
 bool XBee::close()
 {
-    if(serial) {
-        serial->close();
+    if(m_serial) {
+        m_serial->close();
     }
     return true;
 }
@@ -139,13 +141,14 @@ bool XBee::close()
  */
 bool XBee::setSerialPort(const QString &serialPort)
 {
-    if(serial) {
-        serial->close();
-        serial->setPortName(serialPort);
+    if(m_serial) {
+        m_serial->close();
+        m_serial->setPortName(serialPort);
+        m_serial->disconnect(this);
     }
     else {
-        serial = new QSerialPort(serialPort, this);
-        connect(serial, SIGNAL(readyRead()), SLOT(readData()));
+        m_serial = new QSerialPort(serialPort, this);
+        connect(m_serial, SIGNAL(readyRead()), SLOT(readData()));
     }
     applyDefaultSerialPortConfig();
     return initSerialConnection();
@@ -183,14 +186,14 @@ bool XBee::setSerialPort(const QString &serialPort, const QSerialPort::BaudRate 
  */
 bool XBee::setSerialPortConfiguration(const QSerialPort::BaudRate baudRate, const QSerialPort::DataBits dataBits, const QSerialPort::Parity parity, const QSerialPort::StopBits stopBits, const QSerialPort::FlowControl flowControl)
 {
-    if(serial == NULL)
+    if(m_serial == NULL)
         return false;
 
-    return  serial->setBaudRate(baudRate) &&
-            serial->setDataBits(dataBits) &&
-            serial->setParity(parity) &&
-            serial->setStopBits(stopBits) &&
-            serial->setFlowControl(flowControl);
+    return  m_serial->setBaudRate(baudRate) &&
+            m_serial->setDataBits(dataBits) &&
+            m_serial->setParity(parity) &&
+            m_serial->setStopBits(stopBits) &&
+            m_serial->setFlowControl(flowControl);
 }
 
 /**
@@ -208,14 +211,14 @@ bool XBee::setSerialPortConfiguration(const QSerialPort::BaudRate baudRate, cons
  */
 bool XBee::applyDefaultSerialPortConfig()
 {
-    if(serial == NULL)
+    if(m_serial == NULL)
         return false;
 
-    return  serial->setBaudRate(QSerialPort::Baud9600) &&
-            serial->setDataBits(QSerialPort::Data8) &&
-            serial->setParity(QSerialPort::NoParity) &&
-            serial->setStopBits(QSerialPort::OneStop) &&
-            serial->setFlowControl(QSerialPort::NoFlowControl);
+    return  m_serial->setBaudRate(QSerialPort::Baud9600) &&
+            m_serial->setDataBits(QSerialPort::Data8) &&
+            m_serial->setParity(QSerialPort::NoParity) &&
+            m_serial->setStopBits(QSerialPort::OneStop) &&
+            m_serial->setFlowControl(QSerialPort::NoFlowControl);
 }
 
 void XBee::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
@@ -246,15 +249,15 @@ void XBee::displayRemoteCommandResponse(RemoteCommandResponse *digiMeshPacket){
 void XBee::send(DigiMeshPacket *request)
 {
     request->assemblePacket();
-    if(xbeeFound && serial->isOpen())
+    if(xbeeFound && m_serial->isOpen())
     {
         qDebug() << Q_FUNC_INFO << "Transmit: " << QString("0x").append(request->packet().toHex());
-        serial->write(request->packet());
-        serial->flush();
+        m_serial->write(request->packet());
+        m_serial->flush();
     }
     else
     {
-        qDebug() << "XBEE: Cannot write to Serial Port" << serial->portName();
+        qDebug() << "XBEE: Cannot write to Serial Port" << m_serial->portName();
     }
 }
 
@@ -440,21 +443,31 @@ void XBee::readData()
 {
     unsigned startDelimiter = 0x7E;
 
-    QByteArray data = serial->readAll();
+    QByteArray data = m_serial->readAll();
+    QByteArray packet;
     buffer.append(data);
 
-    QByteArray packet;
+    qDebug() << Q_FUNC_INFO << buffer;
 
-    while(!buffer.isEmpty() && (unsigned char)buffer.at(0) != (unsigned char)startDelimiter) {
-        buffer.remove(0, 1);
+    if(m_mode == NormalMode) {
+        if(buffer.endsWith(13)) {
+            emit rawDataReceived(buffer);
+            buffer.clear();
+        }
     }
-    if(buffer.size() > 2) {
-        unsigned length = buffer.at(2)+4;
-        if((unsigned char)buffer.size() >= (unsigned char)length){
-            packet.append(buffer.left(length));
-            qDebug() << Q_FUNC_INFO << QString("0x").append(packet.toHex());
-            processPacket(packet);
-            buffer.remove(0, length);
+    else {
+
+        while(!buffer.isEmpty() && (unsigned char)buffer.at(0) != (unsigned char)startDelimiter) {
+            buffer.remove(0, 1);
+        }
+        if(buffer.size() > 2) {
+            unsigned length = buffer.at(2)+4;
+            if((unsigned char)buffer.size() >= (unsigned char)length){
+                packet.append(buffer.left(length));
+                qDebug() << Q_FUNC_INFO << QString("0x").append(packet.toHex());
+                processPacket(packet);
+                buffer.remove(0, length);
+            }
         }
     }
 }
@@ -547,17 +560,17 @@ void XBee::processATCommandRespone(ATCommandResponse *rep) {
 
 bool XBee::initSerialConnection()
 {
-    if(!serial)
+    if(!m_serial)
         return false;
 
-    if (serial->open(QIODevice::ReadWrite))
+    if (m_serial->open(QIODevice::ReadWrite))
     {
         if(applyDefaultSerialPortConfig())
         {
-            if(serial->isOpen())
+            if(m_serial->isOpen())
             {
                 qDebug() << "XBEE: Connected successfully";
-                qDebug() << "XBEE: Serial Port Name: " << serial->portName();
+                qDebug() << "XBEE: Serial Port Name: " << m_serial->portName();
                 xbeeFound = true;
                 return true;
             }
@@ -565,7 +578,7 @@ bool XBee::initSerialConnection()
     }
     else
     {
-        qDebug() << "XBEE: Serial Port" << serial->portName() << "could not be opened";
+        qDebug() << "XBEE: Serial Port" << m_serial->portName() << "could not be opened";
     }
 
     return false;

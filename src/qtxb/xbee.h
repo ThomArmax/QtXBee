@@ -32,10 +32,19 @@ public:
     XBee(const QString & serialPort, QObject * parent = 0);
     ~XBee();
 
+    enum Mode {
+        NormalMode,
+        API1Mode,
+        API2Mode
+    };
+
     bool applyDefaultSerialPortConfig();
     void broadcast(QString data);
     void unicast(QByteArray address, QString data);
     void send(DigiMeshPacket *request);
+
+    bool setMode(const Mode mode) { m_mode = mode; return true; }
+    Mode mode() const { return m_mode; }
 
     bool setSerialPort(const QString & serialPort);
     bool setSerialPort(
@@ -84,6 +93,8 @@ public:
     quint16 DD() const { return m_dd;}
     quint8 CR() const { return m_cr;}
 
+    QSerialPort * serialPort() { return m_serial; }
+
 signals:
     void receivedATCommandResponse(ATCommandResponse *response);                        /**< @brief Emitted when at ATCommandResponse frame is received*/
     void receivedModemStatus(ModemStatus *response);                                    /**< @brief Emitted when at ModemStatus frame is received*/
@@ -92,6 +103,7 @@ signals:
     void receivedRXIndicatorExplicit(RXIndicatorExplicit *response);                    /**< @brief Emitted when at RXIndicatorExplicit frame is received*/
     void receivedNodeIdentificationIndicator(NodeIdentificationIndicator *response);    /**< @brief Emitted when at NodeIdentificationIndicator frame is received*/
     void receivedRemoteCommandResponse(RemoteCommandResponse *response);                /**< @brief Emitted when at RemoteCommandResponse frame is received*/
+    void rawDataReceived(const QByteArray & data);
     // Addressing signals
     void DHChanged(const quint32 dh);   /**< @brief Emitted when DH property changes. @sa XBee::setDH() @sa XBee::DH()*/
     void DLChanged(const quint32 dl);   /**< @brief Emitted when DL property changes. @sa XBee::setDL() @sa XBee::DL()*/
@@ -132,8 +144,9 @@ private:
     void processATCommandRespone(ATCommandResponse *rep);
 
 private:
-    QSerialPort *serial;
+    QSerialPort *m_serial;
     bool xbeeFound;
+    Mode m_mode;
     QByteArray buffer;
 
     // Adressing

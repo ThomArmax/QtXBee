@@ -23,6 +23,8 @@ class RemoteCommandResponse;
  * <li>Get/Set all XBee's parameters</li>
  * <li>Send/Receive packets to/from other remote XBees</li>
  * </ul>
+ * @todo What to do when the XBee is in XBee::NormalMode at the user wants to send API packets ?
+ * Auto switch to the correct mode ? Stay in XBee::NormalMode and do nothing but warn the user ?
  */
 class XBee : public QObject
 {
@@ -32,10 +34,14 @@ public:
     XBee(const QString & serialPort, QObject * parent = 0);
     ~XBee();
 
+    /**
+     * @brief The Mode enum defines the mode the XBee is.
+     * @note The mode affects the way the data read on serial port are handled
+     */
     enum Mode {
-        NormalMode,
-        API1Mode,
-        API2Mode
+        NormalMode, /**< Standard mode */
+        API1Mode,   /**< API 1 mode */
+        API2Mode    /**< API 2 mode */
     };
 
     bool applyDefaultSerialPortConfig();
@@ -43,8 +49,8 @@ public:
     void unicast(QByteArray address, QString data);
     void send(DigiMeshPacket *request);
 
-    bool setMode(const Mode mode) { m_mode = mode; return true; }
-    Mode mode() const { return m_mode; }
+    bool setMode(const Mode mode) { m_mode = mode; return true; }   /**< @brief Sets the XBee's mode @param mode the new Mode to be applied */
+    Mode mode() const { return m_mode; }                            /**< @brief Returns the XBee's mode @return the XBee's mode */
 
     bool setSerialPort(const QString & serialPort);
     bool setSerialPort(
@@ -93,7 +99,7 @@ public:
     quint16 DD() const { return m_dd;}
     quint8 CR() const { return m_cr;}
 
-    QSerialPort * serialPort() { return m_serial; }
+    QSerialPort * serialPort() { return m_serial; } /**< @brief Returns the QSerialPort used to communicate with the XBee. @return the QSerialPort used to communicate with the XBee */
 
 signals:
     void receivedATCommandResponse(ATCommandResponse *response);                        /**< @brief Emitted when at ATCommandResponse frame is received*/
@@ -103,7 +109,7 @@ signals:
     void receivedRXIndicatorExplicit(RXIndicatorExplicit *response);                    /**< @brief Emitted when at RXIndicatorExplicit frame is received*/
     void receivedNodeIdentificationIndicator(NodeIdentificationIndicator *response);    /**< @brief Emitted when at NodeIdentificationIndicator frame is received*/
     void receivedRemoteCommandResponse(RemoteCommandResponse *response);                /**< @brief Emitted when at RemoteCommandResponse frame is received*/
-    void rawDataReceived(const QByteArray & data);
+    void rawDataReceived(const QByteArray & data);                                      /**< @brief Emitted when raw data are received on the serial port (only in NormalMode). @sa XBee::setMode() @sa XBee::Mode */
     // Addressing signals
     void DHChanged(const quint32 dh);   /**< @brief Emitted when DH property changes. @sa XBee::setDH() @sa XBee::DH()*/
     void DLChanged(const quint32 dl);   /**< @brief Emitted when DL property changes. @sa XBee::setDL() @sa XBee::DL()*/

@@ -447,8 +447,6 @@ void XBee::readData()
     QByteArray packet;
     buffer.append(data);
 
-    qDebug() << Q_FUNC_INFO << buffer;
-
     if(m_mode == NormalMode) {
         if(buffer.endsWith(13)) {
             emit rawDataReceived(buffer);

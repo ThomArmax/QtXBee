@@ -8,6 +8,8 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     hello_world \
+    #test_xbee_configuration \
+    xbee_serial_commands
 
 OTHER_FILES += \
     tests.pri

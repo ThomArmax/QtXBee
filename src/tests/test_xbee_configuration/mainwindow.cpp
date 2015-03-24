@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     xbee(NULL)
 {
     xbee = new XBee(this);
+    xbee->setMode(XBee::API1Mode);
     //paramsModel = new XBeeParamsTableModel(new XBeeParamItem, this);
     paramsModel = new XBeeParamsTableModel(xbee, this);
 

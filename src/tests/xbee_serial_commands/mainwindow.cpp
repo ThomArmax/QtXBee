@@ -49,7 +49,7 @@ void MainWindow::onSendCommandButtonClicked()
     ui->serialCommand->clear();
 
     data = QByteArray(cmd.toStdString().data());
-    log(QString("Sending \"").append(data).append("\""));
+    log(QString("> ").append(data));
 
     if(data != "+++") {
         data.append(0x0D);
@@ -65,10 +65,12 @@ void MainWindow::onRawDataReceived(const QByteArray &data)
     log(QString().append(d));
 }
 
+#include <QtWidgets/QScrollBar>
 void MainWindow::log(const QString &log)
 {
     QString text = ui->console->toPlainText();
     text.append(log).append("\n");
     ui->console->setPlainText(text);
+    ui->console->verticalScrollBar()->setValue(ui->console->verticalScrollBar()->maximum());
 }
 

@@ -1,0 +1,11 @@
+/*! \mainpage QtXBee SDK documentation
+ *
+ * \section main_intro_sec Introduction
+ *
+ * The QtXBee SDK is a Qt5 API library designed to use XBee DigiMesh modems. 
+ * It aims to be easy to use and very powerfull thanks to the Qt framework.
+ *
+ * With QtXBee, you will be able to configure the local XBee and communicate with remote modules, discover modules over the network ...
+ * \section install_sec Installation
+ *
+ */

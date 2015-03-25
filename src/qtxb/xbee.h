@@ -5,26 +5,26 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 
-class DigiMeshPacket;
-class ATCommandResponse;
-class ModemStatus;
-class TransmitStatus;
-class RXIndicator;
-class RXIndicatorExplicit;
-class NodeIdentificationIndicator;
-class RemoteCommandResponse;
+class DigiMeshFrame;
+class ATCommandResponseFrame;
+class ModemStatusFrame;
+class TransmitStatusFrame;
+class ReceivePacketFrame;
+class ExplicitRxIndicatorFrame;
+class NodeIdentificationIndicatorFrame;
+class RemoteATCommandResponseFrame;
 
 /**
  * @brief The XBee class is used to represents the local XBee.
  *
  * You can :
- * <ul>
- * <li>Open/Close and configure the serial interface</li>
- * <li>Get/Set all XBee's parameters</li>
- * <li>Send/Receive packets to/from other remote XBees</li>
- * </ul>
+ *  - Open/Close and configure the serial interface
+ *  - Get/Set all XBee's parameters
+ *  - Send/Receive packets to/from other remote XBees
+ *
  * @todo What to do when the XBee is in XBee::NormalMode at the user wants to send API packets ?
  * Auto switch to the correct mode ? Stay in XBee::NormalMode and do nothing but warn the user ?
+ * @note The whole QtXBee lib is mainly designed to work in API Mode
  */
 class XBee : public QObject
 {
@@ -36,18 +36,18 @@ public:
 
     /**
      * @brief The Mode enum defines the mode the XBee is.
-     * @note The mode affects the way the data read on serial port are handled
+     * @note The mode affects the way the data are read on serial port.
      */
     enum Mode {
-        NormalMode, /**< Standard mode */
-        API1Mode,   /**< API 1 mode */
-        API2Mode    /**< API 2 mode */
+        TransparentMode,    /**< Transparent mode */
+        API1Mode,           /**< API Operation (AP=1) */
+        API2Mode            /**< API Operation with escaped characters (AP=2) */
     };
 
     bool applyDefaultSerialPortConfig();
     void broadcast(QString data);
     void unicast(QByteArray address, QString data);
-    void send(DigiMeshPacket *request);
+    void send(DigiMeshFrame *request);
 
     bool setMode(const Mode mode) { m_mode = mode; return true; }   /**< @brief Sets the XBee's mode @param mode the new Mode to be applied */
     Mode mode() const { return m_mode; }                            /**< @brief Returns the XBee's mode @return the XBee's mode */
@@ -102,13 +102,13 @@ public:
     QSerialPort * serialPort() { return m_serial; } /**< @brief Returns the QSerialPort used to communicate with the XBee. @return the QSerialPort used to communicate with the XBee */
 
 signals:
-    void receivedATCommandResponse(ATCommandResponse *response);                        /**< @brief Emitted when at ATCommandResponse frame is received*/
-    void receivedModemStatus(ModemStatus *response);                                    /**< @brief Emitted when at ModemStatus frame is received*/
-    void receivedTransmitStatus(TransmitStatus *response);                              /**< @brief Emitted when at TransmitStatus frame is received*/
-    void receivedRXIndicator(RXIndicator *response);                                    /**< @brief Emitted when at RXIndicator frame is received*/
-    void receivedRXIndicatorExplicit(RXIndicatorExplicit *response);                    /**< @brief Emitted when at RXIndicatorExplicit frame is received*/
-    void receivedNodeIdentificationIndicator(NodeIdentificationIndicator *response);    /**< @brief Emitted when at NodeIdentificationIndicator frame is received*/
-    void receivedRemoteCommandResponse(RemoteCommandResponse *response);                /**< @brief Emitted when at RemoteCommandResponse frame is received*/
+    void receivedATCommandResponse(ATCommandResponseFrame *response);                        /**< @brief Emitted when at ATCommandResponse frame is received*/
+    void receivedModemStatus(ModemStatusFrame *response);                                    /**< @brief Emitted when at ModemStatus frame is received*/
+    void receivedTransmitStatus(TransmitStatusFrame *response);                              /**< @brief Emitted when at TransmitStatus frame is received*/
+    void receivedRXIndicator(ReceivePacketFrame *response);                                    /**< @brief Emitted when at RXIndicator frame is received*/
+    void receivedRXIndicatorExplicit(ExplicitRxIndicatorFrame *response);                    /**< @brief Emitted when at RXIndicatorExplicit frame is received*/
+    void receivedNodeIdentificationIndicator(NodeIdentificationIndicatorFrame *response);    /**< @brief Emitted when at NodeIdentificationIndicator frame is received*/
+    void receivedRemoteCommandResponse(RemoteATCommandResponseFrame *response);                /**< @brief Emitted when at RemoteCommandResponse frame is received*/
     void rawDataReceived(const QByteArray & data);                                      /**< @brief Emitted when raw data are received on the serial port (only in NormalMode). @sa XBee::setMode() @sa XBee::Mode */
     // Addressing signals
     void DHChanged(const quint32 dh);   /**< @brief Emitted when DH property changes. @sa XBee::setDH() @sa XBee::DH()*/
@@ -133,13 +133,13 @@ public slots:
     bool open();
     bool close();
 
-    void displayATCommandResponse(ATCommandResponse *digiMeshPacket);
-    void displayModemStatus(ModemStatus *digiMeshPacket);
-    void displayTransmitStatus(TransmitStatus *digiMeshPacket);
-    void displayRXIndicator(RXIndicator *digiMeshPacket);
-    void displayRXIndicatorExplicit(RXIndicatorExplicit *digiMeshPacket);
-    void displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket);
-    void displayRemoteCommandResponse(RemoteCommandResponse *digiMeshPacket);
+    void displayATCommandResponse(ATCommandResponseFrame *digiMeshPacket);
+    void displayModemStatus(ModemStatusFrame *digiMeshPacket);
+    void displayTransmitStatus(TransmitStatusFrame *digiMeshPacket);
+    void displayRXIndicator(ReceivePacketFrame *digiMeshPacket);
+    void displayRXIndicatorExplicit(ExplicitRxIndicatorFrame *digiMeshPacket);
+    void displayNodeIdentificationIndicator(NodeIdentificationIndicatorFrame *digiMeshPacket);
+    void displayRemoteCommandResponse(RemoteATCommandResponseFrame *digiMeshPacket);
 
 private slots:
     void readData();
@@ -147,7 +147,7 @@ private slots:
 private:
     bool initSerialConnection();
     void processPacket(QByteArray packet);
-    void processATCommandRespone(ATCommandResponse *rep);
+    void processATCommandRespone(ATCommandResponseFrame *rep);
 
 private:
     QSerialPort *m_serial;

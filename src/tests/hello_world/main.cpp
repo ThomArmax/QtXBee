@@ -3,30 +3,39 @@
 #include <QTime>
 
 #include "xbee.h"
-#include "atcommand.h"
+#include "atcommandframe.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    XBee xb("/dev/ttyUSB0");
+    XBee xb("/dev/ttyUSB1");
+    xb.setMode(XBee::API1Mode);
 
-    QObject::connect(&xb, SIGNAL(receivedATCommandResponse(ATCommandResponse*)), &xb, SLOT(displayATCommandResponse(ATCommandResponse*)));
-    QObject::connect(&xb, SIGNAL(receivedModemStatus(ModemStatus*)), &xb, SLOT(displayModemStatus(ModemStatus*)));
-    QObject::connect(&xb, SIGNAL(receivedTransmitStatus(TransmitStatus*)), &xb, SLOT(displayTransmitStatus(TransmitStatus*)));
-    QObject::connect(&xb, SIGNAL(receivedRXIndicator(RXIndicator*)), &xb, SLOT(displayRXIndicator(RXIndicator*)));
-    QObject::connect(&xb, SIGNAL(receivedRXIndicatorExplicit(RXIndicatorExplicit*)), &xb, SLOT(displayRXIndicatorExplicit(RXIndicatorExplicit*)));
-    QObject::connect(&xb, SIGNAL(receivedNodeIdentificationIndicator(NodeIdentificationIndicator*)), &xb, SLOT(displayNodeIdentificationIndicator(NodeIdentificationIndicator*)));
-    QObject::connect(&xb, SIGNAL(receivedRemoteCommandResponse(RemoteCommandResponse*)), &xb, SLOT(displayRemoteCommandResponse(RemoteCommandResponse*)));
+    QObject::connect(&xb, SIGNAL(receivedATCommandResponse(ATCommandResponseFrame*)), &xb, SLOT(displayATCommandResponse(ATCommandResponseFrame*)));
+    QObject::connect(&xb, SIGNAL(receivedModemStatus(ModemStatusFrame*)), &xb, SLOT(displayModemStatus(ModemStatusFrame*)));
+    QObject::connect(&xb, SIGNAL(receivedTransmitStatus(TransmitStatusFrame*)), &xb, SLOT(displayTransmitStatus(TransmitStatusFrame*)));
+    QObject::connect(&xb, SIGNAL(receivedRXIndicator(ReceivePacketFrame*)), &xb, SLOT(displayRXIndicator(ReceivePacketFrame*)));
+    QObject::connect(&xb, SIGNAL(receivedRXIndicatorExplicit(ExplicitRxIndicatorFrame*)), &xb, SLOT(displayRXIndicatorExplicit(ExplicitRxIndicatorFrame*)));
+    QObject::connect(&xb, SIGNAL(receivedNodeIdentificationIndicator(NodeIdentificationIndicatorFrame*)), &xb, SLOT(displayNodeIdentificationIndicator(NodeIdentificationIndicatorFrame*)));
+    QObject::connect(&xb, SIGNAL(receivedRemoteCommandResponse(RemoteATCommandResponseFrame*)), &xb, SLOT(displayRemoteCommandResponse(RemoteATCommandResponseFrame*)));
 
-    ATCommand atapi, atmy, atid;
-    atapi.setCommand(ATCommand::Command_AP);
+    ATCommandFrame atapi, atmy, atid, atdh, atdl;
+    atapi.setCommand(ATCommandFrame::Command_AP);
     atapi.setParameter("1");
-    atmy.setCommand(ATCommand::Command_MY);
-    atid.setCommand(ATCommand::Command_ID);
+//    atmy.setCommand(ATCommand::Command_MY);
+//    atid.setCommand(ATCommand::Command_ID);
+//    atid.setParameter("3321");
+//    atdh.setCommand(ATCommand::Command_DH);
+//    atdl.setCommand(ATCommand::Command_DL);
 
-    xb.send(&atapi);
+//    xb.send(&atapi);
     xb.send(&atid);
+//    xb.send(&atdh);
+//    xb.send(&atdh);
+    ATCommandFrame nd;
+    nd.setCommand(ATCommandFrame::Command_ND);
+    xb.send(&nd);
 
     return a.exec();
 }

@@ -1,7 +1,7 @@
 #ifndef REMOTECOMMANDRESPONSE_H
 #define REMOTECOMMANDRESPONSE_H
 
-#include "digimeshpacketresponse.h"
+#include "digimeshframeresponse.h"
 
 #include <QObject>
 #include <QByteArray>
@@ -15,12 +15,12 @@
  *
  * @sa RemoteCommandRequest
  */
-class RemoteCommandResponse : public DigiMeshPacketResponse
+class RemoteATCommandResponseFrame : public DigiMeshFrameResponse
 {
     Q_OBJECT
 public:
-    explicit RemoteCommandResponse(QObject *parent = 0);
-    RemoteCommandResponse(const QByteArray & packet, QObject *parent = 0);
+    explicit RemoteATCommandResponseFrame(QObject *parent = 0);
+    RemoteATCommandResponseFrame(const QByteArray & packet, QObject *parent = 0);
 
     virtual bool setPacket(const QByteArray &packet);
 };

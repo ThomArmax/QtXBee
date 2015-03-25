@@ -1,14 +1,13 @@
-#ifndef RXINDICATOR_H
-#define RXINDICATOR_H
+#ifndef RECEIVEPACKETFRAME_H
+#define RECEIVEPACKETFRAME_H
 
-#include "digimeshpacket.h"
-#include <QByteArray>
+#include "digimeshframe.h"
 
-class RXIndicator : public DigiMeshPacket
+class ReceivePacketFrame : public DigiMeshFrame
 {
     Q_OBJECT
 public:
-    explicit RXIndicator(QObject *parent);
+    explicit ReceivePacketFrame(QObject *parent);
     void setSrcAddr64(QByteArray sa64);
     void setSrcAddr16(QByteArray sa16);
     void setReceiveOptions(unsigned ro);
@@ -26,4 +25,4 @@ private:
     QByteArray m_data;
 };
 
-#endif // RXINDICATOR_H
+#endif // RECEIVEPACKETFRAME_H

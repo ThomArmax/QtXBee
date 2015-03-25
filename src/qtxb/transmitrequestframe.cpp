@@ -1,8 +1,8 @@
-#include "txrequest.h"
-#include "digimeshpacket.h"
+#include "transmitrequestframe.h"
+#include "digimeshframe.h"
 
-TXRequest::TXRequest(QObject *parent) :
-    DigiMeshPacket(parent)
+TransmitRequestFrame::TransmitRequestFrame(QObject *parent) :
+    DigiMeshFrame(parent)
 {
     unsigned zero = 0x00;
     unsigned oxff = 0xFF;
@@ -23,40 +23,40 @@ TXRequest::TXRequest(QObject *parent) :
     setFrameType(TXRequestFrame);
     setFrameId(0x01);
 }
-void TXRequest::setBroadcastRadius(int rad){
+void TransmitRequestFrame::setBroadcastRadius(int rad){
     m_broadcastRadius = rad;
 }
-void TXRequest::setTransmitOptions(unsigned to){
+void TransmitRequestFrame::setTransmitOptions(unsigned to){
     m_transmitOptions = to;
 }
-void TXRequest::setDestAddr64(QByteArray da64){
+void TransmitRequestFrame::setDestAddr64(QByteArray da64){
     m_destAddr64.clear();
     m_destAddr64.append(da64);
 }
-void TXRequest::setDestAddr16(QByteArray da16){
+void TransmitRequestFrame::setDestAddr16(QByteArray da16){
     m_destAddr16.clear();
     m_destAddr16.append(da16);
 }
-void TXRequest::setData(QByteArray d){
+void TransmitRequestFrame::setData(QByteArray d){
     m_data.clear();
     m_data.append(d);
 }
-QByteArray TXRequest::destAddr64() const{
+QByteArray TransmitRequestFrame::destAddr64() const{
     return m_destAddr64;
 }
-QByteArray TXRequest::destAddr16() const{
+QByteArray TransmitRequestFrame::destAddr16() const{
     return m_destAddr16;
 }
-unsigned TXRequest::broadcastRadius() const{
+unsigned TransmitRequestFrame::broadcastRadius() const{
     return m_broadcastRadius;
 }
-unsigned TXRequest::transmitOptions() const{
+unsigned TransmitRequestFrame::transmitOptions() const{
     return m_transmitOptions;
 }
-QByteArray TXRequest::getData() const{
+QByteArray TransmitRequestFrame::getData() const{
     return m_data;
 }
-void TXRequest::assemblePacket(){
+void TransmitRequestFrame::assemblePacket(){
     m_packet.clear();
     m_packet.append(frameType());
     m_packet.append(frameId());

@@ -1,13 +1,13 @@
-#ifndef TXREQUEST_H
-#define TXREQUEST_H
+#ifndef TRANSMITREQUESTFRAME_H
+#define TRANSMITREQUESTFRAME_H
 
-#include "digimeshpacket.h"
+#include "digimeshframe.h"
 
 
 #include <QByteArray>
 
 /**
- * @brief The TXRequest class causes the module to send data as an RF packet to the specified destination.
+ * @brief The TransmitRequestFrame class causes the module to send data as an RF packet to the specified destination.
  *
  * The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices).
  * The coordinator can be addressed by either setting the 64-bit address to all 0x00s and the 16-bit address to 0xFFFE,
@@ -22,11 +22,11 @@
  *
  * @sa TransmitStatus
  */
-class TXRequest : public DigiMeshPacket
+class TransmitRequestFrame : public DigiMeshFrame
 {
     Q_OBJECT
 public:
-    explicit TXRequest(QObject *parent = 0);
+    explicit TransmitRequestFrame(QObject *parent = 0);
     void setBroadcastRadius(int rad);
     void setTransmitOptions(unsigned to);
     void setDestAddr64(QByteArray da64);
@@ -47,4 +47,4 @@ private:
     QByteArray m_data;
 };
 
-#endif // TXREQUEST_H
+#endif // TRANSMITREQUESTFRAME_H

@@ -1,39 +1,39 @@
-#include "rxindicator.h"
-#include "digimeshpacket.h"
+#include "receivepacketframe.h"
+#include "digimeshframe.h"
 #include <QDebug>
 
-RXIndicator::RXIndicator(QObject *parent) :
-    DigiMeshPacket(parent)
+ReceivePacketFrame::ReceivePacketFrame(QObject *parent) :
+    DigiMeshFrame(parent)
 {
 }
-void RXIndicator::setSrcAddr64(QByteArray sa64) {
+void ReceivePacketFrame::setSrcAddr64(QByteArray sa64) {
     m_srcAddr64.clear();
     m_srcAddr64.append(sa64);
 }
-void RXIndicator::setSrcAddr16(QByteArray sa16) {
+void ReceivePacketFrame::setSrcAddr16(QByteArray sa16) {
     m_srcAddr16.clear();
     m_srcAddr16.append(sa16);
 }
-void RXIndicator::setData(QByteArray d) {
+void ReceivePacketFrame::setData(QByteArray d) {
     m_data.clear();
     m_data.append(d);
 }
-QByteArray RXIndicator::srcAddr64() const {
+QByteArray ReceivePacketFrame::srcAddr64() const {
     return m_srcAddr64;
 }
-QByteArray RXIndicator::srcAddr16() const {
+QByteArray ReceivePacketFrame::srcAddr16() const {
     return m_srcAddr16;
 }
-void RXIndicator::setReceiveOptions(unsigned ro) {
+void ReceivePacketFrame::setReceiveOptions(unsigned ro) {
     m_receiveOptions = ro;
 }
-unsigned RXIndicator::receiveOptions() const {
+unsigned ReceivePacketFrame::receiveOptions() const {
     return m_receiveOptions;
 }
-QByteArray RXIndicator::data() const {
+QByteArray ReceivePacketFrame::data() const {
     return m_data;
 }
-void RXIndicator::readPacket(QByteArray rx) {
+void ReceivePacketFrame::readPacket(QByteArray rx) {
 
     m_packet.clear();
     m_packet.append(rx);

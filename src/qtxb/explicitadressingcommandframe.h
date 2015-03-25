@@ -1,14 +1,13 @@
 #ifndef TXREQUESTEXPLICIT_H
 #define TXREQUESTEXPLICIT_H
 
-#include "txrequest.h"
-#include <QByteArray>
+#include "transmitrequestframe.h"
 
-class TXRequestExplicit : public TXRequest
+class ExplicitAdressingCommandFrame : public TransmitRequestFrame
 {
     Q_OBJECT
 public:
-    explicit TXRequestExplicit(QObject *parent = 0);
+    explicit ExplicitAdressingCommandFrame(QObject *parent = 0);
 
 private:
     QByteArray m_sourceEndpoint;

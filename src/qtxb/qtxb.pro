@@ -18,40 +18,38 @@ DESTDIR = ../../usr/lib/QtXBee
 QT += serialport
 
 SOURCES += \
-    digimeshpacket.cpp \
-    atcommandqueueparam.cpp \
-    atcommand.cpp \
-    txrequest.cpp \
-    txrequestexplicit.cpp \
-    atcommandremote.cpp \
-    atcommandresponse.cpp \
-    modemstatus.cpp \
-    transmitstatus.cpp \
-    rxindicator.cpp \
-    remotecommandrequest.cpp \
-    rxindicatorexplicit.cpp \
-    nodeidentificationindicator.cpp \
-    remotecommandresponse.cpp \
-    digimeshpacketresponse.cpp \
-    xbee.cpp
+    xbee.cpp \
+    digimeshframe.cpp \
+    digimeshframeresponse.cpp \
+    atcommandframe.cpp \
+    atcommandqueueparamframe.cpp \
+    modemstatusframe.cpp \
+    transmitrequestframe.cpp \
+    nodeidentificationindicatorframe.cpp \
+    remoteatcommandrequestframe.cpp \
+    remoteatcommandresponseframe.cpp \
+    atcommandresponseframe.cpp \
+    receivepacketframe.cpp \
+    explicitrxindicatorframe.cpp \
+    transmitstatusframe.cpp \
+    explicitadressingcommandframe.cpp
 
 HEADERS += \
-    digimeshpacket.h \
-    atcommandqueueparam.h \
-    atcommand.h \
-    txrequest.h \
-    txrequestexplicit.h \
-    atcommandremote.h \
-    atcommandresponse.h \
-    modemstatus.h \
-    transmitstatus.h \
-    rxindicator.h \
-    remotecommandrequest.h \
-    rxindicatorexplicit.h \
-    nodeidentificationindicator.h \
-    remotecommandresponse.h \
-    digimeshpacketresponse.h \
-    xbee.h
+    xbee.h \
+    digimeshframe.h \
+    digimeshframeresponse.h \
+    atcommandframe.h \
+    atcommandqueueparamframe.h \
+    modemstatusframe.h \
+    transmitrequestframe.h \
+    nodeidentificationindicatorframe.h \
+    remoteatcommandresponseframe.h \
+    remoteatcommandrequestframe.h \
+    atcommandresponseframe.h \
+    receivepacketframe.h \
+    explicitrxindicatorframe.h \
+    transmitstatusframe.h \
+    explicitadressingcommandframe.h
 
 OTHER_FILES += \
     qtxb.pri \

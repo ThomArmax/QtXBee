@@ -1,19 +1,19 @@
-#include "modemstatus.h"
-#include "digimeshpacket.h"
+#include "modemstatusframe.h"
+#include "digimeshframe.h"
 #include <QDebug>
 
-ModemStatus::ModemStatus(QObject *parent) :
-    DigiMeshPacket(parent)
+ModemStatusFrame::ModemStatusFrame(QObject *parent) :
+    DigiMeshFrame(parent)
 {
 }
 
-ModemStatus::ModemStatus(const QByteArray &data, QObject *parent) :
-    DigiMeshPacket(parent)
+ModemStatusFrame::ModemStatusFrame(const QByteArray &data, QObject *parent) :
+    DigiMeshFrame(parent)
 {
     setData(data);
 }
 
-bool ModemStatus::setData(const QByteArray & data) {
+bool ModemStatusFrame::setData(const QByteArray & data) {
     bool bRet = false;
     m_packet.clear();
     m_packet.append(data);
@@ -34,10 +34,10 @@ bool ModemStatus::setData(const QByteArray & data) {
     return bRet;
 }
 
-void ModemStatus::setStatus(unsigned s){
+void ModemStatusFrame::setStatus(unsigned s){
     m_status = s;
 }
 
-unsigned ModemStatus::status() const{
+unsigned ModemStatusFrame::status() const{
     return m_status;
 }

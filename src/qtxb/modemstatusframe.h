@@ -1,7 +1,7 @@
-#ifndef MODEMSTATUS_H
-#define MODEMSTATUS_H
+#ifndef MODEMSTATUSFRAME_H
+#define MODEMSTATUSFRAME_H
 
-#include "digimeshpacket.h"
+#include "digimeshframe.h"
 #include <QByteArray>
 
 /**
@@ -9,12 +9,12 @@
  *
  * RF module status messages are sent from the module in response to specific conditions.
  */
-class ModemStatus : public DigiMeshPacket
+class ModemStatusFrame : public DigiMeshFrame
 {
     Q_OBJECT
 public:
-    explicit ModemStatus(QObject *parent);
-    ModemStatus(const QByteArray & data, QObject * parent = 0);
+    explicit ModemStatusFrame(QObject *parent);
+    ModemStatusFrame(const QByteArray & data, QObject * parent = 0);
 
     bool setData(const QByteArray & data);
     void setStatus(unsigned s);
@@ -24,4 +24,4 @@ private:
     unsigned m_status;
 };
 
-#endif // MODEMSTATUS_H
+#endif // MODEMSTATUSFRAME_H

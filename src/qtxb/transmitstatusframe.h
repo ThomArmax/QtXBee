@@ -1,20 +1,20 @@
-#ifndef TRANSMITSTATUS_H
-#define TRANSMITSTATUS_H
-#include "digimeshpacket.h"
-#include <QByteArray>
+#ifndef TRANSMITSTATUSFRAME_H
+#define TRANSMITSTATUSFRAME_H
+
+#include "digimeshframe.h"
 
 /**
- * @brief The TransmitStatus class indicate if the packet was transmitted successfully or not.
+ * @brief The TransmitRequestFrame class indicate if the packet was transmitted successfully or not.
  *
- * When a TXRequest is completed, the module sends a TX Status message.
+ * When a TransmitRequestFrame is completed, the module sends a TX Status message.
  * This message will indicate if the packet was transmitted successfully or if there was a failure.
- * @sa TXRequest
+ * @sa TransmitRequestFrame
  */
-class TransmitStatus : public DigiMeshPacket
+class TransmitStatusFrame : public DigiMeshFrame
 {
     Q_OBJECT
 public:
-    explicit TransmitStatus(QObject *parent);
+    explicit TransmitStatusFrame(QObject *parent);
 
      void readPacket(QByteArray rx);
      void setDeliveryStatus(unsigned ds);
@@ -32,4 +32,4 @@ private:
      unsigned m_discoveryStatus;
 };
 
-#endif // TRANSMITSTATUS_H
+#endif // TRANSMITSTATUSFRAME_H

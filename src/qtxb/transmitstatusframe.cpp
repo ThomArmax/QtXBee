@@ -1,12 +1,12 @@
-#include "transmitstatus.h"
-#include "digimeshpacket.h"
+#include "transmitstatusframe.h"
+#include "digimeshframe.h"
 #include <QDebug>
 
-TransmitStatus::TransmitStatus(QObject *parent) :
-    DigiMeshPacket(parent)
+TransmitStatusFrame::TransmitStatusFrame(QObject *parent) :
+    DigiMeshFrame(parent)
 {
 }
-void TransmitStatus::readPacket(QByteArray rx){
+void TransmitStatusFrame::readPacket(QByteArray rx){
     m_packet.clear();
     m_packet.append(rx);
     setStartDelimiter(rx.at(0));
@@ -27,24 +27,24 @@ void TransmitStatus::readPacket(QByteArray rx){
         m_packet.clear();
     }
 }
-void TransmitStatus:: setDeliveryStatus(unsigned ds){
+void TransmitStatusFrame:: setDeliveryStatus(unsigned ds){
     m_deliveryStatus = ds;
 }
-void TransmitStatus:: setTransmitRetryCount(unsigned trc){
+void TransmitStatusFrame:: setTransmitRetryCount(unsigned trc){
     m_transmitRetryCount = trc;
 }
-void TransmitStatus:: setDiscoveryStatus(unsigned ds){
+void TransmitStatusFrame:: setDiscoveryStatus(unsigned ds){
     m_discoveryStatus = ds;
 }
-unsigned TransmitStatus:: deliveryStatus() const{
+unsigned TransmitStatusFrame:: deliveryStatus() const{
     return m_deliveryStatus;
 }
-unsigned TransmitStatus:: transmitRetryCount() const{
+unsigned TransmitStatusFrame:: transmitRetryCount() const{
     return m_transmitRetryCount;
 }
-unsigned TransmitStatus:: discoveryStatus() const{
+unsigned TransmitStatusFrame:: discoveryStatus() const{
     return m_discoveryStatus;
 }
-QByteArray TransmitStatus:: reserved() const{
+QByteArray TransmitStatusFrame:: reserved() const{
     return m_reserved;
 }

@@ -1,6 +1,6 @@
-#ifndef NODEIDENTIFICATIONINDICATOR_H
-#define NODEIDENTIFICATIONINDICATOR_H
-#include "digimeshpacket.h"
+#ifndef NODEIDENTIFICATIONINDICATORFRAME_H
+#define NODEIDENTIFICATIONINDICATORFRAME_H
+#include "digimeshframe.h"
 #include <QByteArray>
 
 /**
@@ -9,12 +9,12 @@
  *
  * The data portion of this frame is similar to a network discovery response frame (see ND command).
  */
-class NodeIdentificationIndicator : public DigiMeshPacket
+class NodeIdentificationIndicatorFrame : public DigiMeshFrame
 {
     Q_OBJECT
 public:
-    explicit NodeIdentificationIndicator(QObject *parent = 0);
+    explicit NodeIdentificationIndicatorFrame(QObject *parent = 0);
     void readPacket(QByteArray rx);
 };
 
-#endif // NODEIDENTIFICATIONINDICATOR_H
+#endif // NODEIDENTIFICATIONINDICATORFRAME_H

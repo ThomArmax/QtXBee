@@ -5,12 +5,14 @@ ATCommandResponseFrame::ATCommandResponseFrame(QObject *parent) :
     DigiMeshFrameResponse(parent),
     m_atCommand(ATCommandFrame::Command_Undefined)
 {
+    setFrameType(DigiMeshFrame::ATCommandResponseFrame);
 }
 
 ATCommandResponseFrame::ATCommandResponseFrame(const QByteArray &data, QObject *parent)  :
     DigiMeshFrameResponse(parent),
     m_atCommand(ATCommandFrame::Command_Undefined)
 {
+    setFrameType(DigiMeshFrame::ATCommandResponseFrame);
     setPacket(data);
 }
 

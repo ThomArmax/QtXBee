@@ -5,11 +5,13 @@
 ModemStatusFrame::ModemStatusFrame(QObject *parent) :
     DigiMeshFrame(parent)
 {
+    setFrameType(DigiMeshFrame::ModemStatusFrame);
 }
 
 ModemStatusFrame::ModemStatusFrame(const QByteArray &data, QObject *parent) :
     DigiMeshFrame(parent)
 {
+    setFrameType(DigiMeshFrame::ModemStatusFrame);
     setData(data);
 }
 

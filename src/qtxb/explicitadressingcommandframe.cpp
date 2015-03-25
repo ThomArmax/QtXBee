@@ -4,4 +4,5 @@
 ExplicitAdressingCommandFrame::ExplicitAdressingCommandFrame(QObject *parent) :
     TransmitRequestFrame(parent)
 {
+    setFrameType(DigiMeshFrame::ExplicitAddressingCommandFrame);
 }

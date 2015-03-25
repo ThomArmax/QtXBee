@@ -5,6 +5,7 @@
 ReceivePacketFrame::ReceivePacketFrame(QObject *parent) :
     DigiMeshFrame(parent)
 {
+    setFrameType(DigiMeshFrame::RXIndicatorFrame);
 }
 void ReceivePacketFrame::setSrcAddr64(QByteArray sa64) {
     m_srcAddr64.clear();

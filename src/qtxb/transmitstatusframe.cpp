@@ -5,6 +5,7 @@
 TransmitStatusFrame::TransmitStatusFrame(QObject *parent) :
     DigiMeshFrame(parent)
 {
+    setFrameType(DigiMeshFrame::TransmitStatusFrame);
 }
 void TransmitStatusFrame::readPacket(QByteArray rx){
     m_packet.clear();

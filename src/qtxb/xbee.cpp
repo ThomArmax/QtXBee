@@ -512,7 +512,7 @@ void XBee::processPacket(QByteArray packet)
         emit receivedNodeIdentificationIndicator(response);
         break;
     }
-    case DigiMeshFrame::RemoteCommandResponseFrame : {
+    case DigiMeshFrame::RemoteATCommandResponseFrame : {
         RemoteATCommandResponseFrame *response = new RemoteATCommandResponseFrame(packet);
         emit receivedRemoteCommandResponse(response);
         response->deleteLater();

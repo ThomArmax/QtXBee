@@ -183,7 +183,7 @@ QString DigiMeshFrame::frameTypeToString(const APIFrameType type) {
     case RXIndicatorFrame                   : str = "RXIndicator";                          break;
     case ExplicitRxIndicatorFrame           : str = "Explicit Rx Indicator";                break;
     case NodeIdentificationIndicatorFrame   : str = "Node Identification Indicator";        break;
-    case RemoteCommandResponseFrame         : str = "Remote Command Response";              break;
+    case RemoteATCommandResponseFrame         : str = "Remote Command Response";              break;
     default                                 : str = "Unknown";                              break;
     }
     return str;

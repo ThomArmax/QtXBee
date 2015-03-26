@@ -1,0 +1,41 @@
+/*! \mainpage QtXBee SDK documentation
+ *
+ * \section main_intro_sec Introduction
+ * \subsection xbee_intro_sec What is XBee
+ * \cite Wikipedia
+ * XBee is the brand name from <a href="http://www.digi.com/">Digi International</a> for a family of form factor compatible radio modules.
+ * The first XBee radios were introduced under the MaxStream brand in 2005 and were based on the 802.15.4-2003
+ * standard designed for point-to-point and star communications at over-the-air baud rates of 250 kbit/s.
+ *
+ * Two models were initially introduced—a lower cost 1 mW XBee and the higher power 100 mW XBee-PRO.
+ * Since the initial introduction, a number of new XBee radios have been introduced and all XBees are now marketed and sold under the Digi brand.
+ *
+ * \subsection qtxbee_intro QtXBee SDK description
+ * The QtXBee SDK is a Qt5 API library designed to use XBee DigiMesh modems from <a href="http://www.digi.com/">Digi</a>.
+ *
+ * It aims to be easy to use and very powerfull thanks to the <a href="http://www.qt.io/">Qt framework</a>.
+ * It also aims to be as flexible as possible for the developer if he wants to create a library based on QtXBee, or improve it.
+ *
+ * With QtXBee, you will be able to configure the local XBee, communicate with remote modules, discover modules over the network ...
+ *
+ * \section install_sec Installation
+ *
+ * \code{SHELL}
+ * git clone http://github.com/ThomArmax/QtXBee.git
+ * cd ./QtXBee
+ * qmake
+ * make
+ * sudo make install
+ * \endcode
+ * By default :
+ * - Libraries will be installed in /usr/lib/QtXBee
+ * - Includes will be installed in /usr/include/QtXBee
+ *
+ * To customize output directory, you can do :
+ * \code{SHELL}
+ * make install INSTALL_ROOT=<install/prefix>
+ * \endcode
+ * So in this case :
+ * - Libraries will be installed in <install/prefix>/usr/lib/QtXBee
+ * - Includes will be installed in <install/prefix>/usr/include/QtXBee
+ */

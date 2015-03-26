@@ -5,11 +5,11 @@
 #-------------------------------------------------
 
 QT       += core gui
-include(../tests.pri)
+include(../examples.pri)
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = xbee_serial_commands
+TARGET = xbee_terminal
 TEMPLATE = app
 
 

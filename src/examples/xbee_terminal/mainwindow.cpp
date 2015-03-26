@@ -73,4 +73,3 @@ void MainWindow::log(const QString &log)
     ui->console->setPlainText(text);
     ui->console->verticalScrollBar()->setValue(ui->console->verticalScrollBar()->maximum());
 }
-

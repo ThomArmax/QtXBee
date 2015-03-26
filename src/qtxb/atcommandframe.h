@@ -296,86 +296,160 @@ public:
  * Parameter range : 0 - 0xFFFFFFFFFFFFFFFF<BR>
  * Default : 0
  *
- * @var ATCommandFrame::Command_OP = 0x4F50,
- * @var ATCommandFrame::Command_NH = 0x4E48,
- * @var ATCommandFrame::Command_BH = 0x4248,
- * @var ATCommandFrame::Command_OI = 0x4F49,
- * @var ATCommandFrame::Command_NT = 0x4E54,
- * @var ATCommandFrame::Command_NO = 0x4E4F,
- * @var ATCommandFrame::Command_SC = 0x5343,
- * @var ATCommandFrame::Command_SD = 0x5344,
- * @var ATCommandFrame::Command_ZS = 0x5A53,
- * @var ATCommandFrame::Command_NJ = 0x4E4A,
- * @var ATCommandFrame::Command_JV = 0x4A56,
- * @var ATCommandFrame::Command_NW = 0x4E57,
- * @var ATCommandFrame::Command_JN = 0x4A4E,
- * @var ATCommandFrame::Command_AR = 0x4152,
+ * @var ATCommandFrame::Command_OP
+ * 0x4F50
+ * @var ATCommandFrame::Command_NH
+ * 0x4E48
+ * @var ATCommandFrame::Command_BH
+ * 0x4248
+ * @var ATCommandFrame::Command_OI
+ * 0x4F49
+ * @var ATCommandFrame::Command_NT
+ * 0x4E54
+ * @var ATCommandFrame::Command_NO
+ * 0x4E4F
+ * @var ATCommandFrame::Command_SC
+ * 0x5343
+ * @var ATCommandFrame::Command_SD
+ * 0x5344
+ * @var ATCommandFrame::Command_ZS
+ * 0x5A53
+ * @var ATCommandFrame::Command_NJ
+ * 0x4E4A
+ * @var ATCommandFrame::Command_JV
+ * 0x4A56
+ * @var ATCommandFrame::Command_NW
+ * 0x4E57
+ * @var ATCommandFrame::Command_JN
+ * 0x4A4E
+ * @var ATCommandFrame::Command_AR
+ * 0x4152
  * // Security
- * @var ATCommandFrame::Command_EE = 0x4545,
- * @var ATCommandFrame::Command_EO = 0x454F,
- * @var ATCommandFrame::Command_NK = 0x4E4B,
- * @var ATCommandFrame::Command_KY = 0x4B59,
+ * @var ATCommandFrame::Command_EE
+ * 0x4545
+ * @var ATCommandFrame::Command_EO
+ * 0x454F
+ * @var ATCommandFrame::Command_NK
+ * 0x4E4B
+ * @var ATCommandFrame::Command_KY
+ * 0x4B59
  * // RF Interfacing
- * @var ATCommandFrame::Command_PL = 0x504C,
- * @var ATCommandFrame::Command_PM = 0x504D,
- * @var ATCommandFrame::Command_DB = 0x4442,
- * @var ATCommandFrame::Command_PP = 0x5050,
+ * @var ATCommandFrame::Command_PL
+ * 0x504C
+ * @var ATCommandFrame::Command_PM
+ * 0x504D
+ * @var ATCommandFrame::Command_DB
+ * 0x4442
+ * @var ATCommandFrame::Command_PP
+ * 0x5050
  * // Serial Interfacing (I/O)
- * @var ATCommandFrame::Command_AP = 0x4150,
- * @var ATCommandFrame::Command_AO = 0x414F,
- * @var ATCommandFrame::Command_BD = 0x4244,
- * @var ATCommandFrame::Command_NB = 0x4E42,
- * @var ATCommandFrame::Command_SB = 0x5342,
- * @var ATCommandFrame::Command_RO = 0x524F,
- * @var ATCommandFrame::Command_D7 = 0x4437,
- * @var ATCommandFrame::Command_D6 = 0x4436,
- * // I/O @var ATCommandFrame::Command_s
- * @var ATCommandFrame::Command_IR = 0x4952,
- * @var ATCommandFrame::Command_IC = 0x4943,
- * @var ATCommandFrame::Command_P0 = 0x5030,
- * @var ATCommandFrame::Command_P1 = 0x5031,
- * @var ATCommandFrame::Command_P2 = 0x5032,
- * @var ATCommandFrame::Command_P3 = 0x5033,
- * @var ATCommandFrame::Command_D0 = 0x4430,
- * @var ATCommandFrame::Command_D1 = 0x4431,
- * @var ATCommandFrame::Command_D2 = 0x4432,
- * @var ATCommandFrame::Command_D3 = 0x4433,
- * @var ATCommandFrame::Command_D4 = 0x4434,
- * @var ATCommandFrame::Command_D5 = 0x4435,
- * @var ATCommandFrame::Command_D8 = 0x4438,
- * @var ATCommandFrame::Command_LT = 0x4C54,
- * @var ATCommandFrame::Command_PR = 0x5052,
- * @var ATCommandFrame::Command_RP = 0x5250,
- * @var ATCommandFrame::Command_V  = 0x2556,
- * @var ATCommandFrame::Command_VP = 0x562B,
- * @var ATCommandFrame::Command_TP = 0x5450,
- * @var ATCommandFrame::Command_VR = 0x5652,
- * @var ATCommandFrame::Command_HV = 0x4856,
- * @var ATCommandFrame::Command_AI = 0x4149,
+ * @var ATCommandFrame::Command_AP
+ * 0x4150
+ * @var ATCommandFrame::Command_AO
+ * 0x414F
+ * @var ATCommandFrame::Command_BD
+ * 0x4244
+ * @var ATCommandFrame::Command_NB
+ * 0x4E42
+ * @var ATCommandFrame::Command_SB
+ * 0x5342
+ * @var ATCommandFrame::Command_RO
+ * 0x524F
+ * @var ATCommandFrame::Command_D7
+ * 0x4437
+ * @var ATCommandFrame::Command_D6
+ * 0x4436
+ * // I/O
+ * @var ATCommandFrame::Command_IR
+ * 0x4952
+ * @var ATCommandFrame::Command_IC
+ * 0x4943
+ * @var ATCommandFrame::Command_P0
+ * 0x5030
+ * @var ATCommandFrame::Command_P1
+ * 0x5031
+ * @var ATCommandFrame::Command_P2
+ * 0x5032
+ * @var ATCommandFrame::Command_P3
+ * 0x5033
+ * @var ATCommandFrame::Command_D0
+ * 0x4430
+ * @var ATCommandFrame::Command_D1
+ * 0x4431
+ * @var ATCommandFrame::Command_D2
+ * 0x4432
+ * @var ATCommandFrame::Command_D3
+ * 0x4433
+ * @var ATCommandFrame::Command_D4
+ * 0x4434
+ * @var ATCommandFrame::Command_D5
+ * 0x4435
+ * @var ATCommandFrame::Command_D8
+ * 0x4438
+ * @var ATCommandFrame::Command_LT
+ * 0x4C54
+ * @var ATCommandFrame::Command_PR
+ * 0x5052
+ * @var ATCommandFrame::Command_RP
+ * 0x5250
+ * @var ATCommandFrame::Command_V
+ * 0x2556
+ * @var ATCommandFrame::Command_VP
+ * 0x562B
+ * @var ATCommandFrame::Command_TP
+ * 0x5450
+ * @var ATCommandFrame::Command_VR
+ * 0x5652
+ * @var ATCommandFrame::Command_HV
+ * 0x4856
+ * @var ATCommandFrame::Command_AI
+ * 0x4149
  * // AT @var ATCommandFrame::Command_ Options
- * @var ATCommandFrame::Command_CT = 0x4354,
- * @var ATCommandFrame::Command_CN = 0x434E,
- * @var ATCommandFrame::Command_GT = 0x4754,
- * @var ATCommandFrame::Command_CC = 0x4343,
+ * @var ATCommandFrame::Command_CT
+ * 0x4354
+ * @var ATCommandFrame::Command_CN
+ * 0x434E
+ * @var ATCommandFrame::Command_GT
+ * 0x4754
+ * @var ATCommandFrame::Command_CC
+ * 0x4343
  * // Sleep @var ATCommandFrame::Command_s
- * @var ATCommandFrame::Command_SM = 0x534D,
- * @var ATCommandFrame::Command_SN = 0x534E,
- * @var ATCommandFrame::Command_SP = 0x5350,
- * @var ATCommandFrame::Command_ST = 0x5354,
- * @var ATCommandFrame::Command_SO = 0x534F,
- * @var ATCommandFrame::Command_WH = 0x5748,
- * @var ATCommandFrame::Command_SI = 0x5349,
- * @var ATCommandFrame::Command_PO = 0x504F,
+ * @var ATCommandFrame::Command_SM
+ * 0x534D
+ * @var ATCommandFrame::Command_SN
+ * 0x534E
+ * @var ATCommandFrame::Command_SP
+ * 0x5350
+ * @var ATCommandFrame::Command_ST
+ * 0x5354
+ * @var ATCommandFrame::Command_SO
+ * 0x534F
+ * @var ATCommandFrame::Command_WH
+ * 0x5748
+ * @var ATCommandFrame::Command_SI
+ * 0x5349
+ * @var ATCommandFrame::Command_PO
+ * 0x504F
  * // Execution @var ATCommandFrame::Command_s
- * @var ATCommandFrame::Command_AC = 0x4143,
- * @var ATCommandFrame::Command_WR = 0x5752,
- * @var ATCommandFrame::Command_RE = 0x5245,
- * @var ATCommandFrame::Command_FR = 0x4652,
- * @var ATCommandFrame::Command_NR = 0x4E52,
- * @var ATCommandFrame::Command_CB = 0x4342,
- * @var ATCommandFrame::Command_ND = 0x4E44,
- * @var ATCommandFrame::Command_DN = 0x444E,
- * @var ATCommandFrame::Command_IS = 0x4953,
- * @var ATCommandFrame::Command_1S = 0x3153
+ * @var ATCommandFrame::Command_AC
+ * 0x4143
+ * @var ATCommandFrame::Command_WR
+ * 0x5752
+ * @var ATCommandFrame::Command_RE
+ * 0x5245
+ * @var ATCommandFrame::Command_FR
+ * 0x4652
+ * @var ATCommandFrame::Command_NR
+ * 0x4E52
+ * @var ATCommandFrame::Command_CB
+ * 0x4342
+ * @var ATCommandFrame::Command_ND
+ * 0x4E44
+ * @var ATCommandFrame::Command_DN
+ * 0x444E
+ * @var ATCommandFrame::Command_IS
+ * 0x4953
+ * @var ATCommandFrame::Command_1S
+ * 0x3153
  */
 

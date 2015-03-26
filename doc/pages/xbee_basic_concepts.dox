@@ -1,0 +1,38 @@
+/*!
+ * @defgroup XBEE_BASIC_CONCEPTS XBee and ZigBee basic concepts
+ *
+ * This section covers basic concepts regarding the XBee radio modules.
+ * As XBee Gateway and related documentation refers to these concepts frequently,
+ * it is important to understand them.
+ *
+ * Contents:
+ * - XBee Concepts
+ * - RF modules
+ * - XBee RF modules
+ * - Radio firmware
+ * - Radio communication protocols
+ * - Radio module operating modes
+ * - AT (Application Transparent) operating mode
+ * - AT command mode
+ * - API operating mode
+ * - API escaped operating mode
+ * - Escape characters
+ * - API frames
+ * - AT settings or commands
+ * - ZigBee Protocol concepts
+ * - ZigBee nodes
+ * - Coordinators
+ * - Routers
+ * - End devices
+ * - Example ZigBee nodes
+ * - Creating and joining ZigBee networks
+ * - PAN ID
+ * - Channel
+ * - Create a ZigBee network
+ * - Using a custom PAN ID
+ * - Configure the XBee Gateway ZB Device with a custom PAN ID
+ * - Configure other ZigBee nodes with a custom PAN ID
+ * - Join an existing ZigBee network
+ *
+ * <b>Source : </b><a href="http://ftp1.digi.com/support/documentation/html/90001399/90001399_A/Files/XBee-concepts.html#_Toc384719500">XBee™ Gateway User's Guide</a>
+ */

@@ -1,38 +1,265 @@
 /*!
- * @defgroup XBEE_BASIC_CONCEPTS XBee and ZigBee basic concepts
+ * @page XBEE_BASIC_CONCEPTS XBee and ZigBee basic concepts
  *
  * This section covers basic concepts regarding the XBee radio modules.
  * As XBee Gateway and related documentation refers to these concepts frequently,
  * it is important to understand them.
  *
  * Contents:
- * - XBee Concepts
- * - RF modules
- * - XBee RF modules
- * - Radio firmware
- * - Radio communication protocols
- * - Radio module operating modes
- * - AT (Application Transparent) operating mode
- * - AT command mode
- * - API operating mode
- * - API escaped operating mode
- * - Escape characters
- * - API frames
- * - AT settings or commands
- * - ZigBee Protocol concepts
- * - ZigBee nodes
- * - Coordinators
- * - Routers
- * - End devices
- * - Example ZigBee nodes
- * - Creating and joining ZigBee networks
- * - PAN ID
- * - Channel
- * - Create a ZigBee network
+ * - @ref XBEE_CONCEPTS_MAIN_SECTION
+ * - @ref XBEE_CONCEPTS_RD_MODULES_SECTION
+ * - @ref XBEE_CONCEPTS_XBEE_RF_MODULES_SECTION
+ * - @ref XBEE_CONCEPTS_RADIO_FIRMWARE_SECTION
+ * - @ref XBEE_CONCEPTS_RADIO_COMMUNICATION_PROTOCOLS_SECTION
+ * - @ref XBEE_CONCEPTS_RADIO_OPERATING_MODES_SECTION
+ * - @ref XBEE_CONCEPTS_TRANSPARENT_MODE_SECTION
+ * - @ref XBEE_CONCEPTS_AT_COMMAND_MODE_SECTION
+ * - @ref XBEE_CONCEPTS_API_OPERATING_MODE_SECTION
+ * - @ref XBEE_CONCEPTS_API_ESCAPED_OPERATING_MODE_SECTION
+ * - @ref XBEE_CONCEPTS_ESCAPE_CARACTERS_SECTION
+ * - @ref XBEE_CONCEPTS_API_FRAMES_SECTION
+ * - @ref XBEE_CONCEPTS_AT_SETTINGS_OR_CMDS_SECTION
+ * - @ref XBEE_CONCEPTS_ZIGBEE_PROTO_CONCEPTS_SECTION
+ * - @ref XBEE_CONCEPTS_ZIGBEE_NODES_SECTION
+ * - @ref XBEE_CONCEPTS_ZIGBEE_NODES_COORDINATORS_SECTION
+ * - @ref XBEE_CONCEPTS_ZIGBEE_NODES_ROUTERS_SECTION
+ * - @ref XBEE_CONCEPTS_ZIGBEE_NODES_END_DEVICES_SECTION
+ * - @ref XBEE_CONCEPTS_ZIGBEE_NODES_EXAMPLE_SECTION
+ * - @ref XBEE_CONCEPTS_CREATING_JOINING_NETWORK_SECTION
+ * - @ref XBEE_CONCEPTS_PAND_ID_SECTION
+ * - @ref XBEE_CONCEPTS_CHANNEL_SECTION
+ * - @ref XBEE_CONCEPTS_CREATE_NETWORK_SECTION
  * - Using a custom PAN ID
  * - Configure the XBee Gateway ZB Device with a custom PAN ID
  * - Configure other ZigBee nodes with a custom PAN ID
  * - Join an existing ZigBee network
  *
- * <b>Source : </b><a href="http://ftp1.digi.com/support/documentation/html/90001399/90001399_A/Files/XBee-concepts.html#_Toc384719500">XBee™ Gateway User's Guide</a>
+ * @section XBEE_CONCEPTS_MAIN_SECTION XBee Concepts
+ * Following are key concepts for XBee devices.
+ *
+ * @subsection XBEE_CONCEPTS_RD_MODULES_SECTION RF modules
+ * A radio frequency (RF) module is a small electronic circuit used to transmit and receive radio signals on different frequencies.
+ * Digi produces a wide variety of RF modules to meet the requirements of almost any wireless solution,
+ * such as long-range, low-cost, etc.
+ * The most popular wireless products are the XBee RF modules.
+ *
+ * @subsection XBEE_CONCEPTS_XBEE_RF_MODULES_SECTION XBee RF modules
+ * XBee is the brand name of a family of RF modules produced by Digi.
+ * XBee RF modules are modular products that make deploying wireless technology easy and cost-effective.
+ * Multiple protocols and RF features are available, giving customers enormous flexibility to choose the best technology for their needs.
+ *
+ * The XBee RF modules are available in two form-factors: Through-Hole and Surface Mount, with different antenna options.
+ * Almost all modules are available in the Through-Hole form factor and share the same footprint.
+ * @image html xbee-modules.png
+ *
+ * @subsection XBEE_CONCEPTS_RADIO_FIRMWARE_SECTION Radio firmware
+ * Radio firmware is the program code stored in the radio module's persistent memory that provides the control program for the device.
+ * From the local WEB interface of the XBee Gateway, you can update or change the firmware of the local XBee module or any other module
+ * connected to the same network as the local one.
+ * This is a common task when changing the role of the device or use the latest version of a firmware.
+ *
+ * @subsection XBEE_CONCEPTS_RADIO_COMMUNICATION_PROTOCOLS_SECTION Radio communication protocols
+ * A radio communication protocol is a set of rules for data exchange between radio devices.
+ * Depending on the hardware radio firmware on an XBee module, the XBee modules support a specific radio communication protocol.
+ * Following is the complete list of protocols supported by the XBee radio modules:
+ * - IEEE 802.15.4
+ * - ZigBee
+ * - ZigBee Smart Energy
+ * - DigiMesh (Digi’s proprietary)
+ * - ZNet
+ * - IEEE 802.11 (Wi-Fi)
+ * - Point-to-multipoint (Digi’s proprietary)
+ * - XSC (XStream Compatibility)
+ *
+ * @note all the XBee devices can run all these communication protocols. The combination of XBee hardware and radio firmware determines the protocol that an XBee device can execute.
+ * Refer to the <a href="http://www.digi.com/pdf/chart_xbee_rf_features.pdf">XBee RF Family Comparison Matrix</a> for more information about the available XBee RF modules and the protocols they support.
+ *
+ * @subsection XBEE_CONCEPTS_RADIO_OPERATING_MODES_SECTION Radio module operating modes
+ * The operating mode of an XBee radio module establishes the way a user or any microcontroller attached to the XBee communicates with the module through the
+ * Universal Asynchronous Receiver/Transmitter (UART) or serial interface.
+ *
+ * Depending on the firmware and its configuration, the radio modules can work in three different operating modes:
+ * - AT (transparent) operating mode
+ * - API operating mode
+ * - API escaped operating mode
+ *
+ * In some cases, the operating mode of a radio module is established by the firmware version, which determines whether the operating mode is AT or API, and the AP setting of the firmware,
+ * which determines if the API mode is escaped (AP=2) or not (AP=1).
+ * In other cases, the operating mode is only determined by the AP setting, which allows you for configure the mode to be AT (AP=0), API (AP=1) or API escaped (AP=2).
+ *
+ * @subsection XBEE_CONCEPTS_TRANSPARENT_MODE_SECTION Application Transparent (AT) operating mode
+ * In Application Transparent (AT) or transparent operating mode, all serial data received by the radio module is queued up for RF transmission.
+ * When RF data is received by the module, the data is sent out though the serial interface.
+ *
+ * To configure an XBee module operating in AT, put it in AT Command mode to send the configuration commands.
+ *
+ * @subsubsection XBEE_CONCEPTS_AT_COMMAND_MODE_SECTION AT Command mode
+ * When the radio module is working in AT operating mode, settings are configured using the AT Command mode interface.
+ * To enter AT command mode, you must send the 3-character command sequence through the serial interface of the radio module,
+ * usually <b>+++</b>, within one second. Once the AT command mode has been established, the module sends the reply <b>OK\\r</b>,
+ * the command mode timer is started, and the radio module can receive AT commands.
+ *
+ * The structure of an AT command follows:
+ *
+ * AT[ASCII command][Space (optional)] [Parameter (optional)][Carriage return]
+ *
+ * Example:
+ *
+ * @code ATNI MyDevice\r @endcode
+ *
+ * If no valid AT commands are received within the command mode timeout, the radio module automatically exits AT Command mode. You can also exit command mode issuing the CN command (ATCN\\r).
+ *
+ * @subsubsection XBEE_CONCEPTS_API_OPERATING_MODE_SECTION API operating mode
+ * Application Programming Interface (API) operation mode is an alternative to AT mode.
+ * This requires that communication with the module be done through a structured interface; in other words, data is communicated in API frames.  For more information about API frames, see @ref XBEE_CONCEPTS_API_FRAMES_SECTION.
+ *
+ * The API specifies how commands, command responses, and module status messages are sent and received from the module using the serial interface. API operation mode enables many operations such as the following:
+ * - Configuration of the XBee module itself.
+ * - Configuration of remote modules in the network.
+ * - Data management and transmission to multiple destinations.
+ * - Receive success/failure status of each transmitted RF packet.
+ * - Identify the source address of each received packet.
+ *
+ * Depending on the AP parameter value, the radio module can operate in one of two modes: API (AP=1 ) or API escaped (AP=2) operating mode.
+ *
+ * @subsubsection XBEE_CONCEPTS_API_ESCAPED_OPERATING_MODE_SECTION API escaped operating mode
+ * API escaped operating mode (AP = 2) works similarly to API mode. The only difference is that when working in API escaped mode, some bytes of the API frame specific data must be escaped.
+ *
+ * API escaped operating mode is used to add reliability to the RF transmission avoiding conflicts with special characters such as the start-of-frame byte (0x7E).
+ * Since 0x7E can only appear at the start of an API packet, if 0x7E is received at any time, it can be assumed that a new packet has started regardless of length. In API escaped mode, those special bytes are escaped.
+ *
+ * @subsubsection XBEE_CONCEPTS_ESCAPE_CARACTERS_SECTION Escape character
+ * When sending or receiving an API frame in API escaped mode, specific data values must be escaped (flagged) so they do not interfere with the data frame sequence.
+ * To escape a data byte, insert 0x7D and follow it with the byte to be escaped XOR'd with 0x20.
+ * The data bytes that need to be escaped are as follows:
+ * - 0x7E: Frame Delimiter
+ * - 0x7D: Escape
+ * - 0x11: XON
+ * - 0x13: XOFF
+ *
+ * @subsection XBEE_CONCEPTS_API_FRAMES_SECTION API frames
+ * An API frame is the structured data sent and received through the serial interface of the radio module when it is configured in API or API escaped operating modes.
+ * API frames are used to communicate with the module or with other modules in the network.
+ *
+ * An API frame has the following structure:
+ * @image html api-frame.png
+ * Where:
+ * - Start delimiter: This field is always 0x7E
+ * - Length: The length field has a two-byte value that specifies the number of bytes that will be contained in the frame data field. It does not include the checksum field.
+ * - Frame Data: The content of this field is composed by the API identifier and the API identifier specific data. Depending on the API identifier (also called API frame type), the content of the specific data will change.
+ @note There are many API frame types or identifiers. The XCTU application includes an embedded tool called Frames Generator that helps you to build and fill any type of API frame. If you do not have XCTU installed, go to http://www.digi.com/xctu to download and install it.
+ * - Checksum: Byte containing the hash sum of the API frame bytes.
+ *
+ * In API escaped mode, there may be some bytes in the Length, Frame Data and Checksum fields that need to be escaped.
+ * @image html api-frame-escape-mode.png
+ *
+ * @subsection XBEE_CONCEPTS_AT_SETTINGS_OR_CMDS_SECTION AT settings or commands
+ * The firmware running in the XBee RF modules contains a set of settings and commands that can be configured to change the behavior of the module or to perform any action related with it. Depending on the protocol, the number of settings and their meanings varies,
+ * but all the XBee RF modules can be configured with AT commands.
+ *
+ * All the firmware settings or commands are identified with two ASCII characters and some applications and documents refer to them as AT settings or AT commands.
+ *
+ * The configuration process of these AT settings varies depending on the operating mode of the XBee RF module.
+ * - AT operating mode. In this mode, you must put the module in a special mode called AT Command mode, so it can receive AT commands. For more information about configuring XBee RF modules in AT operating mode, see @ref XBEE_CONCEPTS_AT_COMMAND_MODE_SECTION.
+ * - API operating mode. To configure or execute AT commands when the XBee RF module operates in API mode, must generate an AT Command API frame containing the AT setting identifier and the value of that setting and send it to the XBee RF module.
+ * For more information about API frames, see @ref XBEE_CONCEPTS_API_FRAMES_SECTION.
+ *
+ * @subsection XBEE_CONCEPTS_ZIGBEE_PROTO_CONCEPTS_SECTION ZigBee protocol concepts
+ * ZigBee is a wireless mesh network protocol for low-power digital radio modules. The ZigBee protocol defines a network layer above the 802.15.4 layers to support advanced mesh routing capabilities. It allows for creating and organizing the network hierarchy providing some extra communication features such as encryption and authentication.
+ * Through the mesh and routing capabilities, ZigBee allows the transmission of data over long distances by passing the data through intermediate nodes to more distant ones.
+ * Features of the ZigBee protocol include:
+ * - Support for multiple network topologies such as point-to-point, point-to-multipoint and mesh networks.
+ * - Low duty cycle, which promotes long battery life.
+ * - Low latency.
+ * - Direct Sequence Spread Spectrum (DSSS).
+ * - Up to 65,000 nodes per network.
+ * - 128-bit AES encryption for secure data connections.
+ * - Collision avoidance, retries and acknowledgements.
+ *
+ * @note This documentation does not cover the ZigBee protocol in detail.
+ * For more information about the ZigBee protocol, see the <a href="http://www.zigbee.org/Specifications/ZigBee/Overview.aspx">ZigBee Specification Overview</a> on the ZigBee Alliance websitepage for an in-depth explanation.
+ *
+ * @subsection XBEE_CONCEPTS_ZIGBEE_NODES_SECTION ZigBee nodes
+ * The ZigBee protocol defines three types of nodes:
+ * <b>Coordinators</b>, <b>Routers</b>, and <b>End Devices</b>, with a requirement of <b>one Coordinator per network</b>. While all nodes can send and receive data, there are differences in the specific roles they play.
+ * @subsubsection XBEE_CONCEPTS_ZIGBEE_NODES_COORDINATORS_SECTION Coordinators
+ * Coordinators are the most capable of the three node types.
+ * There is exactly one coordinator in each network and it is the device that establishes the network originally.
+ * A coordinator store information about the network, including security keys,
+ * but it cannot be battery-powered (that is, it cannot sleep) because it must store the packets for end device nodes.
+ * @subsubsection XBEE_CONCEPTS_ZIGBEE_NODES_ROUTERS_SECTION Routers
+ * Routers act as intermediate nodes, relaying data from other devices.
+ * Routers can connect to other devices and with the coordinator, but, as with the coordinator, they cannot sleep because they must store the packets for end devices.
+ * Routers are commonly used to extend the network.
+ * @subsubsection XBEE_CONCEPTS_ZIGBEE_NODES_END_DEVICES_SECTION End devices
+ * End Devices, usually sensors, can be low-power / battery-powered devices.
+ * They have sufficient functionality to talk to their parent devices,
+ * either the coordinator or a router, and cannot relay data from other devices.
+ * This reduced functionality allows for the potential to reduce cost.
+ * @subsubsection XBEE_CONCEPTS_ZIGBEE_NODES_EXAMPLE_SECTION Example ZigBee nodes
+ * The following figure displays a topology example of a ZigBee network.
+ * @image html zigbee-network-topology.png
+ *
+ * @subsection XBEE_CONCEPTS_CREATING_JOINING_NETWORK_SECTION Creating and joining ZigBee networks
+ * ZigBee networks are called <b>Personal Area Networks</b> or <b>PANs</b>.
+ * In the ZigBee protocol, the only node that can start a new network is the coordinator.
+ * For that reason, each ZigBee network must have one coordinator.
+ *
+ * To start a network, the coordinator must automatically choose a PAN identifier (<b>PAN ID</b>) and the operating <b>channel</b> for that network.
+ * Once those parameters are established and the network is initialized,
+ * the coordinator and routers can allow other devices (other routers or end devices) to join the network and can route data.
+ *
+ * @subsubsection XBEE_CONCEPTS_PAND_ID_SECTION PAN ID
+ * Each network is defined with a unique PAN identifier (<b>PAN ID</b>).
+ * This identifier is common among all devices of the same network.
+ * This is, devices on the same ZigBee network must share the same PAN ID in order to communicate each other.
+ * This PAN ID is established by the coordinator when it is creating the new network.
+ * When the coordinator is powered on, it automatically selects a PAN ID
+ * or uses a pre-configured one to identify the network that it will start.
+ *
+ * If a coordinator is configured with PAN ID <b>0</b>, it performs a PAN scan to identify nearby ZigBee networks and uses a random unused PAN ID to start the new network.
+ *
+ * If a router or end device is configured with PAN ID <b>0</b>,
+ * it performs a PAN scan and tries to join to the first ZigBee network it finds.
+ *
+ * @subsubsection XBEE_CONCEPTS_CHANNEL_SECTION Channel
+ * The 802.15.4 PHY (physical layer) protocol description defines 16 operating channels
+ * in the 2.4 GHz frequency band. Before starting the network,
+ * the coordinator automatically performs a channel scan to select a good channel
+ * to use for the network.
+ *
+ * All the ZigBee nodes in a network can be configured with the channel or channels on which they operate.
+ *
+ * @subsubsection XBEE_CONCEPTS_CREATE_NETWORK_SECTION Create a ZigBee Network
+ * As explained previously, to create a ZigBee network you need a coordinator,
+ * which is the node type that starts the network itself.
+ * The XBee Gateway includes a built-in XBee ZB node already configured as coordinator.
+ * Therefore, as soon as you power on the XBee Gateway ZB device, your ZigBee network is initialized.
+ *
+ * By default, the ZigBee coordinator in the XBee Gateway ZB device is configured with a PAN ID 0.
+ * That setting means that the coordinator selects a random, unused PAN ID for the network.
+ * The XBee Gateway also is configured to use any of the 16 channels,
+ * so the coordinator can perform a channel scan and choose the best one for the network.
+ *
+ * The XBee Gateway Cloud Kit also includes an XBee ZB module configured as router node.
+ * This means that you should be able to connect the XBee ZB module to the network initialized by the XBee Gateway.
+ * By default, the PAN ID of this ZigBee module is configured to 0.
+ * Therefore, if you power on the XBee ZB module and there is not any other ZigBee network around,
+ * the module should join the ZigBee network initialized by the XBee Gateway automatically.
+ * This joining operation is indicated when the Association LED of the board on which the XBee ZB module is mounted starts blinking.
+ *
+ * To verify that your XBee ZB module has successfully joined the ZigBee network started by the XBee Gateway ZB device, follow these steps:
+ * - Make sure the XBee Gateway is powered on. Make sure the XBee ZB node is mounted on the development board and that the development board is powered on.
+ * - In an Internet browser open the Home page of your XBee Gateway.
+ * In the list of links on the left side, under Configuration, click XBee Network.
+ * The XBee Configuration page is displayed.
+ * - Just below the Remote XBee Devices table, check the Clear list before discovery option and click the Discover XBee Devices button.
+ * @image html XBee-configuration.png
+ * - After some seconds the table should display your XBee ZB node.
+ * @image html remote-xbee-devices.png
+ *
+ *
+ *
+ *
+ * <b>Source : </b><a href="http://ftp1.digi.com/support/documentation/html/90001399/90001399_A/Files/XBee-concepts.html">XBee™ Gateway User's Guide</a>
  */

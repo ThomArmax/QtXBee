@@ -1,3 +1,4 @@
+#include "global.h"
 #include "xbee.h"
 
 #include "digimeshframe.h"
@@ -34,6 +35,7 @@ XBee::XBee(QObject *parent) :
     m_serial(NULL),
     xbeeFound(false),
     m_mode(TransparentMode),
+    m_frameIdCounter(1),
     m_dh(0),
     m_dl(0),
     m_my(0),
@@ -58,12 +60,19 @@ XBee::XBee(QObject *parent) :
  * Allocates and initializes all parameters to there default values and try to open the serial port specified in argument.
  * @param serialPort serial port path (eg. /dev/ttyUSB0) on with the XBee is plugged.
  * @param parent parent object
+ * @note In this case, the serial port configuration will ba set to :
+ * - <b>Baud Rate</b> : 9600
+ * - <b>Data Bits</b> : 8 bits
+ * - <b>Parity</b> : No
+ * - <b>Stop Bits</b> : One stop bit
+ * - <b>Flow Control</b> : No flow control
  */
 XBee::XBee(const QString &serialPort, QObject *parent) :
     QObject(parent),
     m_serial(NULL),
     xbeeFound(false),
     m_mode(TransparentMode),
+    m_frameIdCounter(1),
     m_dh(0),
     m_dl(0),
     m_my(0),
@@ -82,7 +91,9 @@ XBee::XBee(const QString &serialPort, QObject *parent) :
 {
     m_serial = new QSerialPort(serialPort, this);
     connect(m_serial, SIGNAL(readyRead()), SLOT(readData()));
+    applyDefaultSerialPortConfig();
     initSerialConnection();
+    //startupCheck();
 }
 
 /**
@@ -141,6 +152,7 @@ bool XBee::close()
  */
 bool XBee::setSerialPort(const QString &serialPort)
 {
+    bool bRet = false;
     if(m_serial) {
         m_serial->close();
         m_serial->setPortName(serialPort);
@@ -150,8 +162,11 @@ bool XBee::setSerialPort(const QString &serialPort)
         m_serial = new QSerialPort(serialPort, this);
         connect(m_serial, SIGNAL(readyRead()), SLOT(readData()));
     }
-    applyDefaultSerialPortConfig();
-    return initSerialConnection();
+    if(applyDefaultSerialPortConfig()) {
+        bRet = initSerialConnection();
+    }
+    //startupCheck();
+    return bRet;
 }
 
 /**
@@ -246,13 +261,18 @@ void XBee::displayRemoteCommandResponse(RemoteATCommandResponseFrame *digiMeshPa
     qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->packet().toHex();
 }
 
-void XBee::send(DigiMeshFrame *request)
+void XBee::sendATCommandAsync(DigiMeshFrame *command)
 {
-    request->assemblePacket();
+    command->assemblePacket();
     if(xbeeFound && m_serial->isOpen())
     {
-        qDebug() << Q_FUNC_INFO << "Transmit: " << QString("0x").append(request->packet().toHex());
-        m_serial->write(request->packet());
+        command->setFrameId(m_frameIdCounter);
+        if(m_frameIdCounter >= 255)
+            m_frameIdCounter = 1;
+        else m_frameIdCounter++;
+
+        qDebug() << Q_FUNC_INFO << "Transmit: " << QString("0x").append(command->packet().toHex());
+        m_serial->write(command->packet());
         m_serial->flush();
     }
     else
@@ -261,11 +281,65 @@ void XBee::send(DigiMeshFrame *request)
     }
 }
 
+void XBee::setATCommandAsync(const QByteArray &data)
+{
+    Q_UNUSED(data);
+}
+
+ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
+{
+    Q_ASSERT(command);
+    ATCommandResponseFrame * rep = NULL;
+    QByteArray repPacket;
+
+    command->setFrameId(m_frameIdCounter);
+    if(m_frameIdCounter >= 255)
+        m_frameIdCounter = 1;
+    else m_frameIdCounter++;
+
+    command->assemblePacket();
+
+    m_serial->blockSignals(true);
+
+    m_serial->write(command->packet());
+    m_serial->flush();
+    m_serial->waitForBytesWritten(100);
+    m_serial->waitForReadyRead(1000);
+    while(!m_serial->atEnd())
+        repPacket.append(m_serial->readAll());
+
+    m_serial->blockSignals(false);
+
+    if(repPacket.size() > 0) {
+        rep = new ATCommandResponseFrame();
+        rep->setPacket(repPacket);
+    }
+    return rep;
+}
+
+ATCommandResponseFrame * XBee::sendATCommandSync(const QByteArray &data)
+{
+    ATCommandResponseFrame * rep = NULL;
+    if(data.size() >= 2)
+    {
+        ATCommandFrame at;
+        at.setCommand(data.mid(0, 2));
+        if(data.size() > 2) {
+            at.setParameter(data.mid(2, data.size()-2));
+        }
+        rep = sendATCommandSync(&at);
+    }
+    else {
+        qWarning() << Q_FUNC_INFO << "bad command" << data;
+    }
+    return rep;
+}
+
 void XBee::broadcast(QString data)
 {
     TransmitRequestFrame request;
     request.setData(data.toLatin1());
-    send(&request);
+    sendATCommandAsync(&request);
 }
 
 void XBee::unicast(QByteArray address, QString data)
@@ -273,7 +347,7 @@ void XBee::unicast(QByteArray address, QString data)
     TransmitRequestFrame request;
     request.setDestAddr64(address);
     request.setData(data.toLatin1());
-    send(&request);
+    sendATCommandAsync(&request);
 }
 
 /**
@@ -298,21 +372,21 @@ void XBee::unicast(QByteArray address, QString data)
  */
 void XBee::loadAddressingProperties() {
     ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_DH); send(&at);
-    at.setCommand(ATCommandFrame::Command_DL); send(&at);
-    at.setCommand(ATCommandFrame::Command_MY); send(&at);
-    at.setCommand(ATCommandFrame::Command_MP); send(&at);
-    at.setCommand(ATCommandFrame::Command_NC); send(&at);
-    at.setCommand(ATCommandFrame::Command_SH); send(&at);
-    at.setCommand(ATCommandFrame::Command_SL); send(&at);
-    at.setCommand(ATCommandFrame::Command_NI); send(&at);
-    at.setCommand(ATCommandFrame::Command_SE); send(&at);
-    at.setCommand(ATCommandFrame::Command_DE); send(&at);
-    at.setCommand(ATCommandFrame::Command_CI); send(&at);
-    at.setCommand(ATCommandFrame::Command_TO); send(&at);
-    at.setCommand(ATCommandFrame::Command_NP); send(&at);
-    at.setCommand(ATCommandFrame::Command_DD); send(&at);
-    at.setCommand(ATCommandFrame::Command_CR); send(&at);
+    at.setCommand(ATCommandFrame::Command_DH); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_DL); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_MY); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_MP); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_NC); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_SH); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_SL); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_NI); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_SE); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_DE); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_CI); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_TO); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_NP); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_DD); sendATCommandAsync(&at);
+    at.setCommand(ATCommandFrame::Command_CR); sendATCommandAsync(&at);
 }
 
 // Adressing
@@ -320,7 +394,7 @@ bool XBee::setDH(const quint32 dh) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_DH);
     at.setParameter(QByteArray::number(dh));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -328,7 +402,7 @@ bool XBee::setDL(const quint32 dl) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_DL);
     at.setParameter(QByteArray::number(dl));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -336,7 +410,7 @@ bool XBee::setMY(const quint16 my) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_MY);
     at.setParameter(QByteArray::number(my));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -344,7 +418,7 @@ bool XBee::setMP(const quint16 mp) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_MP);
     at.setParameter(QByteArray::number(mp));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -352,7 +426,7 @@ bool XBee::setNC(const quint32 nc) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_NC);
     at.setParameter(QByteArray::number(nc));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -360,7 +434,7 @@ bool XBee::setSH(const quint32 sh) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_SH);
     at.setParameter(QByteArray::number(sh));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -368,7 +442,7 @@ bool XBee::setSL(const quint32 sl) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_SL);
     at.setParameter(QByteArray::number(sl));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -376,7 +450,7 @@ bool XBee::setNI(const QString & ni) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_NI);
     at.setParameter(ni.toUtf8());
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -384,7 +458,7 @@ bool XBee::setSE(const quint8 se) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_SE);
     at.setParameter(QByteArray::number(se));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -392,7 +466,7 @@ bool XBee::setDE(const quint8 de) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_DE);
     at.setParameter(QByteArray::number(de));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -400,7 +474,7 @@ bool XBee::setCI(const quint8 ci) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_CI);
     at.setParameter(QByteArray::number(ci));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -408,7 +482,7 @@ bool XBee::setTO(const quint8 to) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_TO);
     at.setParameter(QByteArray::number(to));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -416,7 +490,7 @@ bool XBee::setNP(const quint8 np) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_NP);
     at.setParameter(QByteArray::number(np));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -424,7 +498,7 @@ bool XBee::setDD(const quint16 dd) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_DD);
     at.setParameter(QByteArray::number(dd));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -432,7 +506,7 @@ bool XBee::setCR(const quint8 cr) {
     ATCommandFrame at;
     at.setCommand(ATCommandFrame::Command_CR);
     at.setParameter(QByteArray::number(cr));
-    send(&at);
+    sendATCommandAsync(&at);
     return true;
 }
 
@@ -508,7 +582,7 @@ void XBee::processPacket(QByteArray packet)
     }
     case DigiMeshFrame::NodeIdentificationIndicatorFrame : {
         NodeIdentificationIndicatorFrame *response = new NodeIdentificationIndicatorFrame(this);
-        response->readPacket(packet);
+        response->setPacket(packet);
         emit receivedNodeIdentificationIndicator(response);
         break;
     }
@@ -525,6 +599,7 @@ void XBee::processPacket(QByteArray packet)
     }
 }
 
+#include "nodediscoveryresponseparser.h"
 void XBee::processATCommandRespone(ATCommandResponseFrame *rep) {
     Q_ASSERT(rep);
     ATCommandFrame::ATCommand at = rep->atCommand();
@@ -551,9 +626,11 @@ void XBee::processATCommandRespone(ATCommandResponseFrame *rep) {
     case ATCommandFrame::Command_DD : m_dd = dataInt; emit DDChanged(m_dd); break;
     case ATCommandFrame::Command_CR : m_cr = dataInt; emit CRChanged(m_cr); break;
 
-    case ATCommandFrame::Command_ND :
-
+    case ATCommandFrame::Command_ND : {
+        NodeDiscoveryResponseParser nd;
+        nd.setPacketData(rep->data());
         break;
+    }
     default:
         qWarning() << Q_FUNC_INFO << "Unhandled AT command" <<  QString("0x%1 (%2)").arg(at , 0, 16).arg(ATCommandFrame::atCommandToString(at));
     }
@@ -567,15 +644,13 @@ bool XBee::initSerialConnection()
 
     if (m_serial->open(QIODevice::ReadWrite))
     {
-        if(applyDefaultSerialPortConfig())
+        if(m_serial->isOpen())
         {
-            if(m_serial->isOpen())
-            {
-                qDebug() << "XBEE: Connected successfully";
-                qDebug() << "XBEE: Serial Port Name: " << m_serial->portName();
-                xbeeFound = true;
-                return true;
-            }
+            qDebug() << "XBEE: Connected successfully";
+            qDebug() << "XBEE: Serial Port Name: " << m_serial->portName();
+            xbeeFound = true;
+            startupCheck();
+            return true;
         }
     }
     else
@@ -583,5 +658,101 @@ bool XBee::initSerialConnection()
         qDebug() << "XBEE: Serial Port" << m_serial->portName() << "could not be opened";
     }
 
+
     return false;
+}
+
+bool XBee::startupCheck()
+{
+    bool bRet = false;
+    ATCommandFrame at;
+    ATCommandResponseFrame * rep = NULL;
+    if(xbeeFound)
+    {
+        at.setCommand("AP");
+        rep = sendATCommandSync(&at);
+        // Check AP mode
+        if(rep)
+        {
+            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
+                bool ok = false;
+                int apmode = rep->data().toHex().toInt(&ok,16);
+                if(ok) {
+                    if(apmode != 1) {
+                        qDebug() << Q_FUNC_INFO << "XBee radio is not in API mode without escape characters (AP=1). Try to set AP=1";
+                        at.setParameter("1");
+                        delete rep;
+                        rep = sendATCommandSync(&at);
+                        if(rep) {
+                            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
+                                qDebug() << Q_FUNC_INFO << "XBee in API mode (AP=1) : OK";
+                                bRet = true;
+                                delete rep;
+                                rep = NULL;
+                            }
+                            else {
+                                qWarning() << Q_FUNC_INFO << "Failed to set AP=1 !";
+                            }
+                        }
+                        else {
+                            qWarning() << Q_FUNC_INFO << "Failed to set AP=1 !";
+                        }
+                    }
+                    else {
+                        qDebug() << Q_FUNC_INFO << "XBee in API mode (AP=1) : OK";
+                        bRet = true;
+                    }
+                }
+                else {
+                    qWarning() << Q_FUNC_INFO << "Failed to retreive AP parameter from received response !";
+                }
+            }
+            else {
+                qWarning() << Q_FUNC_INFO << "AP command failed !";
+            }
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO << "Failed to get AP parameter";
+        }
+        // Check HardWare Rev
+        ATCommandFrame hv;
+        hv.setCommand("HV");
+        rep = sendATCommandSync(&hv);
+        if(rep)
+        {
+            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
+                bool ok = false;
+                int hv = rep->data().toHex().toInt(&ok,16);
+                if(ok) {
+                    if(hv == QtXBee::XBeeSerie1 || QtXBee::XBeeSerie1Pro) {
+                        qDebug() << Q_FUNC_INFO << "XBee Serie 1/1Pro : OK";
+                        bRet &= true;
+                    }
+                    else {
+                        qDebug() << Q_FUNC_INFO << "XBee Serie 1/1Pro : KO (unsuported hardware version)";
+                        bRet = false;
+                    }
+                }
+                else {
+                    qWarning() << Q_FUNC_INFO << "Failed to retreive HV parameter from received response !";
+                    bRet = false;
+                }
+            }
+            else {
+                qWarning() << Q_FUNC_INFO << "HV command failed !";
+                bRet = false;
+            }
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO << "Failed to get HV parameter";
+            bRet = false;
+        }
+
+    }
+    if(rep) {
+        delete rep;
+    }
+    return bRet;
 }

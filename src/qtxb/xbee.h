@@ -47,7 +47,12 @@ public:
     bool applyDefaultSerialPortConfig();
     void broadcast(QString data);
     void unicast(QByteArray address, QString data);
-    void send(DigiMeshFrame *request);
+
+    ATCommandResponseFrame *sendATCommandSync(DigiMeshFrame * command);
+    ATCommandResponseFrame *sendATCommandSync(const QByteArray & data);
+
+    void sendATCommandAsync(DigiMeshFrame *command);
+    void setATCommandAsync(const QByteArray & data);
 
     bool setMode(const Mode mode) { m_mode = mode; return true; }   /**< @brief Sets the XBee's mode @param mode the new Mode to be applied */
     Mode mode() const { return m_mode; }                            /**< @brief Returns the XBee's mode @return the XBee's mode */
@@ -148,12 +153,14 @@ private:
     bool initSerialConnection();
     void processPacket(QByteArray packet);
     void processATCommandRespone(ATCommandResponseFrame *rep);
+    bool startupCheck();
 
 private:
     QSerialPort *m_serial;
     bool xbeeFound;
     Mode m_mode;
     QByteArray buffer;
+    quint16 m_frameIdCounter;
 
     // Adressing
     quint32 m_dh;

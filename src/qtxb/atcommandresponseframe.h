@@ -15,7 +15,7 @@ class ATCommandResponseFrame : public DigiMeshFrameResponse
 {
     Q_OBJECT
 public:
-    explicit ATCommandResponseFrame(QObject *parent);
+    explicit ATCommandResponseFrame(QObject *parent = 0);
     ATCommandResponseFrame(const QByteArray &packet, QObject * parent = 0);
 
     void setATCommand(ATCommandFrame::ATCommand at);

@@ -9,6 +9,14 @@ enum DeviceType {
     EndDevice
 };
 
+enum HardwareVersion {
+    XBeeSerieUnknown = 0,
+    XBeeSerie1 = 0x17,
+    XBeeSerie1Pro,
+    XBeeSeriel2,
+    XBeeSerie2Pro
+};
+
 } // END namespace
 
 #endif // GLOBAL

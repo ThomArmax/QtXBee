@@ -3,6 +3,7 @@
 
 #include "digimeshframe.h"
 #include <QObject>
+#include <QDebug>
 
 /**
  * @brief The DigiMeshFrameResponse class is the base to create API frames respons.
@@ -27,6 +28,7 @@ public:
 
     virtual bool setPacket(const QByteArray &packet);
     virtual QByteArray data() const;
+    virtual void clear();
 
     void setCommandStatus(const CommandStatus status);
     CommandStatus commandStatus() const { return m_status; }

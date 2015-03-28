@@ -79,6 +79,7 @@ public:
     unsigned checksum() const;
 
     virtual void assemblePacket();
+    virtual void clear();
     virtual QString toString();
     static QString frameTypeToString(const APIFrameType type);
 
@@ -88,7 +89,7 @@ protected:
 protected:
     QByteArray m_packet;        /**< Constains the packet's data (sent or received)*/
     unsigned m_startDelimiter;  /**< The packet start delimiter */
-    u_int16_t m_length;         /**< Frame-specific data length (Number of bytes between the length and the checksum) */
+    quint16 m_length;           /**< Frame-specific data length (Number of bytes between the length and the checksum) */
     APIFrameType m_frameType;   /**< The frame's type */
     unsigned m_frameId;         /**< The frame's id */
     unsigned m_checksum;        /**< Packet checksum */

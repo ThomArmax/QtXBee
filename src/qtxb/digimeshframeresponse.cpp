@@ -23,6 +23,13 @@ QByteArray DigiMeshFrameResponse::data() const
     return m_data;
 }
 
+void DigiMeshFrameResponse::clear()
+{
+    DigiMeshFrame::clear();
+    m_data.clear();
+    m_status = Error;
+}
+
 void DigiMeshFrameResponse::setCommandStatus(const CommandStatus status)
 {
     m_status = status;

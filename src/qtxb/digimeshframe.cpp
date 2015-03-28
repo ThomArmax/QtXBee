@@ -7,7 +7,7 @@
 DigiMeshFrame::DigiMeshFrame(QObject *parent) :
     QObject(parent),
     m_startDelimiter(0x7E),
-    m_length(-1),
+    m_length(0),
     m_frameType(UndefinedFrame),
     m_frameId(-1),
     m_checksum(-1)
@@ -147,6 +147,15 @@ QByteArray DigiMeshFrame::packet() const {
  */
 void DigiMeshFrame::assemblePacket() {
 
+}
+
+void DigiMeshFrame::clear() {
+    m_packet.clear();
+    m_startDelimiter = 0x7E;
+    m_length = 0;
+    m_frameType = UndefinedFrame;
+    m_frameId = -1;
+    m_checksum = -1;
 }
 
 /**

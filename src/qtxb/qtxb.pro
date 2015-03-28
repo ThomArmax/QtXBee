@@ -32,9 +32,11 @@ SOURCES += \
     receivepacketframe.cpp \
     explicitrxindicatorframe.cpp \
     transmitstatusframe.cpp \
-    explicitadressingcommandframe.cpp
+    explicitadressingcommandframe.cpp \
+    nodediscoveryresponseparser.cpp
 
 HEADERS += \
+    global.h \
     xbee.h \
     digimeshframe.h \
     digimeshframeresponse.h \
@@ -49,7 +51,8 @@ HEADERS += \
     receivepacketframe.h \
     explicitrxindicatorframe.h \
     transmitstatusframe.h \
-    explicitadressingcommandframe.h
+    explicitadressingcommandframe.h \
+    nodediscoveryresponseparser.h
 
 OTHER_FILES += \
     qtxb.pri \

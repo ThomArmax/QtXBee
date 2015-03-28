@@ -130,7 +130,8 @@ public:
     QByteArray command() const;
     QByteArray parameter() const;
 
-    void assemblePacket();
+    virtual void assemblePacket();
+    virtual void clear();
 
     static QString atCommandToString(const ATCommand command);
     static QByteArray atCommandToByteArray(const ATCommand command);

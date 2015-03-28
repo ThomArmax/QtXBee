@@ -73,6 +73,13 @@ void ATCommandFrame::assemblePacket() {
     m_packet.insert(2, length()&0xFF);
 }
 
+void ATCommandFrame::clear()
+{
+    DigiMeshFrame::clear();
+    m_command.clear();
+    m_parameter.clear();
+}
+
 /**
  * @brief Returns the given ATCommandFrame::ATCommand into QString
  * @param command the ATCommand to be converted into QString

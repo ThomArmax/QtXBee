@@ -63,6 +63,16 @@ public:
         ManyToOneRouteRequestIndicator      = 0xA3
     };
 
+    /**
+     * @brief The SpecialByte enum defines the special bytes
+     */
+    enum SpecialByte {
+        StartDelimiter  = 0x7E, /**< Start delimiter */
+        Escape          = 0x7D, /**< Escape caracter */
+        XON             = 0x11, /**< XON */
+        XOFF            = 0x13  /**< XOFF */
+    };
+
     explicit DigiMeshFrame(QObject *parent = 0);
 
     void setStartDelimiter(unsigned sd);
@@ -72,6 +82,7 @@ public:
     void setChecksum(unsigned cs);
 
     QByteArray packet() const;
+    void setPacket(const QByteArray & packet);
     unsigned startDelimiter() const;
     u_int16_t length() const;
     APIFrameType frameType() const;
@@ -83,6 +94,11 @@ public:
     virtual QString toString();
     static QString frameTypeToString(const APIFrameType type);
 
+    void escapePacket();
+    bool unescapePacket();
+
+private:
+    bool isSpecialByte(const char c);
 protected:
     void createChecksum(QByteArray array);
 

@@ -1,4 +1,5 @@
 #include "digimeshframe.h"
+#include <QDebug>
 
 /**
  * @brief DigiMeshFrame's constructor
@@ -139,6 +140,11 @@ QByteArray DigiMeshFrame::packet() const {
     return m_packet;
 }
 
+void DigiMeshFrame::setPacket(const QByteArray &packet) {
+    m_packet = packet;
+    assemblePacket();
+}
+
 /**
  * @brief Assembles the packet to be able to send it.
  *
@@ -165,6 +171,7 @@ void DigiMeshFrame::clear() {
 QString DigiMeshFrame::toString() {
     QString str;
     str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));
+    str.append(QString("Frame id        : %1 (0x%2)\n").arg(frameId(), 0, 16).arg(frameId(), 0, 16));
     str.append(QString("Frame type      : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
     str.append(QString("Start delimiter : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
     str.append(QString("Length          : %1 bytes\n").arg(m_length));
@@ -192,8 +199,92 @@ QString DigiMeshFrame::frameTypeToString(const APIFrameType type) {
     case RXIndicatorFrame                   : str = "RXIndicator";                          break;
     case ExplicitRxIndicatorFrame           : str = "Explicit Rx Indicator";                break;
     case NodeIdentificationIndicatorFrame   : str = "Node Identification Indicator";        break;
-    case RemoteATCommandResponseFrame         : str = "Remote Command Response";              break;
+    case RemoteATCommandResponseFrame       : str = "Remote Command Response";              break;
     default                                 : str = "Unknown";                              break;
     }
     return str;
+}
+
+void DigiMeshFrame::escapePacket()
+{
+    int escapeBytes = 0;
+    QByteArray escapedPacked;
+    int i;
+
+    // Skip byte 0 (start delimiter)
+    for (i=1; i<m_packet.size(); i++) {
+        if (isSpecialByte(m_packet.at(i))) {
+            qDebug() << Q_FUNC_INFO << "packet requires escaping for byte" << i << "(" <<QByteArray().append(m_packet.at(i)).toHex() << ")";
+            escapeBytes++;
+        }
+    }
+
+    if (escapeBytes == 0) {
+        qDebug() << "No need to escape packet" << m_packet.toHex();
+        return;
+    }
+    else {
+        qDebug() << Q_FUNC_INFO << "packet need to be escaped";
+
+        int pos = 1;
+
+        escapedPacked.reserve(m_packet.size() + escapeBytes);
+        escapedPacked[0] = startDelimiter();
+
+        for (i = 1; i < m_packet.size(); i++) {
+            if (isSpecialByte(m_packet[i])) {
+                escapedPacked[pos] = StartDelimiter;
+                escapedPacked[++pos] = 0x20 ^ m_packet[i];
+
+                qDebug() << Q_FUNC_INFO << "xor'd byte is" << QString("0x%1").arg(escapedPacked[pos]);
+            } else {
+                escapedPacked[pos] = m_packet[i];
+            }
+            pos++;
+        }
+        qDebug() << Q_FUNC_INFO << m_packet.toHex() << "===>" << escapedPacked.toHex();
+        m_packet.clear();
+        m_packet = escapedPacked;
+    }
+}
+
+bool DigiMeshFrame::unescapePacket()
+{
+    QByteArray unEscapedPacket;
+    int escapeBytes = 0;
+    int i = 0;
+    int pos = 0;
+
+    for(i=0; i<m_packet.size(); i++) {
+        if(m_packet.at(i) == Escape) {
+            escapeBytes++;
+        }
+    }
+
+    if (escapeBytes == 0) {
+        return true;
+    }
+
+    unEscapedPacket.reserve(m_packet.size() - escapeBytes);
+
+    for(i = 0; i<m_packet.size(); i++) {
+        if (m_packet[i] == (char)Escape) {
+            // discard escape byte and un-escape following byte
+            unEscapedPacket[pos] = 0x20 ^ m_packet[++i];
+        } else {
+            unEscapedPacket[pos] = m_packet[i];
+        }
+        pos++;
+    }
+
+    qDebug() << Q_FUNC_INFO << m_packet.toHex() << "====>" << unEscapedPacket.toHex();
+    return true;
+}
+
+bool DigiMeshFrame::isSpecialByte(const char c)
+{
+    return  c == StartDelimiter ||
+            c == Escape ||
+            c == XON ||
+            c == XOFF;
 }

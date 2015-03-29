@@ -1,20 +1,29 @@
 #ifndef GLOBAL
 #define GLOBAL
 
+/**
+ * @file global.h Defines global properties and glob enums.
+ */
 namespace QtXBee {
 
+/**
+ * @brief The DeviceType enum
+ */
 enum DeviceType {
     Coordinator,
-    Route,
+    Router,
     EndDevice
 };
 
+/**
+ * @brief The HardwareVersion enum
+ */
 enum HardwareVersion {
-    XBeeSerieUnknown = 0,
-    XBeeSerie1 = 0x17,
-    XBeeSerie1Pro,
-    XBeeSeriel2,
-    XBeeSerie2Pro
+    XBeeSerieUnknown = 0,   /**< Unkown hardware version */
+    XBeeSerie1 = 0x17,      /**< XBee Serie 1 hardware version */
+    XBeeSerie1Pro,          /**< XBee Serie 1 Pro hardware version */
+    XBeeSeriel2,            /**< XBee Serie 2 hardware version */
+    XBeeSerie2Pro           /**< XBee Serie 2 hardware version */
 };
 
 } // END namespace

@@ -107,14 +107,14 @@ public:
     QSerialPort * serialPort() { return m_serial; } /**< @brief Returns the QSerialPort used to communicate with the XBee. @return the QSerialPort used to communicate with the XBee */
 
 signals:
-    void receivedATCommandResponse(ATCommandResponseFrame *response);                        /**< @brief Emitted when at ATCommandResponse frame is received*/
-    void receivedModemStatus(ModemStatusFrame *response);                                    /**< @brief Emitted when at ModemStatus frame is received*/
-    void receivedTransmitStatus(TransmitStatusFrame *response);                              /**< @brief Emitted when at TransmitStatus frame is received*/
-    void receivedRXIndicator(ReceivePacketFrame *response);                                    /**< @brief Emitted when at RXIndicator frame is received*/
-    void receivedRXIndicatorExplicit(ExplicitRxIndicatorFrame *response);                    /**< @brief Emitted when at RXIndicatorExplicit frame is received*/
-    void receivedNodeIdentificationIndicator(NodeIdentificationIndicatorFrame *response);    /**< @brief Emitted when at NodeIdentificationIndicator frame is received*/
-    void receivedRemoteCommandResponse(RemoteATCommandResponseFrame *response);                /**< @brief Emitted when at RemoteCommandResponse frame is received*/
-    void rawDataReceived(const QByteArray & data);                                      /**< @brief Emitted when raw data are received on the serial port (only in NormalMode). @sa XBee::setMode() @sa XBee::Mode */
+    void receivedATCommandResponse(ATCommandResponseFrame *response);                       /**< @brief Emitted when at ATCommandResponse frame is received*/
+    void receivedModemStatus(ModemStatusFrame *response);                                   /**< @brief Emitted when at ModemStatus frame is received*/
+    void receivedTransmitStatus(TransmitStatusFrame *response);                             /**< @brief Emitted when at TransmitStatus frame is received*/
+    void receivedRXIndicator(ReceivePacketFrame *response);                                 /**< @brief Emitted when at RXIndicator frame is received*/
+    void receivedRXIndicatorExplicit(ExplicitRxIndicatorFrame *response);                   /**< @brief Emitted when at RXIndicatorExplicit frame is received*/
+    void receivedNodeIdentificationIndicator(NodeIdentificationIndicatorFrame *response);   /**< @brief Emitted when at NodeIdentificationIndicator frame is received*/
+    void receivedRemoteCommandResponse(RemoteATCommandResponseFrame *response);             /**< @brief Emitted when at RemoteCommandResponse frame is received*/
+    void rawDataReceived(const QByteArray & data);                                          /**< @brief Emitted when raw data are received on the serial port (only in NormalMode). @sa XBee::setMode() @sa XBee::Mode */
     // Addressing signals
     void DHChanged(const quint32 dh);   /**< @brief Emitted when DH property changes. @sa XBee::setDH() @sa XBee::DH()*/
     void DLChanged(const quint32 dl);   /**< @brief Emitted when DL property changes. @sa XBee::setDL() @sa XBee::DL()*/

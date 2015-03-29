@@ -93,7 +93,6 @@ XBee::XBee(const QString &serialPort, QObject *parent) :
     connect(m_serial, SIGNAL(readyRead()), SLOT(readData()));
     applyDefaultSerialPortConfig();
     initSerialConnection();
-    //startupCheck();
 }
 
 /**
@@ -165,7 +164,6 @@ bool XBee::setSerialPort(const QString &serialPort)
     if(applyDefaultSerialPortConfig()) {
         bRet = initSerialConnection();
     }
-    //startupCheck();
     return bRet;
 }
 
@@ -291,6 +289,7 @@ ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
     Q_ASSERT(command);
     ATCommandResponseFrame * rep = NULL;
     QByteArray repPacket;
+    QByteArray tmp;
 
     command->setFrameId(m_frameIdCounter);
     if(m_frameIdCounter >= 255)
@@ -304,11 +303,17 @@ ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
 
     m_serial->write(command->packet());
     m_serial->flush();
-    m_serial->waitForBytesWritten(100);
-    //m_serial->waitForReadyRead(100);
-    while(!m_serial->atEnd() || m_serial->bytesAvailable())
-        repPacket.append(m_serial->readAll());
+    while(m_serial->waitForReadyRead(100)) {
+        tmp.append(m_serial->readAll());
+    }
 
+    while(!tmp.isEmpty() && (unsigned char)tmp.at(0) != (unsigned char)DigiMeshFrame::StartDelimiter) {
+        tmp.remove(0, 1);
+    }
+
+    repPacket = tmp;
+
+    qDebug() << Q_FUNC_INFO << repPacket.toHex();
     m_serial->blockSignals(false);
 
     if(repPacket.size() > 0) {
@@ -667,7 +672,6 @@ bool XBee::initSerialConnection()
     {
         qDebug() << "XBEE: Serial Port" << m_serial->portName() << "could not be opened";
     }
-
 
     return false;
 }

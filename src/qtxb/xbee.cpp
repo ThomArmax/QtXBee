@@ -297,6 +297,7 @@ ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
         m_frameIdCounter = 1;
     else m_frameIdCounter++;
 
+    command->setFrameId(m_frameIdCounter);
     command->assemblePacket();
 
     m_serial->blockSignals(true);
@@ -304,8 +305,8 @@ ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
     m_serial->write(command->packet());
     m_serial->flush();
     m_serial->waitForBytesWritten(100);
-    m_serial->waitForReadyRead(1000);
-    while(!m_serial->atEnd())
+    //m_serial->waitForReadyRead(100);
+    while(!m_serial->atEnd() || m_serial->bytesAvailable())
         repPacket.append(m_serial->readAll());
 
     m_serial->blockSignals(false);
@@ -313,6 +314,10 @@ ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
     if(repPacket.size() > 0) {
         rep = new ATCommandResponseFrame();
         rep->setPacket(repPacket);
+    }
+    else {
+        qDebug() << Q_FUNC_INFO << "no response to";
+        qDebug() << qPrintable(command->toString());
     }
     return rep;
 }
@@ -352,23 +357,21 @@ void XBee::unicast(QByteArray address, QString data)
 
 /**
  * @brief Loads the XBee's addressing properties
- * <ul>
- * <li>DH</li>
- * <li>DL</li>
- * <li>MY</li>
- * <li>MP</li>
- * <li>NC</li>
- * <li>SH</li>
- * <li>SL</li>
- * <li>NI</li>
- * <li>SE</li>
- * <li>DE</li>
- * <li>CI</li>
- * <li>TO</li>
- * <li>NP</li>
- * <li>DD</li>
- * <li>CR</li>
- * </ul>
+ * - DH
+ * - DL
+ * - MY
+ * - MP
+ * - NC
+ * - SH
+ * - SL
+ * - NI
+ * - SE
+ * - DE
+ * - CI
+ * - TO
+ * - NP
+ * - DD
+ * - CR
  */
 void XBee::loadAddressingProperties() {
     ATCommandFrame at;
@@ -510,6 +513,13 @@ bool XBee::setCR(const quint8 cr) {
     return true;
 }
 
+bool XBee::setMode(const Mode mode)
+{
+    m_mode = mode;
+    buffer.clear();
+    return true;
+}
+
 //_________________________________________________________________________________________________
 //___________________________________________PRIVATE API___________________________________________
 //_________________________________________________________________________________________________
@@ -534,7 +544,7 @@ void XBee::readData()
         }
         if(buffer.size() > 2) {
             unsigned length = buffer.at(2)+4;
-            if((unsigned char)buffer.size() >= (unsigned char)length){
+            if((unsigned char)buffer.size() >= (unsigned char)length) {
                 packet.append(buffer.left(length));
                 qDebug() << Q_FUNC_INFO << QString("0x").append(packet.toHex());
                 processPacket(packet);
@@ -667,86 +677,124 @@ bool XBee::startupCheck()
     bool bRet = false;
     ATCommandFrame at;
     ATCommandResponseFrame * rep = NULL;
+    QString errorStr;
+    Mode currentMode;
+
+    qDebug() << "****************** XBEE CONFIGURATION CHECKUP ******************";
     if(xbeeFound)
     {
-        at.setCommand("AP");
-        rep = sendATCommandSync(&at);
-        // Check AP mode
-        if(rep)
-        {
-            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
-                bool ok = false;
-                int apmode = rep->data().toHex().toInt(&ok,16);
-                if(ok) {
-                    if(apmode != 1) {
-                        qDebug() << Q_FUNC_INFO << "XBee radio is not in API mode without escape characters (AP=1). Try to set AP=1";
-                        at.setParameter("1");
-                        delete rep;
-                        rep = sendATCommandSync(&at);
-                        if(rep) {
-                            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
-                                qDebug() << Q_FUNC_INFO << "XBee in API mode (AP=1) : OK";
-                                bRet = true;
-                                delete rep;
-                                rep = NULL;
-                            }
-                            else {
-                                qWarning() << Q_FUNC_INFO << "Failed to set AP=1 !";
-                            }
-                        }
-                        else {
-                            qWarning() << Q_FUNC_INFO << "Failed to set AP=1 !";
-                        }
+        // Go in command mode
+        if(enterInCommandMode()) {
+            QByteArray r;
+            r = synchronousCmd(QByteArray("ATAP").append(0x0d));
+            if(!r.isEmpty()) {
+                currentMode = (Mode) r.toInt();
+                if(currentMode != API1Mode) {
+                    qDebug() << "XBee radio is not in API mode without escape characters (AP=1). Try to set AP=1";
+                    r = synchronousCmd(QByteArray("ATAP1").append(0x0d));
+                    if(r == "OK") {
+                        errorStr = "OK";
                     }
-                    else {
-                        qDebug() << Q_FUNC_INFO << "XBee in API mode (AP=1) : OK";
-                        bRet = true;
-                    }
+                    errorStr = "KO (Failed to set AP=1)";
                 }
                 else {
-                    qWarning() << Q_FUNC_INFO << "Failed to retreive AP parameter from received response !";
+                    errorStr = "OK";
                 }
             }
             else {
-                qWarning() << Q_FUNC_INFO << "AP command failed !";
+                errorStr = "KO (No response to AP command";
             }
         }
-        else
-        {
-            qDebug() << Q_FUNC_INFO << "Failed to get AP parameter";
+        else {
+            errorStr = "KO (Failed to enter in command mode)";
         }
+        exitCommandMode();
+        // Check AP mode
+//        at.setCommand("AP");
+//        rep = sendATCommandSync(&at);
+//        if(rep)
+//        {
+//            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
+//                bool ok = false;
+//                currentMode = (Mode)rep->data().toHex().toInt(&ok,16);
+//                if(ok) {
+//                    if(currentMode != API1Mode) {
+//                        qDebug() << Q_FUNC_INFO << "XBee radio is not in API mode without escape characters (AP=1). Try to set AP=1";
+//                        at.clear();
+//                        at.setCommand("AP");
+//                        at.setParameter("1");
+//                        at.assemblePacket();
+//                        if(currentMode == 2) at.escapePacket();
+//                        delete rep;
+//                        rep = sendATCommandSync(&at);
+//                        if(currentMode == 2) at.unescapePacket();
+//                        if(rep) {
+//                            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
+//                                errorStr = "OK";
+//                                bRet = true;
+//                                delete rep;
+//                                rep = NULL;
+//                            }
+//                            else {
+//                                errorStr = QString("KO (Failed to set AP=1, %1)").arg(rep->statusToString(rep->commandStatus()));
+//                                qDebug() << Q_FUNC_INFO << "rep" << rep->packet().toHex();
+//                            }
+//                        }
+//                        else {
+//                            errorStr = "KO (No response to AP command)";
+//                        }
+//                    }
+//                    else {
+//                        errorStr = "OK";
+//                        bRet = true;
+//                    }
+//                }
+//                else {
+//                    errorStr = "KO (Failed to get AP parameter)";
+//                }
+//            }
+//            else {
+//                errorStr = "KO (AP command failed)";
+//            }
+//        }
+//        else
+//        {
+//            errorStr = "KO (No response to AP command)";
+//        }
+        qDebug() << "XBEE: Startup check :" << "XBee in API mode (AP=1) :" << qPrintable(errorStr);
+
         // Check HardWare Rev
-        ATCommandFrame hv;
-        hv.setCommand("HV");
-        rep = sendATCommandSync(&hv);
+        at.clear();
+        at.setCommand("HV");
+        rep = sendATCommandSync(&at);
         if(rep)
         {
             if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
                 bool ok = false;
-                int hv = rep->data().toHex().toInt(&ok,16);
+                int hv = rep->data().left(1).toHex().toInt(&ok,16);
                 if(ok) {
-                    if(hv == QtXBee::XBeeSerie1 || QtXBee::XBeeSerie1Pro) {
-                        qDebug() << Q_FUNC_INFO << "XBee Serie 1/1Pro : OK";
+                    if(hv == QtXBee::XBeeSerie1 || hv == QtXBee::XBeeSerie1Pro) {
+                        errorStr = QString("OK (0x%1)").arg(QString(rep->data().toHex()));
                         bRet &= true;
                     }
                     else {
-                        qDebug() << Q_FUNC_INFO << "XBee Serie 1/1Pro : KO (unsuported hardware version)";
+                        errorStr = QString("KO (Unsuported hardware version 0x%1)").arg(QString(rep->data().toHex()));
                         bRet = false;
                     }
                 }
                 else {
-                    qWarning() << Q_FUNC_INFO << "Failed to retreive HV parameter from received response !";
+                    errorStr = "KO (Failed to retreive HV parameter from received response)";
                     bRet = false;
                 }
             }
             else {
-                qWarning() << Q_FUNC_INFO << "HV command failed !";
+                errorStr = "KO (HV command failed)";
                 bRet = false;
             }
         }
         else
         {
-            qDebug() << Q_FUNC_INFO << "Failed to get HV parameter";
+            errorStr = "KO (No response to HV command)";
             bRet = false;
         }
 
@@ -754,5 +802,58 @@ bool XBee::startupCheck()
     if(rep) {
         delete rep;
     }
+    qDebug() << "XBEE: Startup check :" << "XBee Serie 1/1Pro       :" << qPrintable(errorStr);
+    qDebug() << "*****************************************************************";
     return bRet;
+}
+
+QByteArray XBee::synchronousCmd(QByteArray cmd)
+{
+    QByteArray rep;
+    m_serial->blockSignals(true);
+    m_serial->write(cmd);
+    m_serial->flush();
+    while(m_serial->waitForReadyRead(10))
+        rep.append(m_serial->readAll());
+
+    m_serial->blockSignals(false);
+
+    if(!rep.isEmpty()) {
+    if(rep.at(rep.size()-1) == 0x0D)
+        rep.remove(rep.size()-1, 1);
+    }
+    return rep;
+}
+
+bool XBee::enterInCommandMode()
+{
+    bool bRet = false;
+    QByteArray rep;
+
+    m_serial->blockSignals(true);
+    m_serial->write("+++");
+    m_serial->flush();
+    while(m_serial->waitForReadyRead(2000))
+        rep.append(m_serial->readAll());
+    m_serial->blockSignals(false);
+    if(rep == QByteArray("OK").append(0x0D)) {
+        bRet = true;
+        qDebug() << "XBee entering in command mode ...";
+        QThread::sleep(2);
+    }
+    else {
+        qWarning() << "XBee failed to enter in Command Mode (" << rep << ")";
+    }
+    return bRet;
+}
+
+bool XBee::exitCommandMode()
+{
+    QByteArray rep;
+    rep = synchronousCmd(QByteArray("ATCN").append(0x0D));
+    if(rep == "OK")
+        qDebug() << "XBee exiting from command mode ...";
+    else
+        qDebug() << "XBee failed to exit from command mode";
+    return rep == "OK";
 }

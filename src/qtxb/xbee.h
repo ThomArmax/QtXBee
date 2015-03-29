@@ -54,7 +54,7 @@ public:
     void sendATCommandAsync(DigiMeshFrame *command);
     void setATCommandAsync(const QByteArray & data);
 
-    bool setMode(const Mode mode) { m_mode = mode; return true; }   /**< @brief Sets the XBee's mode @param mode the new Mode to be applied */
+    bool setMode(const Mode mode);                                  /**< @brief Sets the XBee's mode @param mode the new Mode to be applied */
     Mode mode() const { return m_mode; }                            /**< @brief Returns the XBee's mode @return the XBee's mode */
 
     bool setSerialPort(const QString & serialPort);
@@ -132,7 +132,6 @@ signals:
     void DDChanged(const quint16 dd);   /**< @brief Emitted when DD property changes. @sa XBee::setDD() @sa XBee::DD()*/
     void CRChanged(const quint8 cr);    /**< @brief Emitted when CR property changes. @sa XBee::setCR() @sa XBee::CR()*/
 
-
 public slots:
     void loadAddressingProperties();
     bool open();
@@ -154,6 +153,9 @@ private:
     void processPacket(QByteArray packet);
     void processATCommandRespone(ATCommandResponseFrame *rep);
     bool startupCheck();
+    QByteArray synchronousCmd(QByteArray cmd);
+    bool enterInCommandMode();
+    bool exitCommandMode();
 
 private:
     QSerialPort *m_serial;

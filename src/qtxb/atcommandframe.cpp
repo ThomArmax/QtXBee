@@ -78,6 +78,8 @@ void ATCommandFrame::clear()
     DigiMeshFrame::clear();
     m_command.clear();
     m_parameter.clear();
+    setFrameType(DigiMeshFrame::ATCommandFrame);
+    setFrameId(0x01);
 }
 
 /**

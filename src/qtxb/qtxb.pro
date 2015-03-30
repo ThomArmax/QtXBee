@@ -33,7 +33,8 @@ SOURCES += \
     explicitrxindicatorframe.cpp \
     transmitstatusframe.cpp \
     explicitadressingcommandframe.cpp \
-    nodediscoveryresponseparser.cpp
+    nodediscoveryresponseparser.cpp \
+    remotenode.cpp
 
 HEADERS += \
     global.h \
@@ -52,7 +53,8 @@ HEADERS += \
     explicitrxindicatorframe.h \
     transmitstatusframe.h \
     explicitadressingcommandframe.h \
-    nodediscoveryresponseparser.h
+    nodediscoveryresponseparser.h \
+    remotenode.h
 
 OTHER_FILES += \
     qtxb.pri \

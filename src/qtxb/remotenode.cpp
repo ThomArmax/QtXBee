@@ -1,6 +1,12 @@
 #include "remotenode.h"
 
-RemoteNode::RemoteNode(QObject *parent) : QObject(parent)
+RemoteNode::RemoteNode(QObject *parent) :
+    QObject (parent),
+    m_my    (0),
+    m_sh    (0),
+    m_sl    (0),
+    m_rssi  (0),
+    m_ni    (QString())
 {
 
 }
@@ -102,10 +108,24 @@ quint32 RemoteNode::serialNumberLow() const {
     return m_sl;
 }
 
+quint64 RemoteNode::serialNumber() const {
+    return ((quint64)m_sh<<32) + m_sl;
+}
+
 qint8 RemoteNode::rssi() const {
     return m_rssi;
 }
 
 QString RemoteNode::nodeIdentifier() const {
     return m_ni;
+}
+
+QString RemoteNode::toString() {
+    QString str;
+    if(!nodeIdentifier().isEmpty())
+    str += QString("Node '%1', ").arg(nodeIdentifier());
+    str += QString("Addr 0x%1, ").arg(QString::number(m_my, 16));
+    str += QString("Serial number 0x%1, ").arg(QString::number(serialNumber(), 16));
+    str += QString("RSSI %1 dBm").arg(m_rssi);
+    return str;
 }

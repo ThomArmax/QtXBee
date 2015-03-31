@@ -22,8 +22,11 @@ public:
     quint16 address() const;
     quint32 serialNumberHigh() const;
     quint32 serialNumberLow() const;
+    quint64 serialNumber() const;
     qint8 rssi() const;
     QString nodeIdentifier() const;
+
+    virtual QString toString();
 
 signals:
     void addressChanged             (); /**< @brief emitted when the address changes */

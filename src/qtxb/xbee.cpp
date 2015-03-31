@@ -16,6 +16,7 @@
 #include "explicitrxindicatorframe.h"
 #include "nodeidentificationindicatorframe.h"
 #include "remoteatcommandresponseframe.h"
+#include "remotenode.h"
 
 #include <QDebug>
 #include <QSerialPort>
@@ -313,7 +314,6 @@ ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
 
     repPacket = tmp;
 
-    qDebug() << Q_FUNC_INFO << repPacket.toHex();
     m_serial->blockSignals(false);
 
     if(repPacket.size() > 0) {
@@ -642,8 +642,13 @@ void XBee::processATCommandRespone(ATCommandResponseFrame *rep) {
     case ATCommandFrame::Command_CR : m_cr = dataInt; emit CRChanged(m_cr); break;
 
     case ATCommandFrame::Command_ND : {
+        RemoteNode * node = NULL;
         NodeDiscoveryResponseParser nd;
-        nd.setPacketData(rep->data());
+        if((node = nd.parseData(rep->data())) != NULL) {
+            node->setParent(this);
+            qDebug() << "Discovered node :" << qPrintable(node->toString());
+        }
+
         break;
     }
     default:

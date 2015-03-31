@@ -3,19 +3,15 @@
 
 #include <QtCore>
 
+class RemoteNode;
+
 class NodeDiscoveryResponseParser
 {
 public:
     NodeDiscoveryResponseParser();
     ~NodeDiscoveryResponseParser();
 
-    bool setPacketData(const QByteArray & data);
-
-private:
-    quint32 sh;
-    quint32 sl;
-    QString ni;
-
+    RemoteNode * parseData(const QByteArray & data);
 };
 
 #endif // NODEDISCOVERYRESPONSEPARSER_H

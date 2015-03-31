@@ -2,6 +2,7 @@
 #define REMOTEATCOMMANDREQUESTFRAME_H
 
 #include "digimeshframe.h"
+#include "atcommandframe.h"
 
 /**
  * @brief The RemoteATCommandRequestFrame class is used to query or set module parameters on a remote device.
@@ -13,7 +14,43 @@ class RemoteATCommandRequestFrame : public DigiMeshFrame
 {
     Q_OBJECT
 public:
-    explicit RemoteATCommandRequestFrame(QObject *parent = 0);
+    /**
+     * @brief The RemoteCommandOption enum defines the remote command options
+     */
+    enum RemoteCommandOption {
+        DisableRetriesAndRouteRepair    = 0x01, /**< Disable retries and route repair */
+        ApplyChanges                    = 0x02, /**< Apply changes */
+        EnabledAPSEncryption            = 0x20, /**< Enable APS encryption (if EE=1) */
+        UseExtendedTXTimeout            = 0x40  /**< Use the extended transmision timeout */
+    };
+    Q_DECLARE_FLAGS(RemoteCommandOptions, RemoteCommandOption)
+
+    RemoteATCommandRequestFrame(QObject *parent = 0);
+
+    // Reimplemented from DigiMeshFrame
+    virtual void assemblePacket();
+    virtual void clear();
+    virtual QString toString();
+
+    // Setters
+    void setDestinationAddress(const quint64 dest);
+    void setNetworkAddress(const quint32 network);
+    void setCommandOptions(const RemoteCommandOptions options);
+    void setATCommand(const ATCommandFrame::ATCommand command);
+    void setCommandParameter(const quint8 parameter);
+
+    // Getters
+    quint64 destinationAddress() const;
+    quint16 networkAddress() const;
+    ATCommandFrame::ATCommand atCommand() const;
+    quint8 commandParameter();
+
+protected:
+    quint64 m_destinationAddress;
+    quint16 m_networkAddress;
+    RemoteCommandOptions m_options;
+    ATCommandFrame::ATCommand m_atCommand;
+    quint8 m_commandParameter;
 };
 
 #endif // REMOTEATCOMMANDREQUESTFRAME_H

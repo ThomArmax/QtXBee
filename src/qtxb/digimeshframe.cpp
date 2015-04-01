@@ -140,9 +140,10 @@ QByteArray DigiMeshFrame::packet() const {
     return m_packet;
 }
 
-void DigiMeshFrame::setPacket(const QByteArray &packet) {
+bool DigiMeshFrame::setPacket(const QByteArray &packet) {
     m_packet = packet;
     assemblePacket();
+    return true;
 }
 
 /**

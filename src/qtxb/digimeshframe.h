@@ -82,7 +82,7 @@ public:
     void setChecksum(unsigned cs);
 
     QByteArray packet() const;
-    void setPacket(const QByteArray & packet);
+    virtual bool setPacket(const QByteArray & packet);
     unsigned startDelimiter() const;
     u_int16_t length() const;
     APIFrameType frameType() const;

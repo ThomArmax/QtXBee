@@ -12,12 +12,6 @@ DigiMeshFrameResponse::~DigiMeshFrameResponse()
 
 }
 
-bool DigiMeshFrameResponse::setPacket(const QByteArray &data)
-{
-    Q_UNUSED(data)
-    return false;
-}
-
 QByteArray DigiMeshFrameResponse::data() const
 {
     return m_data;

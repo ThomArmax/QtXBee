@@ -26,9 +26,10 @@ public:
     explicit DigiMeshFrameResponse(QObject *parent = 0);
     ~DigiMeshFrameResponse();
 
-    virtual bool setPacket(const QByteArray &packet);
-    virtual QByteArray data() const;
+    // Reimplemented from DigiMeshFrame
     virtual void clear();
+
+    virtual QByteArray data() const;
 
     void setCommandStatus(const CommandStatus status);
     CommandStatus commandStatus() const { return m_status; }

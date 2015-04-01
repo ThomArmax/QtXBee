@@ -14,18 +14,40 @@ RemoteATCommandRequestFrame::RemoteATCommandRequestFrame(QObject *parent) :
 {
     setFrameType(DigiMeshFrame::RemoteATCommandRequestFrame);
 }
-
+#include <QDebug>
 // Reimplemented from DigiMeshFrame
 void RemoteATCommandRequestFrame::assemblePacket() {
+    int i;
 
+    m_packet.clear();
+    m_packet.append(frameType());
+    m_packet.append(frameId());
+    for(i=7; i>=0; i--) {
+        m_packet.append(destinationAddress() >> (i*8)&0xFF);
+    }
+    for(i=1; i>=0; i--) {
+        m_packet.append(networkAddress() >> (i*8)&0xFF);
+    }
+    m_packet.append(commandOptions());
+    for(i=1; i>=0; i--) {
+        m_packet.append(atCommand() >> (i*8)&0xFF);
+    }
+    setLength(m_packet.size());
+    createChecksum(m_packet);
+    m_packet.append(checksum());
+    m_packet.insert(0, startDelimiter());
+    m_packet.insert(1, (length()>>8)&0xFF);
+    m_packet.insert(2, length()&0xFF);
+    qDebug() << Q_FUNC_INFO << m_packet.toHex();
 }
 
 void RemoteATCommandRequestFrame::clear() {
-    m_destinationAddress = 0;
-    m_networkAddress = 0;
-    m_options = 0;
-    m_atCommand = ATCommandFrame::Command_Undefined;
-    m_commandParameter = 0;
+    DigiMeshFrame::clear();
+    m_destinationAddress    = 0;
+    m_networkAddress        = 0;
+    m_options               = 0;
+    m_atCommand             = ATCommandFrame::Command_Undefined;
+    m_commandParameter      = 0;
 }
 
 QString RemoteATCommandRequestFrame::toString() {
@@ -96,4 +118,8 @@ ATCommandFrame::ATCommand RemoteATCommandRequestFrame::atCommand() const {
 
 quint8 RemoteATCommandRequestFrame::commandParameter() {
     return m_commandParameter;
+}
+
+RemoteATCommandRequestFrame::RemoteCommandOptions RemoteATCommandRequestFrame::commandOptions() const {
+    return m_options;
 }

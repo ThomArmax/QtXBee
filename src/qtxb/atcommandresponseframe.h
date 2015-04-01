@@ -20,7 +20,7 @@ public:
 
     void setATCommand(ATCommandFrame::ATCommand at);
     void setATCommand(const QByteArray & at);
-    bool setPacket(const QByteArray &packet);
+    virtual bool setPacket(const QByteArray &packet);
 
     ATCommandFrame::ATCommand atCommand() const;
     QString toString();

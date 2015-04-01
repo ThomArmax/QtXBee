@@ -44,6 +44,7 @@ public:
     quint16 networkAddress() const;
     ATCommandFrame::ATCommand atCommand() const;
     quint8 commandParameter();
+    RemoteCommandOptions commandOptions() const;
 
 protected:
     quint64 m_destinationAddress;

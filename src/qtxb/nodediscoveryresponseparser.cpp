@@ -16,8 +16,8 @@ NodeDiscoveryResponseParser::~NodeDiscoveryResponseParser()
 }
 
 /**
- * @brief Parses the ATCommandResponseFrame's data
- * @param data the ATCommandResponseFrame's data to be parsed
+ * @brief Parses the ATCommandResponse's data
+ * @param data the ATCommandResponse's data to be parsed
  * @return the associated RemoteNode in case of success; NULL otherwise.
  * @note You will have to take the ownership of the returned RemoteNode
  */

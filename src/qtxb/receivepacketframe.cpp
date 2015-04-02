@@ -1,42 +1,42 @@
-#include "receivepacketframe.h"
-#include "digimeshframe.h"
+#include "receivepacket.h"
+#include "xbeepacket.h"
 #include <QDebug>
 
 namespace QtXBee {
 
-ReceivePacketFrame::ReceivePacketFrame(QObject *parent) :
-    DigiMeshFrame(parent)
+ReceivePacket::ReceivePacket(QObject *parent) :
+    XBeePacket(parent)
 {
-    setFrameType(DigiMeshFrame::RXIndicatorFrame);
+    setFrameType(XBeePacket::RXIndicatorFrame);
 }
-void ReceivePacketFrame::setSrcAddr64(QByteArray sa64) {
+void ReceivePacket::setSrcAddr64(QByteArray sa64) {
     m_srcAddr64.clear();
     m_srcAddr64.append(sa64);
 }
-void ReceivePacketFrame::setSrcAddr16(QByteArray sa16) {
+void ReceivePacket::setSrcAddr16(QByteArray sa16) {
     m_srcAddr16.clear();
     m_srcAddr16.append(sa16);
 }
-void ReceivePacketFrame::setData(QByteArray d) {
+void ReceivePacket::setData(QByteArray d) {
     m_data.clear();
     m_data.append(d);
 }
-QByteArray ReceivePacketFrame::srcAddr64() const {
+QByteArray ReceivePacket::srcAddr64() const {
     return m_srcAddr64;
 }
-QByteArray ReceivePacketFrame::srcAddr16() const {
+QByteArray ReceivePacket::srcAddr16() const {
     return m_srcAddr16;
 }
-void ReceivePacketFrame::setReceiveOptions(unsigned ro) {
+void ReceivePacket::setReceiveOptions(unsigned ro) {
     m_receiveOptions = ro;
 }
-unsigned ReceivePacketFrame::receiveOptions() const {
+unsigned ReceivePacket::receiveOptions() const {
     return m_receiveOptions;
 }
-QByteArray ReceivePacketFrame::data() const {
+QByteArray ReceivePacket::data() const {
     return m_data;
 }
-void ReceivePacketFrame::readPacket(QByteArray rx) {
+void ReceivePacket::readPacket(QByteArray rx) {
 
     m_packet.clear();
     m_packet.append(rx);

@@ -1,22 +1,22 @@
-#ifndef TRANSMITSTATUSFRAME_H
-#define TRANSMITSTATUSFRAME_H
+#ifndef TRANSMITSTATUS_H
+#define TRANSMITSTATUS_H
 
-#include "digimeshframe.h"
+#include "xbeepacket.h"
 
 namespace QtXBee {
 
 /**
- * @brief The TransmitRequestFrame class indicate if the packet was transmitted successfully or not.
+ * @brief The TransmitRequest class indicate if the packet was transmitted successfully or not.
  *
- * When a TransmitRequestFrame is completed, the module sends a TX Status message.
+ * When a TransmitRequest is completed, the module sends a TX Status message.
  * This message will indicate if the packet was transmitted successfully or if there was a failure.
- * @sa TransmitRequestFrame
+ * @sa TransmitRequest
  */
-class TransmitStatusFrame : public DigiMeshFrame
+class TransmitStatus : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit TransmitStatusFrame(QObject *parent);
+    explicit TransmitStatus(QObject *parent);
 
      void readPacket(QByteArray rx);
      void setDeliveryStatus(unsigned ds);
@@ -36,4 +36,4 @@ private:
 
 } // END namepsace
 
-#endif // TRANSMITSTATUSFRAME_H
+#endif // TRANSMITSTATUS_H

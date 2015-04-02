@@ -1,15 +1,15 @@
 #ifndef TXREQUESTEXPLICIT_H
 #define TXREQUESTEXPLICIT_H
 
-#include "transmitrequestframe.h"
+#include "transmitrequest.h"
 
 namespace QtXBee {
 
-class ExplicitAdressingCommandFrame : public TransmitRequestFrame
+class ExplicitAdressingCommand : public TransmitRequest
 {
     Q_OBJECT
 public:
-    explicit ExplicitAdressingCommandFrame(QObject *parent = 0);
+    explicit ExplicitAdressingCommand(QObject *parent = 0);
 
 private:
     QByteArray m_sourceEndpoint;

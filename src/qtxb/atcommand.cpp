@@ -1,16 +1,16 @@
-#include "atcommandframe.h"
+#include "atcommand.h"
 #include <QDebug>
 
 namespace QtXBee {
 
 /**
- * @brief ATCommandFrame's constructor
+ * @brief ATCommand's constructor
  * @param parent
  */
-ATCommandFrame::ATCommandFrame(QObject *parent) :
-    DigiMeshFrame(parent)
+ATCommand::ATCommand(QObject *parent) :
+    XBeePacket(parent)
 {
-    setFrameType(DigiMeshFrame::ATCommandFrame);
+    setFrameType(XBeePacket::ATCommandFrame);
     setFrameId(0x01);
 }
 
@@ -18,7 +18,7 @@ ATCommandFrame::ATCommandFrame(QObject *parent) :
  * @brief Sets the AT Command
  * @param command
  */
-void ATCommandFrame::setCommand(const ATCommand command) {
+void ATCommand::setCommand(const ATCommandType command) {
     int cmdMSB = (command>>8) & 0xFF;
     int cmdLSB = command & 0xFF;
     m_command.clear();
@@ -30,7 +30,7 @@ void ATCommandFrame::setCommand(const ATCommand command) {
  * @brief Sets the AT Command from the given QString
  * @param command
  */
-void ATCommandFrame::setCommand(const QString &command) {
+void ATCommand::setCommand(const QString &command) {
     m_command.clear();
     m_command.append(command.at(0));
     m_command.append(command.at(1));
@@ -40,7 +40,7 @@ void ATCommandFrame::setCommand(const QString &command) {
  * @brief Sets command's parameter
  * @param param
  */
-void ATCommandFrame::setParameter(const QByteArray &param) {
+void ATCommand::setParameter(const QByteArray &param) {
     m_parameter.clear();
     m_parameter.append(param);
 }
@@ -49,7 +49,7 @@ void ATCommandFrame::setParameter(const QByteArray &param) {
  * @brief Returns the AT Command
  * @return the AT Command
  */
-QByteArray ATCommandFrame::command() const {
+QByteArray ATCommand::command() const {
     return m_command;
 }
 
@@ -57,11 +57,11 @@ QByteArray ATCommandFrame::command() const {
  * @brief Returns the command's parameter
  * @return the command's parameter
  */
-QByteArray ATCommandFrame::parameter() const {
+QByteArray ATCommand::parameter() const {
     return m_parameter;
 }
 
-void ATCommandFrame::assemblePacket() {
+void ATCommand::assemblePacket() {
     m_packet.clear();
     m_packet.append(frameType());
     m_packet.append(frameId());
@@ -75,32 +75,32 @@ void ATCommandFrame::assemblePacket() {
     m_packet.insert(2, length()&0xFF);
 }
 
-void ATCommandFrame::clear()
+void ATCommand::clear()
 {
-    DigiMeshFrame::clear();
+    XBeePacket::clear();
     m_command.clear();
     m_parameter.clear();
-    setFrameType(DigiMeshFrame::ATCommandFrame);
+    setFrameType(XBeePacket::ATCommandFrame);
     setFrameId(0x01);
 }
 
 /**
- * @brief Returns the given ATCommandFrame::ATCommand into QString
+ * @brief Returns the given ATCommand::ATCommand into QString
  * @param command the ATCommand to be converted into QString
  * @return the given ATCommand into QString
  */
-QString ATCommandFrame::atCommandToString(const ATCommand command)
+QString ATCommand::atCommandToString(const ATCommandType command)
 {
     QString at(atCommandToByteArray(command));
     return at;
 }
 
 /**
- * @brief Returns the given ATCommandFrame::ATCommand into QByteArray
+ * @brief Returns the given ATCommand::ATCommand into QByteArray
  * @param command the ATCommand to be converted into QByteArray
  * @return the given ATCommand into QByteArray
  */
-QByteArray ATCommandFrame::atCommandToByteArray(const ATCommand command)
+QByteArray ATCommand::atCommandToByteArray(const ATCommandType command)
 {
     QByteArray at;
     at.append((command>>8)&0xFF);
@@ -109,14 +109,14 @@ QByteArray ATCommandFrame::atCommandToByteArray(const ATCommand command)
 }
 
 /**
- * @brief Returns the ATCommandFrame::ATCommand corresponding to the given QByteArray
+ * @brief Returns the ATCommand::ATCommand corresponding to the given QByteArray
  * @param command
- * @return the ATCommandFrame::ATCommand corresponding to the given QByteArray.
+ * @return the ATCommand::ATCommand corresponding to the given QByteArray.
  */
-ATCommandFrame::ATCommand ATCommandFrame::atCommandFromByteArray(const QByteArray &command)
+ATCommand::ATCommandType ATCommand::atCommandFromByteArray(const QByteArray &command)
 {
-    ATCommandFrame::ATCommand at;
-    at = (ATCommandFrame::ATCommand) ( ( (command.at(0)&0xFF)<<8) + command.at(1) );
+    ATCommand::ATCommandType at;
+    at = (ATCommand::ATCommandType) ( ( (command.at(0)&0xFF)<<8) + command.at(1) );
 
     return at;
 }

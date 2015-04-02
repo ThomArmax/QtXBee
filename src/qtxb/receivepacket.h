@@ -1,15 +1,15 @@
-#ifndef RECEIVEPACKETFRAME_H
-#define RECEIVEPACKETFRAME_H
+#ifndef RECEIVEPACKET_H
+#define RECEIVEPACKET_H
 
-#include "digimeshframe.h"
+#include "xbeepacket.h"
 
 namespace QtXBee {
 
-class ReceivePacketFrame : public DigiMeshFrame
+class ReceivePacket : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit ReceivePacketFrame(QObject *parent);
+    explicit ReceivePacket(QObject *parent);
     void setSrcAddr64(QByteArray sa64);
     void setSrcAddr16(QByteArray sa16);
     void setReceiveOptions(unsigned ro);
@@ -29,4 +29,4 @@ private:
 
 } // END namepsace
 
-#endif // RECEIVEPACKETFRAME_H
+#endif // RECEIVEPACKET_H

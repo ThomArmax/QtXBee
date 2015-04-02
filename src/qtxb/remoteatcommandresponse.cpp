@@ -1,30 +1,30 @@
-#include "remoteatcommandresponseframe.h"
-#include "digimeshframe.h"
+#include "remoteatcommandresponse.h"
+#include "xbeepacket.h"
 
 namespace QtXBee {
 
-RemoteATCommandResponseFrame::RemoteATCommandResponseFrame(QObject *parent) :
-    DigiMeshFrameResponse(parent)
+RemoteATCommandResponse::RemoteATCommandResponse(QObject *parent) :
+    XBeeResponse(parent)
 {
-    setFrameType(DigiMeshFrame::RemoteATCommandResponseFrame);
+    setFrameType(XBeePacket::RemoteATCommandResponseFrame);
 }
 
-RemoteATCommandResponseFrame::RemoteATCommandResponseFrame(const QByteArray &data, QObject *parent) :
-    DigiMeshFrameResponse(parent)
+RemoteATCommandResponse::RemoteATCommandResponse(const QByteArray &data, QObject *parent) :
+    XBeeResponse(parent)
 {
-    setFrameType(DigiMeshFrame::RemoteATCommandResponseFrame);
+    setFrameType(XBeePacket::RemoteATCommandResponseFrame);
     setPacket(data);
 }
 
-void RemoteATCommandResponseFrame::clear() {
-    DigiMeshFrameResponse::clear();
+void RemoteATCommandResponse::clear() {
+    XBeeResponse::clear();
     m_sourceAddress     = 0;
     m_networkAddress    = 0;
-    m_atCommand         = (ATCommandFrame::ATCommand)0;
+    m_atCommand         = ATCommand::Command_Undefined;
     m_commandData.clear();
 }
 
-bool RemoteATCommandResponseFrame::setPacket(const QByteArray &packet)
+bool RemoteATCommandResponse::setPacket(const QByteArray &packet)
 Q_DECL_OVERRIDE
 {
     bool bRet = false;
@@ -41,7 +41,7 @@ Q_DECL_OVERRIDE
     setLength((unsigned char)packet.at(2) + ((unsigned char)packet.at(1)<<8));
     setSourceAddress(packet.mid(5, 8).toHex().toULong());
     setNetworkAddress(packet.mid(13, 1).toHex().toUInt());
-    setATCommand((ATCommandFrame::ATCommand) packet.mid(15, 1).toHex().toUInt());
+    setATCommand((ATCommand::ATCommandType) packet.mid(15, 1).toHex().toUInt());
     setCommandStatus((CommandStatus) packet.at(17));
     if(packet.size() > 18) {
         for(int i=0; i < packet.size()-1; i++) {
@@ -53,7 +53,7 @@ Q_DECL_OVERRIDE
     return bRet;
 }
 
-QString RemoteATCommandResponseFrame::toString()
+QString RemoteATCommandResponse::toString()
 Q_DECL_OVERRIDE
 {
     QString str;
@@ -76,36 +76,36 @@ Q_DECL_OVERRIDE
 }
 
 // Setters
-void RemoteATCommandResponseFrame::setSourceAddress(const quint64 source) {
+void RemoteATCommandResponse::setSourceAddress(const quint64 source) {
     m_sourceAddress = source;
 }
 
-void RemoteATCommandResponseFrame::setNetworkAddress(const quint32 network) {
+void RemoteATCommandResponse::setNetworkAddress(const quint32 network) {
     m_networkAddress = network;
 }
 
-void RemoteATCommandResponseFrame::setATCommand(const ATCommandFrame::ATCommand command) {
+void RemoteATCommandResponse::setATCommand(const ATCommand::ATCommandType command) {
     m_atCommand = command;
 }
 
-void RemoteATCommandResponseFrame::setCommandData(const QByteArray & data) {
+void RemoteATCommandResponse::setCommandData(const QByteArray & data) {
     m_commandData = data;
 }
 
 // Getters
-quint64 RemoteATCommandResponseFrame::sourceAddress() const {
+quint64 RemoteATCommandResponse::sourceAddress() const {
     return m_sourceAddress;
 }
 
-quint16 RemoteATCommandResponseFrame::networkAddress() const {
+quint16 RemoteATCommandResponse::networkAddress() const {
     return m_networkAddress;
 }
 
-ATCommandFrame::ATCommand RemoteATCommandResponseFrame::atCommand() const {
+ATCommand::ATCommandType RemoteATCommandResponse::atCommand() const {
     return m_atCommand;
 }
 
-QByteArray RemoteATCommandResponseFrame::commandData() const {
+QByteArray RemoteATCommandResponse::commandData() const {
     return m_commandData;
 }
 

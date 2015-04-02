@@ -1,5 +1,5 @@
-#ifndef DigiMeshFrame_H
-#define DigiMeshFrame_H
+#ifndef XBEEPACKET_H
+#define XBEEPACKET_H
 
 #include <QByteArray>
 #include <QObject>
@@ -7,7 +7,7 @@
 namespace QtXBee {
 
 /**
- * @brief The DigiMeshFrame class is the base class to implement XBee API frames (API Operations)
+ * @brief The XBeePacket class is the base class to implement XBee API frames (API Operations)
  *
  * As an alternative to Transparent Operation, API (Application Programming Interface) Operations are available.
  * API operation requires that communication with the module be done through a structured interface (data is communicated in frames in a defined order).
@@ -36,7 +36,7 @@ namespace QtXBee {
  * @note Digi may add new API frames to future versions of firmware, so please build into your software interface the ability to
  * filter out additional API frames with unknown Frame Types.
  */
-class DigiMeshFrame : public QObject
+class XBeePacket : public QObject
 {
     Q_OBJECT
 public:
@@ -75,7 +75,7 @@ public:
         XOFF            = 0x13  /**< XOFF */
     };
 
-    explicit DigiMeshFrame(QObject *parent = 0);
+    explicit XBeePacket(QObject *parent = 0);
 
     void setStartDelimiter(unsigned sd);
     void setLength(unsigned l);
@@ -115,25 +115,25 @@ protected:
 
 } // END namepsace
 
-#endif // DigiMeshFrame_H
+#endif // XBEEPACKET_H
 
 /**
- * @enum DigiMeshFrame::APIFrameType
+ * @enum XBeePacket::APIFrameType
  * @brief The APIFrameType enum identifies sent/received frame's type
  *
- * @var DigiMeshFrame::ATCommandFrame
+ * @var XBeePacket::ATCommandFrame
  * Identifies an AT Command Frame (ATCommandFrame)<BR>
  * Used to query or set module parameters on the local device. This API command applies changes after executing the command.
  * (Changes made to module parameters take effect once changes are applied.)
  * The API example below illustrates an API frame when modifying the NJ parameter value of the module
  *
- * @var DigiMeshFrame::ATCommandQueueFrame
+ * @var XBeePacket::ATCommandQueueFrame
  * Identifies an AT Command - Queue Parameter Value Frame (ATCommandQueueParamFrame)<BR>
- * This API type allows module parameters to be queried or set. In contrast to the DigiMeshFrame::ATCommandFrame API type,
- * new parameter values are queued and not applied until either the DigiMeshFrame::ATCommandFrame (0x08) API type or the AC (Apply Changes) command is issued.
+ * This API type allows module parameters to be queried or set. In contrast to the XBeePacket::ATCommandFrame API type,
+ * new parameter values are queued and not applied until either the XBeePacket::ATCommandFrame (0x08) API type or the AC (Apply Changes) command is issued.
  * Register queries (reading parameter values) are returned immediately.
  *
- * @var DigiMeshFrame::TXRequestFrame
+ * @var XBeePacket::TXRequestFrame
  * Identifies a ZigBee Transmit Request Frame (TransmitRequestFrame)<BR>
  * A Transmit Request API frame causes the module to send data as an RF packet to the specified destination.
  * The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices).
@@ -146,10 +146,10 @@ protected:
  * This parameter is only used for broadcast transmissions.
  * The maximum number of payload bytes can be read with the NP command.
  *
- * @var DigiMeshFrame::ExplicitAddressingCommandFrame
+ * @var XBeePacket::ExplicitAddressingCommandFrame
  * Identifies an Explicit Addressing Command Frame (ExplicitAdressingCommandFrame)<BR>
  * Allows ZigBee application layer fields (endpoint and cluster ID) to be specified for a data transmission.
- * Similar to the DigiMeshFrame::TXRequestFrame, but also requires ZigBee application layer addressing fields to be specified
+ * Similar to the XBeePacket::TXRequestFrame, but also requires ZigBee application layer addressing fields to be specified
  * (endpoints, cluster ID, profile ID). An Explicit Addressing Request API frame causes the module to send data as an RF
  * packet to the specified destination, using the specified source and destination endpoints, cluster ID, and profile ID.
  * The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices).
@@ -163,69 +163,69 @@ protected:
  * The maximum number of payload bytes can be read with the NP command.
  * @note if source routing is used, the RF payload will be reduced by two bytes per intermediate hop in the source route.
  *
- * @var DigiMeshFrame::RemoteATCommandRequestFrame
+ * @var XBeePacket::RemoteATCommandRequestFrame
  * Identifies a Remote Command Request Frame (RemoteATCommandRequestFrame)<BR>
  * Used to query or set module parameters on a remote device. For parameter changes on the remote device to take effect,
  * changes must be applied, either by setting the apply changes options bit, or by sending an AC command to the remote.
  *
- * @var DigiMeshFrame::CreateSourceRouteFrame
+ * @var XBeePacket::CreateSourceRouteFrame
  * Identifies A Create Source Route Frame (CreateSourceRoute)
  * This frame creates a source route in the module.
  * A source route specifies the complete route a packet should traverse to get from source to destination.
  * Source routing should be used with many-to-one routing for best results.
  * @note Both the 64-bit and 16-bit destination addresses are required when creating a source route.
- * These are obtained when a DigiMeshFrame::RouteRecordIndicatorFrame (0xA1) frame is received.
+ * These are obtained when a XBeePacket::RouteRecordIndicatorFrame (0xA1) frame is received.
  *
- * @var DigiMeshFrame::ATCommandResponseFrame
+ * @var XBeePacket::ATCommandResponseFrame
  * Identifies an AT Command Response Frame (ATCommandResponseFrame)<BR>
- * In response to an DigiMeshFrame::ATCommandFrame message, the module will send an DigiMeshFrame::ATCommandResponseFrame.
+ * In response to an XBeePacket::ATCommandFrame message, the module will send an XBeePacket::ATCommandResponseFrame.
  * Some commands will send back multiple frames (for example, the ND (Node Discover) command).
  *
- * @var DigiMeshFrame::ModemStatusFrame
+ * @var XBeePacket::ModemStatusFrame
  * Identifies a Modem Status Frame (ModemStatusFrame)<BR>
  * RF module status messages are sent from the module in response to specific conditions.
  *
- * @var DigiMeshFrame::TransmitStatusFrame
+ * @var XBeePacket::TransmitStatusFrame
  * Identifies a ZigBee Transmit Status (TransmitStatusFrame)<BR>
- * When a DigiMeshFrame::TXRequestFrame is completed, the module sends a TX Status message.
+ * When a XBeePacket::TXRequestFrame is completed, the module sends a TX Status message.
  * This message will indicate if the packet was transmitted successfully or if there was a failure.
  *
- * @var DigiMeshFrame::RXIndicatorFrame
+ * @var XBeePacket::RXIndicatorFrame
  * Identifies a ZigBee Receive Packet Frame when AO=0 (ReceivePacketFrame)<BR>
  * When the module receives an RF packet, it is sent out the UART using this message type.
  *
- * @var DigiMeshFrame::ExplicitRxIndicatorFrame
+ * @var XBeePacket::ExplicitRxIndicatorFrame
  * Identifies a ZigBee Explicit Rx Indicator when AO=1 (ExplicitRxIndicatorFrame)<BR>
  * When the modem receives a ZigBee RF packet it is sent out the UART using this message type (when AO=1).
  *
- * @var DigiMeshFrame::IODataSampleRXIndicatorFrame
+ * @var XBeePacket::IODataSampleRXIndicatorFrame
  * When the module receives an IO sample frame from a remote device,
  * it sends the sample out the UART using this frame type (when AO=0).
  * Only modules running API firmware will send IO samples out the UART.
  *
- * @var DigiMeshFrame::SensorReadIndicatorFrame
+ * @var XBeePacket::SensorReadIndicatorFrame
  * When the module receives a sensor sample (from a Digi 1-wire sensor adapter), it is sent out the UART using this message type (when AO=0).
  *
- * @var DigiMeshFrame::NodeIdentificationIndicatorFrame
+ * @var XBeePacket::NodeIdentificationIndicatorFrame
  * Identifies a Node Identification Indicator Frame (NodeIdentificationIndicatorFrame)<BR>
  * This frame is received when a module transmits a node identification message to identify itself (when AO=0).
  * The data portion of this frame is similar to a network discovery response frame (see ND command).
  *
- * @var DigiMeshFrame::RemoteATCommandResponseFrame
+ * @var XBeePacket::RemoteATCommandResponseFrame
  * Identifies a Remote Command Response Frame (RemoteATCommandResponseFrame)<BR>
  * If a module receives a remote command response RF data frame in response to a Remote AT Command Request,
  * the module will send a Remote AT Command Response message out the UART.
  * Some commands may send back multiple frames--for example, Node Discover (ND) command.
  *
- * @var DigiMeshFrame::OverTheAirFirmwareUpdateFrame
+ * @var XBeePacket::OverTheAirFirmwareUpdateFrame
  * The Over-the-Air Firmware Update Status frame provides a status indication of a firmware update transmission attempt.
  * If a query command (0x01 0x51) is sent to a target with a 64-bit address of 0x0013A200 40522BAA through an
  * updater with 64-bit address 0x0013A200403E0750 and 16-bit address 0x0000, the following is the expected response.
  *
- * @var DigiMeshFrame::RouteRecordIndicatorFrame
+ * @var XBeePacket::RouteRecordIndicatorFrame
  * The route record indicator is received whenever a device sends a ZigBee route record command.
  * This is used with many-to-one routing to create source routes for devices in a network.
  *
- * @var DigiMeshFrame::ManyToOneRouteRequestIndicator
+ * @var XBeePacket::ManyToOneRouteRequestIndicator
  * The many-to-one route request indicator frame is sent out the UART whenever a many-to-one route request is received.
  **/

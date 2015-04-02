@@ -1,13 +1,13 @@
-#ifndef TRANSMITREQUESTFRAME_H
-#define TRANSMITREQUESTFRAME_H
+#ifndef TRANSMITREQUEST_H
+#define TRANSMITREQUEST_H
 
-#include "digimeshframe.h"
+#include "xbeepacket.h"
 #include <QByteArray>
 
 namespace QtXBee {
 
 /**
- * @brief The TransmitRequestFrame class causes the module to send data as an RF packet to the specified destination.
+ * @brief The TransmitRequest class causes the module to send data as an RF packet to the specified destination.
  *
  * The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices).
  * The coordinator can be addressed by either setting the 64-bit address to all 0x00s and the 16-bit address to 0xFFFE,
@@ -22,11 +22,11 @@ namespace QtXBee {
  *
  * @sa TransmitStatus
  */
-class TransmitRequestFrame : public DigiMeshFrame
+class TransmitRequest : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit TransmitRequestFrame(QObject *parent = 0);
+    explicit TransmitRequest(QObject *parent = 0);
     void setBroadcastRadius(int rad);
     void setTransmitOptions(unsigned to);
     void setDestAddr64(QByteArray da64);
@@ -49,4 +49,4 @@ private:
 
 } // END namepsace
 
-#endif // TRANSMITREQUESTFRAME_H
+#endif // TRANSMITREQUEST_H

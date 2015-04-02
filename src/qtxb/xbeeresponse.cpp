@@ -1,37 +1,37 @@
-#include "digimeshframeresponse.h"
+#include "xbeeresponse.h"
 
 namespace QtXBee {
 
-DigiMeshFrameResponse::DigiMeshFrameResponse(QObject *parent) :
-    DigiMeshFrame(parent),
+XBeeResponse::XBeeResponse(QObject *parent) :
+    XBeePacket(parent),
     m_status(Error)
 {
 
 }
 
-DigiMeshFrameResponse::~DigiMeshFrameResponse()
+XBeeResponse::~XBeeResponse()
 {
 
 }
 
-QByteArray DigiMeshFrameResponse::data() const
+QByteArray XBeeResponse::data() const
 {
     return m_data;
 }
 
-void DigiMeshFrameResponse::clear()
+void XBeeResponse::clear()
 {
-    DigiMeshFrame::clear();
+    XBeePacket::clear();
     m_data.clear();
     m_status = Error;
 }
 
-void DigiMeshFrameResponse::setCommandStatus(const CommandStatus status)
+void XBeeResponse::setCommandStatus(const CommandStatus status)
 {
     m_status = status;
 }
 
-QString DigiMeshFrameResponse::statusToString(const DigiMeshFrameResponse::CommandStatus status)
+QString XBeeResponse::statusToString(const XBeeResponse::CommandStatus status)
 {
     QString st = "Unknown";
     switch(status) {

@@ -19,42 +19,42 @@ QT += serialport
 
 SOURCES += \
     xbee.cpp \
-    digimeshframe.cpp \
-    digimeshframeresponse.cpp \
-    atcommandframe.cpp \
-    atcommandqueueparamframe.cpp \
-    modemstatusframe.cpp \
-    transmitrequestframe.cpp \
-    nodeidentificationindicatorframe.cpp \
-    remoteatcommandrequestframe.cpp \
-    remoteatcommandresponseframe.cpp \
-    atcommandresponseframe.cpp \
     receivepacketframe.cpp \
-    explicitrxindicatorframe.cpp \
-    transmitstatusframe.cpp \
-    explicitadressingcommandframe.cpp \
     nodediscoveryresponseparser.cpp \
-    remotenode.cpp
+    remotenode.cpp \
+    xbeepacket.cpp \
+    xbeeresponse.cpp \
+    atcommand.cpp \
+    atcommandqueueparam.cpp \
+    atcommandresponse.cpp \
+    explicitadressingcommand.cpp \
+    explicitrxindicator.cpp \
+    modemstatus.cpp \
+    nodeidentificationindicator.cpp \
+    remoteatcommandresponse.cpp \
+    transmitrequest.cpp \
+    transmitstatus.cpp \
+    remoteatcommandrequest.cpp
 
 HEADERS += \
     global.h \
     xbee.h \
-    digimeshframe.h \
-    digimeshframeresponse.h \
-    atcommandframe.h \
-    atcommandqueueparamframe.h \
-    modemstatusframe.h \
-    transmitrequestframe.h \
-    nodeidentificationindicatorframe.h \
-    remoteatcommandresponseframe.h \
-    remoteatcommandrequestframe.h \
-    atcommandresponseframe.h \
-    receivepacketframe.h \
-    explicitrxindicatorframe.h \
-    transmitstatusframe.h \
-    explicitadressingcommandframe.h \
     nodediscoveryresponseparser.h \
-    remotenode.h
+    remotenode.h \
+    xbeepacket.h \
+    xbeeresponse.h \
+    atcommand.h \
+    atcommandqueueparam.h \
+    atcommandresponse.h \
+    explicitadressingcommand.h \
+    explicitrxindicator.h \
+    modemstatus.h \
+    nodeidentificationindicator.h \
+    receivepacket.h \
+    remoteatcommandrequest.h \
+    remoteatcommandresponse.h \
+    transmitrequest.h \
+    transmitstatus.h
 
 OTHER_FILES += \
     qtxb.pri \

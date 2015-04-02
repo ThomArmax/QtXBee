@@ -6,21 +6,21 @@
 
 #include "global.h"
 
-#include "digimeshframe.h"
+#include "xbeepacket.h"
 
-#include "atcommandframe.h"
-#include "atcommandqueueparamframe.h"
-#include "transmitrequestframe.h"
-#include "explicitadressingcommandframe.h"
-#include "remoteatcommandrequestframe.h"
+#include "atcommand.h"
+#include "atcommandqueueparam.h"
+#include "transmitrequest.h"
+#include "explicitadressingcommand.h"
+#include "remoteatcommandrequest.h"
 
-#include "atcommandresponseframe.h"
-#include "modemstatusframe.h"
-#include "transmitstatusframe.h"
-#include "receivepacketframe.h"
-#include "explicitrxindicatorframe.h"
-#include "nodeidentificationindicatorframe.h"
-#include "remoteatcommandresponseframe.h"
+#include "atcommandresponse.h"
+#include "modemstatus.h"
+#include "transmitstatus.h"
+#include "receivepacket.h"
+#include "explicitrxindicator.h"
+#include "nodeidentificationindicator.h"
+#include "remoteatcommandresponse.h"
 #include "remotenode.h"
 #include "nodediscoveryresponseparser.h"
 
@@ -239,35 +239,35 @@ bool XBee::applyDefaultSerialPortConfig()
             m_serial->setFlowControl(QSerialPort::NoFlowControl);
 }
 
-void XBee::displayATCommandResponse(ATCommandResponseFrame *digiMeshPacket){
+void XBee::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
     qDebug() << "*********************************************";
     qDebug() << "Received ATCommandResponse: ";
     qDebug() << qPrintable(digiMeshPacket->toString());
     qDebug() << "*********************************************";
 }
-void XBee::displayModemStatus(ModemStatusFrame *digiMeshPacket){
+void XBee::displayModemStatus(ModemStatus *digiMeshPacket){
     qDebug() << "Received ModemStatus: " << digiMeshPacket->packet().toHex();
 }
-void XBee::displayTransmitStatus(TransmitStatusFrame *digiMeshPacket){
+void XBee::displayTransmitStatus(TransmitStatus *digiMeshPacket){
     qDebug() << "Received TransmitStatus: " << digiMeshPacket->packet().toHex();
 }
-void XBee::displayRXIndicator(ReceivePacketFrame *digiMeshPacket){
+void XBee::displayRXIndicator(ReceivePacket *digiMeshPacket){
     qDebug() << "Received RXIndicator: " << digiMeshPacket->data().toHex();
 }
-void XBee::displayRXIndicatorExplicit(ExplicitRxIndicatorFrame *digiMeshPacket){
+void XBee::displayRXIndicatorExplicit(ExplicitRxIndicator *digiMeshPacket){
     qDebug() << "Received RXIndicatorExplicit: " << digiMeshPacket->packet().toHex();
 }
-void XBee::displayNodeIdentificationIndicator(NodeIdentificationIndicatorFrame *digiMeshPacket){
+void XBee::displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket){
     qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->packet().toHex();
 }
-void XBee::displayRemoteCommandResponse(RemoteATCommandResponseFrame *digiMeshPacket){
+void XBee::displayRemoteCommandResponse(RemoteATCommandResponse *digiMeshPacket){
     qDebug() << "*********************************************";
     qDebug() << "Received RemoteCommandResponse: ";
     qDebug() << qPrintable(digiMeshPacket->toString());
     qDebug() << "*********************************************";
 }
 
-void XBee::sendATCommandAsync(DigiMeshFrame *command)
+void XBee::sendATCommandAsync(XBeePacket *command)
 {
     command->assemblePacket();
     if(xbeeFound && m_serial->isOpen())
@@ -292,10 +292,10 @@ void XBee::setATCommandAsync(const QByteArray &data)
     Q_UNUSED(data);
 }
 
-ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
+ATCommandResponse * XBee::sendATCommandSync(XBeePacket *command)
 {
     Q_ASSERT(command);
-    ATCommandResponseFrame * rep = NULL;
+    ATCommandResponse * rep = NULL;
     QByteArray repPacket;
     QByteArray tmp;
 
@@ -315,7 +315,7 @@ ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
         tmp.append(m_serial->readAll());
     }
 
-    while(!tmp.isEmpty() && (unsigned char)tmp.at(0) != (unsigned char)DigiMeshFrame::StartDelimiter) {
+    while(!tmp.isEmpty() && (unsigned char)tmp.at(0) != (unsigned char)XBeePacket::StartDelimiter) {
         tmp.remove(0, 1);
     }
 
@@ -324,7 +324,7 @@ ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
     m_serial->blockSignals(false);
 
     if(repPacket.size() > 0) {
-        rep = new ATCommandResponseFrame();
+        rep = new ATCommandResponse();
         rep->setPacket(repPacket);
     }
     else {
@@ -334,12 +334,12 @@ ATCommandResponseFrame * XBee::sendATCommandSync(DigiMeshFrame *command)
     return rep;
 }
 
-ATCommandResponseFrame * XBee::sendATCommandSync(const QByteArray &data)
+ATCommandResponse * XBee::sendATCommandSync(const QByteArray &data)
 {
-    ATCommandResponseFrame * rep = NULL;
+    ATCommandResponse * rep = NULL;
     if(data.size() >= 2)
     {
-        ATCommandFrame at;
+        ATCommand at;
         at.setCommand(data.mid(0, 2));
         if(data.size() > 2) {
             at.setParameter(data.mid(2, data.size()-2));
@@ -354,14 +354,14 @@ ATCommandResponseFrame * XBee::sendATCommandSync(const QByteArray &data)
 
 void XBee::broadcast(QString data)
 {
-    TransmitRequestFrame request;
+    TransmitRequest request;
     request.setData(data.toLatin1());
     sendATCommandAsync(&request);
 }
 
 void XBee::unicast(QByteArray address, QString data)
 {
-    TransmitRequestFrame request;
+    TransmitRequest request;
     request.setDestAddr64(address);
     request.setData(data.toLatin1());
     sendATCommandAsync(&request);
@@ -386,140 +386,140 @@ void XBee::unicast(QByteArray address, QString data)
  * - CR
  */
 void XBee::loadAddressingProperties() {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_DH); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_DL); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_MY); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_MP); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_NC); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_SH); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_SL); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_NI); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_SE); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_DE); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_CI); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_TO); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_NP); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_DD); sendATCommandAsync(&at);
-    at.setCommand(ATCommandFrame::Command_CR); sendATCommandAsync(&at);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_DH); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_DL); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_MY); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_MP); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_NC); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_SH); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_SL); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_NI); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_SE); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_DE); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_CI); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_TO); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_NP); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_DD); sendATCommandAsync(&at);
+    at.setCommand(ATCommand::Command_CR); sendATCommandAsync(&at);
 }
 
 // Adressing
 bool XBee::setDH(const quint32 dh) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_DH);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_DH);
     at.setParameter(QByteArray::number(dh));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setDL(const quint32 dl) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_DL);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_DL);
     at.setParameter(QByteArray::number(dl));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setMY(const quint16 my) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_MY);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_MY);
     at.setParameter(QByteArray::number(my));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setMP(const quint16 mp) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_MP);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_MP);
     at.setParameter(QByteArray::number(mp));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setNC(const quint32 nc) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_NC);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_NC);
     at.setParameter(QByteArray::number(nc));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setSH(const quint32 sh) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_SH);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_SH);
     at.setParameter(QByteArray::number(sh));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setSL(const quint32 sl) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_SL);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_SL);
     at.setParameter(QByteArray::number(sl));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setNI(const QString & ni) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_NI);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_NI);
     at.setParameter(ni.toUtf8());
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setSE(const quint8 se) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_SE);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_SE);
     at.setParameter(QByteArray::number(se));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setDE(const quint8 de) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_DE);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_DE);
     at.setParameter(QByteArray::number(de));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setCI(const quint8 ci) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_CI);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_CI);
     at.setParameter(QByteArray::number(ci));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setTO(const quint8 to) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_TO);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_TO);
     at.setParameter(QByteArray::number(to));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setNP(const quint8 np) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_NP);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_NP);
     at.setParameter(QByteArray::number(np));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setDD(const quint16 dd) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_DD);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_DD);
     at.setParameter(QByteArray::number(dd));
     sendATCommandAsync(&at);
     return true;
 }
 
 bool XBee::setCR(const quint8 cr) {
-    ATCommandFrame at;
-    at.setCommand(ATCommandFrame::Command_CR);
+    ATCommand at;
+    at.setCommand(ATCommand::Command_CR);
     at.setParameter(QByteArray::number(cr));
     sendATCommandAsync(&at);
     return true;
@@ -572,44 +572,44 @@ void XBee::processPacket(QByteArray packet)
     qDebug() << Q_FUNC_INFO << "packet type :" << QString::number(packetType, 16).prepend("0x");
 
     switch (packetType) {
-    case DigiMeshFrame::ATCommandResponseFrame : {
-        ATCommandResponseFrame *response = new ATCommandResponseFrame(packet);
+    case XBeePacket::ATCommandResponseFrame : {
+        ATCommandResponse *response = new ATCommandResponse(packet);
         processATCommandRespone(response);
         response->deleteLater();
         break;
     }
-    case DigiMeshFrame::ModemStatusFrame : {
-        ModemStatusFrame *response = new ModemStatusFrame(packet);
+    case XBeePacket::ModemStatusFrame : {
+        ModemStatus *response = new ModemStatus(packet);
         emit receivedModemStatus(response);
         response->deleteLater();
         break;
     }
-    case DigiMeshFrame::TransmitStatusFrame : {
-        TransmitStatusFrame *response = new TransmitStatusFrame(this);
+    case XBeePacket::TransmitStatusFrame : {
+        TransmitStatus *response = new TransmitStatus(this);
         response->readPacket(packet);
         emit receivedTransmitStatus(response);
         break;
     }
-    case DigiMeshFrame::RXIndicatorFrame : {
-        ReceivePacketFrame *response = new ReceivePacketFrame(this);
+    case XBeePacket::RXIndicatorFrame : {
+        ReceivePacket *response = new ReceivePacket(this);
         response->readPacket(packet);
         emit receivedRXIndicator(response);
         break;
     }
-    case DigiMeshFrame::ExplicitRxIndicatorFrame : {
-        ExplicitRxIndicatorFrame *response = new ExplicitRxIndicatorFrame(this);
+    case XBeePacket::ExplicitRxIndicatorFrame : {
+        ExplicitRxIndicator *response = new ExplicitRxIndicator(this);
         response->readPacket(packet);
         emit receivedRXIndicatorExplicit(response);
         break;
     }
-    case DigiMeshFrame::NodeIdentificationIndicatorFrame : {
-        NodeIdentificationIndicatorFrame *response = new NodeIdentificationIndicatorFrame(this);
+    case XBeePacket::NodeIdentificationIndicatorFrame : {
+        NodeIdentificationIndicator *response = new NodeIdentificationIndicator(this);
         response->setPacket(packet);
         emit receivedNodeIdentificationIndicator(response);
         break;
     }
-    case DigiMeshFrame::RemoteATCommandResponseFrame : {
-        RemoteATCommandResponseFrame *response = new RemoteATCommandResponseFrame(packet);
+    case XBeePacket::RemoteATCommandResponseFrame : {
+        RemoteATCommandResponse *response = new RemoteATCommandResponse(packet);
         emit receivedRemoteCommandResponse(response);
         response->deleteLater();
         break;
@@ -621,33 +621,33 @@ void XBee::processPacket(QByteArray packet)
     }
 }
 
-void XBee::processATCommandRespone(ATCommandResponseFrame *rep) {
+void XBee::processATCommandRespone(ATCommandResponse *rep) {
     Q_ASSERT(rep);
-    ATCommandFrame::ATCommand at = rep->atCommand();
+    ATCommand::ATCommandType at = rep->atCommand();
     QByteArray data = rep->data().toHex();
     quint32 dataInt = QString(data).toInt(0, 16);
 
-    qDebug() << Q_FUNC_INFO << "AT command" << ATCommandFrame::atCommandToString(at) << QString("0x%1").arg(at , 0, 16) << " : " << data << dataInt;
+    qDebug() << Q_FUNC_INFO << "AT command" << ATCommand::atCommandToString(at) << QString("0x%1").arg(at , 0, 16) << " : " << data << dataInt;
 
     switch(at) {
     // Addressing
-    case ATCommandFrame::Command_DH : m_dh = dataInt; emit DHChanged(m_dh); break;
-    case ATCommandFrame::Command_DL : m_dl = dataInt; emit DLChanged(m_dl); break;
-    case ATCommandFrame::Command_MY : m_my = dataInt; emit MYChanged(m_my); break;
-    case ATCommandFrame::Command_MP : m_mp = dataInt; emit MPChanged(m_mp); break;
-    case ATCommandFrame::Command_NC : m_nc = dataInt; emit NCChanged(m_nc); break;
-    case ATCommandFrame::Command_SH : m_sh = dataInt; emit SHChanged(m_sh); break;
-    case ATCommandFrame::Command_SL : m_sl = dataInt; emit SLChanged(m_sl); break;
-    case ATCommandFrame::Command_NI : m_ni = data; emit NIChanged(m_ni); break;
-    case ATCommandFrame::Command_SE : m_se = dataInt; emit SEChanged(m_se); break;
-    case ATCommandFrame::Command_DE : m_de = dataInt; emit DEChanged(m_de); break;
-    case ATCommandFrame::Command_CI : m_ci = dataInt; emit CIChanged(m_ci); break;
-    case ATCommandFrame::Command_TO : m_to = dataInt; emit TOChanged(m_to); break;
-    case ATCommandFrame::Command_NP : m_np = dataInt; emit NPChanged(m_np); break;
-    case ATCommandFrame::Command_DD : m_dd = dataInt; emit DDChanged(m_dd); break;
-    case ATCommandFrame::Command_CR : m_cr = dataInt; emit CRChanged(m_cr); break;
+    case ATCommand::Command_DH : m_dh = dataInt; emit DHChanged(m_dh); break;
+    case ATCommand::Command_DL : m_dl = dataInt; emit DLChanged(m_dl); break;
+    case ATCommand::Command_MY : m_my = dataInt; emit MYChanged(m_my); break;
+    case ATCommand::Command_MP : m_mp = dataInt; emit MPChanged(m_mp); break;
+    case ATCommand::Command_NC : m_nc = dataInt; emit NCChanged(m_nc); break;
+    case ATCommand::Command_SH : m_sh = dataInt; emit SHChanged(m_sh); break;
+    case ATCommand::Command_SL : m_sl = dataInt; emit SLChanged(m_sl); break;
+    case ATCommand::Command_NI : m_ni = data; emit NIChanged(m_ni); break;
+    case ATCommand::Command_SE : m_se = dataInt; emit SEChanged(m_se); break;
+    case ATCommand::Command_DE : m_de = dataInt; emit DEChanged(m_de); break;
+    case ATCommand::Command_CI : m_ci = dataInt; emit CIChanged(m_ci); break;
+    case ATCommand::Command_TO : m_to = dataInt; emit TOChanged(m_to); break;
+    case ATCommand::Command_NP : m_np = dataInt; emit NPChanged(m_np); break;
+    case ATCommand::Command_DD : m_dd = dataInt; emit DDChanged(m_dd); break;
+    case ATCommand::Command_CR : m_cr = dataInt; emit CRChanged(m_cr); break;
 
-    case ATCommandFrame::Command_ND : {
+    case ATCommand::Command_ND : {
         RemoteNode * node = NULL;
         NodeDiscoveryResponseParser nd;
         if((node = nd.parseData(rep->data())) != NULL) {
@@ -658,7 +658,7 @@ void XBee::processATCommandRespone(ATCommandResponseFrame *rep) {
         break;
     }
     default:
-        qWarning() << Q_FUNC_INFO << "Unhandled AT command" <<  QString("0x%1 (%2)").arg(at , 0, 16).arg(ATCommandFrame::atCommandToString(at));
+        qWarning() << Q_FUNC_INFO << "Unhandled AT command" <<  QString("0x%1 (%2)").arg(at , 0, 16).arg(ATCommand::atCommandToString(at));
     }
     emit receivedATCommandResponse(rep);
 }
@@ -690,8 +690,8 @@ bool XBee::initSerialConnection()
 bool XBee::startupCheck()
 {
     bool bRet = false;
-    ATCommandFrame at;
-    ATCommandResponseFrame * rep = NULL;
+    ATCommand at;
+    ATCommandResponse * rep = NULL;
     QString errorStr;
     Mode currentMode;
 
@@ -729,7 +729,7 @@ bool XBee::startupCheck()
 //        rep = sendATCommandSync(&at);
 //        if(rep)
 //        {
-//            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
+//            if(rep->commandStatus() == ATCommandResponse::Ok) {
 //                bool ok = false;
 //                currentMode = (Mode)rep->data().toHex().toInt(&ok,16);
 //                if(ok) {
@@ -744,7 +744,7 @@ bool XBee::startupCheck()
 //                        rep = sendATCommandSync(&at);
 //                        if(currentMode == 2) at.unescapePacket();
 //                        if(rep) {
-//                            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
+//                            if(rep->commandStatus() == ATCommandResponse::Ok) {
 //                                errorStr = "OK";
 //                                bRet = true;
 //                                delete rep;
@@ -784,7 +784,7 @@ bool XBee::startupCheck()
         rep = sendATCommandSync(&at);
         if(rep)
         {
-            if(rep->commandStatus() == ATCommandResponseFrame::Ok) {
+            if(rep->commandStatus() == ATCommandResponse::Ok) {
                 bool ok = false;
                 int hv = rep->data().left(1).toHex().toInt(&ok,16);
                 if(ok) {

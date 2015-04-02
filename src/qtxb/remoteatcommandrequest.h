@@ -1,18 +1,18 @@
-#ifndef REMOTEATCOMMANDREQUESTFRAME_H
-#define REMOTEATCOMMANDREQUESTFRAME_H
+#ifndef REMOTEATCOMMANDREQUEST_H
+#define REMOTEATCOMMANDREQUEST_H
 
-#include "digimeshframe.h"
-#include "atcommandframe.h"
+#include "xbeepacket.h"
+#include "atcommand.h"
 
 namespace QtXBee {
 
 /**
- * @brief The RemoteATCommandRequestFrame class is used to query or set module parameters on a remote device.
+ * @brief The RemoteATCommandRequest class is used to query or set module parameters on a remote device.
  *
  * For parameter changes on the remote device to take effect, changes must be applied,
  * either by setting the apply changes options bit, or by sending an AC command to the remote.
  */
-class RemoteATCommandRequestFrame : public DigiMeshFrame
+class RemoteATCommandRequest : public XBeePacket
 {
     Q_OBJECT
 public:
@@ -27,9 +27,9 @@ public:
     };
     Q_DECLARE_FLAGS(RemoteCommandOptions, RemoteCommandOption)
 
-    RemoteATCommandRequestFrame(QObject *parent = 0);
+    RemoteATCommandRequest(QObject *parent = 0);
 
-    // Reimplemented from DigiMeshFrame
+    // Reimplemented from XBeePacket
     virtual void assemblePacket();
     virtual void clear();
     virtual QString toString();
@@ -38,13 +38,13 @@ public:
     void setDestinationAddress(const quint64 dest);
     void setNetworkAddress(const quint32 network);
     void setCommandOptions(const RemoteCommandOptions options);
-    void setATCommand(const ATCommandFrame::ATCommand command);
+    void setATCommand(const ATCommand::ATCommandType command);
     void setCommandParameter(const quint8 parameter);
 
     // Getters
     quint64 destinationAddress() const;
     quint16 networkAddress() const;
-    ATCommandFrame::ATCommand atCommand() const;
+    ATCommand::ATCommandType atCommand() const;
     quint8 commandParameter();
     RemoteCommandOptions commandOptions() const;
 
@@ -52,10 +52,10 @@ protected:
     quint64 m_destinationAddress;
     quint16 m_networkAddress;
     RemoteCommandOptions m_options;
-    ATCommandFrame::ATCommand m_atCommand;
+    ATCommand::ATCommandType m_atCommand;
     quint8 m_commandParameter;
 };
 
 } // END namepsace
 
-#endif // REMOTEATCOMMANDREQUESTFRAME_H
+#endif // REMOTEATCOMMANDREQUEST_H

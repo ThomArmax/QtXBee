@@ -1,23 +1,23 @@
-#include "modemstatusframe.h"
-#include "digimeshframe.h"
+#include "modemstatus.h"
+#include "xbeepacket.h"
 #include <QDebug>
 
 namespace QtXBee {
 
-ModemStatusFrame::ModemStatusFrame(QObject *parent) :
-    DigiMeshFrame(parent)
+ModemStatus::ModemStatus(QObject *parent) :
+    XBeePacket(parent)
 {
-    setFrameType(DigiMeshFrame::ModemStatusFrame);
+    setFrameType(XBeePacket::ModemStatusFrame);
 }
 
-ModemStatusFrame::ModemStatusFrame(const QByteArray &data, QObject *parent) :
-    DigiMeshFrame(parent)
+ModemStatus::ModemStatus(const QByteArray &data, QObject *parent) :
+    XBeePacket(parent)
 {
-    setFrameType(DigiMeshFrame::ModemStatusFrame);
+    setFrameType(XBeePacket::ModemStatusFrame);
     setData(data);
 }
 
-bool ModemStatusFrame::setData(const QByteArray & data) {
+bool ModemStatus::setData(const QByteArray & data) {
     bool bRet = false;
     m_packet.clear();
     m_packet.append(data);
@@ -38,11 +38,11 @@ bool ModemStatusFrame::setData(const QByteArray & data) {
     return bRet;
 }
 
-void ModemStatusFrame::setStatus(unsigned s){
+void ModemStatus::setStatus(unsigned s){
     m_status = s;
 }
 
-unsigned ModemStatusFrame::status() const{
+unsigned ModemStatus::status() const{
     return m_status;
 }
 

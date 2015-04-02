@@ -1,8 +1,8 @@
 #ifndef REMOTECOMMANDRESPONSE_H
 #define REMOTECOMMANDRESPONSE_H
 
-#include "digimeshframeresponse.h"
-#include "atcommandframe.h"
+#include "xbeeresponse.h"
+#include "atcommand.h"
 
 #include <QObject>
 #include <QByteArray>
@@ -18,14 +18,14 @@ namespace QtXBee {
  *
  * @sa RemoteCommandRequest
  */
-class RemoteATCommandResponseFrame : public DigiMeshFrameResponse
+class RemoteATCommandResponse : public XBeeResponse
 {
     Q_OBJECT
 public:
-    explicit RemoteATCommandResponseFrame(QObject *parent = 0);
-    RemoteATCommandResponseFrame(const QByteArray & packet, QObject *parent = 0);
+    explicit RemoteATCommandResponse(QObject *parent = 0);
+    RemoteATCommandResponse(const QByteArray & packet, QObject *parent = 0);
 
-    // Reimplement from DigiMeshFrame
+    // Reimplement from XBeePacket
     virtual QString toString();
     virtual void clear();
     virtual bool setPacket(const QByteArray &packet);
@@ -33,19 +33,19 @@ public:
     // Setters
     void setSourceAddress(const quint64 source);
     void setNetworkAddress(const quint32 network);
-    void setATCommand(const ATCommandFrame::ATCommand command);
+    void setATCommand(const ATCommand::ATCommandType command);
     void setCommandData(const QByteArray & data);
 
     // Getters
     quint64 sourceAddress() const;
     quint16 networkAddress() const;
-    ATCommandFrame::ATCommand atCommand() const;
+    ATCommand::ATCommandType atCommand() const;
     QByteArray commandData() const;
 
 private:
     quint64 m_sourceAddress;
     quint16 m_networkAddress;
-    ATCommandFrame::ATCommand m_atCommand;
+    ATCommand::ATCommandType m_atCommand;
     QByteArray m_commandData;
 };
 

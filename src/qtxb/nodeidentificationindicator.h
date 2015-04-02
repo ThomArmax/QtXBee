@@ -1,7 +1,7 @@
-#ifndef NODEIDENTIFICATIONINDICATORFRAME_H
-#define NODEIDENTIFICATIONINDICATORFRAME_H
+#ifndef NODEIDENTIFICATIONINDICATOR_H
+#define NODEIDENTIFICATIONINDICATOR_H
 
-#include "digimeshframeresponse.h"
+#include "xbeeresponse.h"
 
 namespace QtXBee {
 
@@ -11,11 +11,11 @@ namespace QtXBee {
  *
  * The data portion of this frame is similar to a network discovery response frame (see ND command).
  */
-class NodeIdentificationIndicatorFrame : public DigiMeshFrameResponse
+class NodeIdentificationIndicator : public XBeeResponse
 {
     Q_OBJECT
 public:
-    explicit NodeIdentificationIndicatorFrame(QObject *parent = 0);
+    explicit NodeIdentificationIndicator(QObject *parent = 0);
     virtual bool setPacket(const QByteArray &packet);
 
     virtual QString toString();
@@ -36,4 +36,4 @@ private:
 
 } // END namepsace
 
-#endif // NODEIDENTIFICATIONINDICATORFRAME_H
+#endif // NODEIDENTIFICATIONINDICATOR_H

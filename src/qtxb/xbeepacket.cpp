@@ -1,13 +1,13 @@
-#include "digimeshframe.h"
+#include "xbeepacket.h"
 #include <QDebug>
 
 namespace QtXBee {
 
 /**
- * @brief DigiMeshFrame's constructor
+ * @brief XBeePacket's constructor
  * @param parent
  */
-DigiMeshFrame::DigiMeshFrame(QObject *parent) :
+XBeePacket::XBeePacket(QObject *parent) :
     QObject(parent),
     m_startDelimiter(0x7E),
     m_length(0),
@@ -20,102 +20,102 @@ DigiMeshFrame::DigiMeshFrame(QObject *parent) :
 /**
  * @brief Sets the frame's start delimiter.
  * By default the start delemiter is set to 0x7E
- * @sa DigiMeshFrame::startDelimiter()
+ * @sa XBeePacket::startDelimiter()
  * @param sd
  */
-void DigiMeshFrame::setStartDelimiter(unsigned sd) {
+void XBeePacket::setStartDelimiter(unsigned sd) {
     m_startDelimiter = sd;
 }
 
 /**
  * @brief Sets the frame's length
  * @param l
- * @sa DigiMeshFrame::length()
+ * @sa XBeePacket::length()
  */
-void DigiMeshFrame::setLength(unsigned l) {
+void XBeePacket::setLength(unsigned l) {
     m_length = l;
 }
 
 /**
  * @brief Sets the frame's type
  * @param type
- * @sa DigiMeshFrame::frameType()
+ * @sa XBeePacket::frameType()
  */
-void DigiMeshFrame::setFrameType(APIFrameType type) {
+void XBeePacket::setFrameType(APIFrameType type) {
     m_frameType = type;
 }
 
 /**
  * @brief Sets the frame's id
  * @param id
- * @sa DigiMeshFrame::frameType()
+ * @sa XBeePacket::frameType()
  */
-void DigiMeshFrame::setFrameId(unsigned id) {
+void XBeePacket::setFrameId(unsigned id) {
     m_frameId = id;
 }
 
 /**
  * @brief Sets the checksum
  * @param cs
- * @sa DigiMeshFrame::checksum()
+ * @sa XBeePacket::checksum()
  */
-void DigiMeshFrame::setChecksum(unsigned cs) {
+void XBeePacket::setChecksum(unsigned cs) {
     m_checksum = cs;
 }
 
 /**
  * @brief Returns the frame's start delimiter
  * @returns the frame's start delimiter
- * @sa DigiMeshFrame::setStartDelimiter()
+ * @sa XBeePacket::setStartDelimiter()
  */
-unsigned DigiMeshFrame::startDelimiter() const {
+unsigned XBeePacket::startDelimiter() const {
     return m_startDelimiter;
 }
 
 /**
  * @brief Returns the frame-specific data length (Number of bytes between the length and the checksum)
  * @returns the packet's length
- * @sa DigiMeshFrame::setLength()
+ * @sa XBeePacket::setLength()
  */
-u_int16_t DigiMeshFrame::length() const {
+u_int16_t XBeePacket::length() const {
     return m_length;
 }
 
 /**
  * @brief Returns the frame's type
  * @returns the frame's type
- * @sa DigiMeshFrame::setFrameType()
- * @sa DigiMeshFrame::APIFrameType
+ * @sa XBeePacket::setFrameType()
+ * @sa XBeePacket::APIFrameType
  */
-DigiMeshFrame::APIFrameType DigiMeshFrame::frameType() const {
+XBeePacket::APIFrameType XBeePacket::frameType() const {
     return m_frameType;
 }
 
 /**
  * @brief Returns the frame's id
  * @returns the frame's id
- * @sa DigiMeshFrame::setFrameId()
+ * @sa XBeePacket::setFrameId()
  */
-unsigned DigiMeshFrame::frameId() const {
+unsigned XBeePacket::frameId() const {
     return m_frameId;
 }
 
 /**
  * @brief Returns the packet's checksum
  * @returns the packet's checksum
- * @sa DigiMeshFrame::setChecksum()
+ * @sa XBeePacket::setChecksum()
  */
-unsigned DigiMeshFrame::checksum() const {
+unsigned XBeePacket::checksum() const {
     return m_checksum;
 }
 
 /**
  * @brief Computes the checksum of the given QByteArray, and set it.
  * @param array
- * @sa DigiMeshFrame::setChecksum()
- * @sa DigiMeshFrame::checksum()
+ * @sa XBeePacket::setChecksum()
+ * @sa XBeePacket::checksum()
  */
-void DigiMeshFrame::createChecksum(QByteArray array) {
+void XBeePacket::createChecksum(QByteArray array) {
     int len = array.size();
     unsigned int sum = 0x00;
     unsigned int ff = 0xFF;
@@ -138,11 +138,11 @@ void DigiMeshFrame::createChecksum(QByteArray array) {
  * @brief Returns the frame's packet (raw data)
  * @returns the frame's packet (raw data)
  */
-QByteArray DigiMeshFrame::packet() const {
+QByteArray XBeePacket::packet() const {
     return m_packet;
 }
 
-bool DigiMeshFrame::setPacket(const QByteArray &packet) {
+bool XBeePacket::setPacket(const QByteArray &packet) {
     m_packet = packet;
     assemblePacket();
     return true;
@@ -154,11 +154,11 @@ bool DigiMeshFrame::setPacket(const QByteArray &packet) {
  * Overload this function to create your own packet.
  * @note This method does nothing.
  */
-void DigiMeshFrame::assemblePacket() {
+void XBeePacket::assemblePacket() {
 
 }
 
-void DigiMeshFrame::clear() {
+void XBeePacket::clear() {
     m_packet.clear();
     m_startDelimiter = 0x7E;
     m_length = 0;
@@ -171,7 +171,7 @@ void DigiMeshFrame::clear() {
  * @brief Returns a debug string containing all packet's informations.
  * @returns a debug string containing all packet's informations.
  */
-QString DigiMeshFrame::toString() {
+QString XBeePacket::toString() {
     QString str;
     str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));
     str.append(QString("Frame id        : %1 (0x%2)\n").arg(frameId(), 0, 16).arg(frameId(), 0, 16));
@@ -188,7 +188,7 @@ QString DigiMeshFrame::toString() {
  * @returns the given frame type APIFrameType into a human readable string
  * @param type
  */
-QString DigiMeshFrame::frameTypeToString(const APIFrameType type) {
+QString XBeePacket::frameTypeToString(const APIFrameType type) {
     QString str;
     switch(type) {
     case ATCommandFrame                     : str = "AT Command";                           break;
@@ -208,7 +208,7 @@ QString DigiMeshFrame::frameTypeToString(const APIFrameType type) {
     return str;
 }
 
-void DigiMeshFrame::escapePacket()
+void XBeePacket::escapePacket()
 {
     int escapeBytes = 0;
     QByteArray escapedPacked;
@@ -251,7 +251,7 @@ void DigiMeshFrame::escapePacket()
     }
 }
 
-bool DigiMeshFrame::unescapePacket()
+bool XBeePacket::unescapePacket()
 {
     QByteArray unEscapedPacket;
     int escapeBytes = 0;
@@ -284,7 +284,7 @@ bool DigiMeshFrame::unescapePacket()
     return true;
 }
 
-bool DigiMeshFrame::isSpecialByte(const char c)
+bool XBeePacket::isSpecialByte(const char c)
 {
     return  c == StartDelimiter ||
             c == Escape ||

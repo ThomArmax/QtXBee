@@ -1,15 +1,15 @@
 #ifndef EXPLICITRXINDICATOR_H
 #define EXPLICITRXINDICATOR_H
 
-#include "digimeshframe.h"
+#include "xbeepacket.h"
 
 namespace QtXBee {
 
-class ExplicitRxIndicatorFrame : public DigiMeshFrame
+class ExplicitRxIndicator : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit ExplicitRxIndicatorFrame(QObject *parent = 0);
+    explicit ExplicitRxIndicator(QObject *parent = 0);
     void readPacket(QByteArray rx);
 };
 

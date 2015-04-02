@@ -1,16 +1,16 @@
-#ifndef DIGIMESHFRAMERESPONSE_H
-#define DIGIMESHFRAMERESPONSE_H
+#ifndef XBEERESPONSE_H
+#define XBEERESPONSE_H
 
-#include "digimeshframe.h"
+#include "xbeepacket.h"
 #include <QObject>
 #include <QDebug>
 
 namespace QtXBee {
 
 /**
- * @brief The DigiMeshFrameResponse class is the base to create API frames respons.
+ * @brief The XBeeResponse class is the base to create API frames responses.
  */
-class DigiMeshFrameResponse : public DigiMeshFrame
+class XBeeResponse : public XBeePacket
 {
     Q_OBJECT
 public:
@@ -25,10 +25,10 @@ public:
         TXFailure           = 4
     };
 
-    explicit DigiMeshFrameResponse(QObject *parent = 0);
-    ~DigiMeshFrameResponse();
+    explicit XBeeResponse(QObject *parent = 0);
+    ~XBeeResponse();
 
-    // Reimplemented from DigiMeshFrame
+    // Reimplemented from XBeePacket
     virtual void clear();
 
     virtual QByteArray data() const;
@@ -36,7 +36,7 @@ public:
     void setCommandStatus(const CommandStatus status);
     CommandStatus commandStatus() const { return m_status; }
 
-    static QString statusToString(const DigiMeshFrameResponse::CommandStatus status);
+    static QString statusToString(const XBeeResponse::CommandStatus status);
 
 protected:
     QByteArray m_data;
@@ -45,4 +45,4 @@ protected:
 
 } // END namepsace
 
-#endif // DIGIMESHFRAMERESPONSE_H
+#endif // XBEERESPONSE_H

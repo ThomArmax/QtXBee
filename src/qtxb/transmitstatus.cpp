@@ -1,15 +1,15 @@
-#include "transmitstatusframe.h"
-#include "digimeshframe.h"
+#include "transmitstatus.h"
+#include "xbeepacket.h"
 #include <QDebug>
 
 namespace QtXBee {
 
-TransmitStatusFrame::TransmitStatusFrame(QObject *parent) :
-    DigiMeshFrame(parent)
+TransmitStatus::TransmitStatus(QObject *parent) :
+    XBeePacket(parent)
 {
-    setFrameType(DigiMeshFrame::TransmitStatusFrame);
+    setFrameType(XBeePacket::TransmitStatusFrame);
 }
-void TransmitStatusFrame::readPacket(QByteArray rx){
+void TransmitStatus::readPacket(QByteArray rx){
     m_packet.clear();
     m_packet.append(rx);
     setStartDelimiter(rx.at(0));
@@ -30,25 +30,25 @@ void TransmitStatusFrame::readPacket(QByteArray rx){
         m_packet.clear();
     }
 }
-void TransmitStatusFrame:: setDeliveryStatus(unsigned ds){
+void TransmitStatus:: setDeliveryStatus(unsigned ds){
     m_deliveryStatus = ds;
 }
-void TransmitStatusFrame:: setTransmitRetryCount(unsigned trc){
+void TransmitStatus:: setTransmitRetryCount(unsigned trc){
     m_transmitRetryCount = trc;
 }
-void TransmitStatusFrame:: setDiscoveryStatus(unsigned ds){
+void TransmitStatus:: setDiscoveryStatus(unsigned ds){
     m_discoveryStatus = ds;
 }
-unsigned TransmitStatusFrame:: deliveryStatus() const{
+unsigned TransmitStatus:: deliveryStatus() const{
     return m_deliveryStatus;
 }
-unsigned TransmitStatusFrame:: transmitRetryCount() const{
+unsigned TransmitStatus:: transmitRetryCount() const{
     return m_transmitRetryCount;
 }
-unsigned TransmitStatusFrame:: discoveryStatus() const{
+unsigned TransmitStatus:: discoveryStatus() const{
     return m_discoveryStatus;
 }
-QByteArray TransmitStatusFrame:: reserved() const{
+QByteArray TransmitStatus:: reserved() const{
     return m_reserved;
 }
 

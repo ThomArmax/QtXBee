@@ -1,9 +1,9 @@
-#include "nodeidentificationindicatorframe.h"
+#include "nodeidentificationindicator.h"
 
 namespace QtXBee {
 
-NodeIdentificationIndicatorFrame::NodeIdentificationIndicatorFrame(QObject *parent) :
-    DigiMeshFrameResponse(parent),
+NodeIdentificationIndicator::NodeIdentificationIndicator(QObject *parent) :
+    XBeeResponse(parent),
     m_senderAddr64          (0),
     m_senderAddr16          (0),
     m_receiveOptions        (0),
@@ -16,10 +16,10 @@ NodeIdentificationIndicatorFrame::NodeIdentificationIndicatorFrame(QObject *pare
     m_digiProfileId         (0),
     m_digiManufacturerId    (0)
 {
-    setFrameType(DigiMeshFrame::NodeIdentificationIndicatorFrame);
+    setFrameType(XBeePacket::NodeIdentificationIndicatorFrame);
 }
 
-bool NodeIdentificationIndicatorFrame::setPacket(const QByteArray &packet)
+bool NodeIdentificationIndicator::setPacket(const QByteArray &packet)
 Q_DECL_OVERRIDE
 {
     qDebug() << Q_FUNC_INFO << QString(packet.toHex());
@@ -159,7 +159,7 @@ exit:
     return bRet;
 }
 
-QString NodeIdentificationIndicatorFrame::toString() {
+QString NodeIdentificationIndicator::toString() {
     QString str;
     str.append(QString("Raw packet                   : 0x%1\n").arg(QString(packet().toHex())));
     str.append(QString("Start delimiter              : 0x%1\n").arg(QString::number(startDelimiter(), 16)));

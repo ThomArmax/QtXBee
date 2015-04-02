@@ -1,24 +1,24 @@
-#include "remoteatcommandrequestframe.h"
+#include "remoteatcommandrequest.h"
 #include <QDebug>
 
 namespace QtXBee {
 
 /**
- * @brief RemoteATCommandRequestFrame's constructor
+ * @brief RemoteATCommandRequest's constructor
  * @param parent parent object
  */
-RemoteATCommandRequestFrame::RemoteATCommandRequestFrame(QObject *parent) :
-    DigiMeshFrame(parent),
+RemoteATCommandRequest::RemoteATCommandRequest(QObject *parent) :
+    XBeePacket(parent),
     m_destinationAddress(0),
     m_networkAddress(0),
     m_options(0),
-    m_atCommand(ATCommandFrame::Command_Undefined),
+    m_atCommand(ATCommand::Command_Undefined),
     m_commandParameter(0)
 {
-    setFrameType(DigiMeshFrame::RemoteATCommandRequestFrame);
+    setFrameType(XBeePacket::RemoteATCommandRequestFrame);
 }
-// Reimplemented from DigiMeshFrame
-void RemoteATCommandRequestFrame::assemblePacket() {
+// Reimplemented from XBeePacket
+void RemoteATCommandRequest::assemblePacket() {
     int i;
 
     m_packet.clear();
@@ -43,16 +43,16 @@ void RemoteATCommandRequestFrame::assemblePacket() {
     qDebug() << Q_FUNC_INFO << m_packet.toHex();
 }
 
-void RemoteATCommandRequestFrame::clear() {
-    DigiMeshFrame::clear();
+void RemoteATCommandRequest::clear() {
+    XBeePacket::clear();
     m_destinationAddress    = 0;
     m_networkAddress        = 0;
     m_options               = 0;
-    m_atCommand             = ATCommandFrame::Command_Undefined;
+    m_atCommand             = ATCommand::Command_Undefined;
     m_commandParameter      = 0;
 }
 
-QString RemoteATCommandRequestFrame::toString() {
+QString RemoteATCommandRequest::toString() {
     return QString();
 }
 
@@ -65,7 +65,7 @@ QString RemoteATCommandRequestFrame::toString() {
  * - 0x000000000000FFFF - Broadcast address
  * @param dest
  */
-void RemoteATCommandRequestFrame::setDestinationAddress(const quint64 dest) {
+void RemoteATCommandRequest::setDestinationAddress(const quint64 dest) {
     m_destinationAddress = dest;
 }
 
@@ -75,14 +75,14 @@ void RemoteATCommandRequestFrame::setDestinationAddress(const quint64 dest) {
  * Set to 0xFFFE if the address is unknown, or if sending a broadcast.
  * @param network
  */
-void RemoteATCommandRequestFrame::setNetworkAddress(const quint32 network) {
+void RemoteATCommandRequest::setNetworkAddress(const quint32 network) {
     m_networkAddress = network;
 }
 
 /**
  * @brief Sets the remote command options.
  */
-void RemoteATCommandRequestFrame::setCommandOptions(const RemoteCommandOptions options) {
+void RemoteATCommandRequest::setCommandOptions(const RemoteCommandOptions options) {
     m_options = options;
 }
 
@@ -90,7 +90,7 @@ void RemoteATCommandRequestFrame::setCommandOptions(const RemoteCommandOptions o
  * @brief Sets the command to be performed on the remote device
  * @param command
  */
-void RemoteATCommandRequestFrame::setATCommand(const ATCommandFrame::ATCommand command) {
+void RemoteATCommandRequest::setATCommand(const ATCommand::ATCommandType command) {
     m_atCommand = command;
 }
 
@@ -101,28 +101,28 @@ void RemoteATCommandRequestFrame::setATCommand(const ATCommandFrame::ATCommand c
  * If no characters present, the register is queried.
  * @param parameter
  */
-void RemoteATCommandRequestFrame::setCommandParameter(const quint8 parameter) {
+void RemoteATCommandRequest::setCommandParameter(const quint8 parameter) {
    m_commandParameter = parameter;
 }
 
 // Getters
-quint64 RemoteATCommandRequestFrame::destinationAddress() const {
+quint64 RemoteATCommandRequest::destinationAddress() const {
     return m_destinationAddress;
 }
 
-quint16 RemoteATCommandRequestFrame::networkAddress() const {
+quint16 RemoteATCommandRequest::networkAddress() const {
     return m_networkAddress;
 }
 
-ATCommandFrame::ATCommand RemoteATCommandRequestFrame::atCommand() const {
+ATCommand::ATCommandType RemoteATCommandRequest::atCommand() const {
     return m_atCommand;
 }
 
-quint8 RemoteATCommandRequestFrame::commandParameter() {
+quint8 RemoteATCommandRequest::commandParameter() {
     return m_commandParameter;
 }
 
-RemoteATCommandRequestFrame::RemoteCommandOptions RemoteATCommandRequestFrame::commandOptions() const {
+RemoteATCommandRequest::RemoteCommandOptions RemoteATCommandRequest::commandOptions() const {
     return m_options;
 }
 

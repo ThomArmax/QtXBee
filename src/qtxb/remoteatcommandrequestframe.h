@@ -4,6 +4,8 @@
 #include "digimeshframe.h"
 #include "atcommandframe.h"
 
+namespace QtXBee {
+
 /**
  * @brief The RemoteATCommandRequestFrame class is used to query or set module parameters on a remote device.
  *
@@ -53,5 +55,7 @@ protected:
     ATCommandFrame::ATCommand m_atCommand;
     quint8 m_commandParameter;
 };
+
+} // END namepsace
 
 #endif // REMOTEATCOMMANDREQUESTFRAME_H

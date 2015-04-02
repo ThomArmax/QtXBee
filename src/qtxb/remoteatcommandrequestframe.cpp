@@ -1,4 +1,7 @@
 #include "remoteatcommandrequestframe.h"
+#include <QDebug>
+
+namespace QtXBee {
 
 /**
  * @brief RemoteATCommandRequestFrame's constructor
@@ -14,7 +17,6 @@ RemoteATCommandRequestFrame::RemoteATCommandRequestFrame(QObject *parent) :
 {
     setFrameType(DigiMeshFrame::RemoteATCommandRequestFrame);
 }
-#include <QDebug>
 // Reimplemented from DigiMeshFrame
 void RemoteATCommandRequestFrame::assemblePacket() {
     int i;
@@ -123,3 +125,5 @@ quint8 RemoteATCommandRequestFrame::commandParameter() {
 RemoteATCommandRequestFrame::RemoteCommandOptions RemoteATCommandRequestFrame::commandOptions() const {
     return m_options;
 }
+
+} // END namepsace

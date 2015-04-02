@@ -2,10 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-class XBee;
 
 namespace Ui {
 class MainWindow;
+}
+
+namespace QtXBee {
+class XBee;
 }
 
 class MainWindow : public QMainWindow
@@ -26,7 +29,7 @@ private:
 
 private:
     Ui::MainWindow *ui;
-    XBee  * xbee;
+    QtXBee::XBee  * xbee;
 };
 
 #endif // MAINWINDOW_H

@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QDebug>
 
+namespace QtXBee {
+
 /**
  * @brief The DigiMeshFrameResponse class is the base to create API frames respons.
  */
@@ -40,5 +42,7 @@ protected:
     QByteArray m_data;
     CommandStatus m_status;
 };
+
+} // END namepsace
 
 #endif // DIGIMESHFRAMERESPONSE_H

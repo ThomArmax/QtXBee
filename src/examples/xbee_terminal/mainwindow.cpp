@@ -5,6 +5,13 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
+using namespace QtXBee;
+
+/**
+ * @example mainwindow.cpp
+ * A description of the example file, causes the example file to show up in
+ * Examples
+ */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)

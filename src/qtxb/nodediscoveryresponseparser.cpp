@@ -3,6 +3,8 @@
 
 #include <QDebug>
 
+namespace QtXBee {
+
 NodeDiscoveryResponseParser::NodeDiscoveryResponseParser()
 {
 
@@ -55,3 +57,5 @@ RemoteNode *NodeDiscoveryResponseParser::parseData(const QByteArray &data)
 
     return node;
 }
+
+} // END namepsace

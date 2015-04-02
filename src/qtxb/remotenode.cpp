@@ -1,5 +1,7 @@
 #include "remotenode.h"
 
+namespace QtXBee {
+
 RemoteNode::RemoteNode(QObject *parent) :
     QObject (parent),
     m_my    (0),
@@ -129,3 +131,5 @@ QString RemoteNode::toString() {
     str += QString("RSSI %1 dBm").arg(m_rssi);
     return str;
 }
+
+} // END namepsace

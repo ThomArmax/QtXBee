@@ -1,5 +1,7 @@
 #include "digimeshframeresponse.h"
 
+namespace QtXBee {
+
 DigiMeshFrameResponse::DigiMeshFrameResponse(QObject *parent) :
     DigiMeshFrame(parent),
     m_status(Error)
@@ -42,3 +44,5 @@ QString DigiMeshFrameResponse::statusToString(const DigiMeshFrameResponse::Comma
 
     return st;
 }
+
+} // END namepsace

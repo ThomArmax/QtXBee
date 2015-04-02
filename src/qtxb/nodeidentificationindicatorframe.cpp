@@ -1,5 +1,7 @@
 #include "nodeidentificationindicatorframe.h"
 
+namespace QtXBee {
+
 NodeIdentificationIndicatorFrame::NodeIdentificationIndicatorFrame(QObject *parent) :
     DigiMeshFrameResponse(parent),
     m_senderAddr64          (0),
@@ -182,3 +184,5 @@ QString NodeIdentificationIndicatorFrame::toString() {
 
     return str;
 }
+
+} // END namepsace

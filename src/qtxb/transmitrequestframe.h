@@ -2,9 +2,9 @@
 #define TRANSMITREQUESTFRAME_H
 
 #include "digimeshframe.h"
-
-
 #include <QByteArray>
+
+namespace QtXBee {
 
 /**
  * @brief The TransmitRequestFrame class causes the module to send data as an RF packet to the specified destination.
@@ -46,5 +46,7 @@ private:
     unsigned m_transmitOptions;
     QByteArray m_data;
 };
+
+} // END namepsace
 
 #endif // TRANSMITREQUESTFRAME_H

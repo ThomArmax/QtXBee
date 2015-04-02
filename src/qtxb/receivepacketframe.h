@@ -3,6 +3,8 @@
 
 #include "digimeshframe.h"
 
+namespace QtXBee {
+
 class ReceivePacketFrame : public DigiMeshFrame
 {
     Q_OBJECT
@@ -24,5 +26,7 @@ private:
     unsigned m_receiveOptions;
     QByteArray m_data;
 };
+
+} // END namepsace
 
 #endif // RECEIVEPACKETFRAME_H

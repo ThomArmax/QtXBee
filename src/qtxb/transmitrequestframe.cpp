@@ -1,6 +1,8 @@
 #include "transmitrequestframe.h"
 #include "digimeshframe.h"
 
+namespace QtXBee {
+
 TransmitRequestFrame::TransmitRequestFrame(QObject *parent) :
     DigiMeshFrame(parent)
 {
@@ -73,3 +75,4 @@ void TransmitRequestFrame::assemblePacket(){
     m_packet.insert(2, length()&0xFF);
 }
 
+} // END namepsace

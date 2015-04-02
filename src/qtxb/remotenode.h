@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+namespace QtXBee {
+
 /**
  * @brief The RemoteNode class is used to represent a remote XBee node
  */
@@ -42,5 +44,7 @@ protected:
     qint8 m_rssi;   /**< @brief Holds the RSSI */
     QString m_ni;   /**< @brief Holds the node identifier */
 };
+
+} // END namepsace
 
 #endif // REMOTENODE_H

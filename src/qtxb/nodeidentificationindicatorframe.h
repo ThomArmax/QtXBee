@@ -3,6 +3,8 @@
 
 #include "digimeshframeresponse.h"
 
+namespace QtXBee {
+
 /**
  * @brief The NodeIdentificationIndicator frame is received when a module
  * transmits a node identification message to identify itself (when AO=0).
@@ -31,5 +33,7 @@ private:
     quint16 m_digiProfileId;
     quint16 m_digiManufacturerId;
 };
+
+} // END namepsace
 
 #endif // NODEIDENTIFICATIONINDICATORFRAME_H

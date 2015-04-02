@@ -2,6 +2,8 @@
 #include "digimeshframe.h"
 #include <QDebug>
 
+namespace QtXBee {
+
 ReceivePacketFrame::ReceivePacketFrame(QObject *parent) :
     DigiMeshFrame(parent)
 {
@@ -66,3 +68,5 @@ void ReceivePacketFrame::readPacket(QByteArray rx) {
         m_packet.clear();
     }
 }
+
+} // END namepsace

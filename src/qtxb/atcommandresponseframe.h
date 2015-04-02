@@ -5,6 +5,8 @@
 #include "atcommandframe.h"
 #include <QByteArray>
 
+namespace QtXBee {
+
 /**
  * @brief In response to an ATCommandFrame message, the module will send an ATCommandResponseFrame message.
  *
@@ -28,5 +30,7 @@ public:
 private:
     ATCommandFrame::ATCommand m_atCommand;
 };
+
+} // END namepsace
 
 #endif // ATCOMMANDRESPONSEFRAME_H

@@ -2,6 +2,8 @@
 #include "digimeshframe.h"
 #include <QDebug>
 
+namespace QtXBee {
+
 ModemStatusFrame::ModemStatusFrame(QObject *parent) :
     DigiMeshFrame(parent)
 {
@@ -43,3 +45,5 @@ void ModemStatusFrame::setStatus(unsigned s){
 unsigned ModemStatusFrame::status() const{
     return m_status;
 }
+
+} // END namepsace

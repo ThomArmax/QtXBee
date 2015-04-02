@@ -1,6 +1,8 @@
 #include "digimeshframe.h"
 #include <QDebug>
 
+namespace QtXBee {
+
 /**
  * @brief DigiMeshFrame's constructor
  * @param parent
@@ -289,3 +291,5 @@ bool DigiMeshFrame::isSpecialByte(const char c)
             c == XON ||
             c == XOFF;
 }
+
+} // END namepsace

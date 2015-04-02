@@ -4,6 +4,8 @@
 #include "atcommandframe.h"
 #include <QByteArray>
 
+namespace QtXBee {
+
 /**
  * @brief The ATCommandQueueParamFrame class allows module parameters to be queried or set.
  *
@@ -17,5 +19,7 @@ class ATCommandQueueParamFrame : public ATCommandFrame
 public:
     explicit ATCommandQueueParamFrame(QObject *parent);
 };
+
+} // END namepsace
 
 #endif // ATCOMMANDQUEUEPARAMFRAME_H

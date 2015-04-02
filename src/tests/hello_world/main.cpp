@@ -1,15 +1,19 @@
 #include <QCoreApplication>
 #include <QtSerialPort/QSerialPort>
 #include <QTime>
+#include <QDebug>
 
 #include "xbee.h"
 #include "atcommandframe.h"
+#include "remoteatcommandrequestframe.h"
+
+using namespace QtXBee;
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    XBee xb("/dev/ttyUSB1");
+    XBee xb("/dev/ttyUSB0");
     xb.setMode(XBee::API1Mode);
 
     QObject::connect(&xb, SIGNAL(receivedATCommandResponse(ATCommandResponseFrame*)), &xb, SLOT(displayATCommandResponse(ATCommandResponseFrame*)));
@@ -20,23 +24,18 @@ int main(int argc, char *argv[])
     QObject::connect(&xb, SIGNAL(receivedNodeIdentificationIndicator(NodeIdentificationIndicatorFrame*)), &xb, SLOT(displayNodeIdentificationIndicator(NodeIdentificationIndicatorFrame*)));
     QObject::connect(&xb, SIGNAL(receivedRemoteCommandResponse(RemoteATCommandResponseFrame*)), &xb, SLOT(displayRemoteCommandResponse(RemoteATCommandResponseFrame*)));
 
-    ATCommandFrame atapi, atmy, atid, atdh, atdl;
-    atapi.setCommand(ATCommandFrame::Command_AP);
-    atapi.setParameter("1");
-//    atmy.setCommand(ATCommand::Command_MY);
-//    atid.setCommand(ATCommand::Command_ID);
-//    atid.setParameter("3321");
-//    atdh.setCommand(ATCommand::Command_DH);
-//    atdl.setCommand(ATCommand::Command_DL);
-
-//    xb.send(&atapi);
-    xb.send(&atid);
-//    xb.send(&atdh);
-//    xb.send(&atdh);
     ATCommandFrame nd;
     nd.setCommand(ATCommandFrame::Command_ND);
-    xb.send(&nd);
+    xb.sendATCommandAsync(&nd);
+    RemoteATCommandRequestFrame ni;
+    ni.setATCommand(ATCommandFrame::Command_MY);
+    //ni.setNetworkAddress(3332);
+    ni.setNetworkAddress(0xFFFE);
+    //ni.setDestinationAddress(0x13A20040CABB38);
+    ni.setDestinationAddress(0xFFFF);
 
+    qDebug() << "Remote NI command :" << ni.packet().toHex();
+    xb.sendATCommandAsync(&ni);
     return a.exec();
 }
 

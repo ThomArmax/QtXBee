@@ -5,6 +5,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 
+namespace QtXBee {
 class DigiMeshFrame;
 class ATCommandResponseFrame;
 class ModemStatusFrame;
@@ -181,5 +182,7 @@ private:
     quint16 m_dd;
     quint8 m_cr;
 };
+
+} //END namespace
 
 #endif

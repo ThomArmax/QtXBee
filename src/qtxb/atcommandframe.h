@@ -4,6 +4,8 @@
 #include "digimeshframe.h"
 #include <QByteArray>
 
+namespace QtXBee {
+
 /**
  * @brief The ATCommandFrame class is used to query or set module parameters on the local device.
  *
@@ -141,6 +143,8 @@ public:
     QByteArray m_command;
     QByteArray m_parameter;
 };
+
+} // END namespace
 
 #endif // ATCOMMANDPACKET_H
 

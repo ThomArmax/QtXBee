@@ -3,6 +3,8 @@
 
 #include "digimeshframe.h"
 
+namespace QtXBee {
+
 /**
  * @brief The TransmitRequestFrame class indicate if the packet was transmitted successfully or not.
  *
@@ -31,5 +33,7 @@ private:
      unsigned m_transmitRetryCount;
      unsigned m_discoveryStatus;
 };
+
+} // END namepsace
 
 #endif // TRANSMITSTATUSFRAME_H

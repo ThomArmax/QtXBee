@@ -4,6 +4,8 @@
 #include "digimeshframe.h"
 #include <QByteArray>
 
+namespace QtXBee {
+
 /**
  * @brief The ModemStatus class represent the XBee module status.
  *
@@ -23,5 +25,7 @@ public:
 private:
     unsigned m_status;
 };
+
+} // END namepsace
 
 #endif // MODEMSTATUSFRAME_H

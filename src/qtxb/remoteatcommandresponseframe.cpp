@@ -1,6 +1,8 @@
 #include "remoteatcommandresponseframe.h"
 #include "digimeshframe.h"
 
+namespace QtXBee {
+
 RemoteATCommandResponseFrame::RemoteATCommandResponseFrame(QObject *parent) :
     DigiMeshFrameResponse(parent)
 {
@@ -106,3 +108,5 @@ ATCommandFrame::ATCommand RemoteATCommandResponseFrame::atCommand() const {
 QByteArray RemoteATCommandResponseFrame::commandData() const {
     return m_commandData;
 }
+
+} // END namepsace

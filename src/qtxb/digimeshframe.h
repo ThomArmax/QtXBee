@@ -4,6 +4,8 @@
 #include <QByteArray>
 #include <QObject>
 
+namespace QtXBee {
+
 /**
  * @brief The DigiMeshFrame class is the base class to implement XBee API frames (API Operations)
  *
@@ -110,6 +112,10 @@ protected:
     unsigned m_frameId;         /**< The frame's id */
     unsigned m_checksum;        /**< Packet checksum */
 };
+
+} // END namepsace
+
+#endif // DigiMeshFrame_H
 
 /**
  * @enum DigiMeshFrame::APIFrameType
@@ -223,5 +229,3 @@ protected:
  * @var DigiMeshFrame::ManyToOneRouteRequestIndicator
  * The many-to-one route request indicator frame is sent out the UART whenever a many-to-one route request is received.
  **/
-
-#endif // DigiMeshFrame_H

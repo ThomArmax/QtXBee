@@ -1,6 +1,8 @@
 #include "atcommandframe.h"
 #include <QDebug>
 
+namespace QtXBee {
+
 /**
  * @brief ATCommandFrame's constructor
  * @param parent
@@ -118,3 +120,5 @@ ATCommandFrame::ATCommand ATCommandFrame::atCommandFromByteArray(const QByteArra
 
     return at;
 }
+
+} // END namepsace

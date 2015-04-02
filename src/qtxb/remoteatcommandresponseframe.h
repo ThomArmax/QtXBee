@@ -7,6 +7,8 @@
 #include <QObject>
 #include <QByteArray>
 
+namespace QtXBee {
+
 /**
  * @brief The RemoteCommandResponse represent the response to a RemoteCommandRequest.
  *
@@ -46,5 +48,7 @@ private:
     ATCommandFrame::ATCommand m_atCommand;
     QByteArray m_commandData;
 };
+
+} // END namepsace
 
 #endif // REMOTECOMMANDRESPONSE_H

@@ -2,6 +2,8 @@
 #include "digimeshframe.h"
 #include <QDebug>
 
+namespace QtXBee {
+
 TransmitStatusFrame::TransmitStatusFrame(QObject *parent) :
     DigiMeshFrame(parent)
 {
@@ -49,3 +51,5 @@ unsigned TransmitStatusFrame:: discoveryStatus() const{
 QByteArray TransmitStatusFrame:: reserved() const{
     return m_reserved;
 }
+
+} // END namepsace

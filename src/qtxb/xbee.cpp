@@ -1,5 +1,10 @@
-#include "global.h"
+#include <QDebug>
+#include <QSerialPort>
+#include <QSerialPortInfo>
+
 #include "xbee.h"
+
+#include "global.h"
 
 #include "digimeshframe.h"
 
@@ -17,10 +22,9 @@
 #include "nodeidentificationindicatorframe.h"
 #include "remoteatcommandresponseframe.h"
 #include "remotenode.h"
+#include "nodediscoveryresponseparser.h"
 
-#include <QDebug>
-#include <QSerialPort>
-#include <QSerialPortInfo>
+namespace QtXBee {
 
 /**
  * @brief XBee's default constructor.
@@ -257,7 +261,10 @@ void XBee::displayNodeIdentificationIndicator(NodeIdentificationIndicatorFrame *
     qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->packet().toHex();
 }
 void XBee::displayRemoteCommandResponse(RemoteATCommandResponseFrame *digiMeshPacket){
-    qDebug() << "Received RemoteCommandResponse: " << digiMeshPacket->packet().toHex();
+    qDebug() << "*********************************************";
+    qDebug() << "Received RemoteCommandResponse: ";
+    qDebug() << qPrintable(digiMeshPacket->toString());
+    qDebug() << "*********************************************";
 }
 
 void XBee::sendATCommandAsync(DigiMeshFrame *command)
@@ -614,7 +621,6 @@ void XBee::processPacket(QByteArray packet)
     }
 }
 
-#include "nodediscoveryresponseparser.h"
 void XBee::processATCommandRespone(ATCommandResponseFrame *rep) {
     Q_ASSERT(rep);
     ATCommandFrame::ATCommand at = rep->atCommand();
@@ -866,3 +872,5 @@ bool XBee::exitCommandMode()
         qDebug() << "XBee failed to exit from command mode";
     return rep == "OK";
 }
+
+} // END namepsace

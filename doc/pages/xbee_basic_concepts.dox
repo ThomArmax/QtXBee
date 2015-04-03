@@ -164,7 +164,7 @@
  * - API operating mode. To configure or execute AT commands when the XBee RF module operates in API mode, must generate an AT Command API frame containing the AT setting identifier and the value of that setting and send it to the XBee RF module.
  * For more information about API frames, see @ref XBEE_CONCEPTS_API_FRAMES_SECTION.
  *
- * @subsection XBEE_CONCEPTS_ZIGBEE_PROTO_CONCEPTS_SECTION ZigBee protocol concepts
+ * @section XBEE_CONCEPTS_ZIGBEE_PROTO_CONCEPTS_SECTION ZigBee protocol concepts
  * ZigBee is a wireless mesh network protocol for low-power digital radio modules. The ZigBee protocol defines a network layer above the 802.15.4 layers to support advanced mesh routing capabilities. It allows for creating and organizing the network hierarchy providing some extra communication features such as encryption and authentication.
  * Through the mesh and routing capabilities, ZigBee allows the transmission of data over long distances by passing the data through intermediate nodes to more distant ones.
  * Features of the ZigBee protocol include:

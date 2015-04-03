@@ -1,0 +1,4 @@
+/**
+ * @namespace QtXBee
+ * @brief Namespace common to XBee Serie1 (802.15.4) and Serie2 (ZigBee)
+ */

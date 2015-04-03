@@ -1,0 +1,4 @@
+/**
+ * @namespace QtXBee::ZigBee
+ * @brief XBee Serie2/Serie 2 Pro (ZigBee) specific namespace
+ */

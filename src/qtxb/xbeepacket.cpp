@@ -11,7 +11,7 @@ XBeePacket::XBeePacket(QObject *parent) :
     QObject(parent),
     m_startDelimiter(0x7E),
     m_length(0),
-    m_frameType(UndefinedFrame),
+    m_frameType(UndefinedId),
     m_frameId(-1),
     m_checksum(-1)
 {
@@ -41,7 +41,7 @@ void XBeePacket::setLength(unsigned l) {
  * @param type
  * @sa XBeePacket::frameType()
  */
-void XBeePacket::setFrameType(APIFrameType type) {
+void XBeePacket::setFrameType(ApiId type) {
     m_frameType = type;
 }
 
@@ -87,7 +87,7 @@ u_int16_t XBeePacket::length() const {
  * @sa XBeePacket::setFrameType()
  * @sa XBeePacket::APIFrameType
  */
-XBeePacket::APIFrameType XBeePacket::frameType() const {
+XBeePacket::ApiId XBeePacket::frameType() const {
     return m_frameType;
 }
 
@@ -162,7 +162,7 @@ void XBeePacket::clear() {
     m_packet.clear();
     m_startDelimiter = 0x7E;
     m_length = 0;
-    m_frameType = UndefinedFrame;
+    m_frameType = UndefinedId;
     m_frameId = -1;
     m_checksum = -1;
 }
@@ -188,22 +188,35 @@ QString XBeePacket::toString() {
  * @returns the given frame type APIFrameType into a human readable string
  * @param type
  */
-QString XBeePacket::frameTypeToString(const APIFrameType type) {
+QString XBeePacket::frameTypeToString(const ApiId type) {
     QString str;
     switch(type) {
-    case ATCommandFrame                     : str = "AT Command";                           break;
-    case ATCommandQueueFrame                : str = "AT Command - Queue Parameter Value";   break;
-    case TXRequestFrame                     : str = "Transmit Request";                     break;
-    case ExplicitAddressingCommandFrame     : str = "Explicit Addressing Command Frame";    break;
-    case RemoteATCommandRequestFrame        : str = "Remote AT Command Request";            break;
-    case ATCommandResponseFrame             : str = "ATCommandResponse";                    break;
-    case ModemStatusFrame                   : str = "Modem Status";                         break;
-    case TransmitStatusFrame                : str = "Transmit Status";                      break;
-    case RXIndicatorFrame                   : str = "RXIndicator";                          break;
-    case ExplicitRxIndicatorFrame           : str = "Explicit Rx Indicator";                break;
-    case NodeIdentificationIndicatorFrame   : str = "Node Identification Indicator";        break;
-    case RemoteATCommandResponseFrame       : str = "Remote Command Response";              break;
-    default                                 : str = "Unknown";                              break;
+    case TXRequest64Id              : str = "Tx 16 bits Address Request"                ; break;
+    case TXRequest16Id              : str = "Tx 16 bits Address Request"                ; break;
+    case ATCommandId                : str = "AT Command Request"                        ; break;
+    case ATCommandQueueId           : str = "AT Command - Queue Parameter Request"      ; break;
+    case ZBTXRequestId              : str = "ZigBee Tx Request"                         ; break;
+    case ZBExplicitTxRequest        : str = "ZigBee Explicit Tx Request"                ; break;
+    case RemoteATCommandRequestId   : str = "Remote AT Command Request"                 ; break;
+    case CreateSourceRouteId        : str = "Create Source Route"                       ; break;
+    case RX64ResponseId             : str = "Rx 64 bits Address Response"               ; break;
+    case RX16ResponseId             : str = "Rx 16 bits Address Response"               ; break;
+    case RX64IOResponseId           : str = "Rx 64 bits Address I/O Response"           ; break;
+    case RX16IOResponseId           : str = "Rx 16 bits Address I/O Response"           ; break;
+    case ATCommandResponseId        : str = "AT Command Response"                       ; break;
+    case TXStatusResponseId         : str = "Tx Status Response"                        ; break;
+    case ModemStatusResponseId      : str = "Modem Status Response"                     ; break;
+    case ZBTXStatusResponseId       : str = "ZigBee Tx Status Response"                 ; break;
+    case ZBRXResponseId             : str = "ZigBee Rx Response"                        ; break;
+    case ZBExplicitRxResponseId     : str = "ZigBee Explicit Rx Response"               ; break;
+    case ZBIOSampleResponseId       : str = "ZigBee I/O Sample Response"                ; break;
+    case XBeeSensorReadIndicatorId  : str = "XBee Sensore Read Indicator"               ; break;
+    case ZBIONodeIdentificationId   : str = "ZigBee I/O Node Indentification Indicator" ; break;
+    case RemoteATCommandResponseId  : str = "Remote AT Command Response"                ; break;
+    case OverTheAirFirmwareUpdateId : str = "Over-the-air Firmware Update"              ; break;
+    case RouteRecordIndicatorId     : str = "Route Record Indicator"                    ; break;
+    case ManyToOneRouteRequestId    : str = "Many-to-one Route Request"                 ; break;
+    default                         : str = "Unkown"                                    ; break;
     }
     return str;
 }

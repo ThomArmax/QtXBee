@@ -7,7 +7,7 @@ namespace QtXBee {
 TransmitStatus::TransmitStatus(QObject *parent) :
     XBeePacket(parent)
 {
-    setFrameType(XBeePacket::TransmitStatusFrame);
+    setFrameType(XBeePacket::ZBTXStatusResponseId);
 }
 void TransmitStatus::readPacket(QByteArray rx){
     m_packet.clear();
@@ -15,7 +15,7 @@ void TransmitStatus::readPacket(QByteArray rx){
     setStartDelimiter(rx.at(0));
     setLength(rx.at(2));
     if(rx.size() == rx.at(2)+4){
-        setFrameType((APIFrameType)rx.at(3));
+        setFrameType((ApiId)rx.at(3));
         setFrameId(rx.at(4));
         m_reserved.append(rx.at(5));
         m_reserved.append(rx.at(6));

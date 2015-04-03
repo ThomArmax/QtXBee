@@ -6,7 +6,7 @@ namespace QtXBee {
 ExplicitAdressingCommand::ExplicitAdressingCommand(QObject *parent) :
     TransmitRequest(parent)
 {
-    setFrameType(XBeePacket::ExplicitAddressingCommandFrame);
+    setFrameType(XBeePacket::ZBExplicitTxRequest);
 }
 
 } // END namepsace

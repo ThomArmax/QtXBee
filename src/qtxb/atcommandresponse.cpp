@@ -7,14 +7,14 @@ ATCommandResponse::ATCommandResponse(QObject *parent) :
     XBeeResponse(parent),
     m_atCommand(ATCommand::Command_Undefined)
 {
-    setFrameType(XBeePacket::ATCommandResponseFrame);
+    setFrameType(XBeePacket::ATCommandResponseId);
 }
 
 ATCommandResponse::ATCommandResponse(const QByteArray &data, QObject *parent)  :
     XBeeResponse(parent),
     m_atCommand(ATCommand::Command_Undefined)
 {
-    setFrameType(XBeePacket::ATCommandResponseFrame);
+    setFrameType(XBeePacket::ATCommandResponseId);
     setPacket(data);
 }
 
@@ -36,7 +36,7 @@ Q_DECL_OVERRIDE
     //setLength((unsigned char)packet.at(2) + ((unsigned char)packet.at(1)<<8));
     setLength(lenArr.toHex().toInt(0,16));
     if(packet.size() == packet.at(2)+4) {
-        setFrameType((APIFrameType)((unsigned char)packet.at(3)&0xFF));
+        setFrameType((ApiId)((unsigned char)packet.at(3)&0xFF));
         setFrameId(packet.at(4));
         at.append(packet.at(5));
         at.append(packet.at(6));

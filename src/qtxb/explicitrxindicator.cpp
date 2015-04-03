@@ -5,7 +5,7 @@ namespace QtXBee {
 ExplicitRxIndicator::ExplicitRxIndicator(QObject *parent) :
     XBeePacket(parent)
 {
-    setFrameType(XBeePacket::ExplicitRxIndicatorFrame);
+    setFrameType(XBeePacket::ZBExplicitRxResponseId);
 }
 void ExplicitRxIndicator::readPacket(QByteArray rx){
     Q_UNUSED(rx)

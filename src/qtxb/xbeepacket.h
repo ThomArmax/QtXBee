@@ -21,7 +21,7 @@ namespace QtXBee {
  *  - Remote Command Request
  *  - Create Source Route
  *  - AT Command Response
- *  - Modem Stat
+ *  - Modem Status
  *  - ZigBee Transmit Status
  *  - ZigBee Receive Packet (AO=0)
  *  - ZigBee Explicit Rx Indicator (AO=1)
@@ -40,29 +40,34 @@ class XBeePacket : public QObject
 {
     Q_OBJECT
 public:
-    /**
-     * @brief The APIFrameType enum identifies sent/received frame's type
-     */
-    enum APIFrameType {
-        UndefinedFrame                      = 0x00, /**< Undefined frame. Invalid value. */
-        ATCommandFrame                      = 0x08,
-        ATCommandQueueFrame                 = 0x09,
-        TXRequestFrame                      = 0x10,
-        ExplicitAddressingCommandFrame      = 0x11,
-        RemoteATCommandRequestFrame         = 0x17,
-        CreateSourceRouteFrame              = 0x21,
-        ATCommandResponseFrame              = 0x88,
-        ModemStatusFrame                    = 0x8A,
-        TransmitStatusFrame                 = 0x8B,
-        RXIndicatorFrame                    = 0x90,
-        ExplicitRxIndicatorFrame            = 0x91,
-        IODataSampleRXIndicatorFrame        = 0x92,
-        SensorReadIndicatorFrame            = 0x94,
-        NodeIdentificationIndicatorFrame    = 0x95,
-        RemoteATCommandResponseFrame        = 0x97,
-        OverTheAirFirmwareUpdateFrame       = 0xA0,
-        RouteRecordIndicatorFrame           = 0xA1,
-        ManyToOneRouteRequestIndicator      = 0xA3
+
+    enum ApiId {
+        TXRequest64Id                   = 0x00,
+        TXRequest16Id                   = 0x01,
+        ATCommandId                     = 0x08,
+        ATCommandQueueId                = 0x09,
+        ZBTXRequestId                   = 0x10,
+        ZBExplicitTxRequest             = 0x11,
+        RemoteATCommandRequestId        = 0x17,
+        CreateSourceRouteId             = 0x21,
+        RX64ResponseId                  = 0x80,
+        RX16ResponseId                  = 0x81,
+        RX64IOResponseId                = 0x82,
+        RX16IOResponseId                = 0x83,
+        ATCommandResponseId             = 0x88,
+        TXStatusResponseId              = 0x89,
+        ModemStatusResponseId           = 0x8A,
+        ZBTXStatusResponseId            = 0x8B,
+        ZBRXResponseId                  = 0x90,
+        ZBExplicitRxResponseId          = 0x91,
+        ZBIOSampleResponseId            = 0x92,
+        XBeeSensorReadIndicatorId       = 0x94,
+        ZBIONodeIdentificationId        = 0x95,
+        RemoteATCommandResponseId       = 0x97,
+        OverTheAirFirmwareUpdateId      = 0xA0,
+        RouteRecordIndicatorId          = 0xA1,
+        ManyToOneRouteRequestId         = 0xA3,
+        UndefinedId                     = 0xFF /**< Undefined frame. Invalid value. */
     };
 
     /**
@@ -79,7 +84,7 @@ public:
 
     void setStartDelimiter(unsigned sd);
     void setLength(unsigned l);
-    void setFrameType(APIFrameType type);
+    void setFrameType(ApiId type);
     void setFrameId(unsigned id);
     void setChecksum(unsigned cs);
 
@@ -87,14 +92,14 @@ public:
     virtual bool setPacket(const QByteArray & packet);
     unsigned startDelimiter() const;
     u_int16_t length() const;
-    APIFrameType frameType() const;
+    ApiId frameType() const;
     unsigned frameId() const;
     unsigned checksum() const;
 
     virtual void assemblePacket();
     virtual void clear();
     virtual QString toString();
-    static QString frameTypeToString(const APIFrameType type);
+    static QString frameTypeToString(const ApiId type);
 
     void escapePacket();
     bool unescapePacket();
@@ -105,10 +110,10 @@ protected:
     void createChecksum(QByteArray array);
 
 protected:
-    QByteArray m_packet;        /**< Constains the packet's data (sent or received)*/
+    QByteArray m_packet;        /**< Contains the packet's data (sent or received)*/
     unsigned m_startDelimiter;  /**< The packet start delimiter */
     quint16 m_length;           /**< Frame-specific data length (Number of bytes between the length and the checksum) */
-    APIFrameType m_frameType;   /**< The frame's type */
+    ApiId m_frameType;          /**< The frame's type */
     unsigned m_frameId;         /**< The frame's id */
     unsigned m_checksum;        /**< Packet checksum */
 };
@@ -118,23 +123,23 @@ protected:
 #endif // XBEEPACKET_H
 
 /**
- * @enum XBeePacket::APIFrameType
- * @brief The APIFrameType enum identifies sent/received frame's type
+ * @enum XBeePacket::ApiId
+ * @brief The ApiId enum identifies sent/received frame's type
  *
  * @var XBeePacket::ATCommandFrame
- * Identifies an AT Command Frame (ATCommandFrame)<BR>
+ * Identifies an AT Command Frame (ATCommand)<BR>
  * Used to query or set module parameters on the local device. This API command applies changes after executing the command.
  * (Changes made to module parameters take effect once changes are applied.)
  * The API example below illustrates an API frame when modifying the NJ parameter value of the module
  *
  * @var XBeePacket::ATCommandQueueFrame
- * Identifies an AT Command - Queue Parameter Value Frame (ATCommandQueueParamFrame)<BR>
+ * Identifies an AT Command - Queue Parameter Value Frame (ATCommandQueueParam)<BR>
  * This API type allows module parameters to be queried or set. In contrast to the XBeePacket::ATCommandFrame API type,
  * new parameter values are queued and not applied until either the XBeePacket::ATCommandFrame (0x08) API type or the AC (Apply Changes) command is issued.
  * Register queries (reading parameter values) are returned immediately.
  *
  * @var XBeePacket::TXRequestFrame
- * Identifies a ZigBee Transmit Request Frame (TransmitRequestFrame)<BR>
+ * Identifies a ZigBee Transmit Request Frame (TransmitRequest)<BR>
  * A Transmit Request API frame causes the module to send data as an RF packet to the specified destination.
  * The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices).
  * The coordinator can be addressed by either setting the 64-bit address to all 0x00s and the 16-bit address to 0xFFFE,

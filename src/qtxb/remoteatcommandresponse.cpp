@@ -6,13 +6,13 @@ namespace QtXBee {
 RemoteATCommandResponse::RemoteATCommandResponse(QObject *parent) :
     XBeeResponse(parent)
 {
-    setFrameType(XBeePacket::RemoteATCommandResponseFrame);
+    setFrameType(XBeePacket::RemoteATCommandResponseId);
 }
 
 RemoteATCommandResponse::RemoteATCommandResponse(const QByteArray &data, QObject *parent) :
     XBeeResponse(parent)
 {
-    setFrameType(XBeePacket::RemoteATCommandResponseFrame);
+    setFrameType(XBeePacket::RemoteATCommandResponseId);
     setPacket(data);
 }
 

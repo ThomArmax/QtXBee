@@ -7,7 +7,7 @@ namespace QtXBee {
 ReceivePacket::ReceivePacket(QObject *parent) :
     XBeePacket(parent)
 {
-    setFrameType(XBeePacket::RXIndicatorFrame);
+    setFrameType(XBeePacket::ZBRXResponseId);
 }
 void ReceivePacket::setSrcAddr64(QByteArray sa64) {
     m_srcAddr64.clear();
@@ -43,7 +43,7 @@ void ReceivePacket::readPacket(QByteArray rx) {
     setStartDelimiter(rx.at(0));
     setLength(rx.at(2));
     if(rx.size() == rx.at(2)+4 && rx.size() > 15) {
-        setFrameType((APIFrameType)rx.at(3));
+        setFrameType((ApiId)rx.at(3));
         m_srcAddr64.append(rx.at(4));
         m_srcAddr64.append(rx.at(5));
         m_srcAddr64.append(rx.at(6));

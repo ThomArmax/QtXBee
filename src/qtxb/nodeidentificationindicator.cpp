@@ -16,7 +16,7 @@ NodeIdentificationIndicator::NodeIdentificationIndicator(QObject *parent) :
     m_digiProfileId         (0),
     m_digiManufacturerId    (0)
 {
-    setFrameType(XBeePacket::NodeIdentificationIndicatorFrame);
+    setFrameType(XBeePacket::ZBIONodeIdentificationId);
 }
 
 bool NodeIdentificationIndicator::setPacket(const QByteArray &packet)

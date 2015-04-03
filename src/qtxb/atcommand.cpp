@@ -10,7 +10,7 @@ namespace QtXBee {
 ATCommand::ATCommand(QObject *parent) :
     XBeePacket(parent)
 {
-    setFrameType(XBeePacket::ATCommandFrame);
+    setFrameType(XBeePacket::ATCommandId);
     setFrameId(0x01);
 }
 
@@ -80,7 +80,7 @@ void ATCommand::clear()
     XBeePacket::clear();
     m_command.clear();
     m_parameter.clear();
-    setFrameType(XBeePacket::ATCommandFrame);
+    setFrameType(XBeePacket::ATCommandId);
     setFrameId(0x01);
 }
 

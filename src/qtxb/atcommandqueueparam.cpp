@@ -6,7 +6,7 @@ namespace QtXBee {
 ATCommandQueueParam::ATCommandQueueParam(QObject *parent) :
     ATCommand(parent)
 {
-    setFrameType(ATCommandQueueFrame);
+    setFrameType(ATCommandQueueId);
     setFrameId(0x00);
 }
 

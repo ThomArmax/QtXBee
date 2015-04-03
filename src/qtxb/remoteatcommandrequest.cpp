@@ -15,7 +15,7 @@ RemoteATCommandRequest::RemoteATCommandRequest(QObject *parent) :
     m_atCommand(ATCommand::Command_Undefined),
     m_commandParameter(0)
 {
-    setFrameType(XBeePacket::RemoteATCommandRequestFrame);
+    setFrameType(XBeePacket::RemoteATCommandRequestId);
 }
 // Reimplemented from XBeePacket
 void RemoteATCommandRequest::assemblePacket() {

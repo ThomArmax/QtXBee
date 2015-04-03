@@ -22,7 +22,7 @@ TransmitRequest::TransmitRequest(QObject *parent) :
 
     m_broadcastRadius = 1;
     m_transmitOptions = 0x00;
-    setFrameType(TXRequestFrame);
+    setFrameType(ZBTXRequestId);
     setFrameId(0x01);
 }
 void TransmitRequest::setBroadcastRadius(int rad){

@@ -572,43 +572,43 @@ void XBee::processPacket(QByteArray packet)
     qDebug() << Q_FUNC_INFO << "packet type :" << QString::number(packetType, 16).prepend("0x");
 
     switch (packetType) {
-    case XBeePacket::ATCommandResponseFrame : {
+    case XBeePacket::ATCommandResponseId : {
         ATCommandResponse *response = new ATCommandResponse(packet);
         processATCommandRespone(response);
         response->deleteLater();
         break;
     }
-    case XBeePacket::ModemStatusFrame : {
+    case XBeePacket::ModemStatusResponseId : {
         ModemStatus *response = new ModemStatus(packet);
         emit receivedModemStatus(response);
         response->deleteLater();
         break;
     }
-    case XBeePacket::TransmitStatusFrame : {
+    case XBeePacket::ZBTXStatusResponseId : {
         TransmitStatus *response = new TransmitStatus(this);
         response->readPacket(packet);
         emit receivedTransmitStatus(response);
         break;
     }
-    case XBeePacket::RXIndicatorFrame : {
+    case XBeePacket::ZBRXResponseId : {
         ReceivePacket *response = new ReceivePacket(this);
         response->readPacket(packet);
         emit receivedRXIndicator(response);
         break;
     }
-    case XBeePacket::ExplicitRxIndicatorFrame : {
+    case XBeePacket::ZBExplicitRxResponseId : {
         ExplicitRxIndicator *response = new ExplicitRxIndicator(this);
         response->readPacket(packet);
         emit receivedRXIndicatorExplicit(response);
         break;
     }
-    case XBeePacket::NodeIdentificationIndicatorFrame : {
+    case XBeePacket::ZBIONodeIdentificationId : {
         NodeIdentificationIndicator *response = new NodeIdentificationIndicator(this);
         response->setPacket(packet);
         emit receivedNodeIdentificationIndicator(response);
         break;
     }
-    case XBeePacket::RemoteATCommandResponseFrame : {
+    case XBeePacket::RemoteATCommandResponseId : {
         RemoteATCommandResponse *response = new RemoteATCommandResponse(packet);
         emit receivedRemoteCommandResponse(response);
         response->deleteLater();

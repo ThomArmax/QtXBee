@@ -7,13 +7,13 @@ namespace QtXBee {
 ModemStatus::ModemStatus(QObject *parent) :
     XBeePacket(parent)
 {
-    setFrameType(XBeePacket::ModemStatusFrame);
+    setFrameType(XBeePacket::ModemStatusResponseId);
 }
 
 ModemStatus::ModemStatus(const QByteArray &data, QObject *parent) :
     XBeePacket(parent)
 {
-    setFrameType(XBeePacket::ModemStatusFrame);
+    setFrameType(XBeePacket::ModemStatusResponseId);
     setData(data);
 }
 
@@ -25,7 +25,7 @@ bool ModemStatus::setData(const QByteArray & data) {
     setLength(data.at(2));
 
     if(data.size() == data.at(2)+4) {
-        setFrameType((APIFrameType)data.at(3));
+        setFrameType((ApiId)data.at(3));
         setStatus(data.at(4));
         setChecksum(data.at(5));
         bRet = true;

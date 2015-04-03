@@ -4,10 +4,6 @@
 /**
  * @file global.h Defines global properties and glob enums.
  */
-
-/**
- * @namespace QtXBee the QtXBee namespace
- */
 namespace QtXBee {
 
 /**

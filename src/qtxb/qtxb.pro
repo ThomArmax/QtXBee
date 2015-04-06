@@ -36,7 +36,8 @@ SOURCES += \
     transmitstatus.cpp \
     remoteatcommandrequest.cpp \
     wpan/txrequest16.cpp \
-    wpan/txrequest64.cpp
+    wpan/txrequest64.cpp \
+    wpan/txstatusresponse.cpp
 
 HEADERS += \
     global.h \
@@ -58,7 +59,8 @@ HEADERS += \
     transmitrequest.h \
     transmitstatus.h \
     wpan/txrequest16.h \
-    wpan/txrequest64.h
+    wpan/txrequest64.h \
+    wpan/txstatusresponse.h
 
 OTHER_FILES += \
     qtxb.pri \

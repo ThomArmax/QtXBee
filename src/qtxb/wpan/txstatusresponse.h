@@ -11,6 +11,7 @@ class TXStatusResponse : public XBeePacket
     Q_OBJECT
 public:
     enum Status {
+        Unknown     = -1,
         Success     = 0,
         NoACK       = 1,
         CCAFailure  = 2,
@@ -27,6 +28,8 @@ public:
 
     void setStatus(const Status status);
     Status status() const;
+
+    static QString statusToString(const Status status);
 
 private:
     Status m_status;

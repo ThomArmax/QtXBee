@@ -18,6 +18,8 @@ TXRequest16::~TXRequest16()
 void TXRequest16::assemblePacket()
 Q_DECL_OVERRIDE
 {
+    int i = 0;
+
     m_packet.clear();
 
     m_packet.append(frameType());
@@ -27,7 +29,7 @@ Q_DECL_OVERRIDE
         m_packet.append(m_destinationAddress >> (i*8)&0xFF);
     }
     /** @todo Handle Options */
-    m_packet.append(0);
+    m_packet.append(QByteArray::number(0));
     /** @todo Check data's size (up to 100 bytes per packet) */
     for(int i=0; i<m_data.size(); i++) {
         m_packet.append(m_data.at(i));
@@ -40,6 +42,20 @@ Q_DECL_OVERRIDE
     m_packet.insert(0, startDelimiter());
     m_packet.insert(1, (length()>>8)&0xFF);
     m_packet.insert(2, length()&0xFF);
+}
+
+void TXRequest16::clear()
+Q_DECL_OVERRIDE
+{
+    m_packet.clear();
+    m_data.clear();
+    m_destinationAddress = 0xFFFF;
+}
+
+QString TXRequest16::toString()
+Q_DECL_OVERRIDE
+{
+    return QString();
 }
 
 /**

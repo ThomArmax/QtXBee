@@ -91,7 +91,7 @@ public:
     QByteArray packet() const;
     virtual bool setPacket(const QByteArray & packet);
     unsigned startDelimiter() const;
-    u_int16_t length() const;
+    quint16 length() const;
     ApiId frameType() const;
     unsigned frameId() const;
     unsigned checksum() const;

@@ -77,7 +77,7 @@ unsigned XBeePacket::startDelimiter() const {
  * @returns the packet's length
  * @sa XBeePacket::setLength()
  */
-u_int16_t XBeePacket::length() const {
+quint16 XBeePacket::length() const {
     return m_length;
 }
 

@@ -37,7 +37,11 @@ SOURCES += \
     remoteatcommandrequest.cpp \
     wpan/txrequest16.cpp \
     wpan/txrequest64.cpp \
-    wpan/txstatusresponse.cpp
+    wpan/txstatusresponse.cpp \
+    wpan/rxbaseresponse.cpp \
+    wpan/rxresponse16.cpp \
+    wpan/rxresponse64.cpp \
+    wpan/rxresponseiosample.cpp
 
 HEADERS += \
     global.h \
@@ -60,7 +64,11 @@ HEADERS += \
     transmitstatus.h \
     wpan/txrequest16.h \
     wpan/txrequest64.h \
-    wpan/txstatusresponse.h
+    wpan/txstatusresponse.h \
+    wpan/rxbaseresponse.h \
+    wpan/rxresponse16.h \
+    wpan/rxresponse64.h \
+    wpan/rxresponseiosample.h
 
 OTHER_FILES += \
     qtxb.pri \

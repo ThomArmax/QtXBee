@@ -19,9 +19,19 @@ public:
     explicit TXRequest64(QObject *parent = 0);
     ~TXRequest64();
 
-signals:
+    // Reimplemented from XBeePacket
+    virtual void assemblePacket();
+    virtual void clear();
+    virtual QString toString();
 
-public slots:
+    void setDestinationAddress(const quint64 address);
+    quint64 destinationAddress() const;
+    void setData(const QByteArray & data);
+    QByteArray data() const;
+
+private:
+    quint64 m_destinationAddress;
+    QByteArray m_data;
 };
 
 } } // END namespace

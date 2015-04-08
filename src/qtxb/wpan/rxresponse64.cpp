@@ -4,7 +4,8 @@ namespace QtXBee {
 namespace WPAN {
 
 RxResponse64::RxResponse64(QObject *parent) :
-    RxBaseResponse(parent)
+    RxBaseResponse(parent),
+    m_sourceAddress(0)
 {
     setFrameType(RX64ResponseId);
 }

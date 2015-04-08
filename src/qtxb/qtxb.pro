@@ -42,7 +42,9 @@ SOURCES += \
     wpan/rxresponse16.cpp \
     wpan/rxresponse64.cpp \
     byteutils.cpp \
-    wpan/rxresponseiosamplebase.cpp
+    wpan/rxresponseiosamplebase.cpp \
+    wpan/rxresponseiosample16.cpp \
+    wpan/rxresponseiosample64.cpp
 
 HEADERS += \
     global.h \
@@ -70,7 +72,9 @@ HEADERS += \
     wpan/rxresponse16.h \
     wpan/rxresponse64.h \
     byteutils.h \
-    wpan/rxresponseiosamplebase.h
+    wpan/rxresponseiosamplebase.h \
+    wpan/rxresponseiosample16.h \
+    wpan/rxresponseiosample64.h
 
 OTHER_FILES += \
     qtxb.pri \

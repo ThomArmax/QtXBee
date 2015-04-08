@@ -8,6 +8,9 @@
 namespace QtXBee {
 namespace WPAN {
 
+/**
+ * @todo Implement RxResponseIoSampleBase class
+ */
 class RxResponseIoSampleBase : public RxBaseResponse
 {
     Q_OBJECT

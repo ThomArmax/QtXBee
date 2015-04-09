@@ -30,7 +30,7 @@ RemoteNode *NodeDiscoveryResponseParser::parseData(const QByteArray &data)
     qDebug() << Q_FUNC_INFO << data.toHex();
     qDebug() << Q_FUNC_INFO << "packet size" << data.size();
 
-    if(data.size() == 0)
+    if(data.size() == 0 || data.size() < 13)
         return NULL;
 
     if(data.size() > 13) {

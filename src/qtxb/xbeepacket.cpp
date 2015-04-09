@@ -12,8 +12,8 @@ XBeePacket::XBeePacket(QObject *parent) :
     m_startDelimiter(0x7E),
     m_length(0),
     m_frameType(UndefinedId),
-    m_frameId(-1),
-    m_checksum(-1)
+    m_frameId(0),
+    m_checksum(0)
 {
 }
 
@@ -143,16 +143,49 @@ QByteArray XBeePacket::packet() const {
 }
 
 bool XBeePacket::setPacket(const QByteArray &packet) {
+    ApiId apiId = UndefinedId;
+    quint8 apiSpecificOffset = 4; // 5th byte
+    QByteArray specificData;
+
+    clear();
     m_packet = packet;
+
+    if(packet.size() < 5) {
+        qDebug() << Q_FUNC_INFO << "bad packet !";
+        return false;
+    }
+
+    setStartDelimiter(packet.at(0));
+    setLength((unsigned char)packet.at(2) + ((unsigned char)packet.at(1)<<8));
+    apiId = (ApiId)(packet.at(3)&0xff);
+//    qDebug() << "apiid" << apiId << ",frame type" << m_frameType;
+//    if(apiId != m_frameType) {
+//        qDebug() << Q_FUNC_INFO << "Bad API frame ID !" << qPrintable(QString("(expected 0x%1, got 0x%2)").arg(m_frameType,0,16).arg(apiId,0,16));
+//        return false;
+//    }
+    setFrameType(apiId);
+
+    if(packet.size() > 5) {
+        for(int i=apiSpecificOffset; i< packet.size(); i++) {
+            specificData.append(packet.at(i));
+        }
+        parseApiSpecificData(specificData);
+    }
+    setChecksum(packet.at(packet.size()-1));
+
     assemblePacket();
     return true;
+}
+
+bool XBeePacket::parseApiSpecificData(const QByteArray &data) {
+    Q_UNUSED(data)
+    return false;
 }
 
 /**
  * @brief Assembles the packet to be able to send it.
  *
  * Overload this function to create your own packet.
- * @note This method does nothing.
  */
 void XBeePacket::assemblePacket() {
 

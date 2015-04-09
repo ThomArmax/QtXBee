@@ -89,7 +89,7 @@ public:
     void setChecksum(unsigned cs);
 
     QByteArray packet() const;
-    virtual bool setPacket(const QByteArray & packet);
+    bool setPacket(const QByteArray & packet);
     unsigned startDelimiter() const;
     quint16 length() const;
     ApiId frameType() const;
@@ -107,15 +107,16 @@ public:
 private:
     bool isSpecialByte(const char c);
 protected:
+    virtual bool parseApiSpecificData(const QByteArray & data);
     void createChecksum(QByteArray array);
 
 protected:
-    QByteArray m_packet;        /**< Contains the packet's data (sent or received)*/
-    unsigned m_startDelimiter;  /**< The packet start delimiter */
-    quint16 m_length;           /**< Frame-specific data length (Number of bytes between the length and the checksum) */
-    ApiId m_frameType;          /**< The frame's type */
-    unsigned m_frameId;         /**< The frame's id */
-    unsigned m_checksum;        /**< Packet checksum */
+    QByteArray m_packet;            /**< Contains the packet's data (sent or received)*/
+    unsigned m_startDelimiter;      /**< The packet start delimiter */
+    quint16 m_length;               /**< Frame-specific data length (Number of bytes between the length and the checksum) */
+    ApiId m_frameType;              /**< The frame's type */
+    unsigned m_frameId;             /**< The frame's id */
+    unsigned m_checksum;            /**< Packet checksum */
 };
 
 } // END namepsace

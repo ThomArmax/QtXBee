@@ -24,33 +24,25 @@ void RemoteATCommandResponse::clear() {
     m_commandData.clear();
 }
 
-bool RemoteATCommandResponse::setPacket(const QByteArray &packet)
+bool RemoteATCommandResponse::parseApiSpecificData(const QByteArray &data)
 Q_DECL_OVERRIDE
 {
-    bool bRet = false;
-    m_packet.clear();
-    m_packet.append(packet);
-    m_data.clear();
-
-    if(packet.size() < 18) {
-        qWarning() << Q_FUNC_INFO << "Bad packet size !";
-        return bRet;
+    if(data.size() < 13) {
+        qDebug() << Q_FUNC_INFO << "bad data !";
+        return false;
     }
-
-    setStartDelimiter(packet.at(0));
-    setLength((unsigned char)packet.at(2) + ((unsigned char)packet.at(1)<<8));
-    setSourceAddress(packet.mid(5, 8).toHex().toULong());
-    setNetworkAddress(packet.mid(13, 1).toHex().toUInt());
-    setATCommand((ATCommand::ATCommandType) packet.mid(15, 1).toHex().toUInt());
-    setCommandStatus((CommandStatus) packet.at(17));
-    if(packet.size() > 18) {
-        for(int i=0; i < packet.size()-1; i++) {
-            m_commandData.append(packet.at(i));
+    setFrameId(data.at(0));
+    setSourceAddress(data.mid(1, 8).toHex().toULong());
+    setNetworkAddress(data.mid(9, 1).toHex().toUInt());
+    setATCommand((ATCommand::ATCommandType) data.mid(11, 1).toHex().toUInt());
+    setCommandStatus((CommandStatus) data.at(13));
+    if(data.size() > 14) {
+        for(int i=0; i < data.size()-1; i++) {
+            m_commandData.append(data.at(i));
         }
     }
-    setChecksum(packet.at(packet.size()-1));
 
-    return bRet;
+    return true;
 }
 
 QString RemoteATCommandResponse::toString()

@@ -37,28 +37,15 @@ Q_DECL_OVERRIDE
     return str;
 }
 
-bool TXStatusResponse::setPacket(const QByteArray &packet)
-Q_DECL_OVERRIDE
+bool TXStatusResponse::parseApiSpecificData(const QByteArray &data)
 {
-    m_packet.clear();
-    m_packet.append(packet);
-    quint8 apiId = 0;
-
-    if(packet.size() < 6) {
-        qDebug() << Q_FUNC_INFO << "bad packet !";
+    if(data.size() < 2) {
+        qDebug() << Q_FUNC_INFO << "invalid data";
         return false;
     }
 
-    setStartDelimiter(packet.at(0));
-    setLength((unsigned char)packet.at(2) + ((unsigned char)packet.at(1)<<8));
-    apiId = packet.at(3);
-    if(apiId != m_frameType) {
-        qDebug() << Q_FUNC_INFO << "Bad frame type!";
-        return false;
-    }
-    setFrameId(packet.mid(4,1).toHex().toUInt(0,16));
-    setStatus((Status)packet.at(5));
-    setChecksum(packet.at(6));
+    setFrameId(data.mid(0,1).toHex().toUInt(0,16));
+    setStatus((Status)data.at(1));
 
     return true;
 }

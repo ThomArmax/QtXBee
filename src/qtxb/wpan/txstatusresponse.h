@@ -24,12 +24,14 @@ public:
     // Reimplemented from XBeePacket
     virtual void clear();
     virtual QString toString();
-    virtual bool setPacket(const QByteArray &packet);
 
     void setStatus(const Status status);
     Status status() const;
 
     static QString statusToString(const Status status);
+
+private:
+    virtual bool parseApiSpecificData(const QByteArray &data);
 
 private:
     Status m_status;

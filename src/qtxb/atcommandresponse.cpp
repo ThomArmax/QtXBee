@@ -7,55 +7,36 @@ ATCommandResponse::ATCommandResponse(QObject *parent) :
     XBeeResponse(parent),
     m_atCommand(ATCommand::Command_Undefined)
 {
-    setFrameType(XBeePacket::ATCommandResponseId);
+    XBeePacket::setFrameType(XBeePacket::ATCommandResponseId);
 }
 
 ATCommandResponse::ATCommandResponse(const QByteArray &data, QObject *parent)  :
     XBeeResponse(parent),
     m_atCommand(ATCommand::Command_Undefined)
 {
-    setFrameType(XBeePacket::ATCommandResponseId);
+    XBeePacket::setFrameType(XBeePacket::ATCommandResponseId);
     setPacket(data);
 }
 
-bool ATCommandResponse::setPacket(const QByteArray &packet)
+bool ATCommandResponse::parseApiSpecificData(const QByteArray &data)
 Q_DECL_OVERRIDE
 {
-    bool bRet = false;
-    QByteArray at, lenArr;
-    m_packet.clear();
-    m_packet.append(packet);
-    m_data.clear();
-    setStartDelimiter(packet.at(0));
-    if(packet.size() < 3) {
-        qDebug() << Q_FUNC_INFO << "bad packet !";
+    QByteArray at;
+    int i;
+    if(data.size() < 3) {
+        qDebug() << Q_FUNC_INFO << "bad packet";
         return false;
     }
-    lenArr.append(packet.at(1));
-    lenArr.append(packet.at(2));
-    //setLength((unsigned char)packet.at(2) + ((unsigned char)packet.at(1)<<8));
-    setLength(lenArr.toHex().toInt(0,16));
-    if(packet.size() == packet.at(2)+4) {
-        setFrameType((ApiId)((unsigned char)packet.at(3)&0xFF));
-        setFrameId(packet.at(4));
-        at.append(packet.at(5));
-        at.append(packet.at(6));
-        setATCommand(at);
-        setCommandStatus((CommandStatus)(unsigned char)packet.at(7));
-        int count = 8;
-        while(count < packet.size()-1) {
-            m_data.append(packet.at(count));
-            count++;
-        }
-        setChecksum(packet.at(packet.size()-1));
-        bRet = true;
-    }
-    else {
-        qDebug() << Q_FUNC_INFO << "Invalid Packet !" << m_packet.toHex();
-        m_packet.clear();
+    setFrameId(data.at(0));
+    at.append(data.at(1));
+    at.append(data.at(2));
+    setATCommand(at);
+    setCommandStatus((CommandStatus)(unsigned char)data.at(3));
+    for(i=4; i<data.size();i++) {
+        m_data.append(data.at(i));
     }
 
-    return bRet;
+    return true;
 }
 
 void ATCommandResponse::setATCommand(ATCommand::ATCommandType at)
@@ -65,7 +46,7 @@ void ATCommandResponse::setATCommand(ATCommand::ATCommandType at)
 
 void ATCommandResponse::setATCommand(const QByteArray &at)
 {
-    if(at.isNull() || at.isEmpty() || at.size() != 2) {
+    if(at.size() != 2) {
         qWarning() << Q_FUNC_INFO << "invalid at command" << at;
         return;
     }

@@ -28,7 +28,6 @@ public:
     // Reimplement from XBeePacket
     virtual QString toString();
     virtual void clear();
-    virtual bool setPacket(const QByteArray &packet);
 
     // Setters
     void setSourceAddress(const quint64 source);
@@ -41,6 +40,9 @@ public:
     quint16 networkAddress() const;
     ATCommand::ATCommandType atCommand() const;
     QByteArray commandData() const;
+
+private:
+    virtual bool parseApiSpecificData(const QByteArray &data);
 
 private:
     quint64 m_sourceAddress;

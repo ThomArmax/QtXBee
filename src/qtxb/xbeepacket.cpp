@@ -164,7 +164,6 @@ bool XBeePacket::setPacket(const QByteArray &packet) {
 //        return false;
 //    }
     setFrameType(apiId);
-    //setFrameId(packet.mid(4,1).toHex().toUInt(0,16));
 
     if(packet.size() > 5) {
         for(int i=apiSpecificOffset; i< packet.size(); i++) {

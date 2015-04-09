@@ -19,6 +19,7 @@ ATCommandResponse::ATCommandResponse(const QByteArray &data, QObject *parent)  :
 }
 
 bool ATCommandResponse::parseApiSpecificData(const QByteArray &data)
+Q_DECL_OVERRIDE
 {
     QByteArray at;
     int i;

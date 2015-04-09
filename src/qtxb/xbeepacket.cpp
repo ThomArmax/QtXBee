@@ -144,7 +144,7 @@ QByteArray XBeePacket::packet() const {
 
 bool XBeePacket::setPacket(const QByteArray &packet) {
     ApiId apiId = UndefinedId;
-    quint8 apiSpecificOffset = 5; // 5th byte
+    quint8 apiSpecificOffset = 4; // 5th byte
     QByteArray specificData;
 
     clear();
@@ -158,13 +158,13 @@ bool XBeePacket::setPacket(const QByteArray &packet) {
     setStartDelimiter(packet.at(0));
     setLength((unsigned char)packet.at(2) + ((unsigned char)packet.at(1)<<8));
     apiId = (ApiId)(packet.at(3)&0xff);
-    qDebug() << "apiid" << apiId << ",frame type" << m_frameType;
-    if(apiId != m_frameType) {
-        qDebug() << Q_FUNC_INFO << "Bad API frame ID !" << qPrintable(QString("(expected 0x%1, got 0x%2)").arg(m_frameType,0,16).arg(apiId,0,16));
-        return false;
-    }
+//    qDebug() << "apiid" << apiId << ",frame type" << m_frameType;
+//    if(apiId != m_frameType) {
+//        qDebug() << Q_FUNC_INFO << "Bad API frame ID !" << qPrintable(QString("(expected 0x%1, got 0x%2)").arg(m_frameType,0,16).arg(apiId,0,16));
+//        return false;
+//    }
     setFrameType(apiId);
-    setFrameId(packet.mid(4,1).toHex().toUInt(0,16));
+    //setFrameId(packet.mid(4,1).toHex().toUInt(0,16));
 
     if(packet.size() > 5) {
         for(int i=apiSpecificOffset; i< packet.size(); i++) {

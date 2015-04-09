@@ -26,11 +26,12 @@ bool ATCommandResponse::parseApiSpecificData(const QByteArray &data)
         qDebug() << Q_FUNC_INFO << "bad packet";
         return false;
     }
-    at.append(data.at(0));
+    setFrameId(data.at(0));
     at.append(data.at(1));
+    at.append(data.at(2));
     setATCommand(at);
-    setCommandStatus((CommandStatus)(unsigned char)data.at(2));
-    for(i=3; i<data.size();i++) {
+    setCommandStatus((CommandStatus)(unsigned char)data.at(3));
+    for(i=4; i<data.size();i++) {
         m_data.append(data.at(i));
     }
 

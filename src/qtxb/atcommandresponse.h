@@ -22,10 +22,12 @@ public:
 
     void setATCommand(ATCommand::ATCommandType at);
     void setATCommand(const QByteArray & at);
-    virtual bool setPacket(const QByteArray &packet);
 
     ATCommand::ATCommandType atCommand() const;
     QString toString();
+
+protected:
+    virtual bool parseApiSpecificData(const QByteArray &data);
 
 private:
     ATCommand::ATCommandType m_atCommand;

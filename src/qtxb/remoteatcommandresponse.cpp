@@ -27,7 +27,6 @@ void RemoteATCommandResponse::clear() {
 bool RemoteATCommandResponse::parseApiSpecificData(const QByteArray &data)
 Q_DECL_OVERRIDE
 {
-    escapePacket();
     if(data.size() < 13) {
         qDebug() << Q_FUNC_INFO << "bad data !";
         return false;
@@ -56,14 +55,13 @@ Q_DECL_OVERRIDE
     str.append(QString("Length                       : %1 bytes\n").arg(length()));
     str.append(QString("Frame id                     : %1\n").arg(frameId()));
     if(!m_data.isEmpty())
-    str.append(QString("Data                         : 0x%1\n").arg(QString(m_data.toHex())));
+    str.append(QString("Data                         : 0x%1 (%2)\n").arg(QString(m_data.toHex())).arg(QString(m_data)));
     else
     str.append(QString("Data                         : No data\n"));
     str.append(QString("Source Address 64bits        : 0x%1\n").arg(m_sourceAddress64, 0, 16));
     str.append(QString("Source Address 16bits        : 0x%1\n").arg(m_sourceAddress16, 0, 16));
     str.append(QString("AT Command                   : %1 (0x%2)\n").arg(ATCommand::atCommandToString(m_atCommand)).arg(m_atCommand, 0,16));
     str.append(QString("Command Status               : %1 (0x%2)\n").arg(statusToString(m_status)).arg(m_status, 0, 16));
-    str.append(QString("Command Data                 : 0x%1 (%2)\n").arg(QString(m_data.toHex())).arg(QString(m_data)));
     str.append(QString("Checksum                     : %1\n").arg(checksum()));
 
     return  str;

@@ -8,6 +8,7 @@
 namespace QtXBee {
 class XBeePacket;
 class ATCommandResponse;
+class ATCommand;
 class ModemStatus;
 class TransmitStatus;
 class ReceivePacket;
@@ -55,11 +56,12 @@ public:
     void broadcast(QString data);
     void unicast(QByteArray address, QString data);
 
-    ATCommandResponse *sendATCommandSync(XBeePacket * command);
+    ATCommandResponse *sendATCommandSync(ATCommand * command);
     ATCommandResponse *sendATCommandSync(const QByteArray & data);
 
-    void sendATCommandAsync(XBeePacket *command);
-    void setATCommandAsync(const QByteArray & data);
+    void send(XBeePacket * packet);
+    void sendATCommandAsync(ATCommand *command);
+    void sendATCommandAsync(const QByteArray & data);
 
     bool setMode(const Mode mode);                                  /**< @brief Sets the XBee's mode @param mode the new Mode to be applied */
     Mode mode() const { return m_mode; }                            /**< @brief Returns the XBee's mode @return the XBee's mode */

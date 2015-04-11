@@ -269,18 +269,18 @@ void XBee::displayRemoteCommandResponse(RemoteATCommandResponse *digiMeshPacket)
     qDebug() << "*********************************************";
 }
 
-void XBee::sendATCommandAsync(XBeePacket *command)
+void XBee::send(XBeePacket *packet)
 {
-    command->assemblePacket();
+    packet->assemblePacket();
     if(xbeeFound && m_serial->isOpen())
     {
-        command->setFrameId(m_frameIdCounter);
+        packet->setFrameId(m_frameIdCounter);
         if(m_frameIdCounter >= 255)
             m_frameIdCounter = 1;
         else m_frameIdCounter++;
 
-        qDebug() << Q_FUNC_INFO << "Transmit: " << QString("0x").append(command->packet().toHex());
-        m_serial->write(command->packet());
+        qDebug() << Q_FUNC_INFO << "Transmit: " << QString("0x").append(packet->packet().toHex());
+        m_serial->write(packet->packet());
         m_serial->flush();
     }
     else
@@ -289,12 +289,17 @@ void XBee::sendATCommandAsync(XBeePacket *command)
     }
 }
 
-void XBee::setATCommandAsync(const QByteArray &data)
+void XBee::sendATCommandAsync(ATCommand *command)
+{
+    send(command);
+}
+
+void XBee::sendATCommandAsync(const QByteArray &data)
 {
     Q_UNUSED(data);
 }
 
-ATCommandResponse * XBee::sendATCommandSync(XBeePacket *command)
+ATCommandResponse * XBee::sendATCommandSync(ATCommand *command)
 {
     Q_ASSERT(command);
     ATCommandResponse * rep = NULL;
@@ -358,7 +363,7 @@ void XBee::broadcast(QString data)
 {
     TransmitRequest request;
     request.setData(data.toLatin1());
-    sendATCommandAsync(&request);
+    send(&request);
 }
 
 void XBee::unicast(QByteArray address, QString data)
@@ -366,7 +371,7 @@ void XBee::unicast(QByteArray address, QString data)
     TransmitRequest request;
     request.setDestAddr64(address);
     request.setData(data.toLatin1());
-    sendATCommandAsync(&request);
+    send(&request);
 }
 
 /**

@@ -3,9 +3,11 @@
 #include <QTime>
 #include <QDebug>
 
-#include "xbee.h"
+#include "XBee"
 #include "atcommand.h"
 #include "remoteatcommandrequest.h"
+#include "wpan/txrequest16.h"
+#include "wpan/txrequest64.h"
 
 using namespace QtXBee;
 
@@ -27,15 +29,32 @@ int main(int argc, char *argv[])
     ATCommand nd;
     nd.setCommand(ATCommand::Command_ND);
     xb.sendATCommandAsync(&nd);
-    RemoteATCommandRequest ni;
-    ni.setATCommand(ATCommand::Command_MY);
-    //ni.setNetworkAddress(3332);
-    ni.setNetworkAddress(0xFFFE);
-    //ni.setDestinationAddress(0x13A20040CABB38);
-    ni.setDestinationAddress(0xFFFF);
 
-    qDebug() << "Remote NI command :" << ni.packet().toHex();
-    xb.sendATCommandAsync(&ni);
+    ATCommand panId;
+    panId.setCommand(ATCommand::Command_ID);
+    xb.sendATCommandAsync(&panId);
+
+//    RemoteATCommandRequest ni;
+//    ni.setATCommand(ATCommand::Command_MY);
+//    //ni.setNetworkAddress(3332);
+//    ni.setNetworkAddress(0xFFFE);
+//    //ni.setDestinationAddress(0x13A20040CABB38);
+//    ni.setDestinationAddress(0xFFFF);
+//    xb.sendATCommandAsync(&ni);
+
+    WPAN::TXRequest16 tx16;
+    tx16.setDestinationAddress(0x0002);
+    tx16.setData("hello boy");
+    xb.send(&tx16);
+
+    WPAN::TXRequest64 tx64;
+    tx64.setDestinationAddress(0x13A20040CABB38);
+    tx64.setData("hello 64");
+    xb.send(&tx64);
+
+    tx64.setDestinationAddress(0xFFFFFFFF);
+    xb.send(&tx64);
+
     return a.exec();
 }
 

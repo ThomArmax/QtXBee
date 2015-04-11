@@ -13,10 +13,12 @@
 #include "transmitrequest.h"
 #include "explicitadressingcommand.h"
 #include "remoteatcommandrequest.h"
-
+#include "wpan/rxresponse16.h"
+#include "wpan/rxresponse64.h"
 #include "atcommandresponse.h"
 #include "modemstatus.h"
 #include "transmitstatus.h"
+#include "wpan/txstatusresponse.h"
 #include "receivepacket.h"
 #include "explicitrxindicator.h"
 #include "nodeidentificationindicator.h"
@@ -572,9 +574,37 @@ void XBee::processPacket(QByteArray packet)
     qDebug() << Q_FUNC_INFO << "packet type :" << QString::number(packetType, 16).prepend("0x");
 
     switch (packetType) {
+    /********************** WPAN **********************/
+    case XBeePacket::RX16ResponseId : {
+        WPAN::RxResponse16 * response = new WPAN::RxResponse16();
+        response->setPacket(packet);
+        emit receivedRxResponse16(response);
+        response->deleteLater();
+        break;
+    }
+    case XBeePacket::RX64ResponseId : {
+        WPAN::RxResponse64 * response = new WPAN::RxResponse64();
+        response->setPacket(packet);
+        emit receivedRxResponse64(response);
+        qDebug() << Q_FUNC_INFO;
+        qDebug() << qPrintable(response->toString());
+        response->deleteLater();
+        break;
+    }
+    case XBeePacket::TXStatusResponseId : {
+        WPAN::TXStatusResponse * response = new WPAN::TXStatusResponse();
+        response->setPacket(packet);
+        emit receivedTransmitStatus(response);
+        qDebug() << Q_FUNC_INFO << "TXStatusResponseId";
+        qDebug() << qPrintable(response->toString());
+        response->deleteLater();
+        break;
+    }
+    /********************** QtXBee **********************/
     case XBeePacket::ATCommandResponseId : {
         ATCommandResponse *response = new ATCommandResponse(packet);
         processATCommandRespone(response);
+        qDebug() << qPrintable(response->toString());
         response->deleteLater();
         break;
     }

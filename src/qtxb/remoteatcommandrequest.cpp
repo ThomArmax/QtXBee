@@ -8,14 +8,14 @@ namespace QtXBee {
  * @param parent parent object
  */
 RemoteATCommandRequest::RemoteATCommandRequest(QObject *parent) :
-    XBeePacket(parent),
-    m_destinationAddress(0),
-    m_networkAddress(0),
-    m_options(0),
-    m_atCommand(ATCommand::Command_Undefined),
-    m_commandParameter(0)
+    ATCommand(parent),
+    m_destinationAddress64(0),
+    m_destinationAddress16(0),
+    m_options(ApplyChanges)/*,
+    m_atCommand(Command_Undefined),
+    m_commandParameter(0)*/
 {
-    setFrameType(XBeePacket::RemoteATCommandRequestId);
+    setFrameType(RemoteATCommandRequestId);
 }
 // Reimplemented from XBeePacket
 void RemoteATCommandRequest::assemblePacket() {
@@ -31,9 +31,10 @@ void RemoteATCommandRequest::assemblePacket() {
         m_packet.append(networkAddress() >> (i*8)&0xFF);
     }
     m_packet.append(commandOptions());
-    for(i=1; i>=0; i--) {
-        m_packet.append(atCommand() >> (i*8)&0xFF);
-    }
+//    for(i=1; i>=0; i--) {
+//        m_packet.append(command().toUInt() >> (i*8)&0xFF);
+//    }
+    m_packet.append(atCommandToByteArray(command()));
     setLength(m_packet.size());
     createChecksum(m_packet);
     m_packet.append(checksum());
@@ -45,11 +46,11 @@ void RemoteATCommandRequest::assemblePacket() {
 
 void RemoteATCommandRequest::clear() {
     XBeePacket::clear();
-    m_destinationAddress    = 0;
-    m_networkAddress        = 0;
+    m_destinationAddress64  = 0;
+    m_destinationAddress16  = 0;
     m_options               = 0;
-    m_atCommand             = ATCommand::Command_Undefined;
-    m_commandParameter      = 0;
+//    m_atCommand             = Command_Undefined;
+//    m_commandParameter      = 0;
 }
 
 QString RemoteATCommandRequest::toString() {
@@ -58,25 +59,25 @@ QString RemoteATCommandRequest::toString() {
 
 // Setters
 /**
- * @brief Sets the address of the destination device
+ * @brief Sets the 64-bits address of the destination device
  *
  * The following addresses are also supported:
  * - 0x0000000000000000 - Reserved 64-bit address for the coordinator
  * - 0x000000000000FFFF - Broadcast address
  * @param dest
  */
-void RemoteATCommandRequest::setDestinationAddress(const quint64 dest) {
-    m_destinationAddress = dest;
+void RemoteATCommandRequest::setDestinationAddress64(const quint64 dest) {
+    m_destinationAddress64 = dest;
 }
 
 /**
  * @brief Sets the 16-bit address of the destination device, if known.
  *
  * Set to 0xFFFE if the address is unknown, or if sending a broadcast.
- * @param network
+ * @param dest
  */
-void RemoteATCommandRequest::setNetworkAddress(const quint32 network) {
-    m_networkAddress = network;
+void RemoteATCommandRequest::setDestinationAddress16(const quint32 dest) {
+    m_destinationAddress16 = dest;
 }
 
 /**
@@ -90,9 +91,9 @@ void RemoteATCommandRequest::setCommandOptions(const RemoteCommandOptions option
  * @brief Sets the command to be performed on the remote device
  * @param command
  */
-void RemoteATCommandRequest::setATCommand(const ATCommand::ATCommandType command) {
-    m_atCommand = command;
-}
+//void RemoteATCommandRequest::setATCommand(const ATCommand::ATCommandType command) {
+//    m_atCommand = command;
+//}
 
 /**
  * @brief Sets the command's parameter.
@@ -101,26 +102,26 @@ void RemoteATCommandRequest::setATCommand(const ATCommand::ATCommandType command
  * If no characters present, the register is queried.
  * @param parameter
  */
-void RemoteATCommandRequest::setCommandParameter(const quint8 parameter) {
-   m_commandParameter = parameter;
-}
+//void RemoteATCommandRequest::setCommandParameter(const quint8 parameter) {
+//   m_commandParameter = parameter;
+//}
 
 // Getters
 quint64 RemoteATCommandRequest::destinationAddress() const {
-    return m_destinationAddress;
+    return m_destinationAddress64;
 }
 
 quint16 RemoteATCommandRequest::networkAddress() const {
-    return m_networkAddress;
+    return m_destinationAddress16;
 }
 
-ATCommand::ATCommandType RemoteATCommandRequest::atCommand() const {
-    return m_atCommand;
-}
+//ATCommand::ATCommandType RemoteATCommandRequest::atCommand() const {
+//    return m_atCommand;
+//}
 
-quint8 RemoteATCommandRequest::commandParameter() {
-    return m_commandParameter;
-}
+//quint8 RemoteATCommandRequest::commandParameter() {
+//    return m_commandParameter;
+//}
 
 RemoteATCommandRequest::RemoteCommandOptions RemoteATCommandRequest::commandOptions() const {
     return m_options;

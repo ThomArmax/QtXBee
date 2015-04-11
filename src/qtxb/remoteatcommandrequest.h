@@ -1,7 +1,6 @@
 #ifndef REMOTEATCOMMANDREQUEST_H
 #define REMOTEATCOMMANDREQUEST_H
 
-#include "xbeepacket.h"
 #include "atcommand.h"
 
 namespace QtXBee {
@@ -12,7 +11,7 @@ namespace QtXBee {
  * For parameter changes on the remote device to take effect, changes must be applied,
  * either by setting the apply changes options bit, or by sending an AC command to the remote.
  */
-class RemoteATCommandRequest : public XBeePacket
+class RemoteATCommandRequest : public ATCommand
 {
     Q_OBJECT
 public:
@@ -29,31 +28,31 @@ public:
 
     RemoteATCommandRequest(QObject *parent = 0);
 
-    // Reimplemented from XBeePacket
+    // Reimplemented from ATCommand
     virtual void assemblePacket();
     virtual void clear();
     virtual QString toString();
 
     // Setters
-    void setDestinationAddress(const quint64 dest);
-    void setNetworkAddress(const quint32 network);
+    void setDestinationAddress64(const quint64 dest);
+    void setDestinationAddress16(const quint32 dest);
     void setCommandOptions(const RemoteCommandOptions options);
-    void setATCommand(const ATCommand::ATCommandType command);
-    void setCommandParameter(const quint8 parameter);
+//    void setATCommand(const ATCommand::ATCommandType command);
+//    void setCommandParameter(const quint8 parameter);
 
     // Getters
     quint64 destinationAddress() const;
     quint16 networkAddress() const;
-    ATCommand::ATCommandType atCommand() const;
-    quint8 commandParameter();
+//    ATCommand::ATCommandType atCommand() const;
+//    quint8 commandParameter();
     RemoteCommandOptions commandOptions() const;
 
 protected:
-    quint64 m_destinationAddress;
-    quint16 m_networkAddress;
+    quint64 m_destinationAddress64;
+    quint16 m_destinationAddress16;
     RemoteCommandOptions m_options;
-    ATCommand::ATCommandType m_atCommand;
-    quint8 m_commandParameter;
+//    ATCommand::ATCommandType m_atCommand;
+//    quint8 m_commandParameter;
 };
 
 } // END namepsace

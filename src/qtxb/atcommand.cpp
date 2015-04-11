@@ -1,4 +1,5 @@
 #include "atcommand.h"
+
 #include <QDebug>
 
 namespace QtXBee {
@@ -18,29 +19,26 @@ ATCommand::ATCommand(QObject *parent) :
  * @brief Sets the AT Command
  * @param command
  */
-void ATCommand::setCommand(const ATCommandType command) {
-    int cmdMSB = (command>>8) & 0xFF;
-    int cmdLSB = command & 0xFF;
-    m_command.clear();
-    m_command.append(cmdMSB);
-    m_command.append(cmdLSB);
+void ATCommand::setCommand(const ATCommandType command)
+{
+    m_command = command;
 }
 
 /**
- * @brief Sets the AT Command from the given QString
+ * @brief Sets the AT Command from the given QByteArray
  * @param command
  */
-void ATCommand::setCommand(const QString &command) {
-    m_command.clear();
-    m_command.append(command.at(0));
-    m_command.append(command.at(1));
+void ATCommand::setCommand(const QByteArray &command)
+{
+    m_command = atCommandFromByteArray(command);
 }
 
 /**
  * @brief Sets command's parameter
  * @param param
  */
-void ATCommand::setParameter(const QByteArray &param) {
+void ATCommand::setParameter(const QByteArray &param)
+{
     m_parameter.clear();
     m_parameter.append(param);
 }
@@ -49,7 +47,8 @@ void ATCommand::setParameter(const QByteArray &param) {
  * @brief Returns the AT Command
  * @return the AT Command
  */
-QByteArray ATCommand::command() const {
+ATCommand::ATCommandType ATCommand::command() const
+{
     return m_command;
 }
 
@@ -57,15 +56,17 @@ QByteArray ATCommand::command() const {
  * @brief Returns the command's parameter
  * @return the command's parameter
  */
-QByteArray ATCommand::parameter() const {
+QByteArray ATCommand::parameter() const
+{
     return m_parameter;
 }
 
-void ATCommand::assemblePacket() {
+void ATCommand::assemblePacket()
+{
     m_packet.clear();
     m_packet.append(frameType());
     m_packet.append(frameId());
-    m_packet.append(command());
+    m_packet.append(atCommandToByteArray(command()));
     m_packet.append(parameter());
     setLength(m_packet.size());
     createChecksum(m_packet);
@@ -75,10 +76,24 @@ void ATCommand::assemblePacket() {
     m_packet.insert(2, length()&0xFF);
 }
 
+QString ATCommand::toString()
+{
+    QString str;
+    str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));
+    str.append(QString("Frame id        : %1 (0x%2)\n").arg(frameId(), 0, 16).arg(frameId(), 0, 16));
+    str.append(QString("Frame type      : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
+    str.append(QString("Start delimiter : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
+    str.append(QString("Length          : %1 bytes\n").arg(length()));
+    str.append(QString("Checksum        : %1\n").arg(checksum()));
+    str.append(QString("AT command      : %1 (0x%2)\n").arg(atCommandToString(m_command)).arg(QString::number(m_command, 16)));
+
+    return str;
+}
+
 void ATCommand::clear()
 {
     XBeePacket::clear();
-    m_command.clear();
+    m_command = Command_Undefined;
     m_parameter.clear();
     setFrameType(XBeePacket::ATCommandId);
     setFrameId(0x01);

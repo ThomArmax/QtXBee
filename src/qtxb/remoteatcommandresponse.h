@@ -1,8 +1,7 @@
 #ifndef REMOTECOMMANDRESPONSE_H
 #define REMOTECOMMANDRESPONSE_H
 
-#include "xbeeresponse.h"
-#include "atcommand.h"
+#include "atcommandresponse.h"
 
 #include <QObject>
 #include <QByteArray>
@@ -18,37 +17,31 @@ namespace QtXBee {
  *
  * @sa RemoteCommandRequest
  */
-class RemoteATCommandResponse : public XBeeResponse
+class RemoteATCommandResponse : public ATCommandResponse
 {
     Q_OBJECT
 public:
     explicit RemoteATCommandResponse(QObject *parent = 0);
     RemoteATCommandResponse(const QByteArray & packet, QObject *parent = 0);
 
-    // Reimplement from XBeePacket
+    // Reimplement from ATCommandResponse
     virtual QString toString();
     virtual void clear();
 
     // Setters
-    void setSourceAddress(const quint64 source);
-    void setNetworkAddress(const quint32 network);
-    void setATCommand(const ATCommand::ATCommandType command);
-    void setCommandData(const QByteArray & data);
+    void setSourceAddress64(const quint64 addr);
+    void setSourceAddress16(const quint32 addr);
 
     // Getters
-    quint64 sourceAddress() const;
-    quint16 networkAddress() const;
-    ATCommand::ATCommandType atCommand() const;
-    QByteArray commandData() const;
+    quint64 sourceAddress64() const;
+    quint16 sourceAddress16() const;
 
 private:
     virtual bool parseApiSpecificData(const QByteArray &data);
 
 private:
-    quint64 m_sourceAddress;
-    quint16 m_networkAddress;
-    ATCommand::ATCommandType m_atCommand;
-    QByteArray m_commandData;
+    quint64 m_sourceAddress64;
+    quint16 m_sourceAddress16;
 };
 
 } // END namepsace

@@ -125,22 +125,24 @@ public:
 
     explicit ATCommand(QObject *parent = 0);
 
-    void setCommand(const ATCommandType command);
-    void setCommand(const QString &command);
-    void setParameter(const QByteArray &param);
-
-    QByteArray command() const;
-    QByteArray parameter() const;
-
+    // Reimplemented from XBeePacket
+    virtual QString toString();
     virtual void assemblePacket();
     virtual void clear();
+
+    void setCommand(const ATCommandType command);
+    void setCommand(const QByteArray &command);
+    void setParameter(const QByteArray &param);
+
+    ATCommandType command() const;
+    QByteArray parameter() const;
 
     static QString atCommandToString(const ATCommandType command);
     static QByteArray atCommandToByteArray(const ATCommandType command);
     static ATCommandType atCommandFromByteArray(const QByteArray & command);
 
  private:
-    QByteArray m_command;
+    ATCommandType m_command;
     QByteArray m_parameter;
 };
 

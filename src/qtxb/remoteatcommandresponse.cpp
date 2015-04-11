@@ -1,44 +1,45 @@
 #include "remoteatcommandresponse.h"
 #include "xbeepacket.h"
 
+#include <QDebug>
+
 namespace QtXBee {
 
 RemoteATCommandResponse::RemoteATCommandResponse(QObject *parent) :
-    XBeeResponse(parent)
+    ATCommandResponse(parent)
 {
     setFrameType(XBeePacket::RemoteATCommandResponseId);
 }
 
 RemoteATCommandResponse::RemoteATCommandResponse(const QByteArray &data, QObject *parent) :
-    XBeeResponse(parent)
+    ATCommandResponse(parent)
 {
     setFrameType(XBeePacket::RemoteATCommandResponseId);
     setPacket(data);
 }
 
 void RemoteATCommandResponse::clear() {
-    XBeeResponse::clear();
-    m_sourceAddress     = 0;
-    m_networkAddress    = 0;
-    m_atCommand         = ATCommand::Command_Undefined;
-    m_commandData.clear();
+    ATCommandResponse::clear();
+    m_sourceAddress64   = 0;
+    m_sourceAddress16   = 0;
 }
 
 bool RemoteATCommandResponse::parseApiSpecificData(const QByteArray &data)
 Q_DECL_OVERRIDE
 {
+    escapePacket();
     if(data.size() < 13) {
         qDebug() << Q_FUNC_INFO << "bad data !";
         return false;
     }
     setFrameId(data.at(0));
-    setSourceAddress(data.mid(1, 8).toHex().toULong());
-    setNetworkAddress(data.mid(9, 1).toHex().toUInt());
-    setATCommand((ATCommand::ATCommandType) data.mid(11, 1).toHex().toUInt());
+    setSourceAddress64(data.mid(1, 8).toHex().toULong(0,16));
+    setSourceAddress16(data.mid(9, 2).toHex().toUInt(0,16));
+    setATCommand((ATCommand::ATCommandType) data.mid(11, 2).toHex().toUInt(0,16));
     setCommandStatus((CommandStatus) data.at(13));
     if(data.size() > 14) {
-        for(int i=0; i < data.size()-1; i++) {
-            m_commandData.append(data.at(i));
+        for(int i=14; i < data.size(); i++) {
+            m_data.append(data.at(i));
         }
     }
 
@@ -53,52 +54,37 @@ Q_DECL_OVERRIDE
     str.append(QString("Start delimiter              : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
     str.append(QString("Frame type                   : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
     str.append(QString("Length                       : %1 bytes\n").arg(length()));
+    str.append(QString("Frame id                     : %1\n").arg(frameId()));
     if(!m_data.isEmpty())
     str.append(QString("Data                         : 0x%1\n").arg(QString(m_data.toHex())));
     else
     str.append(QString("Data                         : No data\n"));
-    str.append(QString("Source Address 64bits        : 0x%1\n").arg(m_sourceAddress, 0, 16));
-    str.append(QString("Source Address 16bits        : 0x%1\n").arg(m_networkAddress, 0, 16));
-    str.append(QString("AT Command                   : 0x%1\n").arg(m_atCommand, 0,16));
+    str.append(QString("Source Address 64bits        : 0x%1\n").arg(m_sourceAddress64, 0, 16));
+    str.append(QString("Source Address 16bits        : 0x%1\n").arg(m_sourceAddress16, 0, 16));
+    str.append(QString("AT Command                   : %1 (0x%2)\n").arg(ATCommand::atCommandToString(m_atCommand)).arg(m_atCommand, 0,16));
     str.append(QString("Command Status               : %1 (0x%2)\n").arg(statusToString(m_status)).arg(m_status, 0, 16));
-    str.append(QString("Command Data                 : 0x%1\n").arg(QString(m_data.toHex())));
+    str.append(QString("Command Data                 : 0x%1 (%2)\n").arg(QString(m_data.toHex())).arg(QString(m_data)));
     str.append(QString("Checksum                     : %1\n").arg(checksum()));
 
     return  str;
 }
 
 // Setters
-void RemoteATCommandResponse::setSourceAddress(const quint64 source) {
-    m_sourceAddress = source;
+void RemoteATCommandResponse::setSourceAddress64(const quint64 addr) {
+    m_sourceAddress64 = addr;
 }
 
-void RemoteATCommandResponse::setNetworkAddress(const quint32 network) {
-    m_networkAddress = network;
-}
-
-void RemoteATCommandResponse::setATCommand(const ATCommand::ATCommandType command) {
-    m_atCommand = command;
-}
-
-void RemoteATCommandResponse::setCommandData(const QByteArray & data) {
-    m_commandData = data;
+void RemoteATCommandResponse::setSourceAddress16(const quint32 addr) {
+    m_sourceAddress16 = addr;
 }
 
 // Getters
-quint64 RemoteATCommandResponse::sourceAddress() const {
-    return m_sourceAddress;
+quint64 RemoteATCommandResponse::sourceAddress64() const {
+    return m_sourceAddress64;
 }
 
-quint16 RemoteATCommandResponse::networkAddress() const {
-    return m_networkAddress;
-}
-
-ATCommand::ATCommandType RemoteATCommandResponse::atCommand() const {
-    return m_atCommand;
-}
-
-QByteArray RemoteATCommandResponse::commandData() const {
-    return m_commandData;
+quint16 RemoteATCommandResponse::sourceAddress16() const {
+    return m_sourceAddress16;
 }
 
 } // END namepsace

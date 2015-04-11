@@ -58,7 +58,9 @@ ATCommand::ATCommandType ATCommandResponse::atCommand() const {
     return m_atCommand;
 }
 
-QString ATCommandResponse::toString() {
+QString ATCommandResponse::toString()
+Q_DECL_OVERRIDE
+{
     QString str;
     str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));
     str.append(QString("Frame id        : %1 (0x%2)\n").arg(frameId(), 0, 16).arg(frameId(), 0, 16));

@@ -166,7 +166,7 @@ bool XBeePacket::setPacket(const QByteArray &packet) {
     setFrameType(apiId);
 
     if(packet.size() > 5) {
-        for(int i=apiSpecificOffset; i< packet.size(); i++) {
+        for(int i=apiSpecificOffset; i< packet.size()-1; i++) {
             specificData.append(packet.at(i));
         }
         parseApiSpecificData(specificData);

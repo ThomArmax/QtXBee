@@ -57,9 +57,9 @@ Q_DECL_OVERRIDE
     if(packetSize == packet.at(2)+4) {
         int ft = packet.at(3)&0xFF;
         // Check the frame type
-        if(ft != m_frameType) {
+        if(ft != frameType()) {
             qWarning() << Q_FUNC_INFO << "Warning : bad frame type"
-                       << qPrintable(QString("(got 0x%1, 0x%2 expected)").arg(ft,0, 16).arg(m_frameType, 0, 16));
+                       << qPrintable(QString("(got 0x%1, 0x%2 expected)").arg(ft,0, 16).arg(frameType(), 0, 16));
             //goto exit;
         }
         count = 4;
@@ -164,7 +164,7 @@ QString NodeIdentificationIndicator::toString() {
     str.append(QString("Raw packet                   : 0x%1\n").arg(QString(packet().toHex())));
     str.append(QString("Start delimiter              : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
     str.append(QString("Frame type                   : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
-    str.append(QString("Length                       : %1 bytes\n").arg(m_length));
+    str.append(QString("Length                       : %1 bytes\n").arg(length()));
     if(!m_data.isEmpty())
     str.append(QString("Data                         : 0x%1\n").arg(QString(m_data.toHex())));
     else

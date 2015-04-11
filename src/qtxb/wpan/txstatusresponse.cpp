@@ -19,7 +19,7 @@ TXStatusResponse::~TXStatusResponse()
 void TXStatusResponse::clear()
 Q_DECL_OVERRIDE
 {
-
+    setStatus(Unknown);
 }
 
 QString TXStatusResponse::toString()
@@ -30,7 +30,7 @@ Q_DECL_OVERRIDE
     str.append(QString("Frame id        : %1 (0x%2)\n").arg(frameId()).arg(frameId(), 0, 16));
     str.append(QString("Frame type      : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
     str.append(QString("Start delimiter : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
-    str.append(QString("Length          : %1 bytes\n").arg(m_length));
+    str.append(QString("Length          : %1 bytes\n").arg(length()));
     str.append(QString("Checksum        : %1\n").arg(checksum()));
     str.append(QString("Status          : %1 (0x%2)\n").arg(statusToString(m_status)).arg(m_status, 0, 16));
 
@@ -39,7 +39,7 @@ Q_DECL_OVERRIDE
 
 bool TXStatusResponse::parseApiSpecificData(const QByteArray &data)
 {
-    if(data.size() < 2) {
+    if(data.size() != 2) {
         qDebug() << Q_FUNC_INFO << "invalid data";
         return false;
     }

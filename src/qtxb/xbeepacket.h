@@ -112,6 +112,7 @@ protected:
 
 protected:
     QByteArray m_packet;            /**< Contains the packet's data (sent or received)*/
+private:
     unsigned m_startDelimiter;      /**< The packet start delimiter */
     quint16 m_length;               /**< Frame-specific data length (Number of bytes between the length and the checksum) */
     ApiId m_frameType;              /**< The frame's type */

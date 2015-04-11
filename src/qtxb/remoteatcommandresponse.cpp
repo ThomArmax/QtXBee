@@ -52,7 +52,7 @@ Q_DECL_OVERRIDE
     str.append(QString("Raw packet                   : 0x%1\n").arg(QString(packet().toHex())));
     str.append(QString("Start delimiter              : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
     str.append(QString("Frame type                   : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
-    str.append(QString("Length                       : %1 bytes\n").arg(m_length));
+    str.append(QString("Length                       : %1 bytes\n").arg(length()));
     if(!m_data.isEmpty())
     str.append(QString("Data                         : 0x%1\n").arg(QString(m_data.toHex())));
     else

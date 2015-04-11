@@ -37,9 +37,7 @@ QByteArray ReceivePacket::data() const {
     return m_data;
 }
 void ReceivePacket::readPacket(QByteArray rx) {
-
-    m_packet.clear();
-    m_packet.append(rx);
+    setPacket(rx);
     setStartDelimiter(rx.at(0));
     setLength(rx.at(2));
     if(rx.size() == rx.at(2)+4 && rx.size() > 15) {
@@ -64,8 +62,8 @@ void ReceivePacket::readPacket(QByteArray rx) {
     }else{
 
         qDebug()<< "Invalid Packet Received!";
-        qDebug()<< m_packet.toHex();
-        m_packet.clear();
+        qDebug()<< rx.toHex();
+        clear();
     }
 }
 

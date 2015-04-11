@@ -7,14 +7,14 @@ ATCommandResponse::ATCommandResponse(QObject *parent) :
     XBeeResponse(parent),
     m_atCommand(ATCommand::Command_Undefined)
 {
-    XBeePacket::setFrameType(XBeePacket::ATCommandResponseId);
+    setFrameType(ATCommandResponseId);
 }
 
 ATCommandResponse::ATCommandResponse(const QByteArray &data, QObject *parent)  :
     XBeeResponse(parent),
     m_atCommand(ATCommand::Command_Undefined)
 {
-    XBeePacket::setFrameType(XBeePacket::ATCommandResponseId);
+    setFrameType(ATCommandResponseId);
     setPacket(data);
 }
 
@@ -65,7 +65,7 @@ QString ATCommandResponse::toString() {
     str.append(QString("Frame type      : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
     str.append(QString("AT command      : %1 (0x%2)\n").arg(ATCommand::atCommandToString(m_atCommand)).arg(QString::number(m_atCommand, 16)));
     str.append(QString("Start delimiter : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
-    str.append(QString("Length          : %1 bytes\n").arg(m_length));
+    str.append(QString("Length          : %1 bytes\n").arg(length()));
     if(!m_data.isEmpty())
     str.append(QString("Data            : 0x%1\n").arg(QString(m_data.toHex())));
     else

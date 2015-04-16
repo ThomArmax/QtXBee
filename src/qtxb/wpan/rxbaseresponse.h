@@ -21,7 +21,6 @@ public:
 
     // Reimplemented from XBeePacket
     virtual void clear();
-    virtual bool setPacket(const QByteArray & packet);
     virtual QString toString();
 
     void setRSSI(const qint8 rssi);

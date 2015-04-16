@@ -14,19 +14,12 @@ RxBaseResponse::~RxBaseResponse()
 {
 }
 
-bool RxBaseResponse::setPacket(const QByteArray &packet)
-Q_DECL_OVERRIDE
-{
-    clear();
-    m_packet = packet;
-    return false;
-}
-
 void RxBaseResponse::clear()
 Q_DECL_OVERRIDE
 {
-    m_packet.clear();
-    m_data.clear();
+    XBeeResponse::clear();
+    m_rssi = -1;
+    m_options = 0;
 }
 
 QString RxBaseResponse::toString()

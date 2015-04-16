@@ -46,7 +46,7 @@ Q_DECL_OVERRIDE
 void TXRequest64::clear()
 Q_DECL_OVERRIDE
 {
-    m_packet.clear();
+    XBeePacket::clear();
     m_data.clear();
     m_destinationAddress = 0xFFFFFFFF;
 }

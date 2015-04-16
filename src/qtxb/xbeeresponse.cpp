@@ -19,6 +19,12 @@ QByteArray XBeeResponse::data() const
     return m_data;
 }
 
+void XBeeResponse::setData(const QByteArray &data)
+{
+    m_data.clear();
+    m_data = data;
+}
+
 void XBeeResponse::clear()
 {
     XBeePacket::clear();

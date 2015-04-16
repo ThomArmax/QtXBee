@@ -18,7 +18,7 @@ public:
 
     // Reimplemented from RXBaseResponse
     virtual void clear();
-    virtual bool setPacket(const QByteArray & packet);
+    virtual bool parseApiSpecificData(const QByteArray &data);
     virtual QString toString();
 
     void setSourceAddress(const quint64 sourceAddress);

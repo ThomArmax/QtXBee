@@ -31,7 +31,8 @@ public:
     // Reimplemented from XBeePacket
     virtual void clear();
 
-    virtual QByteArray data() const;
+    QByteArray data() const;
+    void setData(const QByteArray & data);
 
     void setCommandStatus(const CommandStatus status);
     CommandStatus commandStatus() const { return m_status; }

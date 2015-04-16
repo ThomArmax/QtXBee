@@ -19,6 +19,7 @@ TXStatusResponse::~TXStatusResponse()
 void TXStatusResponse::clear()
 Q_DECL_OVERRIDE
 {
+    XBeePacket::clear();
     setStatus(Unknown);
 }
 

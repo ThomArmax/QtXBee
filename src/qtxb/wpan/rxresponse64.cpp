@@ -1,5 +1,7 @@
 #include "rxresponse64.h"
 
+#include <QDebug>
+
 namespace QtXBee {
 namespace WPAN {
 
@@ -21,11 +23,21 @@ Q_DECL_OVERRIDE
     m_sourceAddress = 0;
 }
 
-bool RxResponse64::setPacket(const QByteArray &packet)
+bool RxResponse64::parseApiSpecificData(const QByteArray &data)
 Q_DECL_OVERRIDE
 {
-    Q_UNUSED(packet)
-    return false;
+    if(data.size() < 9) {
+        qWarning() << Q_FUNC_INFO << "Invalid data, expected at least 9 bytes, got" << data.size();
+        return false;
+    }
+    setSourceAddress(data.mid(0, 8).toHex().toULongLong(0, 16));
+    setRSSI(-1*data.mid(8, 1).toHex().toInt(0, 16));
+    setOptions(data.mid(9, 1).toHex().toUInt(0, 16));
+    if(data.size() > 10) {
+        setData(data.mid(10));
+    }
+
+    return true;
 }
 
 QString RxResponse64::toString()
@@ -39,6 +51,10 @@ Q_DECL_OVERRIDE
     str.append(QString("Length          : %1 bytes\n").arg(length()));
     str.append(QString("Checksum        : %1\n").arg(checksum()));
     str.append(QString("Source Address  : 0x%1\n").arg(sourceAddress(), 0, 16));
+    if(!data().isEmpty())
+    str.append(QString("Data            : 0x%1 (0x%2)\n").arg(QString(data())).arg(QString(data().toHex())));
+    else
+    str.append(QString("Data            : No data\n"));
     return str;
 }
 

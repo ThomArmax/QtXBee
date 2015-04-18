@@ -23,7 +23,8 @@ XBeePacket::XBeePacket(QObject *parent) :
  * @sa XBeePacket::startDelimiter()
  * @param sd
  */
-void XBeePacket::setStartDelimiter(unsigned sd) {
+void XBeePacket::setStartDelimiter(unsigned sd)
+{
     m_startDelimiter = sd;
 }
 
@@ -32,7 +33,8 @@ void XBeePacket::setStartDelimiter(unsigned sd) {
  * @param l
  * @sa XBeePacket::length()
  */
-void XBeePacket::setLength(unsigned l) {
+void XBeePacket::setLength(unsigned l)
+{
     m_length = l;
 }
 
@@ -41,7 +43,8 @@ void XBeePacket::setLength(unsigned l) {
  * @param type
  * @sa XBeePacket::frameType()
  */
-void XBeePacket::setFrameType(ApiId type) {
+void XBeePacket::setFrameType(ApiId type)
+{
     m_frameType = type;
 }
 
@@ -50,7 +53,8 @@ void XBeePacket::setFrameType(ApiId type) {
  * @param id
  * @sa XBeePacket::frameType()
  */
-void XBeePacket::setFrameId(unsigned id) {
+void XBeePacket::setFrameId(unsigned id)
+{
     m_frameId = id;
 }
 
@@ -59,7 +63,8 @@ void XBeePacket::setFrameId(unsigned id) {
  * @param cs
  * @sa XBeePacket::checksum()
  */
-void XBeePacket::setChecksum(unsigned cs) {
+void XBeePacket::setChecksum(unsigned cs)
+{
     m_checksum = cs;
 }
 
@@ -68,7 +73,8 @@ void XBeePacket::setChecksum(unsigned cs) {
  * @returns the frame's start delimiter
  * @sa XBeePacket::setStartDelimiter()
  */
-unsigned XBeePacket::startDelimiter() const {
+unsigned XBeePacket::startDelimiter() const
+{
     return m_startDelimiter;
 }
 
@@ -77,7 +83,8 @@ unsigned XBeePacket::startDelimiter() const {
  * @returns the packet's length
  * @sa XBeePacket::setLength()
  */
-quint16 XBeePacket::length() const {
+quint16 XBeePacket::length() const
+{
     return m_length;
 }
 
@@ -87,7 +94,8 @@ quint16 XBeePacket::length() const {
  * @sa XBeePacket::setFrameType()
  * @sa XBeePacket::APIFrameType
  */
-XBeePacket::ApiId XBeePacket::frameType() const {
+XBeePacket::ApiId XBeePacket::frameType() const
+{
     return m_frameType;
 }
 
@@ -96,7 +104,8 @@ XBeePacket::ApiId XBeePacket::frameType() const {
  * @returns the frame's id
  * @sa XBeePacket::setFrameId()
  */
-unsigned XBeePacket::frameId() const {
+unsigned XBeePacket::frameId() const
+{
     return m_frameId;
 }
 
@@ -105,7 +114,8 @@ unsigned XBeePacket::frameId() const {
  * @returns the packet's checksum
  * @sa XBeePacket::setChecksum()
  */
-unsigned XBeePacket::checksum() const {
+unsigned XBeePacket::checksum() const
+{
     return m_checksum;
 }
 
@@ -115,7 +125,8 @@ unsigned XBeePacket::checksum() const {
  * @sa XBeePacket::setChecksum()
  * @sa XBeePacket::checksum()
  */
-void XBeePacket::createChecksum(QByteArray array) {
+void XBeePacket::createChecksum(QByteArray array)
+{
     int len = array.size();
     unsigned int sum = 0x00;
     unsigned int ff = 0xFF;
@@ -138,11 +149,13 @@ void XBeePacket::createChecksum(QByteArray array) {
  * @brief Returns the frame's packet (raw data)
  * @returns the frame's packet (raw data)
  */
-QByteArray XBeePacket::packet() const {
+QByteArray XBeePacket::packet() const
+{
     return m_packet;
 }
 
-bool XBeePacket::setPacket(const QByteArray &packet) {
+bool XBeePacket::setPacket(const QByteArray &packet)
+{
     ApiId apiId = UndefinedId;
     quint8 apiSpecificOffset = 4; // 5th byte
     QByteArray specificData;
@@ -175,7 +188,8 @@ bool XBeePacket::setPacket(const QByteArray &packet) {
     return true;
 }
 
-bool XBeePacket::parseApiSpecificData(const QByteArray &data) {
+bool XBeePacket::parseApiSpecificData(const QByteArray &data)
+{
     Q_UNUSED(data)
     return false;
 }
@@ -185,11 +199,13 @@ bool XBeePacket::parseApiSpecificData(const QByteArray &data) {
  *
  * Overload this function to create your own packet.
  */
-void XBeePacket::assemblePacket() {
+void XBeePacket::assemblePacket()
+{
 
 }
 
-void XBeePacket::clear() {
+void XBeePacket::clear()
+{
     m_packet.clear();
     m_startDelimiter = 0x7E;
     m_length = 0;
@@ -201,7 +217,8 @@ void XBeePacket::clear() {
  * @brief Returns a debug string containing all packet's informations.
  * @returns a debug string containing all packet's informations.
  */
-QString XBeePacket::toString() {
+QString XBeePacket::toString()
+{
     QString str;
     str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));
     str.append(QString("Frame id        : %1 (0x%2)\n").arg(frameId(), 0, 16).arg(frameId(), 0, 16));
@@ -218,7 +235,8 @@ QString XBeePacket::toString() {
  * @returns the given frame type APIFrameType into a human readable string
  * @param type
  */
-QString XBeePacket::frameTypeToString(const ApiId type) {
+QString XBeePacket::frameTypeToString(const ApiId type)
+{
     QString str;
     switch(type) {
     case TXRequest64Id              : str = "Tx 16 bits Address Request"                ; break;

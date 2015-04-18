@@ -1,6 +1,8 @@
 #ifndef GLOBAL
 #define GLOBAL
 
+#include <QtGlobal>
+
 /**
  * @file global.h Defines global properties and glob enums.
  */
@@ -25,6 +27,9 @@ enum HardwareVersion {
     XBeeSerie2Pro,          /**< XBee Serie 2 hardware version */
     XBeeSerieUnknown        /**< Unkown/Invalid hardware version */
 };
+
+typedef quint64 XBee64BitsAddr;
+typedef quint16 XBee16BitsAddr;
 
 } // END namespace
 

@@ -13,19 +13,21 @@ class RxResponse64 : public RxBaseResponse
 {
     Q_OBJECT
 public:
-    explicit RxResponse64(QObject * parent = 0);
-    virtual ~RxResponse64();
+    explicit        RxResponse64        (QObject * parent = 0);
+    virtual         ~RxResponse64       ();
 
     // Reimplemented from RXBaseResponse
-    virtual void clear();
-    virtual bool parseApiSpecificData(const QByteArray &data);
-    virtual QString toString();
+    virtual void    clear               ();
+    virtual QString toString            ();
 
-    void setSourceAddress(const quint64 sourceAddress);
-    quint64 sourceAddress() const;
+    void            setSourceAddress    (const quint64 sourceAddress);
+    quint64         sourceAddress       () const;
 
 private:
-    quint64 m_sourceAddress;
+    virtual bool    parseApiSpecificData(const QByteArray &data);
+
+private:
+    quint64         m_sourceAddress;
 };
 
 }} // END namespace

@@ -17,20 +17,22 @@ class ATCommandResponse : public XBeeResponse
 {
     Q_OBJECT
 public:
-    explicit ATCommandResponse(QObject *parent = 0);
-    ATCommandResponse(const QByteArray &packet, QObject * parent = 0);
+    explicit                    ATCommandResponse   (QObject *parent = 0);
+                                ATCommandResponse   (const QByteArray &packet, QObject * parent = 0);
 
-    void setATCommand(ATCommand::ATCommandType at);
-    void setATCommand(const QByteArray & at);
+    // Reimplemented from XBeeResponse
+    virtual QString             toString();
 
-    ATCommand::ATCommandType atCommand() const;
-    virtual QString toString();
+    void                        setATCommand        (ATCommand::ATCommandType at);
+    void                        setATCommand        (const QByteArray & at);
+
+    ATCommand::ATCommandType    atCommand           () const;
 
 protected:
-    virtual bool parseApiSpecificData(const QByteArray &data);
+    virtual bool                parseApiSpecificData(const QByteArray &data);
 
 protected:
-    ATCommand::ATCommandType m_atCommand;
+    ATCommand::ATCommandType    m_atCommand;
 };
 
 } // END namepsace

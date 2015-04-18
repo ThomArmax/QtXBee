@@ -66,7 +66,7 @@ void MainWindow::onSendCommandButtonClicked()
     }
     // 64 bits address
     if(addr > 0xFFFF) {
-        log(QString("Sending '%1' to %2 (64 bits addressing)").arg(ui->data->text()).arg(addr));
+        //log(QString("Sending '%1' to %2 (64 bits addressing)").arg(ui->data->text()).arg(addr));
         WPAN::TXRequest64 req;
         req.setDestinationAddress(addr);
         req.setData(ui->data->text().toLatin1());

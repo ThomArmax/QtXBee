@@ -19,7 +19,6 @@ QT += serialport
 
 SOURCES += \
     xbee.cpp \
-    receivepacketframe.cpp \
     nodediscoveryresponseparser.cpp \
     remotenode.cpp \
     xbeepacket.cpp \
@@ -44,7 +43,8 @@ SOURCES += \
     byteutils.cpp \
     wpan/rxresponseiosamplebase.cpp \
     wpan/rxresponseiosample16.cpp \
-    wpan/rxresponseiosample64.cpp
+    wpan/rxresponseiosample64.cpp \
+    receivepacket.cpp
 
 HEADERS += \
     global.h \

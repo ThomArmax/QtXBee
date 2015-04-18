@@ -16,22 +16,23 @@ class TXRequest16 : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit TXRequest16(QObject *parent = 0);
-    ~TXRequest16();
+    explicit        TXRequest16             (QObject *parent = 0);
+                    ~TXRequest16            ();
 
     // Reimplemented from XBeePacket
-    virtual void assemblePacket();
-    virtual void clear();
-    virtual QString toString();
+    virtual void    assemblePacket          ();
+    virtual void    clear                   ();
+    virtual QString toString                ();
 
-    void setDestinationAddress(const quint16 address);
-    quint16 destinationAddress() const;
-    void setData(const QByteArray & data);
-    QByteArray data() const;
+    void            setDestinationAddress   (const quint16 address);
+    void            setData                 (const QByteArray & data);
+
+    quint16         destinationAddress      () const;
+    QByteArray      data                    () const;
 
 private:
-    quint16 m_destinationAddress;
-    QByteArray m_data;
+    quint16         m_destinationAddress;
+    QByteArray      m_data;
 };
 
 } } // END namespace

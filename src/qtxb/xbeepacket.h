@@ -84,44 +84,45 @@ public:
         XOFF            = 0x13  /**< XOFF */
     };
 
-    explicit XBeePacket(QObject *parent = 0);
+    explicit        XBeePacket              (QObject *parent = 0);
 
-    void setStartDelimiter(unsigned sd);
-    void setLength(unsigned l);
-    void setFrameType(ApiId type);
-    void setFrameId(unsigned id);
-    void setChecksum(unsigned cs);
+    void            setStartDelimiter       (unsigned sd);
+    void            setLength               (unsigned l);
+    void            setFrameType            (ApiId type);
+    void            setFrameId              (unsigned id);
+    void            setChecksum             (unsigned cs);
+    bool            setPacket               (const QByteArray & packet);
 
-    QByteArray packet() const;
-    bool setPacket(const QByteArray & packet);
-    unsigned startDelimiter() const;
-    quint16 length() const;
-    ApiId frameType() const;
-    unsigned frameId() const;
-    unsigned checksum() const;
+    QByteArray      packet                  () const;
+    unsigned        startDelimiter          () const;
+    quint16         length                  () const;
+    ApiId           frameType               () const;
+    unsigned        frameId                 () const;
+    unsigned        checksum                () const;
 
-    virtual void assemblePacket();
-    virtual void clear();
-    virtual QString toString();
-    static QString frameTypeToString(const ApiId type);
+    virtual void    assemblePacket          ();
+    virtual void    clear                   ();
+    virtual QString toString                ();
+    static QString  frameTypeToString       (const ApiId type);
 
-    void escapePacket();
-    bool unescapePacket();
+    void            escapePacket            ();
+    bool            unescapePacket          ();
 
 private:
-    bool isSpecialByte(const char c);
-protected:
-    virtual bool parseApiSpecificData(const QByteArray & data);
-    void createChecksum(QByteArray array);
+    bool            isSpecialByte           (const char c);
 
 protected:
-    QByteArray m_packet;            /**< Contains the packet's data (sent or received)*/
+    virtual bool    parseApiSpecificData    (const QByteArray & data);
+    void            createChecksum          (QByteArray array);
+
+protected:
+    QByteArray      m_packet;               /**< Contains the packet's data (sent or received)*/
 private:
-    unsigned m_startDelimiter;      /**< The packet start delimiter */
-    quint16 m_length;               /**< Frame-specific data length (Number of bytes between the length and the checksum) */
-    ApiId m_frameType;              /**< The frame's type */
-    unsigned m_frameId;             /**< The frame's id */
-    unsigned m_checksum;            /**< Packet checksum */
+    unsigned        m_startDelimiter;       /**< The packet start delimiter */
+    quint16         m_length;               /**< Frame-specific data length (Number of bytes between the length and the checksum) */
+    ApiId           m_frameType;            /**< The frame's type */
+    unsigned        m_frameId;              /**< The frame's id */
+    unsigned        m_checksum;             /**< Packet checksum */
 };
 
 } // END namepsace

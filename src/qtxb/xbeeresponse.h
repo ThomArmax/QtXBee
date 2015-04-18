@@ -25,23 +25,23 @@ public:
         TXFailure           = 4
     };
 
-    explicit XBeeResponse(QObject *parent = 0);
-    ~XBeeResponse();
+    explicit        XBeeResponse    (QObject *parent = 0);
+                    ~XBeeResponse   ();
 
     // Reimplemented from XBeePacket
-    virtual void clear();
+    virtual void    clear           ();
 
-    QByteArray data() const;
-    void setData(const QByteArray & data);
+    void            setData         (const QByteArray & data);
+    void            setCommandStatus(const CommandStatus status);
 
-    void setCommandStatus(const CommandStatus status);
-    CommandStatus commandStatus() const { return m_status; }
+    QByteArray      data            () const;
+    CommandStatus   commandStatus   () const { return m_status; }
 
-    static QString statusToString(const XBeeResponse::CommandStatus status);
+    static QString  statusToString  (const XBeeResponse::CommandStatus status);
 
 protected:
-    QByteArray m_data;
-    CommandStatus m_status;
+    QByteArray      m_data;
+    CommandStatus   m_status;
 };
 
 } // END namepsace

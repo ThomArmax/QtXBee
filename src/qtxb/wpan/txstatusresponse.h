@@ -18,23 +18,23 @@ public:
         Purged      = 3
     };
 
-    explicit TXStatusResponse(QObject *parent = 0);
-    virtual ~TXStatusResponse();
+    explicit        TXStatusResponse        (QObject *parent = 0);
+    virtual         ~TXStatusResponse       ();
 
     // Reimplemented from XBeePacket
-    virtual void clear();
-    virtual QString toString();
+    virtual void    clear                   ();
+    virtual QString toString                ();
 
-    void setStatus(const Status status);
-    Status status() const;
+    void            setStatus               (const Status status);
+    Status          status                  () const;
 
-    static QString statusToString(const Status status);
-
-private:
-    virtual bool parseApiSpecificData(const QByteArray &data);
+    static QString  statusToString          (const Status status);
 
 private:
-    Status m_status;
+    virtual bool    parseApiSpecificData    (const QByteArray &data);
+
+private:
+    Status          m_status;
 };
 
 }} // END namepsace

@@ -16,22 +16,22 @@ class RxBaseResponse : public XBeeResponse
 {
     Q_OBJECT
 public:
-    explicit RxBaseResponse(QObject *parent = 0);
-    virtual ~RxBaseResponse();
+    explicit        RxBaseResponse  (QObject *parent = 0);
+    virtual         ~RxBaseResponse ();
 
     // Reimplemented from XBeePacket
-    virtual void clear();
-    virtual QString toString();
+    virtual void    clear           ();
+    virtual QString toString        ();
 
-    void setRSSI(const qint8 rssi);
-    qint8 rssi() const;
+    void            setRSSI         (const qint8 rssi);
+    void            setOptions      (const quint8 options);
 
-    void setOptions(const quint8 options);
-    quint8 options() const;
+    qint8           rssi            () const;
+    quint8          options         () const;
 
 protected:
-    qint8 m_rssi;
-    quint8 m_options;
+    qint8           m_rssi;
+    quint8          m_options;
 
 };
 

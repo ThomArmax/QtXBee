@@ -4,6 +4,8 @@
 
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QtWidgets/QScrollBar>
+#include <QMessageBox>
 
 using namespace QtXBee;
 
@@ -72,7 +74,6 @@ void MainWindow::onRawDataReceived(const QByteArray &data)
     log(QString().append(d));
 }
 
-#include <QtWidgets/QScrollBar>
 void MainWindow::log(const QString &log)
 {
     QString text = ui->console->toPlainText();

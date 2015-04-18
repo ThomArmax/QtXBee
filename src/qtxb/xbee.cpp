@@ -724,6 +724,7 @@ bool XBee::initSerialConnection()
 
 bool XBee::startupCheck()
 {
+    return true;
     bool bRet = false;
     ATCommand at;
     ATCommandResponse * rep = NULL;

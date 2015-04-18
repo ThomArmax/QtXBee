@@ -26,33 +26,27 @@ public:
     };
     Q_DECLARE_FLAGS(RemoteCommandOptions, RemoteCommandOption)
 
-    RemoteATCommandRequest(QObject *parent = 0);
+    explicit                RemoteATCommandRequest  (QObject *parent = 0);
 
     // Reimplemented from ATCommand
-    virtual void assemblePacket();
-    virtual void clear();
-    virtual QString toString();
+    virtual void            assemblePacket          ();
+    virtual void            clear                   ();
+    virtual QString         toString                ();
 
     // Setters
-    void setDestinationAddress64(const quint64 dest);
-    void setDestinationAddress16(const quint32 dest);
-    void setCommandOptions(const RemoteCommandOptions options);
-//    void setATCommand(const ATCommand::ATCommandType command);
-//    void setCommandParameter(const quint8 parameter);
+    void                    setDestinationAddress64 (const quint64 dest);
+    void                    setDestinationAddress16 (const quint32 dest);
+    void                    setCommandOptions       (const RemoteCommandOptions options);
 
     // Getters
-    quint64 destinationAddress() const;
-    quint16 networkAddress() const;
-//    ATCommand::ATCommandType atCommand() const;
-//    quint8 commandParameter();
-    RemoteCommandOptions commandOptions() const;
+    quint64                 destinationAddress      () const;
+    quint16                 networkAddress          () const;
+    RemoteCommandOptions    commandOptions          () const;
 
 protected:
-    quint64 m_destinationAddress64;
-    quint16 m_destinationAddress16;
-    RemoteCommandOptions m_options;
-//    ATCommand::ATCommandType m_atCommand;
-//    quint8 m_commandParameter;
+    quint64                 m_destinationAddress64;
+    quint16                 m_destinationAddress16;
+    RemoteCommandOptions    m_options;
 };
 
 } // END namepsace

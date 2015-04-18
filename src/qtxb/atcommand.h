@@ -123,27 +123,27 @@ public:
         Command_1S = 0x3153
     };
 
-    explicit ATCommand(QObject *parent = 0);
+    explicit                ATCommand               (QObject *parent = 0);
 
     // Reimplemented from XBeePacket
-    virtual QString toString();
-    virtual void assemblePacket();
-    virtual void clear();
+    virtual QString         toString                ();
+    virtual void            assemblePacket          ();
+    virtual void            clear                   ();
 
-    void setCommand(const ATCommandType command);
-    void setCommand(const QByteArray &command);
-    void setParameter(const QByteArray &param);
+    void                    setCommand              (const ATCommandType command);
+    void                    setCommand              (const QByteArray &command);
+    void                    setParameter            (const QByteArray &param);
 
-    ATCommandType command() const;
-    QByteArray parameter() const;
+    ATCommandType           command                 () const;
+    QByteArray              parameter               () const;
 
-    static QString atCommandToString(const ATCommandType command);
-    static QByteArray atCommandToByteArray(const ATCommandType command);
-    static ATCommandType atCommandFromByteArray(const QByteArray & command);
+    static QString          atCommandToString       (const ATCommandType command);
+    static QByteArray       atCommandToByteArray    (const ATCommandType command);
+    static ATCommandType    atCommandFromByteArray  (const QByteArray & command);
 
  private:
-    ATCommandType m_command;
-    QByteArray m_parameter;
+    ATCommandType           m_command;
+    QByteArray              m_parameter;
 };
 
 } // END namespace

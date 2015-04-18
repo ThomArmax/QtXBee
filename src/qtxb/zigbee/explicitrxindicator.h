@@ -4,6 +4,7 @@
 #include "xbeepacket.h"
 
 namespace QtXBee {
+namespace ZigBee {
 
 class ExplicitRxIndicator : public XBeePacket
 {
@@ -13,6 +14,6 @@ public:
     void readPacket(QByteArray rx);
 };
 
-} // END namepsace
+} } // END namepsace
 
 #endif // EXPLICITRXINDICATOR_H

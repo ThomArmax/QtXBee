@@ -10,10 +10,6 @@ class XBeePacket;
 class ATCommandResponse;
 class ATCommand;
 class ModemStatus;
-class TransmitStatus;
-class ReceivePacket;
-class ExplicitRxIndicator;
-class NodeIdentificationIndicator;
 class RemoteATCommandResponse;
 
 namespace WPAN {
@@ -21,6 +17,16 @@ class RxResponse64;
 class RxResponse16;
 class TXStatusResponse;
 }
+
+namespace ZigBee {
+class TransmitStatus;
+class ReceivePacket;
+class ExplicitRxIndicator;
+class NodeIdentificationIndicator;
+}
+
+using namespace QtXBee::WPAN;
+using namespace QtXBee::ZigBee;
 
 /**
  * @brief The XBee class is used to represents the local XBee.

@@ -1,6 +1,7 @@
 #include "nodeidentificationindicator.h"
 
 namespace QtXBee {
+namespace ZigBee {
 
 NodeIdentificationIndicator::NodeIdentificationIndicator(QObject *parent) :
     XBeeResponse(parent),
@@ -185,4 +186,4 @@ QString NodeIdentificationIndicator::toString() {
     return str;
 }
 
-} // END namepsace
+} } // END namepsace

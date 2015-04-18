@@ -4,6 +4,7 @@
 #include "xbeepacket.h"
 
 namespace QtXBee {
+namespace ZigBee {
 
 /**
  * @brief The TransmitRequest class indicate if the packet was transmitted successfully or not.
@@ -35,6 +36,6 @@ private:
      unsigned   m_discoveryStatus;
 };
 
-} // END namepsace
+} } // END namepsace
 
 #endif // TRANSMITSTATUS_H

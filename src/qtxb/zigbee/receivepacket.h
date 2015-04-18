@@ -4,6 +4,7 @@
 #include "xbeepacket.h"
 
 namespace QtXBee {
+namespace ZigBee {
 
 class ReceivePacket : public XBeePacket
 {
@@ -29,6 +30,6 @@ private:
     QByteArray  m_data;
 };
 
-} // END namepsace
+} } // END namepsace
 
 #endif // RECEIVEPACKET_H

@@ -3,6 +3,7 @@
 #include <QDebug>
 
 namespace QtXBee {
+namespace ZigBee {
 
 ReceivePacket::ReceivePacket(QObject *parent) :
     XBeePacket(parent)
@@ -67,4 +68,4 @@ void ReceivePacket::readPacket(QByteArray rx) {
     }
 }
 
-} // END namepsace
+} } // END namepsace

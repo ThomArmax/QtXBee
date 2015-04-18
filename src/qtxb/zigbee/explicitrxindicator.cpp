@@ -1,6 +1,7 @@
 #include "explicitrxindicator.h"
 
 namespace QtXBee {
+namespace ZigBee {
 
 ExplicitRxIndicator::ExplicitRxIndicator(QObject *parent) :
     XBeePacket(parent)
@@ -11,4 +12,4 @@ void ExplicitRxIndicator::readPacket(QByteArray rx){
     Q_UNUSED(rx)
 }
 
-} // END namepsace
+} } // END namepsace

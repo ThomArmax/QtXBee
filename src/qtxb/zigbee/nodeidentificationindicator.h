@@ -4,6 +4,7 @@
 #include "xbeeresponse.h"
 
 namespace QtXBee {
+namespace ZigBee {
 
 /**
  * @brief The NodeIdentificationIndicator frame is received when a module
@@ -34,6 +35,6 @@ private:
     quint16 m_digiManufacturerId;
 };
 
-} // END namepsace
+} } // END namepsace
 
 #endif // NODEIDENTIFICATIONINDICATOR_H

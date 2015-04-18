@@ -2,6 +2,7 @@
 #include "xbeepacket.h"
 
 namespace QtXBee {
+namespace ZigBee {
 
 TransmitRequest::TransmitRequest(QObject *parent) :
     XBeePacket(parent)
@@ -75,4 +76,4 @@ void TransmitRequest::assemblePacket(){
     m_packet.insert(2, length()&0xFF);
 }
 
-} // END namepsace
+} } // END namepsace

@@ -5,6 +5,7 @@
 #include <QByteArray>
 
 namespace QtXBee {
+namespace ZigBee {
 
 /**
  * @brief The TransmitRequest class causes the module to send data as an RF packet to the specified destination.
@@ -51,6 +52,6 @@ private:
     QByteArray  m_data;
 };
 
-} // END namepsace
+} } // END namepsace
 
 #endif // TRANSMITREQUEST_H

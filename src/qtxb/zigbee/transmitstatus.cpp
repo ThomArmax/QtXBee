@@ -3,6 +3,7 @@
 #include <QDebug>
 
 namespace QtXBee {
+namespace ZigBee {
 
 TransmitStatus::TransmitStatus(QObject *parent) :
     XBeePacket(parent)
@@ -52,4 +53,4 @@ QByteArray TransmitStatus:: reserved() const{
     return m_reserved;
 }
 
-} // END namepsace
+} } // END namepsace

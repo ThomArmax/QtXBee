@@ -4,6 +4,7 @@
 #include "transmitrequest.h"
 
 namespace QtXBee {
+namespace ZigBee {
 
 class ExplicitAdressingCommand : public TransmitRequest
 {
@@ -18,6 +19,6 @@ private:
     QByteArray m_profileID;
 };
 
-} // END namepsace
+} } // END namepsace
 
 #endif // TXREQUESTEXPLICIT_H

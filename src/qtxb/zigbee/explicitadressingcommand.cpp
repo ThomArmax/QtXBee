@@ -2,6 +2,7 @@
 #include "transmitrequest.h"
 
 namespace QtXBee {
+namespace ZigBee {
 
 ExplicitAdressingCommand::ExplicitAdressingCommand(QObject *parent) :
     TransmitRequest(parent)
@@ -9,4 +10,4 @@ ExplicitAdressingCommand::ExplicitAdressingCommand(QObject *parent) :
     setFrameType(XBeePacket::ZBExplicitTxRequest);
 }
 
-} // END namepsace
+} } // END namepsace

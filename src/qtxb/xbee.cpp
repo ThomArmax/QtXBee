@@ -3,28 +3,27 @@
 #include <QSerialPortInfo>
 
 #include "xbee.h"
-
 #include "global.h"
-
 #include "xbeepacket.h"
-
 #include "atcommand.h"
 #include "atcommandqueueparam.h"
-#include "transmitrequest.h"
-#include "explicitadressingcommand.h"
 #include "remoteatcommandrequest.h"
-#include "wpan/rxresponse16.h"
-#include "wpan/rxresponse64.h"
 #include "atcommandresponse.h"
 #include "modemstatus.h"
-#include "transmitstatus.h"
-#include "wpan/txstatusresponse.h"
-#include "receivepacket.h"
-#include "explicitrxindicator.h"
-#include "nodeidentificationindicator.h"
 #include "remoteatcommandresponse.h"
 #include "remotenode.h"
 #include "nodediscoveryresponseparser.h"
+
+#include "wpan/txstatusresponse.h"
+#include "wpan/rxresponse16.h"
+#include "wpan/rxresponse64.h"
+
+#include "zigbee/transmitstatus.h"
+#include "zigbee/receivepacket.h"
+#include "zigbee/explicitrxindicator.h"
+#include "zigbee/nodeidentificationindicator.h"
+#include "zigbee/transmitrequest.h"
+#include "zigbee/explicitadressingcommand.h"
 
 namespace QtXBee {
 

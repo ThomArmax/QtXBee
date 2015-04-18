@@ -26,25 +26,25 @@ SOURCES += \
     atcommand.cpp \
     atcommandqueueparam.cpp \
     atcommandresponse.cpp \
-    explicitadressingcommand.cpp \
-    explicitrxindicator.cpp \
     modemstatus.cpp \
-    nodeidentificationindicator.cpp \
     remoteatcommandresponse.cpp \
-    transmitrequest.cpp \
-    transmitstatus.cpp \
     remoteatcommandrequest.cpp \
+    byteutils.cpp \
     wpan/txrequest16.cpp \
     wpan/txrequest64.cpp \
     wpan/txstatusresponse.cpp \
     wpan/rxbaseresponse.cpp \
     wpan/rxresponse16.cpp \
     wpan/rxresponse64.cpp \
-    byteutils.cpp \
     wpan/rxresponseiosamplebase.cpp \
     wpan/rxresponseiosample16.cpp \
     wpan/rxresponseiosample64.cpp \
-    receivepacket.cpp
+    zigbee/transmitrequest.cpp \
+    zigbee/transmitstatus.cpp \
+    zigbee/nodeidentificationindicator.cpp \
+    zigbee/receivepacket.cpp \
+    zigbee/explicitadressingcommand.cpp \
+    zigbee/explicitrxindicator.cpp
 
 HEADERS += \
     global.h \
@@ -56,25 +56,25 @@ HEADERS += \
     atcommand.h \
     atcommandqueueparam.h \
     atcommandresponse.h \
-    explicitadressingcommand.h \
-    explicitrxindicator.h \
     modemstatus.h \
-    nodeidentificationindicator.h \
-    receivepacket.h \
     remoteatcommandrequest.h \
     remoteatcommandresponse.h \
-    transmitrequest.h \
-    transmitstatus.h \
+    byteutils.h \
     wpan/txrequest16.h \
     wpan/txrequest64.h \
     wpan/txstatusresponse.h \
     wpan/rxbaseresponse.h \
     wpan/rxresponse16.h \
     wpan/rxresponse64.h \
-    byteutils.h \
     wpan/rxresponseiosamplebase.h \
     wpan/rxresponseiosample16.h \
-    wpan/rxresponseiosample64.h
+    wpan/rxresponseiosample64.h \
+    zigbee/transmitrequest.h \
+    zigbee/transmitstatus.h \
+    zigbee/nodeidentificationindicator.h \
+    zigbee/receivepacket.h \
+    zigbee/explicitadressingcommand.h \
+    zigbee/explicitrxindicator.h
 
 OTHER_FILES += \
     qtxb.pri \

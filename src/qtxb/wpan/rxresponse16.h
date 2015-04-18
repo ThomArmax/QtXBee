@@ -22,7 +22,7 @@ public:
     void            setSourceAddress        (const quint16 sourceAddress);
     quint16         sourceAddress           () const;
 
-private:
+protected:
     virtual bool    parseApiSpecificData    (const QByteArray &data);
 
 private:

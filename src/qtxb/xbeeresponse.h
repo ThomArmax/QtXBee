@@ -16,13 +16,14 @@ class XBeeResponse : public XBeePacket
 public:
     /**
      * @brief The CommandStatus enum
+     * @todo Move the enum in ATCommandResponse
      */
     enum CommandStatus {
-        Ok                  = 0,
-        Error               = 1,
-        InvalidCommand      = 2,
-        InvalidParameter    = 3,
-        TXFailure           = 4
+        Ok                  = 0,    /**< Ok */
+        Error               = 1,    /**< Error */
+        InvalidCommand      = 2,    /**< Invalid Command */
+        InvalidParameter    = 3,    /**< Invalid Parameter */
+        TXFailure           = 4     /**< Transmission failure */
     };
 
     explicit        XBeeResponse    (QObject *parent = 0);
@@ -35,7 +36,7 @@ public:
     void            setCommandStatus(const CommandStatus status);
 
     QByteArray      data            () const;
-    CommandStatus   commandStatus   () const { return m_status; }
+    CommandStatus   commandStatus   () const;
 
     static QString  statusToString  (const XBeeResponse::CommandStatus status);
 

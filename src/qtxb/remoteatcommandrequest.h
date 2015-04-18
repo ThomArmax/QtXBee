@@ -39,8 +39,8 @@ public:
     void                    setCommandOptions       (const RemoteCommandOptions options);
 
     // Getters
-    quint64                 destinationAddress      () const;
-    quint16                 networkAddress          () const;
+    quint64                 destinationAddress64    () const;
+    quint16                 destinationAddress16    () const;
     RemoteCommandOptions    commandOptions          () const;
 
 protected:

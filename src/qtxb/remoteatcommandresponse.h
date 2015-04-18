@@ -36,7 +36,7 @@ public:
     quint64         sourceAddress64         () const;
     quint16         sourceAddress16         () const;
 
-private:
+protected:
     virtual bool    parseApiSpecificData    (const QByteArray &data);
 
 private:

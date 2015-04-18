@@ -63,14 +63,14 @@ public:
     void                unicast                             (QByteArray address, QString data);
 
     ATCommandResponse * sendATCommandSync                   (ATCommand * command);
-    ATCommandResponse * sendATCommandSync                   (const QByteArray & data);
+    ATCommandResponse * sendATCommandSync                   (const QByteArray & atcommand);
 
     void                send                                (XBeePacket * packet);
     void                sendATCommandAsync                  (ATCommand *command);
     void                sendATCommandAsync                  (const QByteArray & data);
 
-    bool                setMode                             (const Mode mode);              /**< @brief Sets the XBee's mode @param mode the new Mode to be applied */
-    Mode                mode                                () const { return m_mode; }     /**< @brief Returns the XBee's mode @return the XBee's mode */
+    bool                setMode                             (const Mode mode);
+    Mode                mode                                () const;
 
     bool                setSerialPort                       (const QString & serialPort);
     bool                setSerialPort                       (const QString &serialPort,

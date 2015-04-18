@@ -46,16 +46,20 @@ int main(int argc, char *argv[])
     xb.send(&ni);
     ni.setCommand(ATCommand::Command_SL);
     xb.send(&ni);
+    ni.setCommand(ATCommand::Command_ID);
+    xb.send(&ni);
+    ni.setCommand(ATCommand::Command_MY);
+    xb.send(&ni);
 
-    WPAN::TXRequest16 tx16;
-    tx16.setDestinationAddress(0x0002);
-    tx16.setData("hello boy");
-    xb.send(&tx16);
+//    WPAN::TXRequest16 tx16;
+//    tx16.setDestinationAddress(0x0002);
+//    tx16.setData("hello boy");
+//    xb.send(&tx16);
 
-    WPAN::TXRequest64 tx64;
-    tx64.setDestinationAddress(0x13A20040CABB38);
-    tx64.setData("hello 64");
-    xb.send(&tx64);
+//    WPAN::TXRequest64 tx64;
+//    tx64.setDestinationAddress(0x13A20040CABB38);
+//    tx64.setData("hello 64");
+//    xb.send(&tx64);
 
 //    tx64.setDestinationAddress(0xFFFFFFFF);
 //    xb.send(&tx64);

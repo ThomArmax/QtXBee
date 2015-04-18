@@ -68,19 +68,43 @@ Q_DECL_OVERRIDE
 }
 
 // Setters
+/**
+ * @brief Sets the 64-bit address of the source device.
+ * @param addr
+ * @sa RemoteATCommandResponse::setSourceAddress64()
+ * @sa RemoteATCommandResponse::sourceAddress16()
+ */
 void RemoteATCommandResponse::setSourceAddress64(const quint64 addr) {
     m_sourceAddress64 = addr;
 }
 
+/**
+ * @brief Sets the 16-bit address of the source device.
+ * @param addr
+ * @sa RemoteATCommandResponse::setSourceAddress16()
+ * @sa RemoteATCommandResponse::sourceAddress64()
+ */
 void RemoteATCommandResponse::setSourceAddress16(const quint32 addr) {
     m_sourceAddress16 = addr;
 }
 
 // Getters
+/**
+ * @brief Returns the 64-bits address of the source device
+ * @return the 64-bits address of the source device
+ * @sa RemoteATCommandResponse::setSourceAddress64()
+ * @sa RemoteATCommandResponse::sourceAddress16()
+ */
 quint64 RemoteATCommandResponse::sourceAddress64() const {
     return m_sourceAddress64;
 }
 
+/**
+ * @brief Returns the 16-bits address of the source device
+ * @return the 16-bits address of the source device
+ * @sa RemoteATCommandResponse::setSourceAddress16()
+ * @sa RemoteATCommandResponse::sourceAddress64()
+ */
 quint16 RemoteATCommandResponse::sourceAddress16() const {
     return m_sourceAddress16;
 }

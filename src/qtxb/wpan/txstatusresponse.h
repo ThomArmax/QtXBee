@@ -30,7 +30,7 @@ public:
 
     static QString  statusToString          (const Status status);
 
-private:
+protected:
     virtual bool    parseApiSpecificData    (const QByteArray &data);
 
 private:

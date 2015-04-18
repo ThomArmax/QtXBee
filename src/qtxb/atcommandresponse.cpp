@@ -10,12 +10,12 @@ ATCommandResponse::ATCommandResponse(QObject *parent) :
     setFrameType(ATCommandResponseId);
 }
 
-ATCommandResponse::ATCommandResponse(const QByteArray &data, QObject *parent)  :
+ATCommandResponse::ATCommandResponse(const QByteArray &packet, QObject *parent)  :
     XBeeResponse(parent),
     m_atCommand(ATCommand::Command_Undefined)
 {
     setFrameType(ATCommandResponseId);
-    setPacket(data);
+    setPacket(packet);
 }
 
 bool ATCommandResponse::parseApiSpecificData(const QByteArray &data)
@@ -39,11 +39,21 @@ Q_DECL_OVERRIDE
     return true;
 }
 
+/**
+ * @brief Sets the response's AT Command
+ * @param at
+ * @sa ATCommand::ATCommandType
+ */
 void ATCommandResponse::setATCommand(ATCommand::ATCommandType at)
 {
     m_atCommand = at;
 }
 
+/**
+ * @brief Sets the response's AT Command
+ * @param at
+ * @sa ATCommandResponse::setATCommand(ATCommand::ATCommandType at)
+ */
 void ATCommandResponse::setATCommand(const QByteArray &at)
 {
     if(at.size() != 2) {
@@ -54,7 +64,14 @@ void ATCommandResponse::setATCommand(const QByteArray &at)
     m_atCommand = ATCommand::atCommandFromByteArray(at);
 }
 
-ATCommand::ATCommandType ATCommandResponse::atCommand() const {
+/**
+ * @brief Returns the response's AT Command
+ * @return the response's AT Command
+ * @sa ATCommandResponse::setATCommand(ATCommand::ATCommandType at)
+ * @sa ATCommand::ATCommandType
+ */
+ATCommand::ATCommandType ATCommandResponse::atCommand() const
+{
     return m_atCommand;
 }
 

@@ -154,6 +154,11 @@ QByteArray XBeePacket::packet() const
     return m_packet;
 }
 
+/**
+ * @brief Sets the packet's raw data
+ * @param packet
+ * @return true if succeeded; false otherwise.
+ */
 bool XBeePacket::setPacket(const QByteArray &packet)
 {
     ApiId apiId = UndefinedId;
@@ -188,6 +193,12 @@ bool XBeePacket::setPacket(const QByteArray &packet)
     return true;
 }
 
+/**
+ * @brief Parses the packet API specific data
+ * @param data
+ * @return true if succeeded; false otherwise.
+ * @note All subclasses must reimplement this method, which is called by XBeePacket::setPacket()
+ */
 bool XBeePacket::parseApiSpecificData(const QByteArray &data)
 {
     Q_UNUSED(data)
@@ -204,6 +215,10 @@ void XBeePacket::assemblePacket()
 
 }
 
+/**
+ * @brief Clears the packet by reseting all attributes to their default value.
+ * @note All subclass should reimplement this method.
+ */
 void XBeePacket::clear()
 {
     m_packet.clear();

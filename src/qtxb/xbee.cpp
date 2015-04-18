@@ -143,13 +143,11 @@ bool XBee::close()
 /**
  * @brief Sets the XBee's serial port, which we be used to communicate with it.
  * @note Default serial port will be used :
- * <ul>
- * <li><b>Baud Rate</b> : 9600</li>
- * <li><b>Data Bits</b> : 8 bits</li>
- * <li><b>Parity</b> : No</li>
- * <li><b>Stop Bits</b> : One stop bit</li>
- * <li><b>Flow Control</b> : No flow control</li>
- * </ul>
+ * - <b>Baud Rate</b> : 9600
+ * - <b>Data Bits</b> : 8 bits
+ * - <b>Parity</b> : No
+ * - <b>Stop Bits</b> : One stop bit
+ * - <b>Flow Control</b> : No flow control
  * @param serialPort path to the serial port
  * @return true if succeeded; false otherwise
  * @sa XBee::setSerialPort(const QString &serialPort, const QSerialPort::BaudRate baudRate, const QSerialPort::DataBits dataBits, const QSerialPort::Parity parity, const QSerialPort::StopBits stopBits, const QSerialPort::FlowControl flowControl)
@@ -268,6 +266,13 @@ void XBee::displayRemoteCommandResponse(RemoteATCommandResponse *digiMeshPacket)
     qDebug() << "*********************************************";
 }
 
+/**
+ * @brief Sends asynchronously the given packet
+ * @param packet
+ * @note A signal (corresponding the given packet) will be emitted when a response is received.
+ *
+ * For example, if the given packet is an ATCommand, the XBee::receivedATCommandResponse() will be emitted.
+ */
 void XBee::send(XBeePacket *packet)
 {
     packet->assemblePacket();
@@ -288,16 +293,36 @@ void XBee::send(XBeePacket *packet)
     }
 }
 
+/**
+ * @brief Sends an ATCommand asynchronously
+ *
+ * The XBee::receivedATCommandResponse() signal will be emmited when a response to the sent ATCommand is received.
+ * @param command
+ */
 void XBee::sendATCommandAsync(ATCommand *command)
 {
     send(command);
 }
 
+/**
+ * @brief Sends an ATCommand asynchronously
+ *
+ * The XBee::receivedATCommandResponse() signal will be emmited when a response to the sent ATCommand is received.
+ * @param command
+ * @note This method is not implemented yet
+ * @todo Implement this method
+ */
 void XBee::sendATCommandAsync(const QByteArray &data)
 {
     Q_UNUSED(data);
 }
 
+
+/**
+ * @brief Sends an ATCommand synchronously
+ * @param command
+ * @return the corresponding ATCommandResponse; or null.
+ */
 ATCommandResponse * XBee::sendATCommandSync(ATCommand *command)
 {
     Q_ASSERT(command);
@@ -340,20 +365,25 @@ ATCommandResponse * XBee::sendATCommandSync(ATCommand *command)
     return rep;
 }
 
-ATCommandResponse * XBee::sendATCommandSync(const QByteArray &data)
+/**
+ * @brief Sends an ATCommand synchronously
+ * @param atcommand
+ * @return the corresponding ATCommandResponse; or null.
+ */
+ATCommandResponse * XBee::sendATCommandSync(const QByteArray &atcommand)
 {
     ATCommandResponse * rep = NULL;
-    if(data.size() >= 2)
+    if(atcommand.size() >= 2)
     {
         ATCommand at;
-        at.setCommand(data.mid(0, 2));
-        if(data.size() > 2) {
-            at.setParameter(data.mid(2, data.size()-2));
+        at.setCommand(atcommand.mid(0, 2));
+        if(atcommand.size() > 2) {
+            at.setParameter(atcommand.mid(2, atcommand.size()-2));
         }
         rep = sendATCommandSync(&at);
     }
     else {
-        qWarning() << Q_FUNC_INFO << "bad command" << data;
+        qWarning() << Q_FUNC_INFO << "bad command" << atcommand;
     }
     return rep;
 }
@@ -531,11 +561,30 @@ bool XBee::setCR(const quint8 cr) {
     return true;
 }
 
+/**
+ * @brief Sets the XBee's mode
+ * @param mode
+ * @return true if succeeded; false otherwise.
+ * @todo Set the mode into the XBee, not only the class attribute
+ * @sa XBee::Mode
+ * @sa XBee::mode()
+ */
 bool XBee::setMode(const Mode mode)
 {
     m_mode = mode;
     buffer.clear();
     return true;
+}
+
+/**
+ * @brief Returns the XBee's mode
+ * @return the XBee's mode
+ * @sa XBee::setMode()
+ * @sa XBee::Mode
+ */
+XBee::Mode XBee::mode() const
+{
+    return m_mode;
 }
 
 //_________________________________________________________________________________________________

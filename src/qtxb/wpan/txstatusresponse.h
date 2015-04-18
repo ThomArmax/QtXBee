@@ -24,7 +24,7 @@
 #include "../xbeepacket.h"
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 class TXStatusResponse : public XBeePacket
 {

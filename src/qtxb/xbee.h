@@ -32,7 +32,7 @@ class ATCommand;
 class ModemStatus;
 class RemoteATCommandResponse;
 
-namespace WPAN {
+namespace Wpan {
 class RxResponse64;
 class RxResponse16;
 class TXStatusResponse;
@@ -45,7 +45,7 @@ class ZBExplicitRxResponse;
 class ZBIONodeIdentificationResponse;
 }
 
-using namespace QtXBee::WPAN;
+using namespace QtXBee::Wpan;
 using namespace QtXBee::ZigBee;
 
 /**
@@ -144,13 +144,13 @@ signals:
     void                receivedATCommandResponse           (ATCommandResponse *response);              /**< @brief Emitted when a ATCommandResponse frame is received*/
     void                receivedModemStatus                 (ModemStatus *response);                    /**< @brief Emitted when a ModemStatus frame is received*/
     void                receivedTransmitStatus              (ZBTxStatusResponse *response);             /**< @brief Emitted when a TransmitStatus frame is received*/
-    void                receivedTransmitStatus              (WPAN::TXStatusResponse *response);
+    void                receivedTransmitStatus              (Wpan::TXStatusResponse *response);
     void                receivedRXIndicator                 (ZBRxResponse *response);                   /**< @brief Emitted when a RXIndicator frame is received*/
     void                receivedRXIndicatorExplicit         (ZBExplicitRxResponse *response);           /**< @brief Emitted when a RXIndicatorExplicit frame is received*/
     void                receivedNodeIdentificationIndicator (ZBIONodeIdentificationResponse *response); /**< @brief Emitted when a NodeIdentificationIndicator frame is received*/
     void                receivedRemoteCommandResponse       (RemoteATCommandResponse *response);        /**< @brief Emitted when a RemoteCommandResponse frame is received*/
-    void                receivedRxResponse16                (WPAN::RxResponse16 * response);
-    void                receivedRxResponse64                (WPAN::RxResponse64 * response);
+    void                receivedRxResponse16                (Wpan::RxResponse16 * response);
+    void                receivedRxResponse64                (Wpan::RxResponse64 * response);
     void                rawDataReceived                     (const QByteArray & data);                  /**< @brief Emitted when raw data are received on the serial port (only in NormalMode). @sa XBee::setMode() @sa XBee::Mode */
     // Addressing signals
     void                DHChanged                           (const quint32 dh);                         /**< @brief Emitted when DH property changes. @sa XBee::setDH() @sa XBee::DH()*/

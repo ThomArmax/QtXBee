@@ -649,14 +649,14 @@ void XBee::processPacket(QByteArray packet)
     switch (packetType) {
     /********************** WPAN **********************/
     case XBeePacket::RX16ResponseId : {
-        WPAN::RxResponse16 * response = new WPAN::RxResponse16();
+        Wpan::RxResponse16 * response = new Wpan::RxResponse16();
         response->setPacket(packet);
         emit receivedRxResponse16(response);
         response->deleteLater();
         break;
     }
     case XBeePacket::RX64ResponseId : {
-        WPAN::RxResponse64 * response = new WPAN::RxResponse64();
+        Wpan::RxResponse64 * response = new Wpan::RxResponse64();
         response->setPacket(packet);
         emit receivedRxResponse64(response);
         qDebug() << Q_FUNC_INFO;
@@ -665,7 +665,7 @@ void XBee::processPacket(QByteArray packet)
         break;
     }
     case XBeePacket::TXStatusResponseId : {
-        WPAN::TXStatusResponse * response = new WPAN::TXStatusResponse();
+        Wpan::TXStatusResponse * response = new Wpan::TXStatusResponse();
         response->setPacket(packet);
         emit receivedTransmitStatus(response);
         qDebug() << Q_FUNC_INFO << "TXStatusResponseId";

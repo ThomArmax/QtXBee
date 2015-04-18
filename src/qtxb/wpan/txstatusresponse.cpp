@@ -22,7 +22,7 @@
 #include <QDebug>
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 TXStatusResponse::TXStatusResponse(QObject *parent) :
     XBeePacket(parent),

@@ -21,7 +21,7 @@
 #include "rxresponseiosample64.h"
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 RxResponseIoSample64::RxResponseIoSample64(QObject *parent) :
     RxResponseIoSampleBase(parent)

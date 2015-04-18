@@ -23,7 +23,7 @@
 #include <QDebug>
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 RxResponse64::RxResponse64(QObject *parent) :
     RxBaseResponse(parent),

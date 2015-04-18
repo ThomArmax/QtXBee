@@ -21,7 +21,7 @@
 #include "txrequest16.h"
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 TXRequest16::TXRequest16(QObject *parent) :
     XBeePacket(parent),

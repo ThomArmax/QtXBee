@@ -42,9 +42,9 @@ MainWindow::MainWindow(QWidget *parent) :
     xbee = new XBee(this);
     xbee->setMode(XBee::API1Mode);
 
-    connect(xbee, SIGNAL(receivedTransmitStatus(WPAN::TXStatusResponse*)), this, SLOT(onReceivedTransmitStatus(WPAN::TXStatusResponse*)));
-    connect(xbee, SIGNAL(receivedRxResponse16(WPAN::RxResponse16*)), this, SLOT(onReceivedRxResponse16(WPAN::RxResponse16*)));
-    connect(xbee, SIGNAL(receivedRxResponse64(WPAN::RxResponse64*)), this, SLOT(onReceivedRxResponse64(WPAN::RxResponse64*)));
+    connect(xbee, SIGNAL(receivedTransmitStatus(Wpan::TXStatusResponse*)), this, SLOT(onReceivedTransmitStatus(Wpan::TXStatusResponse*)));
+    connect(xbee, SIGNAL(receivedRxResponse16(Wpan::RxResponse16*)), this, SLOT(onReceivedRxResponse16(Wpan::RxResponse16*)));
+    connect(xbee, SIGNAL(receivedRxResponse64(Wpan::RxResponse64*)), this, SLOT(onReceivedRxResponse64(Wpan::RxResponse64*)));
 
     connect(ui->openButton, SIGNAL(clicked()), this, SLOT(onOpenSerialPortButtonClicked()));
     connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(onSendCommandButtonClicked()));
@@ -87,7 +87,7 @@ void MainWindow::onSendCommandButtonClicked()
     // 64 bits address
     if(addr > 0xFFFF) {
         //log(QString("Sending '%1' to %2 (64 bits addressing)").arg(ui->data->text()).arg(addr));
-        WPAN::TXRequest64 req;
+        Wpan::TXRequest64 req;
         req.setDestinationAddress(addr);
         req.setData(ui->data->text().toLatin1());
         xbee->send(&req);
@@ -96,7 +96,7 @@ void MainWindow::onSendCommandButtonClicked()
     else {
         //log(QString("Sending '%1' to %2 (16 bits addressing)").arg(ui->data->text()).arg(addr));
         log(ui->data->text().prepend(">> "));
-        WPAN::TXRequest16 req;
+        Wpan::TXRequest16 req;
         req.setDestinationAddress(addr);
         req.setData(ui->data->text().toLatin1());
         req.setFrameId(20);
@@ -113,17 +113,17 @@ void MainWindow::log(const QString &log)
     ui->console->verticalScrollBar()->setValue(ui->console->verticalScrollBar()->maximum());
 }
 
-void MainWindow::onReceivedTransmitStatus(WPAN::TXStatusResponse *)
+void MainWindow::onReceivedTransmitStatus(Wpan::TXStatusResponse *)
 {
     //log(r->toString());
 }
 
-void MainWindow::onReceivedRxResponse16(WPAN::RxResponse16 * r)
+void MainWindow::onReceivedRxResponse16(Wpan::RxResponse16 * r)
 {
     log(r->data().prepend("<< "));
 }
 
-void MainWindow::onReceivedRxResponse64(WPAN::RxResponse64 * r)
+void MainWindow::onReceivedRxResponse64(Wpan::RxResponse64 * r)
 {
     log(r->data().prepend("<< "));
 }

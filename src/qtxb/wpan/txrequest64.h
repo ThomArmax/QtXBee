@@ -25,7 +25,7 @@
 #include <QObject>
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 /**
  * @brief The TXRequest64 class is used to send a message over 802.15.4 network using 64 bits addresses.

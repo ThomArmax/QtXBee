@@ -21,7 +21,7 @@
 #include "rxresponse16.h"
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 RxResponse16::RxResponse16(QObject *parent) :
     RxBaseResponse(parent),

@@ -26,7 +26,7 @@
 #include <QObject>
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 /**
  * @todo Implement RxResponseIoSampleBase class

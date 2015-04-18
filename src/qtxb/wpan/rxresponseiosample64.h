@@ -24,7 +24,7 @@
 #include "rxresponseiosamplebase.h"
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 /**
  * @todo To be implemented

@@ -26,7 +26,7 @@
 #include <QObject>
 
 namespace QtXBee {
-namespace WPAN {
+namespace Wpan {
 
 
 class RxResponse64 : public RxBaseResponse

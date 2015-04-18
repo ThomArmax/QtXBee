@@ -1,4 +1,4 @@
-#include "transmitrequest.h"
+#include "zbtxrequest.h"
 #include "xbeepacket.h"
 
 namespace QtXBee {

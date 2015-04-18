@@ -39,12 +39,12 @@ SOURCES += \
     wpan/rxresponseiosamplebase.cpp \
     wpan/rxresponseiosample16.cpp \
     wpan/rxresponseiosample64.cpp \
-    zigbee/transmitrequest.cpp \
-    zigbee/transmitstatus.cpp \
-    zigbee/nodeidentificationindicator.cpp \
-    zigbee/receivepacket.cpp \
-    zigbee/explicitadressingcommand.cpp \
-    zigbee/explicitrxindicator.cpp
+    zigbee/zbexplicittxrequest.cpp \
+    zigbee/zbtxstatusresponse.cpp \
+    zigbee/zbtxrequest.cpp \
+    zigbee/zbrxresponse.cpp \
+    zigbee/zbionodeidentificationresponse.cpp \
+    zigbee/zbexplicitrxresponse.cpp
 
 HEADERS += \
     global.h \
@@ -69,12 +69,12 @@ HEADERS += \
     wpan/rxresponseiosamplebase.h \
     wpan/rxresponseiosample16.h \
     wpan/rxresponseiosample64.h \
-    zigbee/transmitrequest.h \
-    zigbee/transmitstatus.h \
-    zigbee/nodeidentificationindicator.h \
-    zigbee/receivepacket.h \
-    zigbee/explicitadressingcommand.h \
-    zigbee/explicitrxindicator.h
+    zigbee/zbexplicittxrequest.h \
+    zigbee/zbexplicitrxresponse.h \
+    zigbee/zbionodeidentificationresponse.h \
+    zigbee/zbrxresponse.h \
+    zigbee/zbtxrequest.h \
+    zigbee/zbtxstatusresponse.h
 
 OTHER_FILES += \
     qtxb.pri \

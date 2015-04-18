@@ -1,7 +1,7 @@
 #ifndef ZBEXPLICITTXRESPONSE_H
 #define ZBEXPLICITTXRESPONSE_H
 
-#include "transmitrequest.h"
+#include "zbtxrequest.h"
 
 namespace QtXBee {
 namespace ZigBee {

@@ -1,5 +1,5 @@
-#include "explicitadressingcommand.h"
-#include "transmitrequest.h"
+#include "zbexplicittxrequest.h"
+#include "zbtxrequest.h"
 
 namespace QtXBee {
 namespace ZigBee {

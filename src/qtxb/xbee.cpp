@@ -18,12 +18,12 @@
 #include "wpan/rxresponse16.h"
 #include "wpan/rxresponse64.h"
 
-#include "zigbee/transmitstatus.h"
-#include "zigbee/receivepacket.h"
-#include "zigbee/explicitrxindicator.h"
-#include "zigbee/nodeidentificationindicator.h"
-#include "zigbee/transmitrequest.h"
-#include "zigbee/explicitadressingcommand.h"
+#include "zigbee/zbtxstatusresponse.h"
+#include "zigbee/zbrxresponse.h"
+#include "zigbee/zbexplicitrxresponse.h"
+#include "zigbee/zbionodeidentificationresponse.h"
+#include "zigbee/zbtxrequest.h"
+#include "zigbee/zbexplicittxrequest.h"
 
 namespace QtXBee {
 

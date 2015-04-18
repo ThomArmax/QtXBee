@@ -1,4 +1,4 @@
-#include "nodeidentificationindicator.h"
+#include "zbionodeidentificationresponse.h"
 
 namespace QtXBee {
 namespace ZigBee {

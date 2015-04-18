@@ -42,31 +42,35 @@ class XBeePacket : public QObject
 public:
 
     enum ApiId {
-        TXRequest64Id                   = 0x00,
-        TXRequest16Id                   = 0x01,
-        ATCommandId                     = 0x08,
-        ATCommandQueueId                = 0x09,
-        ZBTXRequestId                   = 0x10,
-        ZBExplicitTxRequest             = 0x11,
-        RemoteATCommandRequestId        = 0x17,
-        CreateSourceRouteId             = 0x21,
-        RX64ResponseId                  = 0x80,
-        RX16ResponseId                  = 0x81,
-        RX64IOResponseId                = 0x82,
-        RX16IOResponseId                = 0x83,
-        ATCommandResponseId             = 0x88,
-        TXStatusResponseId              = 0x89,
-        ModemStatusResponseId           = 0x8A,
-        ZBTXStatusResponseId            = 0x8B,
-        ZBRXResponseId                  = 0x90,
-        ZBExplicitRxResponseId          = 0x91,
-        ZBIOSampleResponseId            = 0x92,
-        XBeeSensorReadIndicatorId       = 0x94,
-        ZBIONodeIdentificationId        = 0x95,
-        RemoteATCommandResponseId       = 0x97,
-        OverTheAirFirmwareUpdateId      = 0xA0,
-        RouteRecordIndicatorId          = 0xA1,
-        ManyToOneRouteRequestId         = 0xA3,
+        TXRequest64Id                   = 0x00, // 802.15.4
+        TXRequest16Id                   = 0x01, // 802.15.4
+        ATCommandId                     = 0x08, // 802.15.4, ZNet, ZigBee
+        ATCommandQueueId                = 0x09, // 802.15.4, ZNet, ZigBee
+        ZBTXRequestId                   = 0x10, // ZNet, ZigBee
+        ZBExplicitTxRequest             = 0x11, // ZNet, ZigBee
+        RemoteATCommandRequestId        = 0x17, // 802.15.4, ZNet, ZigBee
+        CreateSourceRouteId             = 0x21, // ZigBee
+        ZBRegisterJoiningDeviceId       = 0x24, // ZigBee
+        RX64ResponseId                  = 0x80, // 802.15.4
+        RX16ResponseId                  = 0x81, // 802.15.4
+        RX64IOResponseId                = 0x82, // 802.15.4
+        RX16IOResponseId                = 0x83, // 802.15.4
+        ATCommandResponseId             = 0x88, // 802.15.4, ZNet, ZigBee
+        TXStatusResponseId              = 0x89, // 802.15.4
+        ModemStatusResponseId           = 0x8A, // 802.15.4, ZNet, ZigBee
+        ZBTXStatusResponseId            = 0x8B, // ZNet, ZigBee
+        ZBRXResponseId                  = 0x90, // ZNet, ZigBee
+        ZBExplicitRxResponseId          = 0x91, // ZNet, ZigBee
+        ZBIOSampleResponseId            = 0x92, // ZNet, ZigBee
+        XBeeSensorReadIndicatorId       = 0x94, // ZNet, ZigBee
+        ZBIONodeIdentificationId        = 0x95, // ZNet, ZigBee
+        RemoteATCommandResponseId       = 0x97, // 802.15.4, ZNet, ZigBee
+        OverTheAirFirmwareUpdateId      = 0xA0, // ZigBee
+        RouteRecordIndicatorId          = 0xA1, // ZigBee
+        DeviceAuthenticatedIndicatorId  = 0xA2, // ZigBee
+        ManyToOneRouteRequestId         = 0xA3, // ZigBee
+        RegisterJoiningDeviceStatusId   = 0xA4, // ZigBee
+        JoinNotificationStatusId        = 0xA5, // ZigBee
         UndefinedId                     = 0xFF /**< Undefined frame. Invalid value. */
     };
 

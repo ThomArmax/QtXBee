@@ -1,19 +1,19 @@
-#ifndef EXPLICITRXINDICATOR_H
-#define EXPLICITRXINDICATOR_H
+#ifndef ZBEXPLICITRXRESPONSE_H
+#define ZBEXPLICITRXRESPONSE_H
 
 #include "xbeepacket.h"
 
 namespace QtXBee {
 namespace ZigBee {
 
-class ExplicitRxIndicator : public XBeePacket
+class ZBExplicitRxResponse : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit ExplicitRxIndicator(QObject *parent = 0);
+    explicit ZBExplicitRxResponse(QObject *parent = 0);
     void readPacket(QByteArray rx);
 };
 
 } } // END namepsace
 
-#endif // EXPLICITRXINDICATOR_H
+#endif // ZBEXPLICITRXRESPONSE_H

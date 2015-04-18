@@ -19,10 +19,10 @@ class TXStatusResponse;
 }
 
 namespace ZigBee {
-class TransmitStatus;
-class ReceivePacket;
-class ExplicitRxIndicator;
-class NodeIdentificationIndicator;
+class ZBTxStatusResponse;
+class ZBRxResponse;
+class ZBExplicitRxResponse;
+class ZBIONodeIdentificationResponse;
 }
 
 using namespace QtXBee::WPAN;
@@ -123,11 +123,11 @@ public:
 signals:
     void                receivedATCommandResponse           (ATCommandResponse *response);              /**< @brief Emitted when a ATCommandResponse frame is received*/
     void                receivedModemStatus                 (ModemStatus *response);                    /**< @brief Emitted when a ModemStatus frame is received*/
-    void                receivedTransmitStatus              (TransmitStatus *response);                 /**< @brief Emitted when a TransmitStatus frame is received*/
+    void                receivedTransmitStatus              (ZBTxStatusResponse *response);             /**< @brief Emitted when a TransmitStatus frame is received*/
     void                receivedTransmitStatus              (WPAN::TXStatusResponse *response);
-    void                receivedRXIndicator                 (ReceivePacket *response);                  /**< @brief Emitted when a RXIndicator frame is received*/
-    void                receivedRXIndicatorExplicit         (ExplicitRxIndicator *response);            /**< @brief Emitted when a RXIndicatorExplicit frame is received*/
-    void                receivedNodeIdentificationIndicator (NodeIdentificationIndicator *response);    /**< @brief Emitted when a NodeIdentificationIndicator frame is received*/
+    void                receivedRXIndicator                 (ZBRxResponse *response);                   /**< @brief Emitted when a RXIndicator frame is received*/
+    void                receivedRXIndicatorExplicit         (ZBExplicitRxResponse *response);           /**< @brief Emitted when a RXIndicatorExplicit frame is received*/
+    void                receivedNodeIdentificationIndicator (ZBIONodeIdentificationResponse *response); /**< @brief Emitted when a NodeIdentificationIndicator frame is received*/
     void                receivedRemoteCommandResponse       (RemoteATCommandResponse *response);        /**< @brief Emitted when a RemoteCommandResponse frame is received*/
     void                receivedRxResponse16                (WPAN::RxResponse16 * response);
     void                receivedRxResponse64                (WPAN::RxResponse64 * response);
@@ -156,10 +156,10 @@ public slots:
 
     void                displayATCommandResponse            (ATCommandResponse *digiMeshPacket);
     void                displayModemStatus                  (ModemStatus *digiMeshPacket);
-    void                displayTransmitStatus               (TransmitStatus *digiMeshPacket);
-    void                displayRXIndicator                  (ReceivePacket *digiMeshPacket);
-    void                displayRXIndicatorExplicit          (ExplicitRxIndicator *digiMeshPacket);
-    void                displayNodeIdentificationIndicator  (NodeIdentificationIndicator *digiMeshPacket);
+    void                displayTransmitStatus               (ZBTxStatusResponse *digiMeshPacket);
+    void                displayRXIndicator                  (ZBRxResponse *digiMeshPacket);
+    void                displayRXIndicatorExplicit          (ZBExplicitRxResponse *digiMeshPacket);
+    void                displayNodeIdentificationIndicator  (ZBIONodeIdentificationResponse *digiMeshPacket);
     void                displayRemoteCommandResponse        (RemoteATCommandResponse *digiMeshPacket);
 
 private slots:

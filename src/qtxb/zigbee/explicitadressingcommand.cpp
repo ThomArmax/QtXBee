@@ -4,10 +4,10 @@
 namespace QtXBee {
 namespace ZigBee {
 
-ExplicitAdressingCommand::ExplicitAdressingCommand(QObject *parent) :
-    TransmitRequest(parent)
+ZBExplicitTxRequest::ZBExplicitTxRequest(QObject *parent) :
+    ZBTxRequest(parent)
 {
-    setFrameType(XBeePacket::ZBExplicitTxRequest);
+    setFrameType(XBeePacket::ZBExplicitTxRequestId);
 }
 
 } } // END namepsace

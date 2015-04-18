@@ -1,16 +1,16 @@
-#ifndef RECEIVEPACKET_H
-#define RECEIVEPACKET_H
+#ifndef ZBRXRESPONSE_H
+#define ZBRXRESPONSE_H
 
 #include "xbeepacket.h"
 
 namespace QtXBee {
 namespace ZigBee {
 
-class ReceivePacket : public XBeePacket
+class ZBRxResponse : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit    ReceivePacket       (QObject *parent);
+    explicit    ZBRxResponse        (QObject *parent);
 
     void        setSrcAddr64        (QByteArray sa64);
     void        setSrcAddr16        (QByteArray sa16);
@@ -32,4 +32,4 @@ private:
 
 } } // END namepsace
 
-#endif // RECEIVEPACKET_H
+#endif // ZBRXRESPONSE_H

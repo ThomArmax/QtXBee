@@ -4,7 +4,7 @@
 namespace QtXBee {
 namespace ZigBee {
 
-TransmitRequest::TransmitRequest(QObject *parent) :
+ZBTxRequest::ZBTxRequest(QObject *parent) :
     XBeePacket(parent)
 {
     unsigned zero = 0x00;
@@ -26,40 +26,40 @@ TransmitRequest::TransmitRequest(QObject *parent) :
     setFrameType(ZBTXRequestId);
     setFrameId(0x01);
 }
-void TransmitRequest::setBroadcastRadius(int rad){
+void ZBTxRequest::setBroadcastRadius(int rad){
     m_broadcastRadius = rad;
 }
-void TransmitRequest::setTransmitOptions(unsigned to){
+void ZBTxRequest::setTransmitOptions(unsigned to){
     m_transmitOptions = to;
 }
-void TransmitRequest::setDestAddr64(QByteArray da64){
+void ZBTxRequest::setDestAddr64(QByteArray da64){
     m_destAddr64.clear();
     m_destAddr64.append(da64);
 }
-void TransmitRequest::setDestAddr16(QByteArray da16){
+void ZBTxRequest::setDestAddr16(QByteArray da16){
     m_destAddr16.clear();
     m_destAddr16.append(da16);
 }
-void TransmitRequest::setData(QByteArray d){
+void ZBTxRequest::setData(QByteArray d){
     m_data.clear();
     m_data.append(d);
 }
-QByteArray TransmitRequest::destAddr64() const{
+QByteArray ZBTxRequest::destAddr64() const{
     return m_destAddr64;
 }
-QByteArray TransmitRequest::destAddr16() const{
+QByteArray ZBTxRequest::destAddr16() const{
     return m_destAddr16;
 }
-unsigned TransmitRequest::broadcastRadius() const{
+unsigned ZBTxRequest::broadcastRadius() const{
     return m_broadcastRadius;
 }
-unsigned TransmitRequest::transmitOptions() const{
+unsigned ZBTxRequest::transmitOptions() const{
     return m_transmitOptions;
 }
-QByteArray TransmitRequest::getData() const{
+QByteArray ZBTxRequest::getData() const{
     return m_data;
 }
-void TransmitRequest::assemblePacket(){
+void ZBTxRequest::assemblePacket(){
     m_packet.clear();
     m_packet.append(frameType());
     m_packet.append(frameId());

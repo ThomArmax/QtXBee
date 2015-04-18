@@ -47,7 +47,7 @@ public:
         ATCommandId                     = 0x08, // 802.15.4, ZNet, ZigBee
         ATCommandQueueId                = 0x09, // 802.15.4, ZNet, ZigBee
         ZBTXRequestId                   = 0x10, // ZNet, ZigBee
-        ZBExplicitTxRequest             = 0x11, // ZNet, ZigBee
+        ZBExplicitTxRequestId           = 0x11, // ZNet, ZigBee
         RemoteATCommandRequestId        = 0x17, // 802.15.4, ZNet, ZigBee
         CreateSourceRouteId             = 0x21, // ZigBee
         ZBRegisterJoiningDeviceId       = 0x24, // ZigBee

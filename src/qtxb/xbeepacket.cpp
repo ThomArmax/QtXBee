@@ -244,7 +244,7 @@ QString XBeePacket::frameTypeToString(const ApiId type)
     case ATCommandId                : str = "AT Command Request"                        ; break;
     case ATCommandQueueId           : str = "AT Command - Queue Parameter Request"      ; break;
     case ZBTXRequestId              : str = "ZigBee Tx Request"                         ; break;
-    case ZBExplicitTxRequest        : str = "ZigBee Explicit Tx Request"                ; break;
+    case ZBExplicitTxRequestId      : str = "ZigBee Explicit Tx Request"                ; break;
     case RemoteATCommandRequestId   : str = "Remote AT Command Request"                 ; break;
     case CreateSourceRouteId        : str = "Create Source Route"                       ; break;
     case RX64ResponseId             : str = "Rx 64 bits Address Response"               ; break;

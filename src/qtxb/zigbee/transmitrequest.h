@@ -1,5 +1,5 @@
-#ifndef TRANSMITREQUEST_H
-#define TRANSMITREQUEST_H
+#ifndef ZBTXREQUEST_H
+#define ZBTXREQUEST_H
 
 #include "xbeepacket.h"
 #include <QByteArray>
@@ -8,7 +8,7 @@ namespace QtXBee {
 namespace ZigBee {
 
 /**
- * @brief The TransmitRequest class causes the module to send data as an RF packet to the specified destination.
+ * @brief The ZBTxRequest class causes the module to send data as an RF packet to the specified destination.
  *
  * The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices).
  * The coordinator can be addressed by either setting the 64-bit address to all 0x00s and the 16-bit address to 0xFFFE,
@@ -23,11 +23,11 @@ namespace ZigBee {
  *
  * @sa TransmitStatus
  */
-class TransmitRequest : public XBeePacket
+class ZBTxRequest : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit    TransmitRequest     (QObject *parent = 0);
+    explicit    ZBTxRequest         (QObject *parent = 0);
 
     // Reimplemented from XBeePacket
     void        assemblePacket      ();
@@ -54,4 +54,4 @@ private:
 
 } } // END namepsace
 
-#endif // TRANSMITREQUEST_H
+#endif // ZBTXREQUEST_H

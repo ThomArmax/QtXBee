@@ -3,7 +3,7 @@
 namespace QtXBee {
 namespace ZigBee {
 
-NodeIdentificationIndicator::NodeIdentificationIndicator(QObject *parent) :
+ZBIONodeIdentificationResponse::ZBIONodeIdentificationResponse(QObject *parent) :
     XBeeResponse(parent),
     m_senderAddr64          (0),
     m_senderAddr16          (0),
@@ -20,7 +20,7 @@ NodeIdentificationIndicator::NodeIdentificationIndicator(QObject *parent) :
     setFrameType(XBeePacket::ZBIONodeIdentificationId);
 }
 
-bool NodeIdentificationIndicator::setPacket(const QByteArray &packet)
+bool ZBIONodeIdentificationResponse::setPacket(const QByteArray &packet)
 Q_DECL_OVERRIDE
 {
     qDebug() << Q_FUNC_INFO << QString(packet.toHex());
@@ -160,7 +160,7 @@ exit:
     return bRet;
 }
 
-QString NodeIdentificationIndicator::toString() {
+QString ZBIONodeIdentificationResponse::toString() {
     QString str;
     str.append(QString("Raw packet                   : 0x%1\n").arg(QString(packet().toHex())));
     str.append(QString("Start delimiter              : 0x%1\n").arg(QString::number(startDelimiter(), 16)));

@@ -1,5 +1,5 @@
-#ifndef NODEIDENTIFICATIONINDICATOR_H
-#define NODEIDENTIFICATIONINDICATOR_H
+#ifndef ZBIONODEINDENTIFICATIONRESPONSE_H
+#define ZBIONODEINDENTIFICATIONRESPONSE_H
 
 #include "xbeeresponse.h"
 
@@ -12,11 +12,11 @@ namespace ZigBee {
  *
  * The data portion of this frame is similar to a network discovery response frame (see ND command).
  */
-class NodeIdentificationIndicator : public XBeeResponse
+class ZBIONodeIdentificationResponse : public XBeeResponse
 {
     Q_OBJECT
 public:
-    explicit NodeIdentificationIndicator(QObject *parent = 0);
+    explicit ZBIONodeIdentificationResponse(QObject *parent = 0);
     virtual bool setPacket(const QByteArray &packet);
 
     virtual QString toString();
@@ -37,4 +37,4 @@ private:
 
 } } // END namepsace
 
-#endif // NODEIDENTIFICATIONINDICATOR_H
+#endif // ZBIONODEINDENTIFICATIONRESPONSE_H

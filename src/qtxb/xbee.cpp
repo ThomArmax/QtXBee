@@ -249,16 +249,16 @@ void XBee::displayATCommandResponse(ATCommandResponse *digiMeshPacket){
 void XBee::displayModemStatus(ModemStatus *digiMeshPacket){
     qDebug() << "Received ModemStatus: " << digiMeshPacket->packet().toHex();
 }
-void XBee::displayTransmitStatus(TransmitStatus *digiMeshPacket){
+void XBee::displayTransmitStatus(ZBTxStatusResponse *digiMeshPacket){
     qDebug() << "Received TransmitStatus: " << digiMeshPacket->packet().toHex();
 }
-void XBee::displayRXIndicator(ReceivePacket *digiMeshPacket){
+void XBee::displayRXIndicator(ZBRxResponse *digiMeshPacket){
     qDebug() << "Received RXIndicator: " << digiMeshPacket->data().toHex();
 }
-void XBee::displayRXIndicatorExplicit(ExplicitRxIndicator *digiMeshPacket){
+void XBee::displayRXIndicatorExplicit(ZBExplicitRxResponse *digiMeshPacket){
     qDebug() << "Received RXIndicatorExplicit: " << digiMeshPacket->packet().toHex();
 }
-void XBee::displayNodeIdentificationIndicator(NodeIdentificationIndicator *digiMeshPacket){
+void XBee::displayNodeIdentificationIndicator(ZBIONodeIdentificationResponse *digiMeshPacket){
     qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->packet().toHex();
 }
 void XBee::displayRemoteCommandResponse(RemoteATCommandResponse *digiMeshPacket){
@@ -360,14 +360,14 @@ ATCommandResponse * XBee::sendATCommandSync(const QByteArray &data)
 
 void XBee::broadcast(QString data)
 {
-    TransmitRequest request;
+    ZBTxRequest request;
     request.setData(data.toLatin1());
     send(&request);
 }
 
 void XBee::unicast(QByteArray address, QString data)
 {
-    TransmitRequest request;
+    ZBTxRequest request;
     request.setDestAddr64(address);
     request.setData(data.toLatin1());
     send(&request);
@@ -619,25 +619,25 @@ void XBee::processPacket(QByteArray packet)
         break;
     }
     case XBeePacket::ZBTXStatusResponseId : {
-        TransmitStatus *response = new TransmitStatus(this);
+        ZBTxStatusResponse *response = new ZBTxStatusResponse(this);
         response->readPacket(packet);
         emit receivedTransmitStatus(response);
         break;
     }
     case XBeePacket::ZBRXResponseId : {
-        ReceivePacket *response = new ReceivePacket(this);
+        ZBRxResponse *response = new ZBRxResponse(this);
         response->readPacket(packet);
         emit receivedRXIndicator(response);
         break;
     }
     case XBeePacket::ZBExplicitRxResponseId : {
-        ExplicitRxIndicator *response = new ExplicitRxIndicator(this);
+        ZBExplicitRxResponse *response = new ZBExplicitRxResponse(this);
         response->readPacket(packet);
         emit receivedRXIndicatorExplicit(response);
         break;
     }
     case XBeePacket::ZBIONodeIdentificationId : {
-        NodeIdentificationIndicator *response = new NodeIdentificationIndicator(this);
+        ZBIONodeIdentificationResponse *response = new ZBIONodeIdentificationResponse(this);
         response->setPacket(packet);
         emit receivedNodeIdentificationIndicator(response);
         break;

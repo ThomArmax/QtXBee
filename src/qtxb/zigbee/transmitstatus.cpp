@@ -5,12 +5,12 @@
 namespace QtXBee {
 namespace ZigBee {
 
-TransmitStatus::TransmitStatus(QObject *parent) :
+ZBTxStatusResponse::ZBTxStatusResponse(QObject *parent) :
     XBeePacket(parent)
 {
     setFrameType(XBeePacket::ZBTXStatusResponseId);
 }
-void TransmitStatus::readPacket(QByteArray rx){
+void ZBTxStatusResponse::readPacket(QByteArray rx){
     m_packet.clear();
     m_packet.append(rx);
     setStartDelimiter(rx.at(0));
@@ -31,25 +31,25 @@ void TransmitStatus::readPacket(QByteArray rx){
         m_packet.clear();
     }
 }
-void TransmitStatus:: setDeliveryStatus(unsigned ds){
+void ZBTxStatusResponse::setDeliveryStatus(unsigned ds){
     m_deliveryStatus = ds;
 }
-void TransmitStatus:: setTransmitRetryCount(unsigned trc){
+void ZBTxStatusResponse::setTransmitRetryCount(unsigned trc){
     m_transmitRetryCount = trc;
 }
-void TransmitStatus:: setDiscoveryStatus(unsigned ds){
+void ZBTxStatusResponse::setDiscoveryStatus(unsigned ds){
     m_discoveryStatus = ds;
 }
-unsigned TransmitStatus:: deliveryStatus() const{
+unsigned ZBTxStatusResponse::deliveryStatus() const{
     return m_deliveryStatus;
 }
-unsigned TransmitStatus:: transmitRetryCount() const{
+unsigned ZBTxStatusResponse::transmitRetryCount() const{
     return m_transmitRetryCount;
 }
-unsigned TransmitStatus:: discoveryStatus() const{
+unsigned ZBTxStatusResponse::discoveryStatus() const{
     return m_discoveryStatus;
 }
-QByteArray TransmitStatus:: reserved() const{
+QByteArray ZBTxStatusResponse::reserved() const{
     return m_reserved;
 }
 

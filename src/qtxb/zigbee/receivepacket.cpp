@@ -5,39 +5,39 @@
 namespace QtXBee {
 namespace ZigBee {
 
-ReceivePacket::ReceivePacket(QObject *parent) :
+ZBRxResponse::ZBRxResponse(QObject *parent) :
     XBeePacket(parent)
 {
     setFrameType(XBeePacket::ZBRXResponseId);
 }
-void ReceivePacket::setSrcAddr64(QByteArray sa64) {
+void ZBRxResponse::setSrcAddr64(QByteArray sa64) {
     m_srcAddr64.clear();
     m_srcAddr64.append(sa64);
 }
-void ReceivePacket::setSrcAddr16(QByteArray sa16) {
+void ZBRxResponse::setSrcAddr16(QByteArray sa16) {
     m_srcAddr16.clear();
     m_srcAddr16.append(sa16);
 }
-void ReceivePacket::setData(QByteArray d) {
+void ZBRxResponse::setData(QByteArray d) {
     m_data.clear();
     m_data.append(d);
 }
-QByteArray ReceivePacket::srcAddr64() const {
+QByteArray ZBRxResponse::srcAddr64() const {
     return m_srcAddr64;
 }
-QByteArray ReceivePacket::srcAddr16() const {
+QByteArray ZBRxResponse::srcAddr16() const {
     return m_srcAddr16;
 }
-void ReceivePacket::setReceiveOptions(unsigned ro) {
+void ZBRxResponse::setReceiveOptions(unsigned ro) {
     m_receiveOptions = ro;
 }
-unsigned ReceivePacket::receiveOptions() const {
+unsigned ZBRxResponse::receiveOptions() const {
     return m_receiveOptions;
 }
-QByteArray ReceivePacket::data() const {
+QByteArray ZBRxResponse::data() const {
     return m_data;
 }
-void ReceivePacket::readPacket(QByteArray rx) {
+void ZBRxResponse::readPacket(QByteArray rx) {
     setPacket(rx);
     setStartDelimiter(rx.at(0));
     setLength(rx.at(2));

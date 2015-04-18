@@ -1,16 +1,16 @@
-#ifndef TXREQUESTEXPLICIT_H
-#define TXREQUESTEXPLICIT_H
+#ifndef ZBEXPLICITTXRESPONSE_H
+#define ZBEXPLICITTXRESPONSE_H
 
 #include "transmitrequest.h"
 
 namespace QtXBee {
 namespace ZigBee {
 
-class ExplicitAdressingCommand : public TransmitRequest
+class ZBExplicitTxRequest : public ZBTxRequest
 {
     Q_OBJECT
 public:
-    explicit ExplicitAdressingCommand(QObject *parent = 0);
+    explicit ZBExplicitTxRequest(QObject *parent = 0);
 
 private:
     QByteArray m_sourceEndpoint;
@@ -21,4 +21,4 @@ private:
 
 } } // END namepsace
 
-#endif // TXREQUESTEXPLICIT_H
+#endif // ZBEXPLICITTXRESPONSE_H

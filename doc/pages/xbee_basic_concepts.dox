@@ -29,10 +29,10 @@
  * - @ref XBEE_CONCEPTS_PAND_ID_SECTION
  * - @ref XBEE_CONCEPTS_CHANNEL_SECTION
  * - @ref XBEE_CONCEPTS_CREATE_NETWORK_SECTION
- * - Using a custom PAN ID
- * - Configure the XBee Gateway ZB Device with a custom PAN ID
- * - Configure other ZigBee nodes with a custom PAN ID
- * - Join an existing ZigBee network
+ * - @ref XBEE_CONCEPTS_USING_A_CUSTOM_PAN_ID_SECTION
+ * - @ref XBEE_CONCEPTS_CONFIGURE_THE_XBEE_GATAWAY_WITH_A_CUSTOM_PAN_ID_SECTION
+ * - @ref XBEE_CONCEPTS_CONFIGURE_OTHER_ZIGBEE_NODES_WITH_A_CUSTOM_PAN_ID_SECTION
+ * - @ref XBEE_CONCEPTS_JOIN_AN_EXISTING_ZIGBEE_NETWORK_SECTION
  *
  * @section XBEE_CONCEPTS_MAIN_SECTION XBee Concepts
  * Following are key concepts for XBee devices.
@@ -258,8 +258,59 @@
  * - After some seconds the table should display your XBee ZB node.
  * @image html remote-xbee-devices.png
  *
+ * @subsubsection XBEE_CONCEPTS_USING_A_CUSTOM_PAN_ID_SECTION Using a custom PAN ID
+ * In some cases, you want to have control over the PAN ID used to create your ZigBee network.
+ * Having this control is useful when there are some other networks around and you do not want your router or end device nodes to join them.
+ * In such cases, you need to specify a custom PAN ID and configure the coordinator, routers and end devices to use it.
  *
+ * @subsubsection XBEE_CONCEPTS_CONFIGURE_THE_XBEE_GATAWAY_WITH_A_CUSTOM_PAN_ID_SECTION Configure the XBee Gateway with a custom PAN ID
+ * The first device to configure with a custom PAN ID is the coordinator,
+ * which in this case is the XBee Gateway. Follow these steps to change the PAN ID of your XBee Gateway:
+ * - In an Internet browser, open the Home page of your XBee Gateway ZB and go to the XBee Network section from the left menu.
+ * - Select the XBee Gateway local XBee device to configure it.
+ * - In the XBee Configuration page, open the Network Settings section.
+ * There, configure the Extended PAN ID (ID) option with your custom PAN ID value. Remember this value, as you will configure the other ZigBee nodes of the network with the same one.
+ * @image html xbee-network-extended-pan-id.png
+ * - Click Apply to save the changes in the device.
  *
+ * After applying the changes, the coordinator initializes the ZigBee network with the new PAN ID.
+ * If you had any other ZigBee nodes connected to the network, you must update their PAN IDs so they will join the new one.
+ *
+ * @subsubsection XBEE_CONCEPTS_CONFIGURE_OTHER_ZIGBEE_NODES_WITH_A_CUSTOM_PAN_ID_SECTION Configure other ZigBee nodes with a custom PAN ID
+ * If you want your ZigBee routers or end devices to connect to a ZigBee network with a specific PAN ID,
+ * you must configure them to update the PAN ID they have configured with the new one.
+ * As they are not joined to the network that your XBee Gateway (coordinator) initialized,
+ * you cannot configure them using the XBee Gateway ZB web interface.
+ * In this case, you must use the XCTU software.
+ *
+ * If you do not have XCTU installed, go to <a href="http://www.digi.com/xctu">http://www.digi.com/xctu</a> to download and install it.
+ *
+ * Once you have XCTU installed, follow these steps to change the PAN ID of an XBee ZB module, that is, the module that comes with the XBee Gateway ZB Cloud Kit:
+ * - Attach the XBee ZB node to the XBee development board included in the kit, and connect it to your PC using a USB cable.
+ * - Open XCTU and add the XBee node you have just connected to your PC to the list of radio modules.
+ * @image html xctu-add-node.png
+ * - Select the node and wait for the application to read all its settings.
+ * - At the right side of the XCTU display, under the Networking category, there should be a setting called ID PAN ID. In this setting, replace the current PAN ID with your custom PAN ID.
+ * @image html xctu-firmware-info.png
+ * - Once you have changed the setting, click the Write radio settings button to save the new PAN ID in the XBee module.
+ *
+ * As soon as you save the new PAN ID in the XBee RF module, the module tries to connect to the ZigBee network that has the PAN ID that you configured.
+ *
+ * @subsubsection XBEE_CONCEPTS_JOIN_AN_EXISTING_ZIGBEE_NETWORK_SECTION Join an existing ZigBee network
+ * Although it is not a very common task, you can configure your XBee Gateway device to operate as a router and join an existing network.
+ * To do so, follow these steps:
+ * - In an Internet browser, open the Home page of your XBee Gatewayand go to the XBee Network section from the left menu.
+ * - Select the XBee Gateway ZB local XBee device to configure it.
+ * - In the XBee Configuration page, open the Network Settings section.
+ * There, configure the Extended PAN ID (ID) option with the PAN ID of the network to which the XBee Gateway should join.
+ * @image html xbee-network-extended-pan-id-join.png
+ * - In the same page, uncheck the setting Coordinator Enable (CE). This causes the XBee Gateway to behave as a router node within the ZigBee network.
+ * @image html xbee-network-coordinator-enable-join.png
+ * - Click Apply to save the changes in the device.
+ *
+ * After applying the changes, the XBee Gateway behaves as a router node and tries to connect to the ZigBee network with the PAN ID that you configured.
+ *
+ * To join your XBee ZB module from the kit to an existing network, you should follow the same steps described in the @ref XBEE_CONCEPTS_CONFIGURE_OTHER_ZIGBEE_NODES_WITH_A_CUSTOM_PAN_ID_SECTION section.
  *
  * <b>Source : </b><a href="http://ftp1.digi.com/support/documentation/html/90001399/90001399_A/Files/XBee-concepts.html">XBee™ Gateway User's Guide</a>
  */

@@ -62,9 +62,29 @@ bool RxResponseIoSampleBase::parseApiSpecificData(const QByteArray &data)
 
     setSampleCount(data.at(4));
 
-    setChannelMask(data.mid(5, 2).toHex().toUInt(0, 16));
+    setChannelMask((ChannelMask)data.mid(5, 2).toHex().toUInt(0, 16));
 
     return false;
+}
+
+void RxResponseIoSampleBase::setChannelMask(ChannelMask mask)
+{
+    m_channelMask = mask;
+}
+
+RxResponseIoSampleBase::ChannelMask RxResponseIoSampleBase::channelMask() const
+{
+    return m_channelMask;
+}
+
+void RxResponseIoSampleBase::setSampleCount(const quint8 count)
+{
+    m_samplesCount = count;
+}
+
+quint8 RxResponseIoSampleBase::sampleCount() const
+{
+    return m_samplesCount;
 }
 
 QString RxResponseIoSampleBase::toString()

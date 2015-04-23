@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
  *
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
-*/
+ */
 
 #ifndef RxRESPONSEIOSAMPLEBASE_H
 #define RxRESPONSEIOSAMPLEBASE_H
@@ -35,17 +35,44 @@ class RxResponseIoSampleBase : public RxBaseResponse
 {
     Q_OBJECT
 public:
+    enum Pin {
+        ADC5 = 16384,
+        ADC4 = 8192,
+        ADC3 = 4096,
+        ADC2 = 2048,
+        ADC1 = 1024,
+        ADC0 = 512,
+        DIO8 = 256,
+        DIO7 = 128,
+        DIO6 = 64,
+        DIO5 = 32,
+        DIO4 = 16,
+        DIO3 = 8,
+        DIO2 = 4,
+        DIO1 = 2,
+        DIO0 = 1
+    };
+    Q_DECLARE_FLAGS(ChannelMask, Pin)
+
     explicit        RxResponseIoSampleBase  (QObject *parent = 0);
     virtual         ~RxResponseIoSampleBase ();
 
     // Reimplemented from RxBaseResponse
     virtual void    clear                   ();
-    virtual bool    setPacket               (const QByteArray & packet);
     virtual QString toString                ();
+
+    void            setChannelMask          (ChannelMask mask);
+    ChannelMask     channelMask             () const;
+
+    void            setSampleCount          (const quint8 count);
+    quint8          sampleCount             () const;
+
+protected:
+    virtual bool    parseApiSpecificData    (const QByteArray &data);
 
 protected:
     quint8          m_samplesCount;
-    quint16         m_channelIndicator;
+    ChannelMask     m_channelMask;
 };
 
 }} // END namespace

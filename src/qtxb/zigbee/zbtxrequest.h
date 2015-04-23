@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
  *
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
-*/
+ */
 
 #ifndef ZBTxREQUEST_H
 #define ZBTxREQUEST_H

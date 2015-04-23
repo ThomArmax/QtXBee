@@ -35,7 +35,7 @@ class RemoteATCommandResponse;
 namespace Wpan {
 class RxResponse64;
 class RxResponse16;
-class TXStatusResponse;
+class TxStatusResponse;
 }
 
 namespace ZigBee {
@@ -144,9 +144,9 @@ signals:
     void                receivedATCommandResponse           (ATCommandResponse *response);              /**< @brief Emitted when a ATCommandResponse frame is received*/
     void                receivedModemStatus                 (ModemStatus *response);                    /**< @brief Emitted when a ModemStatus frame is received*/
     void                receivedTransmitStatus              (ZBTxStatusResponse *response);             /**< @brief Emitted when a TransmitStatus frame is received*/
-    void                receivedTransmitStatus              (Wpan::TXStatusResponse *response);
-    void                receivedRXIndicator                 (ZBRxResponse *response);                   /**< @brief Emitted when a RXIndicator frame is received*/
-    void                receivedRXIndicatorExplicit         (ZBExplicitRxResponse *response);           /**< @brief Emitted when a RXIndicatorExplicit frame is received*/
+    void                receivedTransmitStatus              (Wpan::TxStatusResponse *response);
+    void                receivedRxIndicator                 (ZBRxResponse *response);                   /**< @brief Emitted when a RxIndicator frame is received*/
+    void                receivedRxIndicatorExplicit         (ZBExplicitRxResponse *response);           /**< @brief Emitted when a RxIndicatorExplicit frame is received*/
     void                receivedNodeIdentificationIndicator (ZBIONodeIdentificationResponse *response); /**< @brief Emitted when a NodeIdentificationIndicator frame is received*/
     void                receivedRemoteCommandResponse       (RemoteATCommandResponse *response);        /**< @brief Emitted when a RemoteCommandResponse frame is received*/
     void                receivedRxResponse16                (Wpan::RxResponse16 * response);
@@ -177,8 +177,8 @@ public slots:
     void                displayATCommandResponse            (ATCommandResponse *digiMeshPacket);
     void                displayModemStatus                  (ModemStatus *digiMeshPacket);
     void                displayTransmitStatus               (ZBTxStatusResponse *digiMeshPacket);
-    void                displayRXIndicator                  (ZBRxResponse *digiMeshPacket);
-    void                displayRXIndicatorExplicit          (ZBExplicitRxResponse *digiMeshPacket);
+    void                displayRxIndicator                  (ZBRxResponse *digiMeshPacket);
+    void                displayRxIndicatorExplicit          (ZBExplicitRxResponse *digiMeshPacket);
     void                displayNodeIdentificationIndicator  (ZBIONodeIdentificationResponse *digiMeshPacket);
     void                displayRemoteCommandResponse        (RemoteATCommandResponse *digiMeshPacket);
 

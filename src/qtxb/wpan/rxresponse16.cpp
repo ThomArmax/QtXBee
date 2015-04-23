@@ -27,7 +27,7 @@ RxResponse16::RxResponse16(QObject *parent) :
     RxBaseResponse(parent),
     m_sourceAddress(0)
 {
-    setFrameType(RX16ResponseId);
+    setFrameType(Rx16ResponseId);
 }
 
 RxResponse16::~RxResponse16()

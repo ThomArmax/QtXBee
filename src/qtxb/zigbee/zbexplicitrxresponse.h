@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef ZBEXPLICITRXRESPONSE_H
-#define ZBEXPLICITRXRESPONSE_H
+#ifndef ZBEXPLICITRxRESPONSE_H
+#define ZBEXPLICITRxRESPONSE_H
 
 #include "xbeepacket.h"
 
@@ -36,4 +36,4 @@ public:
 
 } } // END namepsace
 
-#endif // ZBEXPLICITRXRESPONSE_H
+#endif // ZBEXPLICITRxRESPONSE_H

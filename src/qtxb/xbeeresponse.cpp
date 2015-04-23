@@ -91,7 +91,7 @@ QString XBeeResponse::statusToString(const XBeeResponse::CommandStatus status)
     case Error              : st = "Error"              ; break;
     case InvalidCommand     : st = "Invalid Command"    ; break;
     case InvalidParameter   : st = "Invalid Parameter"  ; break;
-    case TXFailure          : st = "Tx Failure"         ; break;
+    case TxFailure          : st = "Tx Failure"         ; break;
     }
 
     return st;

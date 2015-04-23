@@ -26,7 +26,7 @@ namespace Wpan {
 RxResponseIoSample16::RxResponseIoSample16(QObject *parent) :
     RxResponseIoSampleBase(parent)
 {
-    setFrameType(RX16IOResponseId);
+    setFrameType(Rx16IOResponseId);
 }
 
 RxResponseIoSample16::~RxResponseIoSample16()

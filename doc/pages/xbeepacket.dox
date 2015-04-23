@@ -2,26 +2,26 @@
  * @enum XBeePacket::ApiId
  * @brief The ApiId enum identifies sent/received frame's type
  *
- * @var XBeePacket::TXRequest64Id
- * Identifies a Transmit request with a 64-bits addressing (Wpan::TXRequest64)
+ * @var XBeePacket::TxRequest64Id
+ * Identifies a Transmit request with a 64-bits addressing (Wpan::TxRequest64)
  *
- * @var XBeePacket::TXRequest16Id
- * Identifies a Transmit request with a 16-bits addressing (Wpan::TXRequest16)
+ * @var XBeePacket::TxRequest16Id
+ * Identifies a Transmit request with a 16-bits addressing (Wpan::TxRequest16)
  *
- * @var XBeePacket::RX16ResponseId
- * Identifies a response (Wpan::TXRequest16) to a Wpan::TXRequest16 (XBeePacket::TXRequest16Id)
+ * @var XBeePacket::Rx16ResponseId
+ * Identifies a response (Wpan::TxRequest16) to a Wpan::TxRequest16 (XBeePacket::TxRequest16Id)
  *
- * @var XBeePacket::RX64ResponseId
- * Identifies a response (Wpan::TXRequest64) to a Wpan::TXRequest64 (XBeePacket::TXRequest64Id)
+ * @var XBeePacket::Rx64ResponseId
+ * Identifies a response (Wpan::TxRequest64) to a Wpan::TxRequest64 (XBeePacket::TxRequest64Id)
  *
- * @var XBeePacket::TXStatusResponseId
- * Identifies a Wpan::TXStatusResponse. When a TX Request (Wpan::TXRequest64 or Wpan::TXRequest16) is completed, the module sends a TX Status message.
+ * @var XBeePacket::TxStatusResponseId
+ * Identifies a Wpan::TxStatusResponse. When a Tx Request (Wpan::TxRequest64 or Wpan::TxRequest16) is completed, the module sends a Tx Status message.
  * This message will indicate if the packet was transmitted successfully or if there was a failure.
  *
- * @var XBeePacket::RX64IOResponseId
+ * @var XBeePacket::Rx64IOResponseId
  * Identifies a Wpan::RxResponseIoSample64
  *
- * @var XBeePacket::RX16IOResponseId
+ * @var XBeePacket::Rx16IOResponseId
  * Identifies a Wpan::RxResponseIoSample16
  *
  * @var XBeePacket::ATCommandId
@@ -36,7 +36,7 @@
  * new parameter values are queued and not applied until either the XBeePacket::ATCommandId (0x08) API type or the AC (Apply Changes) command is issued.
  * Register queries (reading parameter values) are returned immediately.
  *
- * @var XBeePacket::ZBTXRequestId
+ * @var XBeePacket::ZBTxRequestId
  * Identifies a ZigBee Transmit Request Frame (ZigBee::ZBTxRequest)<BR>
  * A Transmit Request API frame causes the module to send data as an RF packet to the specified destination.
  * The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices).
@@ -52,7 +52,7 @@
  * @var XBeePacket::ZBExplicitTxRequestId
  * Identifies an Explicit Addressing Command Frame (ZigBee::ZBExplicitTxRequest)<BR>
  * Allows ZigBee application layer fields (endpoint and cluster ID) to be specified for a data transmission.
- * Similar to the XBeePacket::TXRequestFrame, but also requires ZigBee application layer addressing fields to be specified
+ * Similar to the XBeePacket::TxRequestFrame, but also requires ZigBee application layer addressing fields to be specified
  * (endpoints, cluster ID, profile ID). An Explicit Addressing Request API frame causes the module to send data as an RF
  * packet to the specified destination, using the specified source and destination endpoints, cluster ID, and profile ID.
  * The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices).
@@ -88,12 +88,12 @@
  * Identifies a Modem Status Frame (ModemStatus)<BR>
  * RF module status messages are sent from the module in response to specific conditions.
  *
- * @var XBeePacket::ZBTXStatusResponseId
+ * @var XBeePacket::ZBTxStatusResponseId
  * Identifies a ZigBee Transmit Status (ZigBee::ZBTxStatusResponse)<BR>
- * When a XBeePacket::TXRequestFrame is completed, the module sends a TX Status message.
+ * When a XBeePacket::TxRequestFrame is completed, the module sends a Tx Status message.
  * This message will indicate if the packet was transmitted successfully or if there was a failure.
  *
- * @var XBeePacket::ZBRXResponseId
+ * @var XBeePacket::ZBRxResponseId
  * Identifies a ZigBee Receive Packet Frame when AO=0 (ZigBee::ZBRxResponse)<BR>
  * When the module receives an RF packet, it is sent out the UART using this message type.
  *

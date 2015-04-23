@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
     QObject::connect(&xb, SIGNAL(receivedATCommandResponse(ATCommandResponse*)), &xb, SLOT(displayATCommandResponse(ATCommandResponse*)));
     QObject::connect(&xb, SIGNAL(receivedModemStatus(ModemStatus*)), &xb, SLOT(displayModemStatus(ModemStatus*)));
     QObject::connect(&xb, SIGNAL(receivedTransmitStatus(ZBTxStatusResponse*)), &xb, SLOT(displayTransmitStatus(ZBTxStatusResponse*)));
-    QObject::connect(&xb, SIGNAL(receivedRXIndicator(ZBRxResponse*)), &xb, SLOT(displayRXIndicator(ZBRxResponse*)));
-    QObject::connect(&xb, SIGNAL(receivedRXIndicatorExplicit(ZBExplicitRxResponse*)), &xb, SLOT(displayRXIndicatorExplicit(ZBExplicitRxResponse*)));
+    QObject::connect(&xb, SIGNAL(receivedRxIndicator(ZBRxResponse*)), &xb, SLOT(displayRxIndicator(ZBRxResponse*)));
+    QObject::connect(&xb, SIGNAL(receivedRxIndicatorExplicit(ZBExplicitRxResponse*)), &xb, SLOT(displayRxIndicatorExplicit(ZBExplicitRxResponse*)));
     QObject::connect(&xb, SIGNAL(receivedNodeIdentificationIndicator(ZBIONodeIdentificationResponse*)), &xb, SLOT(displayNodeIdentificationIndicator(ZBIONodeIdentificationResponse*)));
     QObject::connect(&xb, SIGNAL(receivedRemoteCommandResponse(RemoteATCommandResponse*)), &xb, SLOT(displayRemoteCommandResponse(RemoteATCommandResponse*)));
 
@@ -71,12 +71,12 @@ int main(int argc, char *argv[])
     ni.setCommand(ATCommand::Command_MY);
     xb.send(&ni);
 
-//    WPAN::TXRequest16 tx16;
+//    WPAN::TxRequest16 tx16;
 //    tx16.setDestinationAddress(0x0002);
 //    tx16.setData("hello boy");
 //    xb.send(&tx16);
 
-//    WPAN::TXRequest64 tx64;
+//    WPAN::TxRequest64 tx64;
 //    tx64.setDestinationAddress(0x13A20040CABB38);
 //    tx64.setData("hello 64");
 //    xb.send(&tx64);

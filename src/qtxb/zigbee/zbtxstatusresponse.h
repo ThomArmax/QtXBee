@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef ZBTXSTATUSRESPONSE_H
-#define ZBTXSTATUSRESPONSE_H
+#ifndef ZBTxSTATUSRESPONSE_H
+#define ZBTxSTATUSRESPONSE_H
 
 #include "xbeepacket.h"
 
@@ -29,7 +29,7 @@ namespace ZigBee {
 /**
  * @brief The ZBTxStatusResponse class indicate if the packet was transmitted successfully or not.
  *
- * When a ZBTxRequest is completed, the module sends a TX Status message.
+ * When a ZBTxRequest is completed, the module sends a Tx Status message.
  * This message will indicate if the packet was transmitted successfully or if there was a failure.
  * @sa ZBTxRequest
  */
@@ -58,4 +58,4 @@ private:
 
 } } // END namepsace
 
-#endif // ZBTXSTATUSRESPONSE_H
+#endif // ZBTxSTATUSRESPONSE_H

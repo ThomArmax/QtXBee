@@ -24,26 +24,26 @@
 namespace QtXBee {
 namespace Wpan {
 
-TXStatusResponse::TXStatusResponse(QObject *parent) :
+TxStatusResponse::TxStatusResponse(QObject *parent) :
     XBeePacket(parent),
     m_status(Unknown)
 {
-    setFrameType(TXStatusResponseId);
+    setFrameType(TxStatusResponseId);
 }
 
-TXStatusResponse::~TXStatusResponse()
+TxStatusResponse::~TxStatusResponse()
 {
 
 }
 
-void TXStatusResponse::clear()
+void TxStatusResponse::clear()
 Q_DECL_OVERRIDE
 {
     XBeePacket::clear();
     setStatus(Unknown);
 }
 
-QString TXStatusResponse::toString()
+QString TxStatusResponse::toString()
 Q_DECL_OVERRIDE
 {
     QString str;
@@ -58,7 +58,7 @@ Q_DECL_OVERRIDE
     return str;
 }
 
-bool TXStatusResponse::parseApiSpecificData(const QByteArray &data)
+bool TxStatusResponse::parseApiSpecificData(const QByteArray &data)
 {
     if(data.size() != 2) {
         qDebug() << Q_FUNC_INFO << "invalid data";
@@ -71,17 +71,17 @@ bool TXStatusResponse::parseApiSpecificData(const QByteArray &data)
     return true;
 }
 
-void TXStatusResponse::setStatus(const Status status)
+void TxStatusResponse::setStatus(const Status status)
 {
     m_status = status;
 }
 
-TXStatusResponse::Status TXStatusResponse::status() const
+TxStatusResponse::Status TxStatusResponse::status() const
 {
     return m_status;
 }
 
-QString TXStatusResponse::statusToString(const Status status)
+QString TxStatusResponse::statusToString(const Status status)
 {
     QString str = "Unknown";
 

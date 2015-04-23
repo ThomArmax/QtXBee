@@ -28,7 +28,7 @@ namespace ZigBee {
 ZBTxStatusResponse::ZBTxStatusResponse(QObject *parent) :
     XBeePacket(parent)
 {
-    setFrameType(XBeePacket::ZBTXStatusResponseId);
+    setFrameType(XBeePacket::ZBTxStatusResponseId);
 }
 void ZBTxStatusResponse::readPacket(QByteArray rx){
     m_packet.clear();

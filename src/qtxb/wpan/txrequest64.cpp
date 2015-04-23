@@ -24,17 +24,17 @@ namespace QtXBee {
 namespace Wpan {
 
 
-TXRequest64::TXRequest64(QObject *parent) : XBeePacket(parent)
+TxRequest64::TxRequest64(QObject *parent) : XBeePacket(parent)
 {
-    setFrameType(TXRequest64Id);
+    setFrameType(TxRequest64Id);
 }
 
-TXRequest64::~TXRequest64()
+TxRequest64::~TxRequest64()
 {
 
 }
 
-void TXRequest64::assemblePacket()
+void TxRequest64::assemblePacket()
 Q_DECL_OVERRIDE
 {
     int i = 0;
@@ -63,7 +63,7 @@ Q_DECL_OVERRIDE
     m_packet.insert(2, length()&0xFF);
 }
 
-void TXRequest64::clear()
+void TxRequest64::clear()
 Q_DECL_OVERRIDE
 {
     XBeePacket::clear();
@@ -71,13 +71,13 @@ Q_DECL_OVERRIDE
     m_destinationAddress = 0xFFFFFFFF;
 }
 
-QString TXRequest64::toString()
+QString TxRequest64::toString()
 Q_DECL_OVERRIDE
 {
     return QString();
 }
 
-void TXRequest64::setDestinationAddress(const quint64 address)
+void TxRequest64::setDestinationAddress(const quint64 address)
 {
     m_destinationAddress = address;
 }
@@ -86,7 +86,7 @@ void TXRequest64::setDestinationAddress(const quint64 address)
   @brief Returns the packet's destination address.
  * @return the packet's destination address.
  */
-quint64 TXRequest64::destinationAddress() const
+quint64 TxRequest64::destinationAddress() const
 {
     return m_destinationAddress;
 }
@@ -95,7 +95,7 @@ quint64 TXRequest64::destinationAddress() const
  * @brief Sets the data to be sent (Up to 100 bytes per packet)
  * @param data the data to be sent
  */
-void TXRequest64::setData(const QByteArray &data)
+void TxRequest64::setData(const QByteArray &data)
 {
     m_data = data;
 }
@@ -104,7 +104,7 @@ void TXRequest64::setData(const QByteArray &data)
  * @brief Returns the data to be sent
  * @return the data to be sent
  */
-QByteArray TXRequest64::data() const
+QByteArray TxRequest64::data() const
 {
     return m_data;
 }

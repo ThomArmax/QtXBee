@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef RXBASERESPONSE_H
-#define RXBASERESPONSE_H
+#ifndef RxBASERESPONSE_H
+#define RxBASERESPONSE_H
 
 #include "../xbeeresponse.h"
 
@@ -29,7 +29,7 @@ namespace QtXBee {
 namespace Wpan {
 
 /**
- * @brief The RXBaseResponse class
+ * @brief The RxBaseResponse class
  * @todo Handle options
  */
 class RxBaseResponse : public XBeeResponse
@@ -57,4 +57,4 @@ protected:
 
 }} // END namespace
 
-#endif // RXBASERESPONSE_H
+#endif // RxBASERESPONSE_H

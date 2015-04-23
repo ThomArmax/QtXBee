@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef TXREQUEST16_H
-#define TXREQUEST16_H
+#ifndef TxREQUEST16_H
+#define TxREQUEST16_H
 
 #include "../xbeepacket.h"
 #include <QObject>
@@ -28,16 +28,16 @@ namespace QtXBee {
 namespace Wpan {
 
 /**
- * @brief The TXRequest16 class is used to send a message over 802.15.4 network using 16 bits addresses.
+ * @brief The TxRequest16 class is used to send a message over 802.15.4 network using 16 bits addresses.
  *
  * API identifier value: 0x01
  */
-class TXRequest16 : public XBeePacket
+class TxRequest16 : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit        TXRequest16             (QObject *parent = 0);
-                    ~TXRequest16            ();
+    explicit        TxRequest16             (QObject *parent = 0);
+                    ~TxRequest16            ();
 
     // Reimplemented from XBeePacket
     virtual void    assemblePacket          ();
@@ -57,4 +57,4 @@ private:
 
 } } // END namespace
 
-#endif // TXREQUEST16_H
+#endif // TxREQUEST16_H

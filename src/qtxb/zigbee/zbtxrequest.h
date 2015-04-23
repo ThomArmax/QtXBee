@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef ZBTXREQUEST_H
-#define ZBTXREQUEST_H
+#ifndef ZBTxREQUEST_H
+#define ZBTxREQUEST_H
 
 #include "xbeepacket.h"
 #include <QByteArray>
@@ -74,4 +74,4 @@ private:
 
 } } // END namepsace
 
-#endif // ZBTXREQUEST_H
+#endif // ZBTxREQUEST_H

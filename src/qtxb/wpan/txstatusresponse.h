@@ -18,15 +18,15 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef TXSTATUSRESPONSE_H
-#define TXSTATUSRESPONSE_H
+#ifndef TxSTATUSRESPONSE_H
+#define TxSTATUSRESPONSE_H
 
 #include "../xbeepacket.h"
 
 namespace QtXBee {
 namespace Wpan {
 
-class TXStatusResponse : public XBeePacket
+class TxStatusResponse : public XBeePacket
 {
     Q_OBJECT
 public:
@@ -38,8 +38,8 @@ public:
         Purged      = 3
     };
 
-    explicit        TXStatusResponse        (QObject *parent = 0);
-    virtual         ~TXStatusResponse       ();
+    explicit        TxStatusResponse        (QObject *parent = 0);
+    virtual         ~TxStatusResponse       ();
 
     // Reimplemented from XBeePacket
     virtual void    clear                   ();
@@ -59,4 +59,4 @@ private:
 
 }} // END namepsace
 
-#endif // TXSTATUSRESPONSE_H
+#endif // TxSTATUSRESPONSE_H

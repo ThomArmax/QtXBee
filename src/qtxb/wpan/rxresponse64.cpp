@@ -29,7 +29,7 @@ RxResponse64::RxResponse64(QObject *parent) :
     RxBaseResponse(parent),
     m_sourceAddress(0)
 {
-    setFrameType(RX64ResponseId);
+    setFrameType(Rx64ResponseId);
 }
 
 RxResponse64::~RxResponse64()

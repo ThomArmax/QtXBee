@@ -270,11 +270,11 @@ void XBee::displayModemStatus(ModemStatus *digiMeshPacket){
 void XBee::displayTransmitStatus(ZBTxStatusResponse *digiMeshPacket){
     qDebug() << "Received TransmitStatus: " << digiMeshPacket->packet().toHex();
 }
-void XBee::displayRXIndicator(ZBRxResponse *digiMeshPacket){
-    qDebug() << "Received RXIndicator: " << digiMeshPacket->data().toHex();
+void XBee::displayRxIndicator(ZBRxResponse *digiMeshPacket){
+    qDebug() << "Received RxIndicator: " << digiMeshPacket->data().toHex();
 }
-void XBee::displayRXIndicatorExplicit(ZBExplicitRxResponse *digiMeshPacket){
-    qDebug() << "Received RXIndicatorExplicit: " << digiMeshPacket->packet().toHex();
+void XBee::displayRxIndicatorExplicit(ZBExplicitRxResponse *digiMeshPacket){
+    qDebug() << "Received RxIndicatorExplicit: " << digiMeshPacket->packet().toHex();
 }
 void XBee::displayNodeIdentificationIndicator(ZBIONodeIdentificationResponse *digiMeshPacket){
     qDebug() << "Received NodeIdentificationIndicator: " << digiMeshPacket->packet().toHex();
@@ -648,14 +648,14 @@ void XBee::processPacket(QByteArray packet)
 
     switch (packetType) {
     /********************** WPAN **********************/
-    case XBeePacket::RX16ResponseId : {
+    case XBeePacket::Rx16ResponseId : {
         Wpan::RxResponse16 * response = new Wpan::RxResponse16();
         response->setPacket(packet);
         emit receivedRxResponse16(response);
         response->deleteLater();
         break;
     }
-    case XBeePacket::RX64ResponseId : {
+    case XBeePacket::Rx64ResponseId : {
         Wpan::RxResponse64 * response = new Wpan::RxResponse64();
         response->setPacket(packet);
         emit receivedRxResponse64(response);
@@ -664,11 +664,11 @@ void XBee::processPacket(QByteArray packet)
         response->deleteLater();
         break;
     }
-    case XBeePacket::TXStatusResponseId : {
-        Wpan::TXStatusResponse * response = new Wpan::TXStatusResponse();
+    case XBeePacket::TxStatusResponseId : {
+        Wpan::TxStatusResponse * response = new Wpan::TxStatusResponse();
         response->setPacket(packet);
         emit receivedTransmitStatus(response);
-        qDebug() << Q_FUNC_INFO << "TXStatusResponseId";
+        qDebug() << Q_FUNC_INFO << "TxStatusResponseId";
         qDebug() << qPrintable(response->toString());
         response->deleteLater();
         break;
@@ -687,22 +687,22 @@ void XBee::processPacket(QByteArray packet)
         response->deleteLater();
         break;
     }
-    case XBeePacket::ZBTXStatusResponseId : {
+    case XBeePacket::ZBTxStatusResponseId : {
         ZBTxStatusResponse *response = new ZBTxStatusResponse(this);
         response->readPacket(packet);
         emit receivedTransmitStatus(response);
         break;
     }
-    case XBeePacket::ZBRXResponseId : {
+    case XBeePacket::ZBRxResponseId : {
         ZBRxResponse *response = new ZBRxResponse(this);
         response->readPacket(packet);
-        emit receivedRXIndicator(response);
+        emit receivedRxIndicator(response);
         break;
     }
     case XBeePacket::ZBExplicitRxResponseId : {
         ZBExplicitRxResponse *response = new ZBExplicitRxResponse(this);
         response->readPacket(packet);
-        emit receivedRXIndicatorExplicit(response);
+        emit receivedRxIndicatorExplicit(response);
         break;
     }
     case XBeePacket::ZBIONodeIdentificationId : {

@@ -42,7 +42,7 @@ public:
         DisableRetriesAndRouteRepair    = 0x01, /**< Disable retries and route repair */
         ApplyChanges                    = 0x02, /**< Apply changes */
         EnabledAPSEncryption            = 0x20, /**< Enable APS encryption (if EE=1) */
-        UseExtendedTXTimeout            = 0x40  /**< Use the extended transmision timeout */
+        UseExtendedTxTimeout            = 0x40  /**< Use the extended transmision timeout */
     };
     Q_DECLARE_FLAGS(RemoteCommandOptions, RemoteCommandOption)
 

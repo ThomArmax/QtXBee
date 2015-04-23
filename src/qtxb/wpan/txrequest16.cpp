@@ -23,19 +23,19 @@
 namespace QtXBee {
 namespace Wpan {
 
-TXRequest16::TXRequest16(QObject *parent) :
+TxRequest16::TxRequest16(QObject *parent) :
     XBeePacket(parent),
     m_destinationAddress(0xFFFF)
 {
-    setFrameType(TXRequest16Id);
+    setFrameType(TxRequest16Id);
 }
 
-TXRequest16::~TXRequest16()
+TxRequest16::~TxRequest16()
 {
 
 }
 
-void TXRequest16::assemblePacket()
+void TxRequest16::assemblePacket()
 Q_DECL_OVERRIDE
 {
     int i = 0;
@@ -64,7 +64,7 @@ Q_DECL_OVERRIDE
     m_packet.insert(2, length()&0xFF);
 }
 
-void TXRequest16::clear()
+void TxRequest16::clear()
 Q_DECL_OVERRIDE
 {
     XBeePacket::clear();
@@ -72,7 +72,7 @@ Q_DECL_OVERRIDE
     m_destinationAddress = 0xFFFF;
 }
 
-QString TXRequest16::toString()
+QString TxRequest16::toString()
 Q_DECL_OVERRIDE
 {
     return QString();
@@ -83,7 +83,7 @@ Q_DECL_OVERRIDE
  * @note To send the packet on the broadcast set the address to 0xFFFF
  * @param address the destination address
  */
-void TXRequest16::setDestinationAddress(const quint16 address)
+void TxRequest16::setDestinationAddress(const quint16 address)
 {
     m_destinationAddress = address;
 }
@@ -92,7 +92,7 @@ void TXRequest16::setDestinationAddress(const quint16 address)
   @brief Returns the packet's destination address.
  * @return the packet's destination address.
  */
-quint16 TXRequest16::destinationAddress() const
+quint16 TxRequest16::destinationAddress() const
 {
     return m_destinationAddress;
 }
@@ -101,7 +101,7 @@ quint16 TXRequest16::destinationAddress() const
  * @brief Sets the data to be sent (Up to 100 bytes per packet)
  * @param data the data to be sent
  */
-void TXRequest16::setData(const QByteArray &data)
+void TxRequest16::setData(const QByteArray &data)
 {
     m_data = data;
 }
@@ -110,7 +110,7 @@ void TXRequest16::setData(const QByteArray &data)
  * @brief Returns the data to be sent
  * @return the data to be sent
  */
-QByteArray TXRequest16::data() const
+QByteArray TxRequest16::data() const
 {
     return m_data;
 }

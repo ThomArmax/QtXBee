@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     xbee = new XBee(this);
     xbee->setMode(XBee::API1Mode);
 
-    connect(xbee, SIGNAL(receivedTransmitStatus(Wpan::TXStatusResponse*)), this, SLOT(onReceivedTransmitStatus(Wpan::TXStatusResponse*)));
+    connect(xbee, SIGNAL(receivedTransmitStatus(Wpan::TxStatusResponse*)), this, SLOT(onReceivedTransmitStatus(Wpan::TxStatusResponse*)));
     connect(xbee, SIGNAL(receivedRxResponse16(Wpan::RxResponse16*)), this, SLOT(onReceivedRxResponse16(Wpan::RxResponse16*)));
     connect(xbee, SIGNAL(receivedRxResponse64(Wpan::RxResponse64*)), this, SLOT(onReceivedRxResponse64(Wpan::RxResponse64*)));
 
@@ -87,7 +87,7 @@ void MainWindow::onSendCommandButtonClicked()
     // 64 bits address
     if(addr > 0xFFFF) {
         //log(QString("Sending '%1' to %2 (64 bits addressing)").arg(ui->data->text()).arg(addr));
-        Wpan::TXRequest64 req;
+        Wpan::TxRequest64 req;
         req.setDestinationAddress(addr);
         req.setData(ui->data->text().toLatin1());
         xbee->send(&req);
@@ -96,7 +96,7 @@ void MainWindow::onSendCommandButtonClicked()
     else {
         //log(QString("Sending '%1' to %2 (16 bits addressing)").arg(ui->data->text()).arg(addr));
         log(ui->data->text().prepend(">> "));
-        Wpan::TXRequest16 req;
+        Wpan::TxRequest16 req;
         req.setDestinationAddress(addr);
         req.setData(ui->data->text().toLatin1());
         req.setFrameId(20);
@@ -113,7 +113,7 @@ void MainWindow::log(const QString &log)
     ui->console->verticalScrollBar()->setValue(ui->console->verticalScrollBar()->maximum());
 }
 
-void MainWindow::onReceivedTransmitStatus(Wpan::TXStatusResponse *)
+void MainWindow::onReceivedTransmitStatus(Wpan::TxStatusResponse *)
 {
     //log(r->toString());
 }

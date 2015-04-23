@@ -28,7 +28,7 @@ namespace ZigBee {
 ZBRxResponse::ZBRxResponse(QObject *parent) :
     XBeePacket(parent)
 {
-    setFrameType(XBeePacket::ZBRXResponseId);
+    setFrameType(XBeePacket::ZBRxResponseId);
 }
 void ZBRxResponse::setSrcAddr64(QByteArray sa64) {
     m_srcAddr64.clear();

@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef RXRESPONSE64_H
-#define RXRESPONSE64_H
+#ifndef RxRESPONSE64_H
+#define RxRESPONSE64_H
 
 #include "rxbaseresponse.h"
 
@@ -36,7 +36,7 @@ public:
     explicit        RxResponse64        (QObject * parent = 0);
     virtual         ~RxResponse64       ();
 
-    // Reimplemented from RXBaseResponse
+    // Reimplemented from RxBaseResponse
     virtual void    clear               ();
     virtual QString toString            ();
 
@@ -52,4 +52,4 @@ private:
 
 }} // END namespace
 
-#endif // RXRESPONSE64_H
+#endif // RxRESPONSE64_H

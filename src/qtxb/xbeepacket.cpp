@@ -274,23 +274,23 @@ QString XBeePacket::frameTypeToString(const ApiId type)
 {
     QString str;
     switch(type) {
-    case TXRequest64Id              : str = "Tx 16 bits Address Request"                ; break;
-    case TXRequest16Id              : str = "Tx 16 bits Address Request"                ; break;
+    case TxRequest64Id              : str = "Tx 16 bits Address Request"                ; break;
+    case TxRequest16Id              : str = "Tx 16 bits Address Request"                ; break;
     case ATCommandId                : str = "AT Command Request"                        ; break;
     case ATCommandQueueId           : str = "AT Command - Queue Parameter Request"      ; break;
-    case ZBTXRequestId              : str = "ZigBee Tx Request"                         ; break;
+    case ZBTxRequestId              : str = "ZigBee Tx Request"                         ; break;
     case ZBExplicitTxRequestId      : str = "ZigBee Explicit Tx Request"                ; break;
     case RemoteATCommandRequestId   : str = "Remote AT Command Request"                 ; break;
     case CreateSourceRouteId        : str = "Create Source Route"                       ; break;
-    case RX64ResponseId             : str = "Rx 64 bits Address Response"               ; break;
-    case RX16ResponseId             : str = "Rx 16 bits Address Response"               ; break;
-    case RX64IOResponseId           : str = "Rx 64 bits Address I/O Response"           ; break;
-    case RX16IOResponseId           : str = "Rx 16 bits Address I/O Response"           ; break;
+    case Rx64ResponseId             : str = "Rx 64 bits Address Response"               ; break;
+    case Rx16ResponseId             : str = "Rx 16 bits Address Response"               ; break;
+    case Rx64IOResponseId           : str = "Rx 64 bits Address I/O Response"           ; break;
+    case Rx16IOResponseId           : str = "Rx 16 bits Address I/O Response"           ; break;
     case ATCommandResponseId        : str = "AT Command Response"                       ; break;
-    case TXStatusResponseId         : str = "Tx Status Response"                        ; break;
+    case TxStatusResponseId         : str = "Tx Status Response"                        ; break;
     case ModemStatusResponseId      : str = "Modem Status Response"                     ; break;
-    case ZBTXStatusResponseId       : str = "ZigBee Tx Status Response"                 ; break;
-    case ZBRXResponseId             : str = "ZigBee Rx Response"                        ; break;
+    case ZBTxStatusResponseId       : str = "ZigBee Tx Status Response"                 ; break;
+    case ZBRxResponseId             : str = "ZigBee Rx Response"                        ; break;
     case ZBExplicitRxResponseId     : str = "ZigBee Explicit Rx Response"               ; break;
     case ZBIOSampleResponseId       : str = "ZigBee I/O Sample Response"                ; break;
     case XBeeSensorReadIndicatorId  : str = "XBee Sensore Read Indicator"               ; break;

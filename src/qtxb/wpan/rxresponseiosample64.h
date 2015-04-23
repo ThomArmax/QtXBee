@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef RXRESPONSEIOSAMPLE64_H
-#define RXRESPONSEIOSAMPLE64_H
+#ifndef RxRESPONSEIOSAMPLE64_H
+#define RxRESPONSEIOSAMPLE64_H
 
 #include "rxresponseiosamplebase.h"
 
@@ -38,4 +38,4 @@ public:
 
 }} // END namespace
 
-#endif // RXRESPONSEIOSAMPLE64_H
+#endif // RxRESPONSEIOSAMPLE64_H

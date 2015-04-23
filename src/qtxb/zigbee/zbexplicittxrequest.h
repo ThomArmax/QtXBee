@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef ZBEXPLICITTXRESPONSE_H
-#define ZBEXPLICITTXRESPONSE_H
+#ifndef ZBEXPLICITTxRESPONSE_H
+#define ZBEXPLICITTxRESPONSE_H
 
 #include "zbtxrequest.h"
 
@@ -41,4 +41,4 @@ private:
 
 } } // END namepsace
 
-#endif // ZBEXPLICITTXRESPONSE_H
+#endif // ZBEXPLICITTxRESPONSE_H

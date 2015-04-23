@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
 */
 
-#ifndef TXREQUEST64_H
-#define TXREQUEST64_H
+#ifndef TxREQUEST64_H
+#define TxREQUEST64_H
 
 #include "../xbeepacket.h"
 #include <QObject>
@@ -28,16 +28,16 @@ namespace QtXBee {
 namespace Wpan {
 
 /**
- * @brief The TXRequest64 class is used to send a message over 802.15.4 network using 64 bits addresses.
+ * @brief The TxRequest64 class is used to send a message over 802.15.4 network using 64 bits addresses.
  *
  * API identifier value: 0x00
  */
-class TXRequest64 : public XBeePacket
+class TxRequest64 : public XBeePacket
 {
     Q_OBJECT
 public:
-    explicit        TXRequest64             (QObject *parent = 0);
-                    ~TXRequest64            ();
+    explicit        TxRequest64             (QObject *parent = 0);
+                    ~TxRequest64            ();
 
     // Reimplemented from XBeePacket
     virtual void    assemblePacket          ();
@@ -57,4 +57,4 @@ private:
 
 } } // END namespace
 
-#endif // TXREQUEST64_H
+#endif // TxREQUEST64_H

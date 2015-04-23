@@ -43,7 +43,7 @@ public:
         Error               = 1,    /**< Error */
         InvalidCommand      = 2,    /**< Invalid Command */
         InvalidParameter    = 3,    /**< Invalid Parameter */
-        TXFailure           = 4     /**< Transmission failure */
+        TxFailure           = 4     /**< Transmission failure */
     };
 
     explicit        XBeeResponse    (QObject *parent = 0);

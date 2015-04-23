@@ -62,24 +62,24 @@ class XBeePacket : public QObject
 public:
 
     enum ApiId {
-        TXRequest64Id                   = 0x00, // 802.15.4
-        TXRequest16Id                   = 0x01, // 802.15.4
+        TxRequest64Id                   = 0x00, // 802.15.4
+        TxRequest16Id                   = 0x01, // 802.15.4
         ATCommandId                     = 0x08, // 802.15.4, ZNet, ZigBee
         ATCommandQueueId                = 0x09, // 802.15.4, ZNet, ZigBee
-        ZBTXRequestId                   = 0x10, // ZNet, ZigBee
+        ZBTxRequestId                   = 0x10, // ZNet, ZigBee
         ZBExplicitTxRequestId           = 0x11, // ZNet, ZigBee
         RemoteATCommandRequestId        = 0x17, // 802.15.4, ZNet, ZigBee
         CreateSourceRouteId             = 0x21, // ZigBee
         ZBRegisterJoiningDeviceId       = 0x24, // ZigBee
-        RX64ResponseId                  = 0x80, // 802.15.4
-        RX16ResponseId                  = 0x81, // 802.15.4
-        RX64IOResponseId                = 0x82, // 802.15.4
-        RX16IOResponseId                = 0x83, // 802.15.4
+        Rx64ResponseId                  = 0x80, // 802.15.4
+        Rx16ResponseId                  = 0x81, // 802.15.4
+        Rx64IOResponseId                = 0x82, // 802.15.4
+        Rx16IOResponseId                = 0x83, // 802.15.4
         ATCommandResponseId             = 0x88, // 802.15.4, ZNet, ZigBee
-        TXStatusResponseId              = 0x89, // 802.15.4
+        TxStatusResponseId              = 0x89, // 802.15.4
         ModemStatusResponseId           = 0x8A, // 802.15.4, ZNet, ZigBee
-        ZBTXStatusResponseId            = 0x8B, // ZNet, ZigBee
-        ZBRXResponseId                  = 0x90, // ZNet, ZigBee
+        ZBTxStatusResponseId            = 0x8B, // ZNet, ZigBee
+        ZBRxResponseId                  = 0x90, // ZNet, ZigBee
         ZBExplicitRxResponseId          = 0x91, // ZNet, ZigBee
         ZBIOSampleResponseId            = 0x92, // ZNet, ZigBee
         XBeeSensorReadIndicatorId       = 0x94, // ZNet, ZigBee

@@ -27,7 +27,7 @@
 namespace QtXBee {
 
 /**
- * @brief The ModemStatus class represent the XBee module status.
+ * @brief The ModemStatus class represents the XBee module status.
  *
  * RF module status messages are sent from the module in response to specific conditions.
  */

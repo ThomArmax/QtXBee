@@ -76,11 +76,21 @@ Q_DECL_OVERRIDE
     return str;
 }
 
+/**
+ * @brief Sets the 16-bits packet's source address.
+ * @param sourceAddress
+ * @sa RxResponse16::sourceAddress()
+ */
 void RxResponse16::setSourceAddress(const quint16 sourceAddress)
 {
     m_sourceAddress = sourceAddress;
 }
 
+/**
+ * @brief Returns the 16-bits packet's source address.
+ * @return the 16-bits packet's source address.
+ * @sa RxResponse16::setSourceAddress()
+ */
 quint16 RxResponse16::sourceAddress() const
 {
     return m_sourceAddress;

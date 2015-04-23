@@ -107,7 +107,7 @@ public:
     explicit        XBeePacket              (QObject *parent = 0);
 
     void            setStartDelimiter       (unsigned sd);
-    void            setLength               (unsigned l);
+    void            setLength               (unsigned length);
     void            setFrameType            (ApiId type);
     void            setFrameId              (unsigned id);
     void            setChecksum             (unsigned cs);

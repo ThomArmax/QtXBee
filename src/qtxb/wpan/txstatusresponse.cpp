@@ -71,16 +71,33 @@ bool TxStatusResponse::parseApiSpecificData(const QByteArray &data)
     return true;
 }
 
+/**
+ * @brief Sets the transmit status
+ * @param status
+ * @sa TxStatusResponse::Status
+ * @sa TxStatusResponse::status()
+ */
 void TxStatusResponse::setStatus(const Status status)
 {
     m_status = status;
 }
 
+/**
+ * @brief Returns the transmit status
+ * @return the transmit status
+ * @sa TxStatusResponse::Status
+ * @sa TxStatusResponse::setStatus()
+ */
 TxStatusResponse::Status TxStatusResponse::status() const
 {
     return m_status;
 }
 
+/**
+ * @brief Returns the Status as a human readable string
+ * @param status
+ * @return the Status as a human readable string
+ */
 QString TxStatusResponse::statusToString(const Status status)
 {
     QString str = "Unknown";

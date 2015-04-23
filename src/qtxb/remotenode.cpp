@@ -118,30 +118,76 @@ void RemoteNode::setRssi(const qint8 rssi) {
     }
 }
 
+/**
+ * @brief Returns the RemoteNode's address (16 bits address)
+ * @return the RemoteNode's address (16 bits address)
+ * @sa RemoteNode::setAddress()
+ * @sa RemoteNode::addressChanged()
+ */
 quint16 RemoteNode::address() const {
     return m_my;
 }
 
+/**
+ * @brief Returns the RemoteNode' serial number (MSB part)
+ * @return the serial number (MSB part)
+ * @sa RemoteNode::setSerialNumberHigh()
+ * @sa RemoteNode::serialNumberHighChanged()
+ * @sa RemoteNode::serialNumberLow()
+ * @sa RemoteNode::serialNumber()
+ */
 quint32 RemoteNode::serialNumberHigh() const {
     return m_sh;
 }
 
+/**
+ * @brief Returns the RemoteNode' serial number (LSB part)
+ * @return the serial number (LSB part)
+ * @sa RemoteNode::setSerialNumberLow()
+ * @sa RemoteNode::serialNumberLowChanged()
+ * @sa RemoteNode::serialNumberHigh()
+ * @sa RemoteNode::serialNumber()
+ */
 quint32 RemoteNode::serialNumberLow() const {
     return m_sl;
 }
 
+/**
+ * @brief Returns the RemoteNode' serial number (64 bits)
+ * @return the RemoteNode' serial number (64 bits)
+ * @sa RemoteNode::serialNumberHigh()
+ * @sa RemoteNode::serialNumberLow()
+ * @sa RemoteNode::setSerialNumberHigh()
+ * @sa RemoteNode::setSerialNumberLow()
+ */
 quint64 RemoteNode::serialNumber() const {
     return ((quint64)m_sh<<32) + m_sl;
 }
 
+/**
+ * @brief Returns the RSSI (Received Signal Strength Indication)
+ * @return the RSSI (Received Signal Strength Indication)
+ * @sa RemoteNode::setRssi()
+ * @sa RemoteNode::rssiChanged()
+ */
 qint8 RemoteNode::rssi() const {
     return m_rssi;
 }
 
+/**
+ * @brief Returns the node identifier
+ * @return the node identifier
+ * @sa RemoteNode::setNodeIdentifier()
+ * @sa RemoteNode::nodeIdentifierChanged()
+ */
 QString RemoteNode::nodeIdentifier() const {
     return m_ni;
 }
 
+/**
+ * @brief Returns the RemoteNode's properties in a human readable string.
+ * @return the RemoteNode's properties in a human readable string.
+ */
 QString RemoteNode::toString() {
     QString str;
     if(!nodeIdentifier().isEmpty())

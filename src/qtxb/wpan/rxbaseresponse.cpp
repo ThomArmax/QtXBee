@@ -48,11 +48,21 @@ Q_DECL_OVERRIDE
     return QString();
 }
 
+/**
+ * @brief Sets the RSSI (Received Signal Strength Indication)
+ * @param rssi
+ * @sa RxBaseResponse::rssi()
+ */
 void RxBaseResponse::setRSSI(const qint8 rssi)
 {
     m_rssi = rssi;
 }
 
+/**
+ * @brief Returns the RSSI (Received Signal Strength Indication)
+ * @return the RSSI (Received Signal Strength Indication)
+ * @sa RxBaseResponse::setRSSI()
+ */
 qint8 RxBaseResponse::rssi() const
 {
     return m_rssi;

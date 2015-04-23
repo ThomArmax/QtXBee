@@ -25,6 +25,9 @@
 
 namespace QtXBee {
 
+/**
+ * @brief The ByteUtils class is A tooling class to manipulates bytes or QByteArray
+ */
 class ByteUtils
 {
 public:

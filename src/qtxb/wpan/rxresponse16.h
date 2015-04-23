@@ -28,6 +28,9 @@
 namespace QtXBee {
 namespace Wpan {
 
+/**
+ * @brief The RxResponse16 class represents the reponse to a TxRequest16
+ */
 class RxResponse16 : public RxBaseResponse
 {
     Q_OBJECT

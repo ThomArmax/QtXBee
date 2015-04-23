@@ -26,16 +26,23 @@
 namespace QtXBee {
 namespace Wpan {
 
+/**
+ * @brief The TxStatusResponse class is used to indicate if a packet (TxRequest64 or TxRequest16)
+ * was transmitted successfully or if there was a failure.
+ */
 class TxStatusResponse : public XBeePacket
 {
     Q_OBJECT
 public:
+    /**
+     * @brief The Status enum
+     */
     enum Status {
-        Unknown     = -1,
-        Success     = 0,
-        NoACK       = 1,
-        CCAFailure  = 2,
-        Purged      = 3
+        Unknown     = -1,   /**< @brief Unknown, invalid value */
+        Success     = 0,    /**< @brief Success */
+        NoACK       = 1,    /**< @brief No acknowledgment */
+        CCAFailure  = 2,    /**< @brief CCA Failure */
+        Purged      = 3     /**< @brief Purged */
     };
 
     explicit        TxStatusResponse        (QObject *parent = 0);

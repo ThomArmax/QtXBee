@@ -28,7 +28,9 @@
 namespace QtXBee {
 namespace Wpan {
 
-
+/**
+ * @brief The RxResponse64 class represents the reponse to a RxResponse64
+ */
 class RxResponse64 : public RxBaseResponse
 {
     Q_OBJECT

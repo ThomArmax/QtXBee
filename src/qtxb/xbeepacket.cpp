@@ -50,12 +50,12 @@ void XBeePacket::setStartDelimiter(unsigned sd)
 
 /**
  * @brief Sets the frame's length
- * @param l
+ * @param length
  * @sa XBeePacket::length()
  */
-void XBeePacket::setLength(unsigned l)
+void XBeePacket::setLength(unsigned length)
 {
-    m_length = l;
+    m_length = length;
 }
 
 /**
@@ -269,6 +269,7 @@ QString XBeePacket::toString()
  * @brief Returns the given frame type APIFrameType into a human readable string
  * @returns the given frame type APIFrameType into a human readable string
  * @param type
+ * @sa ApiId
  */
 QString XBeePacket::frameTypeToString(const ApiId type)
 {

@@ -22,11 +22,21 @@
 
 namespace QtXBee {
 
+/**
+ * @brief Returns the given quint8 converted into QByteArray
+ * @param number
+ * @return the given quint8 converted into QByteArray
+ */
 QByteArray ByteUtils::uintToByteArray(quint8 number)
 {
     return QByteArray::number(number);
 }
 
+/**
+ * @brief Returns the given quint16 converted into QByteArray
+ * @param number
+ * @return the given quint16 converted into QByteArray
+ */
 QByteArray ByteUtils::uintToByteArray(quint16 number)
 {
     QByteArray array;
@@ -37,6 +47,11 @@ QByteArray ByteUtils::uintToByteArray(quint16 number)
     return array;
 }
 
+/**
+ * @brief Returns the given quint32 converted into QByteArray
+ * @param number
+ * @return the given quint32 converted into QByteArray
+ */
 QByteArray ByteUtils::uintToByteArray(quint32 number)
 {
     QByteArray array;
@@ -47,6 +62,11 @@ QByteArray ByteUtils::uintToByteArray(quint32 number)
     return array;
 }
 
+/**
+ * @brief Returns the given quint64 converted into QByteArray
+ * @param number
+ * @return the given quint64 converted into QByteArray
+ */
 QByteArray ByteUtils::uintToByteArray(quint64 number)
 {
     QByteArray array;

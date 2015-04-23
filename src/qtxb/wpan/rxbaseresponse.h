@@ -29,7 +29,7 @@ namespace QtXBee {
 namespace Wpan {
 
 /**
- * @brief The RxBaseResponse class
+ * @brief The RxBaseResponse class is the base to implement a Wpan Response
  * @todo Handle options
  */
 class RxBaseResponse : public XBeeResponse

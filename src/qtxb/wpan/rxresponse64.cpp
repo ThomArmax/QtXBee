@@ -78,11 +78,21 @@ Q_DECL_OVERRIDE
     return str;
 }
 
+/**
+ * @brief Sets the 64-bits packet's source address.
+ * @param sourceAddress
+ * @sa RxResponse64::sourceAddress()
+ */
 void RxResponse64::setSourceAddress(const quint64 sourceAddress)
 {
     m_sourceAddress = sourceAddress;
 }
 
+/**
+ * @brief Returns the 64-bits packet's source address.
+ * @return the 64-bits packet's source address.
+ * @sa RxResponse64::setSourceAddress()
+ */
 quint64 RxResponse64::sourceAddress() const
 {
     return m_sourceAddress;

@@ -29,13 +29,13 @@
 namespace QtXBee {
 
 /**
- * @brief The RemoteCommandResponse represent the response to a RemoteCommandRequest.
+ * @brief The RemoteATCommandResponse class represents the response to a RemoteATCommandRequest.
  *
- * If a module receives a remote command response RF data frame in response to a RemoteCommandRequest,
+ * If a module receives a remote command response RF data frame in response to a RemoteATCommandRequest,
  * the module will send a RemoteCommandResponse message out the UART.
  * Some commands may send back multiple frames--for example, Node Discover (ND) command.
  *
- * @sa RemoteCommandRequest
+ * @sa RemoteATCommandRequest
  */
 class RemoteATCommandResponse : public ATCommandResponse
 {

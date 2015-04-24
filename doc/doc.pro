@@ -5,6 +5,7 @@ OTHER_FILES += \
     pages/mainpage.dox  \
     pages/xbee_basic_concepts.dox \
     pages/xbeepacket.dox \
+    pages/gettingstarted.dox \
     namespaces/namespace_qtxbee.dox \
     namespaces/namespace_wpan.dox \
     namespaces/namespace_zigbee.dox \

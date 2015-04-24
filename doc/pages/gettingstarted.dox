@@ -1,0 +1,31 @@
+/*!
+ * @page GETTING_STARTED Getting started with QtXBee SDK
+ *
+ * @section GETTING_STARTED_XBEE_CONNECTION XBee connection
+ * @code{.cpp}
+ * QtXBee::XBee xb("/dev/ttyUSB0");
+ * xb.setMode(XBee::API1Mode);
+ * @endcode
+ *
+ * @section GETTING_STARTED_AT_COMMAND_SYNC Synchrone AT Command
+ * @code{.cpp}
+ * QtXBee::XBee xb;
+ * // Set XBee serial port configuration
+ * // and open serial port here
+ *
+ * QtXBee::ATCommand panId;
+ * QtXBee::ATCommandResponse * rep;
+ * panId.setCommand(QtXBee::ATCommand::Command_ID);
+ * rep = xb.sendATCommandSync(&panId);
+ *
+ * if(!rep) {
+ *     // Handle error here
+ * }
+ * else if(rep->commandStatus() != QtXBee::ATCommandResponse::Ok) {
+ *     qWarning() << "AT Command Failed with status" << QtXBee::XBeeResponse::statusToString(rep->commandStatus());
+ * }
+ * else {
+ *     qdebug() << "PAN ID =" << rep->data();
+ * }
+ * @endcode
+ */

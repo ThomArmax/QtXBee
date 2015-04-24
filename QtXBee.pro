@@ -6,8 +6,11 @@
 
 TEMPLATE = subdirs
 
+CONFIG += ordered
+
 SUBDIRS += \
     src \
+    doc
 
 OTHER_FILES += \
     common.pri

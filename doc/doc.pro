@@ -1,0 +1,12 @@
+TEMPLATE = aux
+
+OTHER_FILES += \
+    pages/examples.dox \
+    pages/mainpage.dox  \
+    pages/xbee_basic_concepts.dox \
+    pages/xbeepacket.dox \
+    namespaces/namespace_qtxbee.dox \
+    namespaces/namespace_wpan.dox \
+    namespaces/namespace_zigbee.dox \
+    css/bootstrap.min.css \
+    css/customdoxygen.css \

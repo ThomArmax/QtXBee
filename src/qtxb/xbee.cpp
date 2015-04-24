@@ -60,7 +60,7 @@ XBee::XBee(QObject *parent) :
     QObject(parent),
     m_serial(NULL),
     xbeeFound(false),
-    m_mode(TransparentMode),
+    m_mode(API1Mode),
     m_frameIdCounter(1),
     m_dh(0),
     m_dl(0),
@@ -97,7 +97,7 @@ XBee::XBee(const QString &serialPort, QObject *parent) :
     QObject(parent),
     m_serial(NULL),
     xbeeFound(false),
-    m_mode(TransparentMode),
+    m_mode(API1Mode),
     m_frameIdCounter(1),
     m_dh(0),
     m_dl(0),
@@ -143,6 +143,7 @@ bool XBee::open()
     if(!m_serial)
     {
         qWarning() << "XBEE: No serial port defined";
+        xbeeFound = false;
         return false;
     }
 
@@ -162,6 +163,7 @@ bool XBee::open()
         qDebug() << "XBEE: Serial Port" << m_serial->portName() << "could not be opened";
     }
 
+    xbeeFound = false;
     return false;
 }
 
@@ -197,6 +199,7 @@ bool XBee::setSerialPort(const QString &serialPort)
         m_serial->close();
         m_serial->setPortName(serialPort);
         m_serial->disconnect(this);
+        m_serial->deleteLater();
     }
     else {
         m_serial = new QSerialPort(serialPort, this);

@@ -65,6 +65,10 @@ void MainWindow::onOpenSerialPortButtonClicked()
     QString serialPort = ui->serialCombo->currentData().toString();
     success = xbee->setSerialPort(serialPort);
 
+    if(success) {
+        success = xbee->open();
+    }
+
     ui->sendButton->setEnabled(success);
     ui->serialCommand->setEnabled(success);
 

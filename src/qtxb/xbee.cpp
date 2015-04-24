@@ -118,7 +118,6 @@ XBee::XBee(const QString &serialPort, QObject *parent) :
     m_serial = new QSerialPort(serialPort, this);
     connect(m_serial, SIGNAL(readyRead()), SLOT(readData()));
     applyDefaultSerialPortConfig();
-    initSerialConnection();
 }
 
 /**
@@ -141,11 +140,29 @@ XBee::~XBee()
  */
 bool XBee::open()
 {
-    bool bRet = false;
-    if(m_serial) {
-        bRet = m_serial->open(QIODevice::ReadWrite);
+    if(!m_serial)
+    {
+        qWarning() << "XBEE: No serial port defined";
+        return false;
     }
-    return bRet;
+
+    if(m_serial->open(QIODevice::ReadWrite))
+    {
+        if(m_serial->isOpen())
+        {
+            qDebug() << "XBEE: Connected successfully";
+            qDebug() << "XBEE: Serial Port Name: " << m_serial->portName();
+            xbeeFound = true;
+            startupCheck();
+            return true;
+        }
+    }
+    else
+    {
+        qDebug() << "XBEE: Serial Port" << m_serial->portName() << "could not be opened";
+    }
+
+    return false;
 }
 
 /**
@@ -185,9 +202,7 @@ bool XBee::setSerialPort(const QString &serialPort)
         m_serial = new QSerialPort(serialPort, this);
         connect(m_serial, SIGNAL(readyRead()), SLOT(readData()));
     }
-    if(applyDefaultSerialPortConfig()) {
-        bRet = initSerialConnection();
-    }
+    bRet = applyDefaultSerialPortConfig();
     return bRet;
 }
 
@@ -764,30 +779,6 @@ void XBee::processATCommandRespone(ATCommandResponse *rep) {
         qWarning() << Q_FUNC_INFO << "Unhandled AT command" <<  QString("0x%1 (%2)").arg(at , 0, 16).arg(ATCommand::atCommandToString(at));
     }
     emit receivedATCommandResponse(rep);
-}
-
-bool XBee::initSerialConnection()
-{
-    if(!m_serial)
-        return false;
-
-    if (m_serial->open(QIODevice::ReadWrite))
-    {
-        if(m_serial->isOpen())
-        {
-            qDebug() << "XBEE: Connected successfully";
-            qDebug() << "XBEE: Serial Port Name: " << m_serial->portName();
-            xbeeFound = true;
-            startupCheck();
-            return true;
-        }
-    }
-    else
-    {
-        qDebug() << "XBEE: Serial Port" << m_serial->portName() << "could not be opened";
-    }
-
-    return false;
 }
 
 bool XBee::startupCheck()

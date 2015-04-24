@@ -186,7 +186,6 @@ private slots:
     void                readData                            ();
 
 private:
-    bool                initSerialConnection                ();
     void                processPacket                       (QByteArray packet);
     void                processATCommandRespone             (ATCommandResponse *rep);
     bool                startupCheck                        ();

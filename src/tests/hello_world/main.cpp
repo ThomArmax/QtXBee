@@ -37,6 +37,9 @@ int main(int argc, char *argv[])
 
     XBee xb("/dev/ttyUSB0");
     xb.setMode(XBee::API1Mode);
+    if(!xb.open()) {
+        qFatal("Failed to open serial port");
+    }
 
     QObject::connect(&xb, SIGNAL(receivedATCommandResponse(ATCommandResponse*)), &xb, SLOT(displayATCommandResponse(ATCommandResponse*)));
     QObject::connect(&xb, SIGNAL(receivedModemStatus(ModemStatus*)), &xb, SLOT(displayModemStatus(ModemStatus*)));

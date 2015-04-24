@@ -3,29 +3,52 @@
  *
  * @section GETTING_STARTED_XBEE_CONNECTION XBee connection
  * @code{.cpp}
- * QtXBee::XBee xb("/dev/ttyUSB0");
+ * using namespace QtXBee;
+ *
+ * XBee::XBee xb("/dev/ttyUSB0");
  * xb.setMode(XBee::API1Mode);
  * @endcode
  *
- * @section GETTING_STARTED_AT_COMMAND_SYNC Synchrone AT Command
+ * @section GETTING_STARTED_AT_COMMAND_SYNC Synchronous AT Command
+ * This part discribes the way to send synchronous AT Commands to the XBee module.
  * @code{.cpp}
- * QtXBee::XBee xb;
+ * using namespace QtXBee;
+ *
+ * XBee xb;
  * // Set XBee serial port configuration
  * // and open serial port here
  *
- * QtXBee::ATCommand panId;
- * QtXBee::ATCommandResponse * rep;
- * panId.setCommand(QtXBee::ATCommand::Command_ID);
+ * ATCommand panId;
+ * ATCommandResponse * rep;
+ * panId.setCommand(ATCommand::Command_ID);
  * rep = xb.sendATCommandSync(&panId);
  *
  * if(!rep) {
  *     // Handle error here
  * }
- * else if(rep->commandStatus() != QtXBee::ATCommandResponse::Ok) {
- *     qWarning() << "AT Command Failed with status" << QtXBee::XBeeResponse::statusToString(rep->commandStatus());
+ * else if(rep->commandStatus() != ATCommandResponse::Ok) {
+ *     qWarning() << "AT Command Failed with status" << XBeeResponse::statusToString(rep->commandStatus());
  * }
  * else {
  *     qdebug() << "PAN ID =" << rep->data();
  * }
+ *
+ * if(rep) {
+ *     delete rep;    // Frees allocated resources
+ * }
+ * @endcode
+ *
+ * @section GETTING_STARTED_AT_COMMAND_ASYNC Asynchronous AT Command
+ * This part discribes the way to send asynchronous AT Commands to the XBee module.
+ * @code{.cpp}
+ * //main.c
+ * @endcode
+ *
+ * @code{.cpp}
+ * //myclass.h
+ * @endcode
+ *
+ * @code{.cpp}
+ * //myclass.cpp
  * @endcode
  */

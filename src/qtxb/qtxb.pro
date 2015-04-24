@@ -9,6 +9,8 @@ QT       -= gui
 TARGET = QtXBee
 TEMPLATE = lib
 
+VERSION = 0.1.alpha
+
 DEFINES += QTXBEE_LIBRARY
 
 include(../../common.pri)

@@ -10,7 +10,7 @@ This guide is made to help you to get started with the QtXBee SDK.
  - @ref GETTING_STARTED_REMOTE_AT_COMMAND_ASYNC
 
 @section GETTING_STARTED_XBEE_CONNECTION XBee serial port connection/configuration
-There are severals way to connect to the XBee' serial port.
+There are several way to connect to the XBee' serial port.
 The easiest one, is to use the default configuration (XBee factory settings), by setting directly the serial port in the XBee's factory default settings.
 In you do so, the default serial port's configuration will be applied :
  - Baud Rate : 9600
@@ -21,26 +21,26 @@ In you do so, the default serial port's configuration will be applied :
 
 @include ./../src/getting_started/getting_started_open_1/main.cpp
 
-You can also initialises the serial port to the default configuration by doing :
+You can also initialise the serial port to the default configuration by doing :
 @include ./../src/getting_started/getting_started_open_2/main.cpp
 
-If your XBee module doesn't uses the default serial port configuration, you can specify it in this way :
+If your XBee module doesn't use the default serial port configuration, you can specify it in this way :
 @include ./../src/getting_started/getting_started_open_3/main.cpp
 
 Or by doing :
 @include ./../src/getting_started/getting_started_open_4/main.cpp
 
 @section GETTING_STARTED_AT_COMMAND_SYNC Synchronous AT command
-This part discribes the way to send synchronous AT Commands to the XBee module.
+This part describes the way to send synchronous AT Commands to the XBee module.
 @include ../src/getting_started/getting_started_at_sync/main.cpp
 
 @section GETTING_STARTED_AT_COMMAND_ASYNC Asynchronous AT command
-This part discribes the way to send asynchronous AT Commands to the XBee module.
+This part describes the way to send asynchronous AT Commands to the XBee module.
 @include ../src/getting_started/getting_started_at_async/main.cpp
 <br>
 @include ../src/getting_started/getting_started_at_async/xbeeresponseprinter.h
 
-In my case, the result is
+In my case, the result is:
 @code
 Received packet
 Raw packet      : 0x7e00078801494400333284

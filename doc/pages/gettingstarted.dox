@@ -1,6 +1,7 @@
 /*!
-@page GETTING_STARTED Getting started with QtXBee SDK
+@page getting_started Getting started with QtXBee SDK
 This guide is made to help you to get started with the QtXBee SDK.
+@note Before getting started, ensure that your XBee module is in API1 mode (ATAP1).
 @section GETTING_STARTED_SUMMARY Summary
  - @ref GETTING_STARTED_XBEE_CONNECTION
  - @ref GETTING_STARTED_AT_COMMAND_SYNC

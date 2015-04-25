@@ -10,7 +10,7 @@
  * Two models were initially introduced—a lower cost 1 mW XBee and the higher power 100 mW XBee-PRO.
  * Since the initial introduction, a number of new XBee radios have been introduced and all XBees are now marketed and sold under the Digi brand.
  *
- * \subsection qtxbee_intro QtXBee SDK description
+ * \subsection qtxbee_intro_sec QtXBee SDK description
  * The QtXBee SDK is a Qt5 API library designed to use XBee DigiMesh modems from <a href="http://www.digi.com/">Digi</a>.
  *
  * It aims to be easy to use and very powerfull thanks to the <a href="http://www.qt.io/">Qt framework</a>.
@@ -38,4 +38,7 @@
  * So in this case :
  * - Libraries will be installed in <install/prefix>/usr/lib/QtXBee
  * - Includes will be installed in <install/prefix>/usr/include/QtXBee
+ *
+ * \section getting_starter_sec Getting Started
+ * Once you are done with the installation, you can go the @ref getting_started
  */

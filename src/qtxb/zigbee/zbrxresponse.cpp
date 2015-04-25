@@ -26,7 +26,7 @@ namespace QtXBee {
 namespace ZigBee {
 
 ZBRxResponse::ZBRxResponse(QObject *parent) :
-    XBeePacket(parent)
+    XBeeResponse(parent)
 {
     setFrameType(XBeePacket::ZBRxResponseId);
 }

@@ -26,7 +26,7 @@ namespace QtXBee {
 namespace ZigBee {
 
 ZBTxStatusResponse::ZBTxStatusResponse(QObject *parent) :
-    XBeePacket(parent)
+    XBeeResponse(parent)
 {
     setFrameType(XBeePacket::ZBTxStatusResponseId);
 }

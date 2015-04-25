@@ -21,7 +21,7 @@
 #ifndef TxSTATUSRESPONSE_H
 #define TxSTATUSRESPONSE_H
 
-#include "../xbeepacket.h"
+#include "../xbeeresponse.h"
 
 namespace QtXBee {
 namespace Wpan {
@@ -30,7 +30,7 @@ namespace Wpan {
  * @brief The TxStatusResponse class is used to indicate if a packet (TxRequest64 or TxRequest16)
  * was transmitted successfully or if there was a failure.
  */
-class TxStatusResponse : public XBeePacket
+class TxStatusResponse : public XBeeResponse
 {
     Q_OBJECT
 public:
@@ -48,7 +48,7 @@ public:
     explicit        TxStatusResponse        (QObject *parent = 0);
     virtual         ~TxStatusResponse       ();
 
-    // Reimplemented from XBeePacket
+    // Reimplemented from XBeeResponse
     virtual void    clear                   ();
     virtual QString toString                ();
 

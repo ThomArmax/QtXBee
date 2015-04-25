@@ -21,7 +21,7 @@
 #ifndef MODEMSTATUS_H
 #define MODEMSTATUS_H
 
-#include "xbeepacket.h"
+#include "xbeeresponse.h"
 #include <QByteArray>
 
 namespace QtXBee {
@@ -31,7 +31,7 @@ namespace QtXBee {
  *
  * RF module status messages are sent from the module in response to specific conditions.
  */
-class ModemStatus : public XBeePacket
+class ModemStatus : public XBeeResponse
 {
     Q_OBJECT
 public:

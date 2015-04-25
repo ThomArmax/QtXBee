@@ -21,12 +21,12 @@
 #ifndef ZBEXPLICITRxRESPONSE_H
 #define ZBEXPLICITRxRESPONSE_H
 
-#include "xbeepacket.h"
+#include "xbeeresponse.h"
 
 namespace QtXBee {
 namespace ZigBee {
 
-class ZBExplicitRxResponse : public XBeePacket
+class ZBExplicitRxResponse : public XBeeResponse
 {
     Q_OBJECT
 public:

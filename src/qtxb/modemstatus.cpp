@@ -25,13 +25,13 @@
 namespace QtXBee {
 
 ModemStatus::ModemStatus(QObject *parent) :
-    XBeePacket(parent)
+    XBeeResponse(parent)
 {
     setFrameType(XBeePacket::ModemStatusResponseId);
 }
 
 ModemStatus::ModemStatus(const QByteArray &data, QObject *parent) :
-    XBeePacket(parent)
+    XBeeResponse(parent)
 {
     setFrameType(XBeePacket::ModemStatusResponseId);
     setData(data);

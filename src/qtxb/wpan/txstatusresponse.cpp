@@ -25,7 +25,7 @@ namespace QtXBee {
 namespace Wpan {
 
 TxStatusResponse::TxStatusResponse(QObject *parent) :
-    XBeePacket(parent),
+    XBeeResponse(parent),
     m_status(Unknown)
 {
     setFrameType(TxStatusResponseId);

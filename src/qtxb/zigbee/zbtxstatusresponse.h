@@ -21,7 +21,7 @@
 #ifndef ZBTxSTATUSRESPONSE_H
 #define ZBTxSTATUSRESPONSE_H
 
-#include "xbeepacket.h"
+#include "xbeeresponse.h"
 
 namespace QtXBee {
 namespace ZigBee {
@@ -33,7 +33,7 @@ namespace ZigBee {
  * This message will indicate if the packet was transmitted successfully or if there was a failure.
  * @sa ZBTxRequest
  */
-class ZBTxStatusResponse : public XBeePacket
+class ZBTxStatusResponse : public XBeeResponse
 {
     Q_OBJECT
 public:

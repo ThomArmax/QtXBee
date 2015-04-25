@@ -50,14 +50,14 @@ SOURCES += \
 
 HEADERS += \
     global.h \
-    xbee.h \
+    xbee.h XBee \
     nodediscoveryresponseparser.h \
     remotenode.h \
     xbeepacket.h \
     xbeeresponse.h \
-    atcommand.h \
-    atcommandqueueparam.h \
-    atcommandresponse.h \
+    atcommand.h ATCommand \
+    atcommandqueueparam.h ATCommandQueueParam \
+    atcommandresponse.h ATCommandResponse \
     modemstatus.h \
     remoteatcommandrequest.h \
     remoteatcommandresponse.h \

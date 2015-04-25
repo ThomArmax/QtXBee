@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     xbee = new XBee(this);
+    xbee->setMode(XBee::TransparentMode);
 
     ui->setupUi(this);
     ui->sendButton->setEnabled(false);

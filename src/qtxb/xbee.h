@@ -27,6 +27,7 @@
 
 namespace QtXBee {
 class XBeePacket;
+class XBeeResponse;
 class ATCommandResponse;
 class ATCommand;
 class ModemStatus;
@@ -82,6 +83,7 @@ public:
     void                broadcast                           (QString data);
     void                unicast                             (QByteArray address, QString data);
 
+    XBeeResponse *      sendSync                            (XBeePacket * packet);
     ATCommandResponse * sendATCommandSync                   (ATCommand * command);
     ATCommandResponse * sendATCommandSync                   (const QByteArray & atcommand);
 
@@ -186,7 +188,7 @@ private slots:
     void                readData                            ();
 
 private:
-    void                processPacket                       (QByteArray packet);
+    XBeeResponse *      processPacket                       (QByteArray packet, const bool async);
     void                processATCommandRespone             (ATCommandResponse *rep);
     bool                startupCheck                        ();
     QByteArray          synchronousCmd                      (QByteArray cmd);

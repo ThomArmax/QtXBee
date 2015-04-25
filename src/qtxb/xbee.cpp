@@ -332,6 +332,55 @@ void XBee::sendAsync(XBeePacket *packet)
 }
 
 /**
+ * @brief Sends synchronously the given packet
+ * @param packet the packet to send.
+ * @return the associated XBeeResponse
+ */
+XBeeResponse * XBee::sendSync(XBeePacket *packet)
+{
+    Q_ASSERT(packet);
+    XBeeResponse * rep = NULL;
+    QByteArray repPacket;
+    QByteArray tmp;
+
+    packet->setFrameId(m_frameIdCounter);
+    if(m_frameIdCounter >= 255)
+        m_frameIdCounter = 1;
+    else m_frameIdCounter++;
+
+    packet->setFrameId(m_frameIdCounter);
+    packet->assemblePacket();
+
+    m_serial->blockSignals(true);
+
+    m_serial->write(packet->packet());
+    m_serial->flush();
+    while(m_serial->waitForReadyRead(100)) {
+        tmp.append(m_serial->readAll());
+    }
+
+    while(!tmp.isEmpty() && (unsigned char)tmp.at(0) != (unsigned char)XBeePacket::StartDelimiter) {
+        tmp.remove(0, 1);
+    }
+
+    repPacket = tmp;
+
+    m_serial->blockSignals(false);
+
+    if(repPacket.size() > 0) {
+        rep = processPacket(repPacket, false);
+        if(!rep) {
+            qDebug() << Q_FUNC_INFO << "Failed to process received response !";
+        }
+    }
+    else {
+        qDebug() << Q_FUNC_INFO << "no response to";
+        qDebug() << qPrintable(packet->toString());
+    }
+    return rep;
+}
+
+/**
  * @brief Sends an ATCommand asynchronously
  *
  * The XBee::receivedATCommandResponse() signal will be emmited when a response to the sent ATCommand is received.
@@ -652,14 +701,14 @@ void XBee::readData()
             if((unsigned char)buffer.size() >= (unsigned char)length) {
                 packet.append(buffer.left(length));
                 qDebug() << Q_FUNC_INFO << QString("0x").append(packet.toHex());
-                processPacket(packet);
+                processPacket(packet, true);
                 buffer.remove(0, length);
             }
         }
     }
 }
 
-void XBee::processPacket(QByteArray packet)
+XBeeResponse * XBee::processPacket(QByteArray packet, const bool async)
 {
     unsigned packetType = (unsigned char)packet.at(3);
     qDebug() << Q_FUNC_INFO << "packet type :" << QString::number(packetType, 16).prepend("0x");
@@ -669,70 +718,121 @@ void XBee::processPacket(QByteArray packet)
     case XBeePacket::Rx16ResponseId : {
         Wpan::RxResponse16 * response = new Wpan::RxResponse16();
         response->setPacket(packet);
-        emit receivedRxResponse16(response);
-        response->deleteLater();
+        if(async) {
+            emit receivedRxResponse16(response);
+            response->deleteLater();
+        }
+        else {
+            return response;
+        }
         break;
     }
     case XBeePacket::Rx64ResponseId : {
         Wpan::RxResponse64 * response = new Wpan::RxResponse64();
         response->setPacket(packet);
-        emit receivedRxResponse64(response);
-        qDebug() << Q_FUNC_INFO;
-        qDebug() << qPrintable(response->toString());
-        response->deleteLater();
+        if(async) {
+            emit receivedRxResponse64(response);
+            qDebug() << Q_FUNC_INFO;
+            qDebug() << qPrintable(response->toString());
+            response->deleteLater();
+        }
+        else {
+            return response;
+        }
         break;
     }
     case XBeePacket::TxStatusResponseId : {
         Wpan::TxStatusResponse * response = new Wpan::TxStatusResponse();
         response->setPacket(packet);
-        emit receivedTransmitStatus(response);
-        qDebug() << Q_FUNC_INFO << "TxStatusResponseId";
-        qDebug() << qPrintable(response->toString());
-        response->deleteLater();
+        if(async) {
+            emit receivedTransmitStatus(response);
+            qDebug() << Q_FUNC_INFO << "TxStatusResponseId";
+            qDebug() << qPrintable(response->toString());
+            response->deleteLater();
+        }
+        else {
+            return response;
+        }
         break;
     }
     /********************** QtXBee **********************/
     case XBeePacket::ATCommandResponseId : {
         ATCommandResponse *response = new ATCommandResponse(packet);
-        processATCommandRespone(response);
-        qDebug() << qPrintable(response->toString());
-        response->deleteLater();
+        if(async) {
+            processATCommandRespone(response);
+            qDebug() << qPrintable(response->toString());
+            response->deleteLater();
+        }
+        else {
+            return response;
+        }
         break;
     }
     case XBeePacket::ModemStatusResponseId : {
         ModemStatus *response = new ModemStatus(packet);
-        emit receivedModemStatus(response);
-        response->deleteLater();
+        if(async) {
+            emit receivedModemStatus(response);
+            response->deleteLater();
+        }
+        else {
+            return response;
+        }
         break;
     }
+    case XBeePacket::RemoteATCommandResponseId : {
+        RemoteATCommandResponse *response = new RemoteATCommandResponse(packet);
+        if(async) {
+            emit receivedRemoteCommandResponse(response);
+            response->deleteLater();
+        }
+        else {
+            return response;
+        }
+        break;
+    }
+    /********************** ZigBee **********************/
     case XBeePacket::ZBTxStatusResponseId : {
         ZBTxStatusResponse *response = new ZBTxStatusResponse(this);
         response->readPacket(packet);
-        emit receivedTransmitStatus(response);
+        if(async) {
+            emit receivedTransmitStatus(response);
+        }
+        else {
+            return response;
+        }
         break;
     }
     case XBeePacket::ZBRxResponseId : {
         ZBRxResponse *response = new ZBRxResponse(this);
         response->readPacket(packet);
-        emit receivedRxIndicator(response);
+        if(async) {
+            emit receivedRxIndicator(response);
+        }
+        else {
+            return response;
+        }
         break;
     }
     case XBeePacket::ZBExplicitRxResponseId : {
         ZBExplicitRxResponse *response = new ZBExplicitRxResponse(this);
         response->readPacket(packet);
-        emit receivedRxIndicatorExplicit(response);
+        if(async) {
+            emit receivedRxIndicatorExplicit(response);
+        }
+        else {
+            return response;
+        }
         break;
     }
     case XBeePacket::ZBIONodeIdentificationId : {
         ZBIONodeIdentificationResponse *response = new ZBIONodeIdentificationResponse(this);
         response->setPacket(packet);
-        emit receivedNodeIdentificationIndicator(response);
-        break;
-    }
-    case XBeePacket::RemoteATCommandResponseId : {
-        RemoteATCommandResponse *response = new RemoteATCommandResponse(packet);
-        emit receivedRemoteCommandResponse(response);
-        response->deleteLater();
+        if(async) {
+            emit receivedNodeIdentificationIndicator(response);
+        }
+        else {
+            return response;
+        }
         break;
     }
     default:
@@ -740,6 +840,8 @@ void XBee::processPacket(QByteArray packet)
                                               arg(packetType,0,16).
                                               arg(QString(packet.toHex())));
     }
+
+    return NULL;
 }
 
 void XBee::processATCommandRespone(ATCommandResponse *rep) {

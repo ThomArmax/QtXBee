@@ -1,184 +1,104 @@
 /*!
- * @page GETTING_STARTED Getting started with QtXBee SDK
- *
- * @section GETTING_STARTED_XBEE_CONNECTION XBee connection
- * There are severals way to connect to the XBee' serial port.
- * The easiest one, is to use the default configuration (XBee factory settings), by setting directly the serial port in the XBee's constructor.
- * In you do so, the default serial port's configuration will be applied :
- * * Baud Rate : 9600
- * * Data Bits : 8 bits
- * * Parity : No
- * * Stop Bits : One stop bit
- * * Flow Control : No flow control
- *
- * @code{.cpp}
- * using namespace QtXBee;
- *
- * XBee xb("/dev/ttyUSB0");
- * if(!xb.open()) {
- *     // Handle error
- * }
- * @endcode
- * You can also initialises the serial port to the default configuration by doing :
- * @code{.cpp}
- * using namespace QtXBee;
- *
- * XBee xb;
- * xb.setSerialPort("/dev/ttyUSB0");
- * if(!xb.open()) {
- *     // Handle error
- * }
- * @endcode
- * If your XBee module doesn't uses the default serial port configuration, you can specify it in this way :
- * @code{.cpp}
- * using namespace QtXBee;
- *
- * XBee xb;
- *
- * xb.setSerialPort("/dev/ttyUSB0",
- *                  QSerialPort::Baud9600,
- *                  QSerialPort::Data8,
- *                  QSerialPort::NoParity,
- *                  QSerialPort::OneStop,
- *                  QSerialPort::NoFlowControl);
- * if(!xb.open()) {
- *     // Handle error
- * }
- * @endcode
- * Or by doing :
- * @code{.cpp}
- * #include <xbee.h>
- *
- * using namespace QtXBee;
- *
- * int main(int argc, char *argv[])
- *     XBee xb;
- *     xb.setSerialPort("/dev/ttyUSB0");
- *     xb.setSerialPortConfiguration(QSerialPort::Baud9600,
- *                                   QSerialPort::Data8,
- *                                   QSerialPort::NoParity,
- *                                   QSerialPort::OneStop,
- *                                   QSerialPort::NoFlowControl);
- *     if(!xb.open()) {
- *         // Handle error
- *     }
- * ...
- * }
- * @endcode
- *
- * @section GETTING_STARTED_AT_COMMAND_SYNC Synchronous AT Command
- * This part discribes the way to send synchronous AT Commands to the XBee module.
- * @code{.cpp}
- * using namespace QtXBee;
- *
- * XBee xb;
- * // Set XBee serial port configuration
- * // and open serial port here
- *
- * ATCommand panId;
- * ATCommandResponse * rep;
- * panId.setCommand(ATCommand::Command_ID);
- * rep = xb.sendATCommandSync(&panId);
- *
- * if(!rep) {
- *     // Handle error here
- * }
- * else if(rep->commandStatus() != ATCommandResponse::Ok) {
- *     qWarning() << "AT Command Failed with status" << XBeeResponse::statusToString(rep->commandStatus());
- * }
- * else {
- *     qdebug() << "PAN ID =" << rep->data();
- * }
- *
- * if(rep) {
- *     delete rep;    // Frees allocated resources
- * }
- * @endcode
- *
- * @section GETTING_STARTED_AT_COMMAND_ASYNC Asynchronous AT Command
- * This part discribes the way to send asynchronous AT Commands to the XBee module.
- * @code{.cpp}
- * //main.cpp
- * #include <QCoreApplication>
- * #include <xbee.h>
- * #include <atcommand.h>
- * #include <atcommandresponse.h>
- * #include "XBeeResponsePrinter.h"
- *
- * using namespace QtXBee;
- *
- * int main(int argc, char *argv[])
- * {
- *     QCoreApplication a(argc, argv);
- *     XBeeResponsePrinter printer;
- *     XBee xb("/dev/ttyUSB0");
- *     ATCommand panId;
- *     panId.setCommand(ATCommand::Command_ID);
- *
- *     if(!xb.open()) {
- *         qFatal("Failed to open serial port");
- *     }
- *
- *     QObject::connect(&xb,
- *                      SIGNAL(receivedATCommandResponse(ATCommandResponse*)),
- *                      &printer,
- *                      SLOT(onPacketReceived(ATCommandResponse*))
- *                      );
- *
- *     xb.sendATCommandAsync(&panId);
- *
- *
- *     return a.exec();
- * }
- * @endcode
- * <br>
- * @code{.cpp}
- * //xbeeresponseprinter.h
- * #ifndef XBeeResponsePrinter_H
- * #define XBeeResponsePrinter_H
- *
- * #include <QObject>
- * #include <QDebug>
- *
- * #include <atcommandresponse.h>
- *
- * using namespace QtXBee;
- *
- * class XBeeResponsePrinter : public QObject {
- *     Q_OBJECT
- * public:
- *     explicit XBeeResponsePrinter(QObject * parent = 0) : QObject(parent) {}
- *    ~XBeeResponsePrinter() {}
- *
- * public slots:
- *     void onPacketReceived(ATCommandResponse * packet)
- *     {
- *         qDebug() << "Received packet";
- *         qDebug() << qPrintable(packet->toString());
- *     }
- * };
- * #endif
- * @endcode
- * In my case, the result is
- * @code
- * Received packet
- * Raw packet      : 0x7e00078801494400333284
- * Frame id        : 1 (0x1)
- * Frame type      : AT Command Response (0x88)
- * AT command      : ID (0x4944)
- * Start delimiter : 0x7e
- * Length          : 7 bytes
- * Data            : 0x3332
- * Checksum        : 4294967172
- * Command Status  : OK (0x0)
- * Raw packet      : 0x7e00078801494400333284
- * Frame id        : 1 (0x1)
- * Frame type      : AT Command Response (0x88)
- * AT command      : ID (0x4944)
- * Start delimiter : 0x7e
- * Length          : 7 bytes
- * Data            : 0x3332
- * Checksum        : 4294967172
- * Command Status  : OK (0x0)
- * @endcode
- */
+@page GETTING_STARTED Getting started with QtXBee SDK
+This guide is made to help you to get started with the QtXBee SDK.
+@section GETTING_STARTED_SUMMARY Summary
+ - @ref GETTING_STARTED_XBEE_CONNECTION
+ - @ref GETTING_STARTED_AT_COMMAND_SYNC
+ - @ref GETTING_STARTED_AT_COMMAND_ASYNC
+ - @ref GETTING_STARTED_REMOTE_AT_COMMAND_SYNC
+ - @ref GETTING_STARTED_REMOTE_AT_COMMAND_ASYNC
+
+@section GETTING_STARTED_XBEE_CONNECTION XBee serial port connection/configuration
+There are severals way to connect to the XBee' serial port.
+The easiest one, is to use the default configuration (XBee factory settings), by setting directly the serial port in the XBee's factory default settings.
+In you do so, the default serial port's configuration will be applied :
+ - Baud Rate : 9600
+ - Data Bits : 8 bits
+ - Parity : No
+ - Stop Bits : One stop bit
+ - Flow Control : No flow control
+
+@include ./../src/getting_started/getting_started_open_1/main.cpp
+
+You can also initialises the serial port to the default configuration by doing :
+@include ./../src/getting_started/getting_started_open_2/main.cpp
+
+If your XBee module doesn't uses the default serial port configuration, you can specify it in this way :
+@include ./../src/getting_started/getting_started_open_3/main.cpp
+
+Or by doing :
+@include ./../src/getting_started/getting_started_open_4/main.cpp
+
+@section GETTING_STARTED_AT_COMMAND_SYNC Synchronous AT command
+This part discribes the way to send synchronous AT Commands to the XBee module.
+@include ../src/getting_started/getting_started_at_sync/main.cpp
+
+@section GETTING_STARTED_AT_COMMAND_ASYNC Asynchronous AT command
+This part discribes the way to send asynchronous AT Commands to the XBee module.
+@include ../src/getting_started/getting_started_at_async/main.cpp
+<br>
+@include ../src/getting_started/getting_started_at_async/xbeeresponseprinter.h
+
+In my case, the result is
+@code
+Received packet
+Raw packet      : 0x7e00078801494400333284
+Frame id        : 1 (0x1)
+Frame type      : AT Command Response (0x88)
+AT command      : ID (0x4944)
+Start delimiter : 0x7e
+Length          : 7 bytes
+Data            : 0x3332
+Checksum        : 4294967172
+Command Status  : OK (0x0)
+Raw packet      : 0x7e00078801494400333284
+Frame id        : 1 (0x1)
+Frame type      : AT Command Response (0x88)
+AT command      : ID (0x4944)
+Start delimiter : 0x7e
+Length          : 7 bytes
+Data            : 0x3332
+Checksum        : 4294967172
+Command Status  : OK (0x0)
+@endcode
+
+@section GETTING_STARTED_REMOTE_AT_COMMAND_SYNC Synchronous remote AT command
+@include ../src/getting_started/getting_started_remote_at_sync/main.cpp
+
+In my case the result is:
+@code
+Raw packet                   : 0x7e001697020013a20040cabb3800024e4900576561746865724b
+Start delimiter              : 0x7e
+Frame type                   : Remote AT Command Response (0x97)
+Length                       : 22 bytes
+Frame id                     : 2
+Data                         : 0x57656174686572 (Weather)
+Source Address 64bits        : 0x13a20040cabb38
+Source Address 16bits        : 0x2
+AT Command                   : NI (0x4e49)
+Command Status               : OK (0x0)
+Checksum                     : 75
+
+Node Identifier = "Weather"
+@endcode
+
+@section GETTING_STARTED_REMOTE_AT_COMMAND_ASYNC Asynchronous remote AT command
+@include ../src/getting_started/getting_started_remote_at_async/main.cpp
+<br>
+@include ../src/getting_started/getting_started_remote_at_async/xbeeresponseprinter.h
+In my case the result is:
+@code
+Received packet
+Raw packet                   : 0x7e001697010013a20040cabb3800024e4900576561746865724c
+Start delimiter              : 0x7e
+Frame type                   : Remote AT Command Response (0x97)
+Length                       : 22 bytes
+Frame id                     : 1
+Data                         : 0x57656174686572 (Weather)
+Source Address 64bits        : 0x13a20040cabb38
+Source Address 16bits        : 0x2
+AT Command                   : NI (0x4e49)
+Command Status               : OK (0x0)
+Checksum                     : 7
+@endcode
+*/

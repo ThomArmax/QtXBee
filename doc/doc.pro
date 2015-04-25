@@ -11,3 +11,6 @@ OTHER_FILES += \
     namespaces/namespace_zigbee.dox \
     css/bootstrap.min.css \
     css/customdoxygen.css \
+
+DISTFILES += \
+    Doxyfile

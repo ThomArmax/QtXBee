@@ -861,7 +861,15 @@ EXCLUDE_SYMBOLS        =
 # that contain example code fragments that are included (see the \include
 # command).
 
-EXAMPLE_PATH           = ../src/examples/xbee_terminal
+EXAMPLE_PATH           = ../src/examples/xbee_terminal \
+                         ../src/getting_started/getting_started_open_1 \
+                         ../src/getting_started/getting_started_open_2 \
+                         ../src/getting_started/getting_started_open_3 \
+                         ../src/getting_started/getting_started_open_4 \
+                         ../src/getting_started/getting_started_at_sync \
+                         ../src/getting_started/getting_started_at_async \
+                         ../src/getting_started/getting_started_remote_at_sync \
+                         ../src/getting_started/getting_started_remote_at_async
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and

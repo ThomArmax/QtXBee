@@ -94,7 +94,7 @@ void MainWindow::onSendCommandButtonClicked()
         Wpan::TxRequest64 req;
         req.setDestinationAddress(addr);
         req.setData(ui->data->text().toLatin1());
-        xbee->send(&req);
+        xbee->sendAsync(&req);
     }
     // 16 bits address
     else {
@@ -104,7 +104,7 @@ void MainWindow::onSendCommandButtonClicked()
         req.setDestinationAddress(addr);
         req.setData(ui->data->text().toLatin1());
         req.setFrameId(20);
-        xbee->send(&req);
+        xbee->sendAsync(&req);
     }
     ui->data->clear();
 }

@@ -63,16 +63,16 @@ int main(int argc, char *argv[])
 //    ni.setDestinationAddress64(0x13A20040CABB38);
     ni.setDestinationAddress16(0x2);
     ni.setDestinationAddress64(0x13A20040CABB38);
-    xb.send(&ni);
+    xb.sendAsync(&ni);
 
     ni.setCommand(ATCommand::Command_SH);
-    xb.send(&ni);
+    xb.sendAsync(&ni);
     ni.setCommand(ATCommand::Command_SL);
-    xb.send(&ni);
+    xb.sendAsync(&ni);
     ni.setCommand(ATCommand::Command_ID);
-    xb.send(&ni);
+    xb.sendAsync(&ni);
     ni.setCommand(ATCommand::Command_MY);
-    xb.send(&ni);
+    xb.sendAsync(&ni);
 
 //    WPAN::TxRequest16 tx16;
 //    tx16.setDestinationAddress(0x0002);

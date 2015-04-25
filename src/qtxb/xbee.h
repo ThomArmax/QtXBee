@@ -85,7 +85,7 @@ public:
     ATCommandResponse * sendATCommandSync                   (ATCommand * command);
     ATCommandResponse * sendATCommandSync                   (const QByteArray & atcommand);
 
-    void                send                                (XBeePacket * packet);
+    void                sendAsync                           (XBeePacket * packet);
     void                sendATCommandAsync                  (ATCommand *command);
     void                sendATCommandAsync                  (const QByteArray & data);
 

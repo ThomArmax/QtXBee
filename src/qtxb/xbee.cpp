@@ -306,12 +306,12 @@ void XBee::displayRemoteCommandResponse(RemoteATCommandResponse *digiMeshPacket)
 
 /**
  * @brief Sends asynchronously the given packet
- * @param packet
+ * @param packet the packet to send.
  * @note A signal (corresponding the given packet) will be emitted when a response is received.
  *
  * For example, if the given packet is an ATCommand, the XBee::receivedATCommandResponse() will be emitted.
  */
-void XBee::send(XBeePacket *packet)
+void XBee::sendAsync(XBeePacket *packet)
 {
     packet->assemblePacket();
     if(xbeeFound && m_serial->isOpen())
@@ -339,7 +339,7 @@ void XBee::send(XBeePacket *packet)
  */
 void XBee::sendATCommandAsync(ATCommand *command)
 {
-    send(command);
+    sendAsync(command);
 }
 
 /**
@@ -430,7 +430,7 @@ void XBee::broadcast(QString data)
 {
     ZBTxRequest request;
     request.setData(data.toLatin1());
-    send(&request);
+    sendAsync(&request);
 }
 
 void XBee::unicast(QByteArray address, QString data)
@@ -438,7 +438,7 @@ void XBee::unicast(QByteArray address, QString data)
     ZBTxRequest request;
     request.setDestAddr64(address);
     request.setData(data.toLatin1());
-    send(&request);
+    sendAsync(&request);
 }
 
 /**

@@ -8,4 +8,6 @@ SUBDIRS += \
     getting_started_at_sync \
     getting_started_at_async \
     getting_started_remote_at_sync \
-    getting_started_remote_at_async
+    getting_started_remote_at_async \
+    getting_started_wpan_tx_request16 \
+    getting_started_wpan_tx_request64

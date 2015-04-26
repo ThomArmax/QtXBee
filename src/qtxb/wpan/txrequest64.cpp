@@ -77,6 +77,11 @@ Q_DECL_OVERRIDE
     return QString();
 }
 
+/**
+ * @brief Sets the 64 bits packet's destination address
+ * @note To send the packet on the broadcast set the address to 0x000000000000FFFF
+ * @param address the destination address
+ */
 void TxRequest64::setDestinationAddress(const quint64 address)
 {
     m_destinationAddress = address;

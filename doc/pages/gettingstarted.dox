@@ -8,6 +8,8 @@ This guide is made to help you to get started with the QtXBee SDK.
  - @ref GETTING_STARTED_AT_COMMAND_ASYNC
  - @ref GETTING_STARTED_REMOTE_AT_COMMAND_SYNC
  - @ref GETTING_STARTED_REMOTE_AT_COMMAND_ASYNC
+ - @ref GETTING_STARTED_WPAN_TX_REQUEST16
+ - @ref GETTING_STARTED_WPAN_TX_REQUEST64
 
 @section GETTING_STARTED_XBEE_CONNECTION XBee serial port connection/configuration
 There are several way to connect to the XBee' serial port.
@@ -19,16 +21,16 @@ In you do so, the default serial port's configuration will be applied :
  - Stop Bits : One stop bit
  - Flow Control : No flow control
 
-@include ./../src/getting_started/getting_started_open_1/main.cpp
+@include ../src/getting_started/getting_started_open_1/main.cpp
 
 You can also initialise the serial port to the default configuration by doing :
-@include ./../src/getting_started/getting_started_open_2/main.cpp
+@include ../src/getting_started/getting_started_open_2/main.cpp
 
 If your XBee module doesn't use the default serial port configuration, you can specify it in this way :
-@include ./../src/getting_started/getting_started_open_3/main.cpp
+@include ../src/getting_started/getting_started_open_3/main.cpp
 
 Or by doing :
-@include ./../src/getting_started/getting_started_open_4/main.cpp
+@include ../src/getting_started/getting_started_open_4/main.cpp
 
 @section GETTING_STARTED_AT_COMMAND_SYNC Synchronous AT command
 This part describes the way to send synchronous AT Commands to the XBee module.
@@ -102,4 +104,20 @@ AT Command                   : NI (0x4e49)
 Command Status               : OK (0x0)
 Checksum                     : 7
 @endcode
+
+@section GETTING_STARTED_WPAN_TX_REQUEST16 Wpan transmit request (16 bits addressing)
+This example shows how to send data to a remote XBee, using 16-bits addressing.
+
+In order to be able to send data, you must set the packet's destination address of the remote XBee (MY parameter of the remote node).
+
+We will use the QtXBee::Wpan::TxRequest16 class to send the data, and the QtXBee::Wpan::TxStatusResponse class to check the transmit status.
+@include ../src/getting_started/getting_started_wpan_tx_request16/main.cpp
+
+@section GETTING_STARTED_WPAN_TX_REQUEST64 Wpan transmit request (64 bits addressing)
+This example shows how to send data to a remote XBee, using 64-bits addressing.
+
+In order to be able to send data, you must set the packet's destination address of the remote XBee (SH+SL parameters of the remote node).
+
+We will use the QtXBee::Wpan::TxRequest64 class to send the data, and the QtXBee::Wpan::TxStatusResponse class to check the transmit status.
+@include ../src/getting_started/getting_started_wpan_tx_request64/main.cpp
 */

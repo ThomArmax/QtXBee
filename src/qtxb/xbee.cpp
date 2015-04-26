@@ -332,6 +332,59 @@ void XBee::sendAsync(XBeePacket *packet)
 }
 
 /**
+ * @brief Sends asynchronously the given command.
+ *
+ * To put the module in command mode, you need first to send '+++'
+ * When a response is received, the signal rawDataReceived() will be emitted.
+ * @see http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set
+ * @param command the command to send
+ * @return true if succeeded; false otherwise.
+ * @note The XBee must be in XBee::CommandMode, @see XBee::setMode()
+ */
+bool XBee::sendCommandAsync(const QByteArray &command)
+{
+    if(m_mode != CommandMode)
+        return false;
+    if(!xbeeFound)
+        return false;
+    if(!m_serial)
+        return false;
+    m_serial->write(command);
+    return true;
+}
+
+/**
+ * @brief Sends synchronously the given command
+ *
+ * To put the module in command mode, you need first to send '+++'
+ * @see http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set
+ * @param command the command to send
+ * @return the response (the read data from the serial port are appended until the last received character is <CR> (0x0D))
+ * @note The XBee must be in XBee::CommandMode
+ * @see XBee::setMode()
+ */
+QByteArray XBee::sendCommandSync(const QByteArray &command)
+{
+    QByteArray rep;
+    if(m_mode == CommandMode && xbeeFound && m_serial)
+    {
+        m_serial->blockSignals(true);
+        m_serial->write(command);
+        m_serial->flush();
+        while(m_serial->waitForReadyRead(10))
+            rep.append(m_serial->readAll());
+
+        m_serial->blockSignals(false);
+
+        if(!rep.isEmpty()) {
+        if(rep.at(rep.size()-1) == 0x0D)
+            rep.remove(rep.size()-1, 1);
+        }
+    }
+    return rep;
+}
+
+/**
  * @brief Sends synchronously the given packet
  * @param packet the packet to send.
  * @return the associated XBeeResponse
@@ -685,7 +738,7 @@ void XBee::readData()
     QByteArray packet;
     buffer.append(data);
 
-    if(m_mode == TransparentMode) {
+    if(m_mode == CommandMode) {
         if(buffer.endsWith(13)) {
             emit rawDataReceived(buffer);
             buffer.clear();

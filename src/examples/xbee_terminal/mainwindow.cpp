@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     xbee = new XBee(this);
-    xbee->setMode(XBee::TransparentMode);
+    xbee->setMode(XBee::CommandMode);
 
     ui->setupUi(this);
     ui->sendButton->setEnabled(false);
@@ -88,7 +88,7 @@ void MainWindow::onSendCommandButtonClicked()
     if(data != "+++") {
         data.append(0x0D);
     }
-    xbee->serialPort()->write(data);
+    xbee->sendCommandAsync(data);
 }
 
 void MainWindow::onRawDataReceived(const QByteArray &data)

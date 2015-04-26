@@ -70,7 +70,10 @@ public:
      * @note The mode affects the way the data are read on serial port.
      */
     enum Mode {
-        TransparentMode,    /**< Transparent mode */
+        CommandMode,        /**< Command mode.
+                                 This mode is used to configure the XBee module.
+                                 Once the mode is set to CommandMode, you need to send the command '+++'
+                                 @sa sendCommandSync() @sa sendCommandAsync() @see http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set */
         API1Mode,           /**< API Operation (AP=1) */
         API2Mode            /**< API Operation with escaped characters (AP=2) */
     };
@@ -83,10 +86,12 @@ public:
     void                broadcast                           (QString data);
     void                unicast                             (QByteArray address, QString data);
 
+    bool                sendCommandAsync                    (const QByteArray & command);
     XBeeResponse *      sendSync                            (XBeePacket * packet);
     ATCommandResponse * sendATCommandSync                   (ATCommand * command);
     ATCommandResponse * sendATCommandSync                   (const QByteArray & atcommand);
 
+    QByteArray          sendCommandSync                     (const QByteArray & command);
     void                sendAsync                           (XBeePacket * packet);
     void                sendATCommandAsync                  (ATCommand *command);
     void                sendATCommandAsync                  (const QByteArray & data);
@@ -139,8 +144,6 @@ public:
     quint8              NO                                  () const { return m_np;}
     quint16             DD                                  () const { return m_dd;}
     quint8              CR                                  () const { return m_cr;}
-
-    QSerialPort *       serialPort                          () { return m_serial; }                     /**< @brief Returns the QSerialPort used to communicate with the XBee. @return the QSerialPort used to communicate with the XBee */
 
 signals:
     void                receivedATCommandResponse           (ATCommandResponse *response);              /**< @brief Emitted when a ATCommandResponse frame is received*/

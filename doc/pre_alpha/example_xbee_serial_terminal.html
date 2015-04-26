@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.3.1"/>
         <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-        <title>QtXBee: XBeeSerialTerminalExample</title>
+        <title>QtXBee: XBee Serial Terminal example</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -25,7 +25,7 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand">QtXBee </a>
+                    <a class="navbar-brand">QtXBee 0.1.pre-alpha</a>
                 </div>
             </div>
         </nav>
@@ -43,11 +43,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -66,7 +65,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -81,11 +79,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="examples.html">Examples</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">XBeeSerialTerminalExample</div>  </div>
+<div class="title">XBee Serial Terminal example </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p>This example shows how to create a very simple serial terminal for your XBee module.</p>
+<p>It can be used to :</p>
+<ul>
+<li>Change the PAN Id</li>
+<li>Set the node identifier</li>
+<li>Get the serial number</li>
+<li>...</li>
+</ul>
+<div class="image">
+<img src="example_xbee_terminal.png" alt="example_xbee_terminal.png"/>
+</div>
 <h3>main.cpp</h3>
 <div class="fragment"><div class="line"><span class="comment">/*</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2015 ThomArmax (Thomas COIN)</span></div>
@@ -154,17 +168,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    QMainWindow(parent),</div>
 <div class="line">    ui(new Ui::MainWindow)</div>
 <div class="line">{</div>
-<div class="line">    xbee = <span class="keyword">new</span> <a name="_a0"></a><a class="code" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a>(<span class="keyword">this</span>);</div>
-<div class="line">    xbee-&gt;setMode(XBee::TransparentMode);</div>
+<div class="line">    xbee = <span class="keyword">new</span> <a class="code" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a>(<span class="keyword">this</span>);                  <span class="comment">// Instanciate the XBee</span></div>
+<div class="line">    xbee-&gt;setMode(<a class="code" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a500364f6fdea6e9b6cb8960ad56c87be">XBee::CommandMode</a>);       <span class="comment">// Put the XBee in Command mode (needed)</span></div>
 <div class="line"></div>
 <div class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</div>
-<div class="line">    ui-&gt;sendButton-&gt;setEnabled(<span class="keyword">false</span>);</div>
-<div class="line">    ui-&gt;serialCommand-&gt;setEnabled(<span class="keyword">false</span>);</div>
+<div class="line">    ui-&gt;sendButton-&gt;setEnabled(<span class="keyword">false</span>);      <span class="comment">// Disable the send button</span></div>
+<div class="line">    ui-&gt;serialCommand-&gt;setEnabled(<span class="keyword">false</span>);   <span class="comment">// Disabled the command line edit</span></div>
+<div class="line">                                            <span class="comment">// (where the user enter the data to send)</span></div>
 <div class="line"></div>
-<div class="line">    connect(ui-&gt;openButton, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(onOpenSerialPortButtonClicked()));</div>
-<div class="line">    connect(ui-&gt;sendButton, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(onSendCommandButtonClicked()));</div>
-<div class="line">    connect(xbee, SIGNAL(rawDataReceived(QByteArray)), <span class="keyword">this</span>, SLOT(onRawDataReceived(QByteArray)));</div>
+<div class="line">    <span class="comment">// Connects the &quot;Open&quot; button</span></div>
+<div class="line">    connect(ui-&gt;openButton, SIGNAL(clicked()),</div>
+<div class="line">            <span class="keyword">this</span>, SLOT(onOpenSerialPortButtonClicked()));</div>
 <div class="line"></div>
+<div class="line">    <span class="comment">// Connects the &quot;Send&quot; button</span></div>
+<div class="line">    connect(ui-&gt;sendButton, SIGNAL(clicked()),</div>
+<div class="line">            <span class="keyword">this</span>, SLOT(onSendCommandButtonClicked()));</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Connects the XBee to catch the received data from the serial port</span></div>
+<div class="line">    connect(xbee, SIGNAL(rawDataReceived(QByteArray)),</div>
+<div class="line">            <span class="keyword">this</span>, SLOT(onRawDataReceived(QByteArray)));</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Gets the available serial ports on the system and adds them the combobox</span></div>
+<div class="line">    <span class="comment">// in order the user can choose one</span></div>
 <div class="line">    <span class="keywordflow">foreach</span>(QSerialPortInfo port, QSerialPortInfo::availablePorts())</div>
 <div class="line">    {</div>
 <div class="line">        ui-&gt;serialCombo-&gt;addItem(port.portName(), port.systemLocation());</div>
@@ -176,6 +201,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    <span class="keyword">delete</span> ui;</div>
 <div class="line">}</div>
 <div class="line"></div>
+<div class="line"><span class="comment">// Called when the user clicks on the &quot;Open&quot; button (to open the serial port)</span></div>
 <div class="line"><span class="keywordtype">void</span> MainWindow::onOpenSerialPortButtonClicked()</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordtype">bool</span> success = <span class="keyword">false</span>;</div>
@@ -186,35 +212,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">        success = xbee-&gt;open();</div>
 <div class="line">    }</div>
 <div class="line"></div>
+<div class="line">    <span class="comment">// Enables the &quot;Send&quot; button in case the serial port has been successfully opened</span></div>
 <div class="line">    ui-&gt;sendButton-&gt;setEnabled(success);</div>
+<div class="line">    <span class="comment">// Enables the command line edit in case the serial port has been successfully opened</span></div>
 <div class="line">    ui-&gt;serialCommand-&gt;setEnabled(success);</div>
 <div class="line"></div>
-<div class="line">    log(success ? QString(<span class="stringliteral">&quot;Serial port %1 opened&quot;</span>).arg(serialPort) : QString(<span class="stringliteral">&quot;Failed to open serial port %1&quot;</span>).arg(serialPort));</div>
+<div class="line">    <span class="comment">// Logs the serial port open status</span></div>
+<div class="line">    log(success ?</div>
+<div class="line">            QString(<span class="stringliteral">&quot;Serial port %1 opened&quot;</span>).arg(serialPort) :</div>
+<div class="line">            QString(<span class="stringliteral">&quot;Failed to open serial port %1&quot;</span>).arg(serialPort)</div>
+<div class="line">            );</div>
 <div class="line">}</div>
 <div class="line"></div>
+<div class="line"><span class="comment">// Called when the user clicks on the &quot;Send&quot; button (to send the data to the XBee module)</span></div>
 <div class="line"><span class="keywordtype">void</span> MainWindow::onSendCommandButtonClicked()</div>
 <div class="line">{</div>
+<div class="line">    <span class="comment">// Gets the command entered by the user in the command line edit</span></div>
 <div class="line">    QString cmd = ui-&gt;serialCommand-&gt;text();</div>
 <div class="line">    QByteArray data;</div>
-<div class="line">    ui-&gt;serialCommand-&gt;clear();</div>
+<div class="line">    ui-&gt;serialCommand-&gt;clear(); <span class="comment">// Clears the command line edit</span></div>
 <div class="line"></div>
 <div class="line">    data = QByteArray(cmd.toStdString().data());</div>
-<div class="line">    log(QString(<span class="stringliteral">&quot;&gt; &quot;</span>).append(data));</div>
+<div class="line">    log(QString(<span class="stringliteral">&quot;&gt; &quot;</span>).append(data)); <span class="comment">// Log the command entered by the used</span></div>
 <div class="line"></div>
+<div class="line">    <span class="comment">// Append the \n (carriage return) character if the entered command is not</span></div>
+<div class="line">    <span class="comment">// +++ (which is the command to put the XBee module in command mode)</span></div>
 <div class="line">    <span class="keywordflow">if</span>(data != <span class="stringliteral">&quot;+++&quot;</span>) {</div>
 <div class="line">        data.append(0x0D);</div>
 <div class="line">    }</div>
-<div class="line">    xbee-&gt;serialPort()-&gt;write(data);</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Sends the data to the XBee module</span></div>
+<div class="line">    xbee-&gt;sendCommandAsync(data);</div>
 <div class="line">}</div>
 <div class="line"></div>
+<div class="line"><span class="comment">// Called when receiving data on the serial port</span></div>
 <div class="line"><span class="keywordtype">void</span> MainWindow::onRawDataReceived(<span class="keyword">const</span> QByteArray &amp;data)</div>
 <div class="line">{</div>
 <div class="line">    QByteArray d = data;</div>
 <div class="line">    d.remove(data.size()-1, 1);</div>
-<div class="line">    <span class="comment">//log(QString(&quot;Received \&quot;&quot;).append(d).append(&quot;\&quot;&quot;));</span></div>
 <div class="line">    log(QString().append(d));</div>
 <div class="line">}</div>
 <div class="line"></div>
+<div class="line"><span class="comment">// Writes informations in the console wigdet</span></div>
 <div class="line"><span class="keywordtype">void</span> MainWindow::log(<span class="keyword">const</span> QString &amp;log)</div>
 <div class="line">{</div>
 <div class="line">    QString text = ui-&gt;console-&gt;toPlainText();</div>
@@ -379,7 +418,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"> &lt;resources/&gt;</div>
 <div class="line"> &lt;connections/&gt;</div>
 <div class="line">&lt;/ui&gt;</div>
-</div><!-- fragment --><div class="fragment"></div><!-- fragment --> </div><!-- contents -->
+</div><!-- fragment --> </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 </div>
@@ -388,7 +427,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 25 2015 14:02:08 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 26 2015 21:59:35 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

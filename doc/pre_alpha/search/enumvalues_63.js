@@ -92,5 +92,6 @@ var searchData=
   ['command_5fwh',['Command_WH',['../class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4a2f5602f0250c2d643087d333506a911d',1,'QtXBee::ATCommand']]],
   ['command_5fwr',['Command_WR',['../class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4ad9358178a33f8d2aaaa13aaefbc10013',1,'QtXBee::ATCommand']]],
   ['command_5fzs',['Command_ZS',['../class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4aaec0e0ac6793365ea8d52abf6e9434c1',1,'QtXBee::ATCommand']]],
+  ['commandmode',['CommandMode',['../class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a500364f6fdea6e9b6cb8960ad56c87be',1,'QtXBee::XBee']]],
   ['createsourcerouteid',['CreateSourceRouteId',['../class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fba5345bb47b7abbcf19451f97a2a099d5e',1,'QtXBee::XBeePacket']]]
 ];

@@ -97,6 +97,7 @@ var searchData=
   ['command_5fwh',['Command_WH',['../class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4a2f5602f0250c2d643087d333506a911d',1,'QtXBee::ATCommand']]],
   ['command_5fwr',['Command_WR',['../class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4ad9358178a33f8d2aaaa13aaefbc10013',1,'QtXBee::ATCommand']]],
   ['command_5fzs',['Command_ZS',['../class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4aaec0e0ac6793365ea8d52abf6e9434c1',1,'QtXBee::ATCommand']]],
+  ['commandmode',['CommandMode',['../class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a500364f6fdea6e9b6cb8960ad56c87be',1,'QtXBee::XBee']]],
   ['commandoptions',['commandOptions',['../class_qt_x_bee_1_1_remote_a_t_command_request.html#ab982a2cd8c8452f903b6e6eaa38cfb4d',1,'QtXBee::RemoteATCommandRequest']]],
   ['commandstatus',['CommandStatus',['../class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4',1,'QtXBee::XBeeResponse::CommandStatus()'],['../class_qt_x_bee_1_1_x_bee_response.html#a5c0b10cccfbf31d64a6ddb79cee3a49a',1,'QtXBee::XBeeResponse::commandStatus() const ']]],
   ['crchanged',['CRChanged',['../class_qt_x_bee_1_1_x_bee.html#a407f7f9c9620e15bd35038cacb7047db',1,'QtXBee::XBee']]],

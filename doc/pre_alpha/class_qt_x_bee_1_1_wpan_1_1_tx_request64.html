@@ -25,7 +25,7 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand">QtXBee </a>
+                    <a class="navbar-brand">QtXBee 0.1.pre-alpha</a>
                 </div>
             </div>
         </nav>
@@ -47,7 +47,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
-      <li><a href="examples.html"><span>Examples</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -130,8 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4afe423dd32aa53bdf8074e12bd98c65"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a4afe423dd32aa53bdf8074e12bd98c65">toString</a> ()</td></tr>
 <tr class="memdesc:a4afe423dd32aa53bdf8074e12bd98c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a debug string containing all packet's informations.  <a href="#a4afe423dd32aa53bdf8074e12bd98c65">More...</a><br/></td></tr>
 <tr class="separator:a4afe423dd32aa53bdf8074e12bd98c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebfe0241fe6e2eb6add08824ac3c9fff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebfe0241fe6e2eb6add08824ac3c9fff"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDestinationAddress</b> (const quint64 address)</td></tr>
+<tr class="memitem:aebfe0241fe6e2eb6add08824ac3c9fff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#aebfe0241fe6e2eb6add08824ac3c9fff">setDestinationAddress</a> (const quint64 address)</td></tr>
+<tr class="memdesc:aebfe0241fe6e2eb6add08824ac3c9fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the 64 bits packet's destination address.  <a href="#aebfe0241fe6e2eb6add08824ac3c9fff">More...</a><br/></td></tr>
 <tr class="separator:aebfe0241fe6e2eb6add08824ac3c9fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30299b7fbab899e79e22fe06a895a08c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a30299b7fbab899e79e22fe06a895a08c">setData</a> (const QByteArray &amp;<a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a44d4cbbdb7fbe19d28003a9972cb1adb">data</a>)</td></tr>
 <tr class="memdesc:a30299b7fbab899e79e22fe06a895a08c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the data to be sent (Up to 100 bytes per packet)  <a href="#a30299b7fbab899e79e22fe06a895a08c">More...</a><br/></td></tr>
@@ -377,6 +376,31 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aebfe0241fe6e2eb6add08824ac3c9fff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QtXBee::Wpan::TxRequest64::setDestinationAddress </td>
+          <td>(</td>
+          <td class="paramtype">const quint64&#160;</td>
+          <td class="paramname"><em>address</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the 64 bits packet's destination address. </p>
+<dl class="section note"><dt>Note</dt><dd>To send the packet on the broadcast set the address to 0x000000000000FFFF </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>the destination address </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a4afe423dd32aa53bdf8074e12bd98c65"></a>
 <div class="memitem">
 <div class="memproto">
@@ -418,7 +442,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 25 2015 14:02:08 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 26 2015 21:59:35 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

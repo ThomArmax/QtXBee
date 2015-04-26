@@ -22,13 +22,22 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "xbee.h"
+//#include "xbee.h"
 
 namespace Ui {
 class MainWindow;
 }
 
-using namespace QtXBee;
+//using namespace QtXBee;
+
+namespace QtXBee {
+class XBee;
+namespace Wpan {
+class TxStatusResponse;
+class RxResponse16;
+class RxResponse64;
+}
+}
 
 class MainWindow : public QMainWindow
 {
@@ -41,16 +50,16 @@ public:
 private slots:
     void onOpenSerialPortButtonClicked();
     void onSendCommandButtonClicked();
-    void onReceivedTransmitStatus(Wpan::TxStatusResponse*);
-    void onReceivedRxResponse16(Wpan::RxResponse16*);
-    void onReceivedRxResponse64(Wpan::RxResponse64*);
+    void onReceivedTransmitStatus(QtXBee::Wpan::TxStatusResponse*);
+    void onReceivedRxResponse16(QtXBee::Wpan::RxResponse16*);
+    void onReceivedRxResponse64(QtXBee::Wpan::RxResponse64*);
 
 private:
     void log(const QString & log);
 
 private:
     Ui::MainWindow *ui;
-    XBee * xbee;
+    QtXBee::XBee * xbee;
 };
 
 #endif // MAINWINDOW_H

@@ -1,16 +1,9 @@
 /*!
-\example XBeeSerialTerminalExample
+@page examples Examples
+Here is a list of simple examples using the QtXBee SDK.
+Make sure you have first read \ref getting_started "the getting started guide".
 
-###main.cpp
-\include ../src/examples/xbee_terminal/main.cpp
-
-###mainwindow.cpp
-\include ../src/examples/xbee_terminal/mainwindow.cpp
-
-###mainwindow.h
-\include ../src/examples/xbee_terminal/mainwindow.h
-
-###mainwindow.ui
-\include ../src/examples/xbee_terminal/mainwindow.ui
+ - @subpage example_xbee_serial_terminal
+ - @subpage example_xbee_chat
 
 */

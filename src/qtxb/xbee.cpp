@@ -199,7 +199,8 @@ bool XBee::setSerialPort(const QString &serialPort)
         m_serial->close();
         m_serial->setPortName(serialPort);
         m_serial->disconnect(this);
-        m_serial->deleteLater();
+        delete m_serial;
+        m_serial = NULL;
     }
     else {
         m_serial = new QSerialPort(serialPort, this);

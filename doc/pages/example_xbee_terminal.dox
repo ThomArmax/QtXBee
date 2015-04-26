@@ -1,0 +1,24 @@
+/**
+@page example_xbee_serial_terminal XBee Serial Terminal example
+This example shows how to create a very simple serial terminal for your XBee module.
+
+It can be used to :
+ - Change the PAN Id
+ - Set the node identifier
+ - Get the serial number
+ - ...
+
+@image html example_xbee_terminal.png
+
+###main.cpp
+@include ../src/examples/xbee_terminal/main.cpp
+
+###mainwindow.cpp
+@include ../src/examples/xbee_terminal/mainwindow.cpp
+
+###mainwindow.h
+@include ../src/examples/xbee_terminal/mainwindow.h
+
+###mainwindow.ui
+@include ../src/examples/xbee_terminal/mainwindow.ui
+*/

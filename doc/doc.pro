@@ -13,4 +13,6 @@ OTHER_FILES += \
     css/customdoxygen.css \
 
 DISTFILES += \
-    Doxyfile
+    Doxyfile \
+    pages/example_xbee_terminal.dox \
+    pages/example_xbee_chat.dox

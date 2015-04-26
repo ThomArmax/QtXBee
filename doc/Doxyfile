@@ -862,6 +862,7 @@ EXCLUDE_SYMBOLS        =
 # command).
 
 EXAMPLE_PATH           = ../src/examples/xbee_terminal \
+                         ../src/examples/xbee_chat \
                          ../src/getting_started/getting_started_open_1 \
                          ../src/getting_started/getting_started_open_2 \
                          ../src/getting_started/getting_started_open_3 \

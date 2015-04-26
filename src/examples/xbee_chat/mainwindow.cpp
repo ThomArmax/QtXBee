@@ -21,6 +21,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <XBee>
 #include "wpan/txrequest16.h"
 #include "wpan/txrequest64.h"
 #include "wpan/rxresponse16.h"
@@ -31,24 +32,40 @@
 #include <QtWidgets/QScrollBar>
 #include <QMessageBox>
 
+using namespace QtXBee;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->sendButton->setEnabled(false);
-    ui->data->setEnabled(false);
+    ui->sendButton->setEnabled(false);  // Disables the "Send" button
+    ui->data->setEnabled(false);        // Disable the "data" line edit
 
-    xbee = new XBee(this);
-    xbee->setMode(XBee::API1Mode);
+    xbee = new XBee(this);              // Instanciate the XBee object
 
-    connect(xbee, SIGNAL(receivedTransmitStatus(Wpan::TxStatusResponse*)), this, SLOT(onReceivedTransmitStatus(Wpan::TxStatusResponse*)));
-    connect(xbee, SIGNAL(receivedRxResponse16(Wpan::RxResponse16*)), this, SLOT(onReceivedRxResponse16(Wpan::RxResponse16*)));
-    connect(xbee, SIGNAL(receivedRxResponse64(Wpan::RxResponse64*)), this, SLOT(onReceivedRxResponse64(Wpan::RxResponse64*)));
+    // Connect to the XBee to catch the transmit statuses
+    connect(xbee, SIGNAL(receivedTransmitStatus(Wpan::TxStatusResponse*)),
+            this, SLOT(onReceivedTransmitStatus(Wpan::TxStatusResponse*)));
 
-    connect(ui->openButton, SIGNAL(clicked()), this, SLOT(onOpenSerialPortButtonClicked()));
-    connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(onSendCommandButtonClicked()));
+    // Connects to the XBee to catch the received packets
+    connect(xbee, SIGNAL(receivedRxResponse16(Wpan::RxResponse16*)),
+            this, SLOT(onReceivedRxResponse16(Wpan::RxResponse16*)));
 
+    // Connects to the XBee to catch the received packets
+    connect(xbee, SIGNAL(receivedRxResponse64(Wpan::RxResponse64*)),
+            this, SLOT(onReceivedRxResponse64(Wpan::RxResponse64*)));
+
+    // Connects the "Open" button
+    connect(ui->openButton, SIGNAL(clicked()),
+            this, SLOT(onOpenSerialPortButtonClicked()));
+
+    // Connects the "Open" button
+    connect(ui->sendButton, SIGNAL(clicked()),
+            this, SLOT(onSendCommandButtonClicked()));
+
+    // Gets the available serial ports on the system and adds them the combobox
+    // in order the user can choose one
     foreach(QSerialPortInfo port, QSerialPortInfo::availablePorts())
     {
         ui->serialCombo->addItem(port.portName(), port.systemLocation());
@@ -60,6 +77,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// Called when the user clicks on the "Open" button
 void MainWindow::onOpenSerialPortButtonClicked()
 {
     bool success = false;
@@ -73,13 +91,19 @@ void MainWindow::onOpenSerialPortButtonClicked()
     ui->sendButton->setEnabled(success);
     ui->data->setEnabled(success);
 
-    log(success ? QString("Serial port %1 opened").arg(serialPort) : QString("Failed to open serial port %1").arg(serialPort));
+    log(success ?
+            QString("Serial port %1 opened").arg(serialPort) :
+            QString("Failed to open serial port %1").arg(serialPort));
 }
 
+// Called when the user clicks on the "Send" button
 void MainWindow::onSendCommandButtonClicked()
 {
     bool ok = false;
     quint64 addr = ui->addr->text().toULongLong(&ok, 16);
+
+    // If failed to get address from the address line edit
+    // we show a popup
     if(!ok) {
         QMessageBox * mess = new QMessageBox(this);
         mess->setText("Error : Failed to get destination address");
@@ -90,7 +114,6 @@ void MainWindow::onSendCommandButtonClicked()
     }
     // 64 bits address
     if(addr > 0xFFFF) {
-        //log(QString("Sending '%1' to %2 (64 bits addressing)").arg(ui->data->text()).arg(addr));
         Wpan::TxRequest64 req;
         req.setDestinationAddress(addr);
         req.setData(ui->data->text().toLatin1());
@@ -98,7 +121,6 @@ void MainWindow::onSendCommandButtonClicked()
     }
     // 16 bits address
     else {
-        //log(QString("Sending '%1' to %2 (16 bits addressing)").arg(ui->data->text()).arg(addr));
         log(ui->data->text().prepend(">> "));
         Wpan::TxRequest16 req;
         req.setDestinationAddress(addr);
@@ -109,6 +131,7 @@ void MainWindow::onSendCommandButtonClicked()
     ui->data->clear();
 }
 
+// Log informations in the "console" text area
 void MainWindow::log(const QString &log)
 {
     QString text = ui->console->toPlainText();
@@ -117,16 +140,26 @@ void MainWindow::log(const QString &log)
     ui->console->verticalScrollBar()->setValue(ui->console->verticalScrollBar()->maximum());
 }
 
-void MainWindow::onReceivedTransmitStatus(Wpan::TxStatusResponse *)
+// Called when a transmit status is received
+void MainWindow::onReceivedTransmitStatus(Wpan::TxStatusResponse * status)
 {
-    //log(r->toString());
+    if(status->status() != Wpan::TxStatusResponse::Success) {
+        QMessageBox * mess = new QMessageBox(this);
+        mess->setText("Error : Transmit failed with status " +
+                      TxStatusResponse::statusToString(status->status()));
+        connect(mess, SIGNAL(accepted()), mess, SLOT(deleteLater()));
+        connect(mess, SIGNAL(rejected()), mess, SLOT(deleteLater()));
+        mess->show();
+    }
 }
 
+// Called when a response is received
 void MainWindow::onReceivedRxResponse16(Wpan::RxResponse16 * r)
 {
     log(r->data().prepend("<< "));
 }
 
+// Called when a response is received
 void MainWindow::onReceivedRxResponse64(Wpan::RxResponse64 * r)
 {
     log(r->data().prepend("<< "));

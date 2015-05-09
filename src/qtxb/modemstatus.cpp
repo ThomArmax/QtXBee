@@ -25,45 +25,69 @@
 namespace QtXBee {
 
 ModemStatus::ModemStatus(QObject *parent) :
-    XBeeResponse(parent)
+    XBeeResponse(parent),
+    m_status(Unkown)
 {
     setFrameType(XBeePacket::ModemStatusResponseId);
 }
 
-ModemStatus::ModemStatus(const QByteArray &data, QObject *parent) :
-    XBeeResponse(parent)
+ModemStatus::ModemStatus(const QByteArray &packet, QObject *parent) :
+    XBeeResponse(parent),
+    m_status(Unkown)
 {
     setFrameType(XBeePacket::ModemStatusResponseId);
-    setData(data);
+    setPacket(packet);
 }
 
-bool ModemStatus::setData(const QByteArray & data) {
-    bool bRet = false;
-    m_packet.clear();
-    m_packet.append(data);
-    setStartDelimiter(data.at(0));
-    setLength(data.at(2));
-
-    if(data.size() == data.at(2)+4) {
-        setFrameType((ApiId)data.at(3));
-        setStatus(data.at(4));
-        setChecksum(data.at(5));
-        bRet = true;
+bool ModemStatus::parseApiSpecificData(const QByteArray &data)
+Q_DECL_OVERRIDE
+{
+    if(data.size() != 1) {
+        qDebug() << Q_FUNC_INFO << "bad data !";
+        return false;
     }
-    else {
-        qDebug()<< Q_FUNC_INFO << "Invalid Packet !" << m_packet.toHex();
-        m_packet.clear();
-    }
-
-    return bRet;
+    setStatus((Status)data.at(0));
+    return true;
 }
 
-void ModemStatus::setStatus(unsigned s){
-    m_status = s;
+void ModemStatus::setStatus(Status status)
+{
+    m_status = status;
 }
 
-unsigned ModemStatus::status() const{
+ModemStatus::Status ModemStatus::status() const
+{
     return m_status;
+}
+
+QString ModemStatus::statusToString() const
+{
+    QString str;
+    switch(m_status) {
+    case HardwareReset          : str = "Hardware Reset";           break;
+    case WatchdogTimerReset     : str = "Watchdog Timer Reset";     break;
+    case Associated             : str = "Associated";               break;
+    case Disassociated          : str = "Disassociated";            break;
+    case SynchronizationLost    : str = "Synchronization Lost";     break;
+    case CoordinatorRealignment : str = "Coordinator Realignment";  break;
+    case CoordinatorStarted     : str = "Coordinator Started";      break;
+    default                     : str = "Unknown";                  break;
+    }
+    return str;
+}
+
+QString ModemStatus::toString()
+Q_DECL_OVERRIDE
+{
+    QString str;
+    str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));
+    str.append(QString("Frame type      : %1 (0x%2)\n").arg(frameTypeToString(frameType())).arg(QString::number(frameType(), 16)));
+    str.append(QString("Start delimiter : 0x%1\n").arg(QString::number(startDelimiter(), 16)));
+    str.append(QString("Length          : %1 bytes\n").arg(length()));
+    str.append(QString("Checksum        : %1\n").arg(checksum()));
+    str.append(QString("Status          : %1 (0x%2)").arg(statusToString()).arg(m_status,0,16));
+
+    return str;
 }
 
 } // END namepsace

@@ -35,16 +35,31 @@ class ModemStatus : public XBeeResponse
 {
     Q_OBJECT
 public:
-    explicit    ModemStatus     (QObject *parent);
-                ModemStatus     (const QByteArray & data, QObject * parent = 0);
+    enum Status {
+        HardwareReset           = 0x00,
+        WatchdogTimerReset      = 0x01,
+        Associated              = 0x02,
+        Disassociated           = 0x03,
+        SynchronizationLost     = 0x04,
+        CoordinatorRealignment  = 0x05,
+        CoordinatorStarted      = 0x06,
+        Unkown                  = 0xFF
+    };
 
-    bool        setData         (const QByteArray & data);
-    void        setStatus       (unsigned s);
+    explicit    ModemStatus         (QObject *parent);
+                ModemStatus         (const QByteArray & packet, QObject * parent = 0);
 
-    unsigned    status          () const;
+    QString     toString            ();
+
+    void        setStatus           (Status status);
+    Status      status              () const;
+    QString     statusToString      () const;
 
 private:
-    unsigned m_status;
+    bool        parseApiSpecificData(const QByteArray & data);
+
+private:
+    Status      m_status;
 };
 
 } // END namepsace

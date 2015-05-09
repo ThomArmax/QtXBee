@@ -182,7 +182,7 @@ void XBeeParamsTableModel::onCRChanged(const quint8 cr) {
 void XBeeParamsTableModel::onReceivedATCommandResponse(ATCommandResponse *rep) {
     ATCommand::ATCommandType atcmd = rep->atCommand();
     XBeeParamItem * param = qobject_cast<XBeeParamItem*>(find(atcmd, XBeeParamItem::AtCommandRole));
-    QByteArray data = atcmd == ATCommand::Command_NI ?
+    QByteArray data = atcmd == ATCommand::ATNI ?
                 rep->data() :
                 rep->data().isEmpty() ?
                     rep->data().append("?") : rep->data().toHex().prepend("0x");

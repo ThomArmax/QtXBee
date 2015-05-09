@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         qFatal("Failed to open serial port");
     }
 
-    panId.setCommand(ATCommand::Command_ID);
+    panId.setCommand(ATCommand::ATID);
     rep = xb.sendATCommandSync(&panId);
 
     if(!rep) {

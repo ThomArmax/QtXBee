@@ -25,14 +25,14 @@ namespace QtXBee {
 
 ATCommandResponse::ATCommandResponse(QObject *parent) :
     XBeeResponse(parent),
-    m_atCommand(ATCommand::Command_Undefined)
+    m_atCommand(ATCommand::ATUndefined)
 {
     setFrameType(ATCommandResponseId);
 }
 
 ATCommandResponse::ATCommandResponse(const QByteArray &packet, QObject *parent)  :
     XBeeResponse(parent),
-    m_atCommand(ATCommand::Command_Undefined)
+    m_atCommand(ATCommand::ATUndefined)
 {
     setFrameType(ATCommandResponseId);
     setPacket(packet);

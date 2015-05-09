@@ -49,11 +49,11 @@ void MainWindow::openSelectedSerialPort()
             QString("Failed to open serial port \"%1\"").arg(ui->serialPortSelection->currentData().toString()));
     }
     ATCommand atapi;
-    atapi.setCommand(ATCommand::Command_AP);
+    atapi.setCommand(ATCommand::ATAP);
     atapi.setParameter("1");
     //xbee->send(&atapi);
     xbee->loadAddressingProperties();
 
-    atapi.setCommand(ATCommand::Command_ID);
+    atapi.setCommand(ATCommand::ATID);
     xbee->send(&atapi);
 }

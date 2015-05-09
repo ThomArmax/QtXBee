@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
         qFatal("Failed to open serial port");
     }
 
-    remoteNI.setCommand(ATCommand::Command_NI); // Node Indentifier
+    remoteNI.setCommand(ATCommand::ATNI); // Node Indentifier
     remoteNI.setDestinationAddress16(0x2);
     rep = xb.sendSync(&remoteNI);
 

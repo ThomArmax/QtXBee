@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
         qFatal("Failed to open serial port");
     }
 
-    panId.setCommand(ATCommand::Command_ID);
+    panId.setCommand(ATCommand::ATID);
 
     QObject::connect(&xb,
                      SIGNAL(receivedATCommandResponse(ATCommandResponse*)),

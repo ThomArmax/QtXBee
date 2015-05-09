@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
                      SLOT(onPacketReceived(RemoteATCommandResponse*))
                      );
 
-    remoteNI.setCommand(ATCommand::Command_NI); // Node Indentifier
+    remoteNI.setCommand(ATCommand::ATNI); // Node Indentifier
     remoteNI.setDestinationAddress16(0x2);
     xb.sendAsync(&remoteNI);
 

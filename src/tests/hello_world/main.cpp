@@ -50,28 +50,28 @@ int main(int argc, char *argv[])
     QObject::connect(&xb, SIGNAL(receivedRemoteCommandResponse(RemoteATCommandResponse*)), &xb, SLOT(displayRemoteCommandResponse(RemoteATCommandResponse*)));
 
 //    ATCommand nd;
-//    nd.setCommand(ATCommand::Command_ND);
+//    nd.setCommand(ATCommand::ATND);
 //    xb.sendATCommandAsync(&nd);
 
 //    ATCommand panId;
-//    panId.setCommand(ATCommand::Command_ID);
+//    panId.setCommand(ATCommand::ATID);
 //    xb.sendATCommandAsync(&panId);
 
     RemoteATCommandRequest ni;
-    ni.setCommand(ATCommand::Command_NI);
+    ni.setCommand(ATCommand::ATNI);
 //    ni.setDestinationAddress16(0xFFFE);
 //    ni.setDestinationAddress64(0x13A20040CABB38);
     ni.setDestinationAddress16(0x2);
     ni.setDestinationAddress64(0x13A20040CABB38);
     xb.sendAsync(&ni);
 
-    ni.setCommand(ATCommand::Command_SH);
+    ni.setCommand(ATCommand::ATSH);
     xb.sendAsync(&ni);
-    ni.setCommand(ATCommand::Command_SL);
+    ni.setCommand(ATCommand::ATSL);
     xb.sendAsync(&ni);
-    ni.setCommand(ATCommand::Command_ID);
+    ni.setCommand(ATCommand::ATID);
     xb.sendAsync(&ni);
-    ni.setCommand(ATCommand::Command_MY);
+    ni.setCommand(ATCommand::ATMY);
     xb.sendAsync(&ni);
 
 //    WPAN::TxRequest16 tx16;

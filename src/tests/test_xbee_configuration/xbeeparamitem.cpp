@@ -4,7 +4,7 @@ XBeeParamItem::XBeeParamItem(QObject *parent) :
     Armax::Datamodels::AbstractListItem(parent),
     m_name(QString()),
     m_value(QVariant()),
-    m_at(ATCommand::Command_Undefined)
+    m_at(ATCommand::ATUndefined)
 {
 }
 
@@ -12,7 +12,7 @@ XBeeParamItem::XBeeParamItem(const QString &name, const QVariant &value, QObject
     Armax::Datamodels::AbstractListItem(parent),
     m_name(name),
     m_value(value),
-    m_at(ATCommand::Command_Undefined)
+    m_at(ATCommand::ATUndefined)
 {
 }
 

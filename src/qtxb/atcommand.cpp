@@ -113,7 +113,7 @@ QString ATCommand::toString()
 void ATCommand::clear()
 {
     XBeePacket::clear();
-    m_command = Command_Undefined;
+    m_command = ATUndefined;
     m_parameter.clear();
     setFrameType(XBeePacket::ATCommandId);
     setFrameId(0x01);

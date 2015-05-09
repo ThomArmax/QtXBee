@@ -223,7 +223,7 @@ Synchronous AT command</h1>
 <div class="line">        qFatal(<span class="stringliteral">&quot;Failed to open serial port&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    panId.<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#a75fac9798d5a63cf650c143fed6ca788" title="Sets the AT Command.">setCommand</a>(<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4a576c33346490f6b850b7df1639820aab">ATCommand::Command_ID</a>);</div>
+<div class="line">    panId.<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#a75fac9798d5a63cf650c143fed6ca788" title="Sets the AT Command.">setCommand</a>(<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4afd9746d7ca5334a2e5234584bddf32fd">ATCommand::ATID</a>);</div>
 <div class="line">    rep = xb.<a class="code" href="class_qt_x_bee_1_1_x_bee.html#a31504f6004236e80908dce736c5ac8f2" title="Sends an ATCommand synchronously.">sendATCommandSync</a>(&amp;panId);</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">if</span>(!rep) {</div>
@@ -269,7 +269,7 @@ Asynchronous AT command</h1>
 <div class="line">        qFatal(<span class="stringliteral">&quot;Failed to open serial port&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    panId.<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#a75fac9798d5a63cf650c143fed6ca788" title="Sets the AT Command.">setCommand</a>(<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4a576c33346490f6b850b7df1639820aab">ATCommand::Command_ID</a>);</div>
+<div class="line">    panId.<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#a75fac9798d5a63cf650c143fed6ca788" title="Sets the AT Command.">setCommand</a>(<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4afd9746d7ca5334a2e5234584bddf32fd">ATCommand::ATID</a>);</div>
 <div class="line"></div>
 <div class="line">    QObject::connect(&amp;xb,</div>
 <div class="line">                     SIGNAL(receivedATCommandResponse(<a class="code" href="class_qt_x_bee_1_1_a_t_command_response.html" title="In response to an ATCommand message, the module will send an ATCommandResponse message.">ATCommandResponse</a>*)),</div>
@@ -353,7 +353,7 @@ Synchronous remote AT command</h1>
 <div class="line">        qFatal(<span class="stringliteral">&quot;Failed to open serial port&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    remoteNI.<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#a75fac9798d5a63cf650c143fed6ca788" title="Sets the AT Command.">setCommand</a>(<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4a04ec2be99cdd0124c6b75f34f871db91">ATCommand::Command_NI</a>); <span class="comment">// Node Indentifier</span></div>
+<div class="line">    remoteNI.<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#a75fac9798d5a63cf650c143fed6ca788" title="Sets the AT Command.">setCommand</a>(<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4a41653a40589f956eb0dcefa9b5078f26">ATCommand::ATNI</a>); <span class="comment">// Node Indentifier</span></div>
 <div class="line">    remoteNI.<a class="code" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#ade8e2f7222de694a1e8d8eb8e10b6c24" title="Sets the 16-bit address of the destination device, if known.">setDestinationAddress16</a>(0x2);</div>
 <div class="line">    rep = xb.<a class="code" href="class_qt_x_bee_1_1_x_bee.html#a4e5a35235091f8b2280bb291999ff4fa" title="Sends synchronously the given packet.">sendSync</a>(&amp;remoteNI);</div>
 <div class="line"></div>
@@ -416,7 +416,7 @@ Asynchronous remote AT command</h1>
 <div class="line">                     SLOT(onPacketReceived(<a class="code" href="class_qt_x_bee_1_1_remote_a_t_command_response.html" title="The RemoteATCommandResponse class represents the response to a RemoteATCommandRequest.">RemoteATCommandResponse</a>*))</div>
 <div class="line">                     );</div>
 <div class="line"></div>
-<div class="line">    remoteNI.<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#a75fac9798d5a63cf650c143fed6ca788" title="Sets the AT Command.">setCommand</a>(<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4a04ec2be99cdd0124c6b75f34f871db91">ATCommand::Command_NI</a>); <span class="comment">// Node Indentifier</span></div>
+<div class="line">    remoteNI.<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#a75fac9798d5a63cf650c143fed6ca788" title="Sets the AT Command.">setCommand</a>(<a class="code" href="class_qt_x_bee_1_1_a_t_command.html#aa589dc5df71b84c05367b9ec0fdf22f4a41653a40589f956eb0dcefa9b5078f26">ATCommand::ATNI</a>); <span class="comment">// Node Indentifier</span></div>
 <div class="line">    remoteNI.<a class="code" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#ade8e2f7222de694a1e8d8eb8e10b6c24" title="Sets the 16-bit address of the destination device, if known.">setDestinationAddress16</a>(0x2);</div>
 <div class="line">    xb.<a class="code" href="class_qt_x_bee_1_1_x_bee.html#a325005a816129af674299bd695982c10" title="Sends asynchronously the given packet.">sendAsync</a>(&amp;remoteNI);</div>
 <div class="line"></div>
@@ -565,7 +565,7 @@ Wpan transmit request (64 bits addressing)</h1>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 26 2015 21:59:35 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 9 2015 13:11:29 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

@@ -29,7 +29,7 @@ var searchData=
   ['setnodeidentifier',['setNodeIdentifier',['../class_qt_x_bee_1_1_remote_node.html#af33bd1438f7049da28d3b8bfde7cea5e',1,'QtXBee::RemoteNode']]],
   ['setpacket',['setPacket',['../class_qt_x_bee_1_1_x_bee_packet.html#a397f00887106a794bca7f8276e6e0cb9',1,'QtXBee::XBeePacket']]],
   ['setparameter',['setParameter',['../class_qt_x_bee_1_1_a_t_command.html#af238d4f9984340c1ecfbd59ad1860a48',1,'QtXBee::ATCommand']]],
-  ['setrssi',['setRssi',['../class_qt_x_bee_1_1_remote_node.html#a188beebb56bb7bfeddeb5465c93c95b3',1,'QtXBee::RemoteNode::setRssi()'],['../class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#a06d1ea4a0833e8e26ff4972aca077c01',1,'QtXBee::Wpan::RxBaseResponse::setRSSI()']]],
+  ['setrssi',['setRSSI',['../class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#a06d1ea4a0833e8e26ff4972aca077c01',1,'QtXBee::Wpan::RxBaseResponse::setRSSI()'],['../class_qt_x_bee_1_1_remote_node.html#a188beebb56bb7bfeddeb5465c93c95b3',1,'QtXBee::RemoteNode::setRssi()']]],
   ['setserialnumberhigh',['setSerialNumberHigh',['../class_qt_x_bee_1_1_remote_node.html#ae166c419799fd57347f0a11c82571b45',1,'QtXBee::RemoteNode']]],
   ['setserialnumberlow',['setSerialNumberLow',['../class_qt_x_bee_1_1_remote_node.html#adca951e1485d2333a2613361dd798a08',1,'QtXBee::RemoteNode']]],
   ['setserialport',['setSerialPort',['../class_qt_x_bee_1_1_x_bee.html#abccce0f8f8721bbbc7ca07702b977ea1',1,'QtXBee::XBee::setSerialPort(const QString &amp;serialPort)'],['../class_qt_x_bee_1_1_x_bee.html#a01c26cfec14ff6e87d62e503d46a3e37',1,'QtXBee::XBee::setSerialPort(const QString &amp;serialPort, const QSerialPort::BaudRate baudRate, const QSerialPort::DataBits dataBits, const QSerialPort::Parity parity, const QSerialPort::StopBits stopBits, const QSerialPort::FlowControl flowControl)']]],
@@ -46,7 +46,7 @@ var searchData=
   ['sourceaddress64',['sourceAddress64',['../class_qt_x_bee_1_1_remote_a_t_command_response.html#a3a28c2613cbd98289fb0a952a31362ed',1,'QtXBee::RemoteATCommandResponse']]],
   ['specialbyte',['SpecialByte',['../class_qt_x_bee_1_1_x_bee_packet.html#ac03b5ed1c6b3af8eb0edee1d8219dc34',1,'QtXBee::XBeePacket']]],
   ['startdelimiter',['StartDelimiter',['../class_qt_x_bee_1_1_x_bee_packet.html#ac03b5ed1c6b3af8eb0edee1d8219dc34a7eede677fe955d5b6366d80aaa682060',1,'QtXBee::XBeePacket::StartDelimiter()'],['../class_qt_x_bee_1_1_x_bee_packet.html#abc9cf1036b36813aa24069ac62aa021a',1,'QtXBee::XBeePacket::startDelimiter() const ']]],
-  ['status',['Status',['../class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a372dd26640bdd1049d8a46d8f88ef38b',1,'QtXBee::Wpan::TxStatusResponse::Status()'],['../class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#aa8e9a92669b0488df13f3accf9628f69',1,'QtXBee::Wpan::TxStatusResponse::status() const ']]],
+  ['status',['status',['../class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#aa8e9a92669b0488df13f3accf9628f69',1,'QtXBee::Wpan::TxStatusResponse::status() const '],['../class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a372dd26640bdd1049d8a46d8f88ef38b',1,'QtXBee::Wpan::TxStatusResponse::Status()']]],
   ['statustostring',['statusToString',['../class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#ab47f59733ed64e5fc849aba687e561dc',1,'QtXBee::Wpan::TxStatusResponse::statusToString()'],['../class_qt_x_bee_1_1_x_bee_response.html#acd0a3137eabd7a8890c5b520b9783d3f',1,'QtXBee::XBeeResponse::statusToString()']]],
   ['success',['Success',['../class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a372dd26640bdd1049d8a46d8f88ef38ba05a4a29b2ec8a291b6cfcbbb15cd4cee',1,'QtXBee::Wpan::TxStatusResponse']]]
 ];

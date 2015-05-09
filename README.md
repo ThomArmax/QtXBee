@@ -7,3 +7,16 @@ The API may change.
 Currently, only XBee serie 1 and XBee serie 1 Pro are supported
 
 This library is based on anthonypocock's work (https://github.com/anthonypocock/QtXbee), previously forked.
+
+You can checkout the [QtXBee's home page](http://thomarmax.github.io/QtXBee/ "home page") for more information.
+
+#Documentation
+ - [Online Pre-Alpha Doc](http://thomarmax.github.io/QtXBee/doc/pre_alpha/index.html "Online Pre-Alpha Doc")
+ - make the doc
+ 
+   ```
+   $ cd doc
+   $ doxygen Doxyfile
+   $ firefox html/index.html &
+   ```
+   

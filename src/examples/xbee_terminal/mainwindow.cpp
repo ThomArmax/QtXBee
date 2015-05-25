@@ -20,7 +20,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "xbee.h"
+#include <XBee>
 
 #include <QSerialPort>
 #include <QSerialPortInfo>

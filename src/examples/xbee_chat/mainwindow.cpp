@@ -22,11 +22,11 @@
 #include "ui_mainwindow.h"
 
 #include <XBee>
-#include "wpan/txrequest16.h"
-#include "wpan/txrequest64.h"
-#include "wpan/rxresponse16.h"
-#include "wpan/rxresponse64.h"
-#include "wpan/txstatusresponse.h"
+#include <wpan/TxRequest16>
+#include <wpan/TxRequest64>
+#include <wpan/RxResponse16>
+#include <wpan/RxResponse64>
+#include <wpan/TxStatusResponse>
 
 #include <QSerialPort>
 #include <QtWidgets/QScrollBar>
@@ -125,7 +125,6 @@ void MainWindow::onSendCommandButtonClicked()
         Wpan::TxRequest16 req;
         req.setDestinationAddress(addr);
         req.setData(ui->data->text().toLatin1());
-        req.setFrameId(20);
         xbee->sendAsync(&req);
     }
     ui->data->clear();

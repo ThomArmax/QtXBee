@@ -21,7 +21,7 @@
 #ifndef TxREQUEST16_H
 #define TxREQUEST16_H
 
-#include "../xbeepacket.h"
+#include "../XBeePacket"
 #include <QObject>
 
 namespace QtXBee {

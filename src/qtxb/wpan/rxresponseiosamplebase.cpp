@@ -18,7 +18,7 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
  */
 
-#include "rxresponseiosamplebase.h"
+#include "RxResponseIoSampleBase"
 #include <QDebug>
 
 namespace QtXBee {

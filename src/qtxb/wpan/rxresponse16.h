@@ -21,7 +21,7 @@
 #ifndef RxRESPONSE16_H
 #define RxRESPONSE16_H
 
-#include "rxbaseresponse.h"
+#include "RxBaseResponse"
 
 #include <QObject>
 

@@ -18,7 +18,7 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
  */
 
-#include "rxresponse64.h"
+#include "RxResponse64"
 
 #include <QDebug>
 

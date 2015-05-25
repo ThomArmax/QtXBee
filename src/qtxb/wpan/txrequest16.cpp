@@ -18,7 +18,7 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
  */
 
-#include "txrequest16.h"
+#include "TxRequest16"
 
 namespace QtXBee {
 namespace Wpan {

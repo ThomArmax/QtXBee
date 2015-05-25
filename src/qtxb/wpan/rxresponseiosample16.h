@@ -21,7 +21,7 @@
 #ifndef RxRESPONSEIOSAMPLE16_H
 #define RxRESPONSEIOSAMPLE16_H
 
-#include "rxresponseiosamplebase.h"
+#include "RxResponseIoSampleBase"
 
 namespace QtXBee {
 namespace Wpan {

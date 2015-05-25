@@ -4,7 +4,7 @@
 #include <QDebug>
 
 #include <XBee>
-#include <remoteatcommandrequest.h>
+#include <RemoteATCommandRequest>
 #include "xbeeresponseprinter.h"
 
 using namespace QtXBee;

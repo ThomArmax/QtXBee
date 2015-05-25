@@ -37,7 +37,7 @@ ZBIONodeIdentificationResponse::ZBIONodeIdentificationResponse(QObject *parent) 
     m_digiProfileId         (0),
     m_digiManufacturerId    (0)
 {
-    setFrameType(XBeePacket::ZBIONodeIdentificationId);
+    setFrameType(ZBIONodeIdentificationId);
 }
 
 bool ZBIONodeIdentificationResponse::setPacket(const QByteArray &packet)

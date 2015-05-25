@@ -21,7 +21,7 @@
 #ifndef RxRESPONSE64_H
 #define RxRESPONSE64_H
 
-#include "rxbaseresponse.h"
+#include "RxBaseResponse"
 
 #include <QObject>
 

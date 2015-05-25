@@ -18,8 +18,8 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
  */
 
-#include "nodediscoveryresponseparser.h"
-#include "remotenode.h"
+#include "NodeDiscoveryResponseParser"
+#include "RemoteNode"
 
 #include <QDebug>
 

@@ -27,7 +27,7 @@ namespace ZigBee {
 ZBExplicitTxRequest::ZBExplicitTxRequest(QObject *parent) :
     ZBTxRequest(parent)
 {
-    setFrameType(XBeePacket::ZBExplicitTxRequestId);
+    setFrameType(ZBExplicitTxRequestId);
 }
 
 } } // END namepsace

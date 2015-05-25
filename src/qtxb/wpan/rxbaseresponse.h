@@ -21,7 +21,7 @@
 #ifndef RxBASERESPONSE_H
 #define RxBASERESPONSE_H
 
-#include "../xbeeresponse.h"
+#include "../XBeeResponse"
 
 #include <QObject>
 

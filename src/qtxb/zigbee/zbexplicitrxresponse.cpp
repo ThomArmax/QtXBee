@@ -26,7 +26,7 @@ namespace ZigBee {
 ZBExplicitRxResponse::ZBExplicitRxResponse(QObject *parent) :
     XBeeResponse(parent)
 {
-    setFrameType(XBeePacket::ZBExplicitRxResponseId);
+    setFrameType(ZBExplicitRxResponseId);
 }
 void ZBExplicitRxResponse::readPacket(QByteArray rx){
     Q_UNUSED(rx)

@@ -21,7 +21,7 @@
 #ifndef ZBTxSTATUSRESPONSE_H
 #define ZBTxSTATUSRESPONSE_H
 
-#include "xbeeresponse.h"
+#include "XBeeResponse"
 
 namespace QtXBee {
 namespace ZigBee {

@@ -21,7 +21,7 @@
 #ifndef ZBTxREQUEST_H
 #define ZBTxREQUEST_H
 
-#include "xbeepacket.h"
+#include "XBeePacket"
 #include <QByteArray>
 
 namespace QtXBee {

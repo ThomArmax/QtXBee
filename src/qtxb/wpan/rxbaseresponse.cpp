@@ -18,7 +18,7 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
  */
 
-#include "rxbaseresponse.h"
+#include "RxBaseResponse"
 
 namespace QtXBee {
 namespace Wpan {

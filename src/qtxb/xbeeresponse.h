@@ -21,7 +21,7 @@
 #ifndef XBEERESPONSE_H
 #define XBEERESPONSE_H
 
-#include "xbeepacket.h"
+#include "XBeePacket"
 #include <QObject>
 #include <QDebug>
 

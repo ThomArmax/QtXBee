@@ -19,7 +19,6 @@
  */
 
 #include "zbtxrequest.h"
-#include "xbeepacket.h"
 
 namespace QtXBee {
 namespace ZigBee {

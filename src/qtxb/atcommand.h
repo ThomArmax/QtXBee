@@ -21,7 +21,7 @@
 #ifndef ATCOMMAND_H
 #define ATCOMMAND_H
 
-#include "xbeepacket.h"
+#include "XBeePacket"
 #include <QByteArray>
 
 namespace QtXBee {

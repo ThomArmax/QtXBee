@@ -21,7 +21,7 @@
 #ifndef REMOTEATCOMMANDREQUEST_H
 #define REMOTEATCOMMANDREQUEST_H
 
-#include "atcommand.h"
+#include "ATCommand"
 
 namespace QtXBee {
 

@@ -21,7 +21,7 @@
 #ifndef TxSTATUSRESPONSE_H
 #define TxSTATUSRESPONSE_H
 
-#include "../xbeeresponse.h"
+#include "../XBeeResponse"
 
 namespace QtXBee {
 namespace Wpan {

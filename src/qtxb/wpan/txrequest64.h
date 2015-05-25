@@ -21,7 +21,7 @@
 #ifndef TxREQUEST64_H
 #define TxREQUEST64_H
 
-#include "../xbeepacket.h"
+#include "../XBeePacket"
 #include <QObject>
 
 namespace QtXBee {

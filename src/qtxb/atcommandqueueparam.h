@@ -21,7 +21,7 @@
 #ifndef ATCOMMANDQUEUEPARAM_H
 #define ATCOMMANDQUEUEPARAM_H
 
-#include "atcommand.h"
+#include "ATCommand"
 #include <QByteArray>
 
 namespace QtXBee {

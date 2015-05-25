@@ -2,8 +2,8 @@
 #include <QDebug>
 
 #include <XBee>
-#include <wpan/txrequest16.h>
-#include <wpan/txstatusresponse.h>
+#include <wpan/TxRequest16>
+#include <wpan/TxStatusResponse>
 
 using namespace QtXBee;
 using namespace QtXBee::Wpan;

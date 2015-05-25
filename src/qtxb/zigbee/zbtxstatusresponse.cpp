@@ -19,7 +19,6 @@
  */
 
 #include "zbtxstatusresponse.h"
-#include "xbeepacket.h"
 #include <QDebug>
 
 namespace QtXBee {
@@ -28,7 +27,7 @@ namespace ZigBee {
 ZBTxStatusResponse::ZBTxStatusResponse(QObject *parent) :
     XBeeResponse(parent)
 {
-    setFrameType(XBeePacket::ZBTxStatusResponseId);
+    setFrameType(ZBTxStatusResponseId);
 }
 void ZBTxStatusResponse::readPacket(QByteArray rx){
     m_packet.clear();

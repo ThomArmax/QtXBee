@@ -2,8 +2,8 @@
 #include <QDebug>
 
 #include <XBee>
-#include <remoteatcommandrequest.h>
-#include <xbeeresponse.h>
+#include <RemoteATCommandRequest>
+#include <XBeeResponse>
 
 using namespace QtXBee;
 

@@ -18,8 +18,7 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
  */
 
-#include "modemstatus.h"
-#include "xbeepacket.h"
+#include "ModemStatus"
 #include <QDebug>
 
 namespace QtXBee {

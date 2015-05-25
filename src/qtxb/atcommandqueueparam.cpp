@@ -18,8 +18,7 @@
  * Thomas COIN <esvcorp@gmail.com> 18/04/2015
  */
 
-#include "atcommand.h"
-#include "atcommandqueueparam.h"
+#include "ATCommandQueueParam"
 
 namespace QtXBee {
 

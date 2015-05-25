@@ -21,8 +21,8 @@
 #ifndef ATCOMMANDRESPONSE_H
 #define ATCOMMANDRESPONSE_H
 
-#include "xbeeresponse.h"
-#include "atcommand.h"
+#include "XBeeResponse"
+#include "ATCommand"
 #include <QByteArray>
 
 namespace QtXBee {

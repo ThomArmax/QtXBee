@@ -21,7 +21,7 @@
 #ifndef REMOTECOMMANDRESPONSE_H
 #define REMOTECOMMANDRESPONSE_H
 
-#include "atcommandresponse.h"
+#include "ATCommandResponse"
 
 #include <QObject>
 #include <QByteArray>

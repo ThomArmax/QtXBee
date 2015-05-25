@@ -21,7 +21,7 @@
 #ifndef MODEMSTATUS_H
 #define MODEMSTATUS_H
 
-#include "xbeeresponse.h"
+#include "XBeeResponse"
 #include <QByteArray>
 
 namespace QtXBee {

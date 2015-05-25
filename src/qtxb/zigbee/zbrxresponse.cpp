@@ -19,7 +19,6 @@
  */
 
 #include "zbrxresponse.h"
-#include "xbeepacket.h"
 #include <QDebug>
 
 namespace QtXBee {
@@ -28,7 +27,7 @@ namespace ZigBee {
 ZBRxResponse::ZBRxResponse(QObject *parent) :
     XBeeResponse(parent)
 {
-    setFrameType(XBeePacket::ZBRxResponseId);
+    setFrameType(ZBRxResponseId);
 }
 void ZBRxResponse::setSrcAddr64(QByteArray sa64) {
     m_srcAddr64.clear();

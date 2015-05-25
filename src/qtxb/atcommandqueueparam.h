@@ -32,6 +32,8 @@ namespace QtXBee {
  * In contrast to the ATCommand API type, new parameter values are queued and not applied
  * until either the ATCommand (0x08) API type or the AC (Apply Changes) command is issued.
  * Register queries (reading parameter values) are returned immediately.
+ *
+ * API identifier value: 0x09
  */
 class ATCommandQueueParam : public ATCommand
 {

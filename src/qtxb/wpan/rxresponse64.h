@@ -30,6 +30,8 @@ namespace Wpan {
 
 /**
  * @brief The RxResponse64 class represents the reponse to a RxResponse64
+ *
+ * API identifier value: 0x80
  */
 class RxResponse64 : public RxBaseResponse
 {

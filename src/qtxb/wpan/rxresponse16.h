@@ -30,6 +30,8 @@ namespace Wpan {
 
 /**
  * @brief The RxResponse16 class represents the reponse to a TxRequest16
+ *
+ * API identifier value: 0x81
  */
 class RxResponse16 : public RxBaseResponse
 {

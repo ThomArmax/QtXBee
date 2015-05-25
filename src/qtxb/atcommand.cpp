@@ -31,7 +31,7 @@ namespace QtXBee {
 ATCommand::ATCommand(QObject *parent) :
     XBeePacket(parent)
 {
-    setFrameType(XBeePacket::ATCommandId);
+    setFrameType(ATCommandId);
     setFrameId(0x01);
 }
 

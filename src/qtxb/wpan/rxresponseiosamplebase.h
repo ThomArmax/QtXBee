@@ -30,6 +30,7 @@ namespace Wpan {
 
 /**
  * @todo Implement RxResponseIoSampleBase class
+ * @note Not implemented
  */
 class RxResponseIoSampleBase : public RxBaseResponse
 {

@@ -30,6 +30,8 @@ namespace QtXBee {
  *
  * For parameter changes on the remote device to take effect, changes must be applied,
  * either by setting the apply changes options bit, or by sending an AC command to the remote.
+ *
+ * API identifier value: API identifier value: 0x17
  */
 class RemoteATCommandRequest : public ATCommand
 {

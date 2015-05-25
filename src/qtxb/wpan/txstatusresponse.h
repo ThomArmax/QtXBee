@@ -29,6 +29,8 @@ namespace Wpan {
 /**
  * @brief The TxStatusResponse class is used to indicate if a packet (TxRequest64 or TxRequest16)
  * was transmitted successfully or if there was a failure.
+ *
+ * API identifier value: 0x89
  */
 class TxStatusResponse : public XBeeResponse
 {

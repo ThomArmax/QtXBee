@@ -28,14 +28,14 @@ ModemStatus::ModemStatus(QObject *parent) :
     XBeeResponse(parent),
     m_status(Unkown)
 {
-    setFrameType(XBeePacket::ModemStatusResponseId);
+    setFrameType(ModemStatusResponseId);
 }
 
 ModemStatus::ModemStatus(const QByteArray &packet, QObject *parent) :
     XBeeResponse(parent),
     m_status(Unkown)
 {
-    setFrameType(XBeePacket::ModemStatusResponseId);
+    setFrameType(ModemStatusResponseId);
     setPacket(packet);
 }
 

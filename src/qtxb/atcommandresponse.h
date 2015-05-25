@@ -31,6 +31,8 @@ namespace QtXBee {
  * @brief In response to an ATCommand message, the module will send an ATCommandResponse message.
  *
  * Some commands will send back multiple frames (for example, the ND (Node Discover) command).
+ *
+ * API identifier value: 0x88
  * @sa ATCommand
  */
 class ATCommandResponse : public XBeeResponse

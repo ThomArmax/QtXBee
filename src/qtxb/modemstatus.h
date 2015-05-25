@@ -30,6 +30,8 @@ namespace QtXBee {
  * @brief The ModemStatus class represents the XBee module status.
  *
  * RF module status messages are sent from the module in response to specific conditions.
+ *
+ * API identifier value: 0x8A
  */
 class ModemStatus : public XBeeResponse
 {

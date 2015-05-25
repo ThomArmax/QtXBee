@@ -35,6 +35,8 @@ namespace QtXBee {
  * the module will send a RemoteCommandResponse message out the UART.
  * Some commands may send back multiple frames--for example, Node Discover (ND) command.
  *
+ * API identifier value: 0x97
+ *
  * @sa RemoteATCommandRequest
  */
 class RemoteATCommandResponse : public ATCommandResponse

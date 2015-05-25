@@ -28,6 +28,7 @@ namespace Wpan {
 
 /**
  * @todo To be implemented
+ * @note Not implemented
  */
 class RxResponseIoSample16 : public RxResponseIoSampleBase
 {

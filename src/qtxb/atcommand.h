@@ -32,6 +32,8 @@ namespace QtXBee {
  * This API command applies changes after executing the command.
  * (Changes made to module parameters take effect once changes are applied.)
  *
+ * API identifier value: 0x08
+ *
  * @sa ATCommandResponse
  */
 class ATCommand : public XBeePacket

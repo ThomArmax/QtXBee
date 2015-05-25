@@ -34,3 +34,4 @@ Makefile*
 doc/html
 usr
 tests
+*~

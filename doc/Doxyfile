@@ -1137,7 +1137,7 @@ HTML_FOOTER            = footer.html
 # obsolete.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_STYLESHEET        =  css/bootstrap.min.css
+HTML_STYLESHEET        =  css/customdoxygen.css
 # The HTML_EXTRA_STYLESHEET tag can be used to specify an additional user-
 # defined cascading style sheet that is included after the standard style sheets
 # created by doxygen. Using this option one can overrule certain style aspects.
@@ -1147,8 +1147,8 @@ HTML_STYLESHEET        =  css/bootstrap.min.css
 # see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = css/customdoxygen.css
-                         #css/bootstrap.min.css
+HTML_EXTRA_STYLESHEET  = css/bootstrap.min.css
+                         
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1160,7 +1160,9 @@ HTML_EXTRA_STYLESHEET  = css/customdoxygen.css
 
 HTML_EXTRA_FILES       = js/doxy-boot.js \
                          js/bootstrap.min.js \
-                         js/jquery-2.1.1.min.js 
+                         js/jquery-2.1.1.min.js \
+                         res/clclosed.png \
+                         res/clopen.png 
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the stylesheet and background images according to

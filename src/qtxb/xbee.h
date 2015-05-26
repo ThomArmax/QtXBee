@@ -49,33 +49,14 @@ class ZBIONodeIdentificationResponse;
 using namespace QtXBee::Wpan;
 using namespace QtXBee::ZigBee;
 
-/**
- * @brief The XBee class is used to represents the local XBee.
- *
- * You can :
- *  - Open/Close and configure the serial interface
- *  - Get/Set all XBee's parameters
- *  - Send/Receive packets to/from other remote XBees
- *
- * @todo What to do when the XBee is in XBee::NormalMode at the user wants to send API packets ?
- * Auto switch to the correct mode ? Stay in XBee::NormalMode and do nothing but warn the user ?
- * @note The whole QtXBee lib is mainly designed to work in API Mode
- */
 class XBee : public QObject
 {
     Q_OBJECT
 public:
-    /**
-     * @brief The Mode enum defines the mode the XBee is.
-     * @note The mode affects the way the data are read on serial port.
-     */
     enum Mode {
-        CommandMode,        /**< Command mode.
-                                 This mode is used to configure the XBee module.
-                                 Once the mode is set to CommandMode, you need to send the command '+++'
-                                 @sa sendCommandSync() @sa sendCommandAsync() @see http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set */
-        API1Mode,           /**< API Operation (AP=1) */
-        API2Mode            /**< API Operation with escaped characters (AP=2) */
+        CommandMode,
+        API1Mode,
+        API2Mode
     };
 
     explicit            XBee                                (QObject *parent = 0);
@@ -143,36 +124,36 @@ public:
     quint8              TO                                  () const { return m_to;}
     quint8              NO                                  () const { return m_np;}
     quint16             DD                                  () const { return m_dd;}
-    quint8              CR                                  () const { return m_cr;}
+    quint8              CR                                  () const {return m_cr;}
 
 signals:
-    void                receivedATCommandResponse           (ATCommandResponse *response);              /**< @brief Emitted when a ATCommandResponse frame is received*/
-    void                receivedModemStatus                 (ModemStatus *response);                    /**< @brief Emitted when a ModemStatus frame is received*/
-    void                receivedTransmitStatus              (ZBTxStatusResponse *response);             /**< @brief Emitted when a TransmitStatus frame is received*/
+    void                rawDataReceived                     (const QByteArray & data);
+    void                receivedATCommandResponse           (ATCommandResponse *response);
+    void                receivedModemStatus                 (ModemStatus *response);
+    void                receivedRemoteCommandResponse       (RemoteATCommandResponse *response);
+    void                receivedTransmitStatus              (ZigBee::ZBTxStatusResponse *response);
+    void                receivedRxIndicator                 (ZigBee::ZBRxResponse *response);
+    void                receivedRxIndicatorExplicit         (ZigBee::ZBExplicitRxResponse *response);
+    void                receivedNodeIdentificationIndicator (ZigBee::ZBIONodeIdentificationResponse *response);
     void                receivedTransmitStatus              (Wpan::TxStatusResponse *response);
-    void                receivedRxIndicator                 (ZBRxResponse *response);                   /**< @brief Emitted when a RxIndicator frame is received*/
-    void                receivedRxIndicatorExplicit         (ZBExplicitRxResponse *response);           /**< @brief Emitted when a RxIndicatorExplicit frame is received*/
-    void                receivedNodeIdentificationIndicator (ZBIONodeIdentificationResponse *response); /**< @brief Emitted when a NodeIdentificationIndicator frame is received*/
-    void                receivedRemoteCommandResponse       (RemoteATCommandResponse *response);        /**< @brief Emitted when a RemoteCommandResponse frame is received*/
     void                receivedRxResponse16                (Wpan::RxResponse16 * response);
     void                receivedRxResponse64                (Wpan::RxResponse64 * response);
-    void                rawDataReceived                     (const QByteArray & data);                  /**< @brief Emitted when raw data are received on the serial port (only in NormalMode). @sa XBee::setMode() @sa XBee::Mode */
     // Addressing signals
-    void                DHChanged                           (const quint32 dh);                         /**< @brief Emitted when DH property changes. @sa XBee::setDH() @sa XBee::DH()*/
-    void                DLChanged                           (const quint32 dl);                         /**< @brief Emitted when DL property changes. @sa XBee::setDL() @sa XBee::DL()*/
-    void                MYChanged                           (const quint16 my);                         /**< @brief Emitted when MY property changes. @sa XBee::setMY() @sa XBee::MY()*/
-    void                MPChanged                           (const quint16 mp);                         /**< @brief Emitted when MP property changes. @sa XBee::setMP() @sa XBee::MP()*/
-    void                NCChanged                           (const quint32 nc);                         /**< @brief Emitted when NC property changes. @sa XBee::setNC() @sa XBee::NC()*/
-    void                SHChanged                           (const quint32 sh);                         /**< @brief Emitted when SH property changes. @sa XBee::setSH() @sa XBee::SH()*/
-    void                SLChanged                           (const quint32 sl);                         /**< @brief Emitted when SL property changes. @sa XBee::setSL() @sa XBee::SL()*/
-    void                NIChanged                           (const QString & ni);                       /**< @brief Emitted when NI property changes. @sa XBee::setNI() @sa XBee::NI()*/
-    void                SEChanged                           (const quint8 se);                          /**< @brief Emitted when SE property changes. @sa XBee::setSE() @sa XBee::SE()*/
-    void                DEChanged                           (const quint8 de);                          /**< @brief Emitted when DE property changes. @sa XBee::setDE() @sa XBee::DE()*/
-    void                CIChanged                           (const quint8 ci);                          /**< @brief Emitted when CI property changes. @sa XBee::setCI() @sa XBee::CI()*/
-    void                TOChanged                           (const quint8 to);                          /**< @brief Emitted when TO property changes. @sa XBee::setTO() @sa XBee::TO()*/
-    void                NPChanged                           (const quint8 np);                          /**< @brief Emitted when NP property changes. @sa XBee::setNP() @sa XBee::NP()*/
-    void                DDChanged                           (const quint16 dd);                         /**< @brief Emitted when DD property changes. @sa XBee::setDD() @sa XBee::DD()*/
-    void                CRChanged                           (const quint8 cr);                          /**< @brief Emitted when CR property changes. @sa XBee::setCR() @sa XBee::CR()*/
+    void                DHChanged                           (const quint32 dh);                                 /**< @brief Emitted when DH property changes. @sa XBee::setDH() @sa XBee::DH()*/
+    void                DLChanged                           (const quint32 dl);                                 /**< @brief Emitted when DL property changes. @sa XBee::setDL() @sa XBee::DL()*/
+    void                MYChanged                           (const quint16 my);                                 /**< @brief Emitted when MY property changes. @sa XBee::setMY() @sa XBee::MY()*/
+    void                MPChanged                           (const quint16 mp);                                 /**< @brief Emitted when MP property changes. @sa XBee::setMP() @sa XBee::MP()*/
+    void                NCChanged                           (const quint32 nc);                                 /**< @brief Emitted when NC property changes. @sa XBee::setNC() @sa XBee::NC()*/
+    void                SHChanged                           (const quint32 sh);                                 /**< @brief Emitted when SH property changes. @sa XBee::setSH() @sa XBee::SH()*/
+    void                SLChanged                           (const quint32 sl);                                 /**< @brief Emitted when SL property changes. @sa XBee::setSL() @sa XBee::SL()*/
+    void                NIChanged                           (const QString & ni);                               /**< @brief Emitted when NI property changes. @sa XBee::setNI() @sa XBee::NI()*/
+    void                SEChanged                           (const quint8 se);                                  /**< @brief Emitted when SE property changes. @sa XBee::setSE() @sa XBee::SE()*/
+    void                DEChanged                           (const quint8 de);                                  /**< @brief Emitted when DE property changes. @sa XBee::setDE() @sa XBee::DE()*/
+    void                CIChanged                           (const quint8 ci);                                  /**< @brief Emitted when CI property changes. @sa XBee::setCI() @sa XBee::CI()*/
+    void                TOChanged                           (const quint8 to);                                  /**< @brief Emitted when TO property changes. @sa XBee::setTO() @sa XBee::TO()*/
+    void                NPChanged                           (const quint8 np);                                  /**< @brief Emitted when NP property changes. @sa XBee::setNP() @sa XBee::NP()*/
+    void                DDChanged                           (const quint16 dd);                                 /**< @brief Emitted when DD property changes. @sa XBee::setDD() @sa XBee::DD()*/
+    void                CRChanged                           (const quint8 cr);                                  /**< @brief Emitted when CR property changes. @sa XBee::setCR() @sa XBee::CR()*/
 
 public slots:
     void                loadAddressingProperties();

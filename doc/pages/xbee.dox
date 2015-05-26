@@ -1,0 +1,67 @@
+/**
+@class QtXBee::XBee
+@brief The XBee class is used to represents the local XBee.
+
+You can :
+  - Open/Close and configure the serial interface
+  - Get/Set all XBee's parameters
+  - Send/Receive packets to/from other remote XBees
+
+@todo What to do when the XBee is in XBee::CommandMode at the user wants to send API packets ?
+Auto switch to the correct mode ? Stay in XBee::CommandMode and do nothing but warn the user ?
+@note The whole QtXBee lib is mainly designed to work in API Mode
+
+@enum XBee::Mode The Mode enum defines the mode the XBee is.
+@note The mode affects the way the data are read on serial port.
+@note The QtXBee library is designed to work in API1Mode (AP=1)
+
+@var XBee::CommandMode
+Command mode.
+This mode is used to configure the XBee module.
+Once the mode is set to CommandMode, you need to send the command '+++'
+@sa sendCommandSync()
+@sa sendCommandAsync()
+@see http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set
+
+@var XBee::API1Mode
+API Operation (AP=1)
+
+@var XBee::API2Mode
+API Operation with escaped characters (AP=2)
+
+@fn void QtXBee::XBee::rawDataReceived(const QByteArray & data)
+@brief Emitted when raw data are received on the serial port (only in XBee::CommandMode).
+@sa XBee::setMode()
+@sa XBee::Mode
+
+@fn void QtXBee::XBee::receivedATCommandResponse(ATCommandResponse *response)
+@brief Emitted when a ATCommandResponse frame is received
+
+@fn void QtXBee::XBee::receivedModemStatus(ModemStatus *response)
+@brief Emitted when a ModemStatus frame is received
+
+@fn void QtXBee::XBee::receivedRemoteCommandResponse(RemoteATCommandResponse *response)
+@brief Emitted when a RemoteATCommandResponse frame is received
+
+@fn void QtXBee::XBee::receivedTransmitStatus(ZigBee::ZBTxStatusResponse *response)
+@brief Emitted when a ZigBee::ZBTxStatusResponse frame is received
+
+@fn void QtXBee::XBee::receivedRxIndicator(ZigBee::ZBRxResponse *response)
+@brief Emitted when a ZigBee::ZBRxResponse frame is received
+
+@fn void QtXBee::XBee::receivedRxIndicatorExplicit(ZigBee::ZBExplicitRxResponse *response)
+@brief Emitted when a ZigBee::ZBExplicitRxResponse frame is received
+
+@fn void QtXBee::XBee::receivedNodeIdentificationIndicator(ZigBee::ZBIONodeIdentificationResponse *response)
+@brief Emitted when a ZigBee::ZBIONodeIdentificationResponse frame is received
+
+@fn void QtXBee::XBee::receivedTransmitStatus(Wpan::TxStatusResponse *response)
+@brief Emitted when a Wpan::TxStatusResponse frame is received
+
+@fn void QtXBee::XBee::receivedRxResponse16(Wpan::RxResponse16 * response)
+@brief Emitted when a Wpan::RxResponse16 frame is received
+
+@fn void QtXBee::XBee::receivedRxResponse64(Wpan::RxResponse64 * response)
+@brief Emitted when a Wpan::RxResponse64 frame is received
+
+*/

@@ -1,0 +1,661 @@
+/**
+@enum QtXBee::ATCommand::ATCommandType
+@brief The ATCommand enum defines the AT commands codes
+@note This list may be uncomplete. If Some AT commands are missing here, please let me know.
+@note Some of theses AT commands are only for XBee S1 or XBee S2.
+Also there can be some differences about the commands parameters between the two modules series.
+
+@var ATCommand::ATWR
+<b>Write</b>.
+Write parameter values to non-volatile memory so that parameter modifications
+persist through subsequent power-up or reset.
+@note Once WR is issued, no additional characters should be sent to the module until
+after the response "OK\r" is received.
+
+@var ATCommand::ATRE
+<b>Restore Defaults</b>.
+Restore module parameters to factory defaults.
+
+@var ATCommand::ATFR
+<b>Software Reset</b>.
+Responds immediately with an OK then performs a hard reset ~100ms later.
+
+@var ATCommand::ATDH
+<b>Destination Address High</b>.
+Set/Get the upper 32 bits of the 64-bit destination address.
+When combined with DL, it defines the 64-bit destination address for data transmission.
+Special definitions for DH and DL include 0x000000000000FFFF (broadcast) and 0x0000000000000000 (coordinator).
+
+Parameter range : 0 - 0xFFFFFFFF<BR>
+Default : 0
+
+@var ATCommand::ATCI
+<b>Cluster Identifier</b>.
+Set/read Zigbee application layer cluster ID value.
+This value will be used as the cluster ID for all data transmissions.
+CI is only supported in AT firmware.
+The default value0x11 (Transparent data cluster ID).
+
+Parameter range : 0 - 0xFFFF<BR>
+Default : 0x11
+
+@var ATCommand::ATDL
+<b>Destination Address Low</b>. Set/Get the lower 32 bits of the 64-bit destination address.
+When combined with DH, it defines the 64-bit destination address for data transmissions.
+Special definitions for DH and DL include 0x000000000000FFFF (broadcast) and 0x0000000000000000 (coordinator).
+
+Parameter range : 0 - 0xFFFFFFFF<BR>
+Default : 0xFFFF(Coordinator), 0 (Router/End Device)
+
+@var ATCommand::ATMY
+<b>16-bit Network Address</b>.
+Read the 16-bit network address of the module. A value of 0xFFFE means the module has not joined a ZigBee network.
+
+Parameter range : 0 - 0xFFFE [read-only]<BR>
+Default : 0xFFFE
+
+@var ATCommand::ATMP
+<b>16-bit Parent Network Address</b>.
+Read the 16-bit network address of the module's parent. A value of 0xFFFE means the module does not have a parent.
+
+Parameter range : 0 - 0xFFFE [read-only]<BR>
+Default : 0xFFFE
+
+@var ATCommand::ATNC
+<b>Number of Remaining Children</b>. Read the number of end device children that can join the device.
+If NC returns 0, then the device cannot allow any more end device children to join.
+
+Parameter range : 0 - MAX_CHILDREN (maximum varies)<BR>
+Default : read-only
+
+@var ATCommand::ATSH
+<b>Serial Number High</b>. Read the high 32 bits of the module's unique 64-bit address.
+
+Parameter range : 0 - 0xFFFFFFFF [read-only]<BR>
+Default : factory-set
+
+@var ATCommand::ATSL
+<b>Serial Number Low</b>. Read the low 32 bits of the module's unique 64-bit address.
+
+Parameter range : 0 - 0xFFFFFFFF [read-only]<BR>
+Default : factory-set
+
+@var ATCommand::ATNI
+<b>Node Identifier</b>. Set/read a string identifier.
+The register only accepts printable ASCII data.
+In AT Command Mode, a string cannot start with a space. A carriage return ends the command.
+A command will automatically end when maximum bytes for the string have been entered.
+This string is returned as part of the ND (Node Discover) command.
+This identifier is also used with the DN (Destination Node) command.
+In AT command mode, an ASCII comma (0x2C) cannot be used in the NI string
+
+Parameter range : 20-Byte printable ASCII string<BR>
+Default : ASCII space character (0x20)
+
+@var ATCommand::ATSE
+<b>Source Endpoint</b>.
+Set/read the ZigBee application layer source endpoint value. This value will be used as the source endpoint for all data transmissions.
+SE is only supported in AT firmware. The default value 0xE8 (Data endpoint) is the Digi data endpoint
+
+Parameter range : 0 - 0xFF<BR>
+Default : 0xE8
+
+@var ATCommand::ATDE
+<b>Destination Endpoint</b>.
+Set/read Zigbee application layer destination ID value. This value will be used as the destination endpoint all data transmissions.
+DE is only supported in AT firmware.The default value (0xE8) is the Digi data endpoint.
+
+Parameter range : 0 - 0xFF<BR>
+Default : 0xE8
+
+@var ATCommand::ATTO
+
+@var ATCommand::ATNP
+<b>Maximum RF Payload Bytes</b>.
+This value returns the maximum number of RF payload bytes that can be sent in a unicast transmission.
+If APS encryption is used (API transmit option bit enabled), the maximum payload size is reduced by 9 bytes.
+If source routing is used (AR < 0xFF), the maximum payload size is reduced further.
+@note NP returns a hexadecimal value. (e.g. if NP returns 0x54, this is equivalent to 84 bytes)
+
+@var ATCommand::ATDD
+<b>Device Type Identifier</b>.
+Stores a device type value.
+This value can be used to differentiate different XBee-based devices.
+Digi reserves the range 0 - 0xFFFFFF.
+For example, Digi currently uses the following DD values to identify various ZigBee products :
+<UL>
+<LI>0x30001 - ConnectPort X8 Gateway</LI>
+<LI>0x30002 - ConnectPort X4 Gateway</LI>
+<LI>0x30003 - ConnectPort X2 Gateway</LI>
+<LI>0x30005 - RS-232 Adapter</LI>
+<LI>0x30006 - RS-485 Adapter</LI>
+<LI>0x30007 - XBee Sensor Adapter</LI>
+<LI>0x30008 - Wall Router</LI>
+<LI>0x3000A - Digital I/O Adapter</LI>
+<LI>0x3000B - Analog I/O Adapter</LI>
+<LI>0x3000C - XStick</LI>
+<LI>0x3000F - Smart Plug</LI>
+<LI>0x30011 - XBee Large Display</LI>
+<LI>0x30012 - XBee Small Display</LI>
+</UL>
+<BR>
+Parameter range : 0 - 0xFFFFFFFF<BR>
+Default : 0x30000
+
+@var ATCommand::ATCR
+
+@var ATCommand::ATCH
+<b>Operating Channel</b>.
+Read the channel number used for transmitting and receiving between RF modules.
+Uses 802.15.4 channel numbers.
+A value of 0 means the device has not joined a PAN and is not operating on any channel.
+
+Parameter range :
+ - XBee 0, 0x0B - 0x1A (Channels 11-26)
+ - XBee-PRO (S2) 0, 0x0B - 0x18 (Channels 11-24)
+ - XBee-PRO (S2B) 0, 0x0B - 0x19 (Channels 11-25)
+ - XBee (S1) 0x0B - 0x1A
+ - XBee-PRO (S1) 0x0C - 0x17
+
+Default : [read-only]
+
+@var ATCommand::ATDA
+<b>Force Disassociation</b>.
+End device will immediately disassociate from a Coordinator (if associated) and reattempt to associate.
+
+@var ATCommand::ATID
+<b>Extended PAN ID</b>.
+Set/read the 64-bit extended PAN ID.
+If set to 0, the coordinator will select a random extended PAN ID, and the router / end device will join any extended PAN ID.
+Changes to ID should be written to non-volatile memory using the WR command to preserve the ID setting if a power cycle occurs.
+
+Parameter range : 0 - 0xFFFFFFFFFFFFFFFF<BR>
+Default : 0
+
+@var ATCommand::ATOP
+0x4F50
+
+@var ATCommand::ATRR
+<b>XBee Retries</b>.
+Set/Read the maximum number of retries the module will execute in
+addition to the 3 retries provided by the 802.15.4 MAC. For each XBee retry, the
+802.15.4 MAC can execute up to 3 retries.
+
+Parameter range : 0-6<br>
+Default : 0
+
+@var ATCommand::ATRN
+<b>Random Delay Slots</b>.
+Set/Read the minimum value of the back-off exponent in the
+CSMA-CA algorithm that is used for collision avoidance. If RN = 0, collision avoidance
+is disabled during the first iteration of the algorithm (802.15.4 - macMinBE).
+
+Parameter range : 0 - 3 [exponent]<br>
+Default : 0
+
+@var ATCommand::ATMM
+<b>MAC mode</b>.
+Set/Read MAC Mode value. MAC Mode enables/disables the
+use of a Digi header in the 802.15.4 RF packet. When Modes 0 or 3 are enabled
+(MM=0,3), duplicate packet detection is enabled as well as certain AT commands.
+Please see the detailed MM description on page 47 for additional information.
+
+Parameter range : 0-3
+ - 0 = Digi Mode
+ - 1 = 802.15.4 (no ACKs)
+ - 2 = 802.15.4 (with ACKs)
+ - 3 = Digi Mode (no ACKs)
+
+Default : 0
+
+@var ATCommand::ATCE
+<b>Coordinator Enable</b>.
+Set/Read the coordinator setting.
+
+Parameter range : 0-1
+ - 0 = End Device
+ - 1 = Coordinator
+
+Default : 0
+
+@var ATCommand::ATNH
+0x4E48
+@var ATCommand::ATBH
+0x4248
+@var ATCommand::ATOI
+0x4F49
+@var ATCommand::ATNT
+<b>Node Discover Time</b>.
+Set/Read the amount of time a node will wait for responses from other nodes when using the ND (Node Discover) command.
+
+Parameter range : 0x01 - 0xFC [x 100 ms]<br>
+Default : 0x19
+
+@var ATCommand::ATNO
+<b>Node Discover Options</b>.
+Enables node discover self-response on the module.
+
+Paramerter range : 0-1<br>
+Default : 0
+
+@var ATCommand::ATSC
+<b>Scan Channels</b>.
+Set/Read list of channels to scan for all Active and Energy Scans as a
+bitfield. This affects scans initiated in command mode (AS, ED) and during End Device
+Association and Coordinator startup:
+<table>
+<tr><td>bit 0 - 0x0B</td></td><td>bit 4 - 0x0F</td><td>bit 8 - 0x13</td><td>bit12 - 0x17</td></tr>
+<tr><td>bit 1 - 0x0C</td></td><td>bit 5 - 0x10</td></td><td>bit 9 - 0x14</td></td><td>bit13 - 0x18</td></tr>
+<tr><td>bit 2 - 0x0D</td></td><td>bit 6 - 0x11</td></td><td>bit 10 - 0x15</td></td><td>bit14 - 0x19</td></tr>
+<tr><td>bit 3 - 0x0E</td></td><td>bit 7 - 0x12</td></td><td>bit 11 - 0x16</td></td><td>bit 15 - 0x1A</td></tr>
+</table>
+
+Parameter range : 0 - 0xFFFF (bits 0, 14, 15 not allowed on the XBee-PRO)<br>
+Default : 0x1FFE (all XBee-PRO Channels)
+
+@var ATCommand::ATSD
+<b>Scan Duration</b>.
+Set/Read the scan duration exponent.
+End Device - Duration of Active Scan during Association.
+Coordinator - If ‘ReassignPANID’ option is set on Coordinator [refer to A2 parameter],
+SD determines the length of time the Coordinator will scan channels to locate existing
+PANs. If ‘ReassignChannel’ option is set, SD determines how long the Coordinator will
+perform an Energy Scan to determine which channel it will operate on.
+
+‘Scan Time’ is measured as (# of channels to scan] * (2 ^ SD) * 15.36ms). The number 0-0x0F [exponent]
+of channels to scan is set by the SC command. The XBee can scan up to 16 channels
+(SC = 0xFFFF). The XBee PRO can scan up to 13 channels (SC = 0x3FFE).
+
+Example : The values below show results for a 13 channel scan :
+<table>
+<tr><td>SD = 0, time = 0.18 sec</td></td><td>SD = 8, time = 47.19 sec</td></tr>
+<tr><td>SD = 2, time = 0.74 sec</td></td><td>SD = 10, time = 3.15 min</td></tr>
+<tr><td>SD = 4, time = 2.95 sec</td></td><td>SD = 12, time = 12.58 min</td></tr>
+<tr><td>SD = 6, time = 11.80 sec</td></td><td>SD = 14, time = 50.33 min</td></tr>
+</table>
+
+@var ATCommand::ATA1
+<b>End Device Association</b>.
+Set/Read End Device association options.
+ - <b>bit 0</b> - ReassignPanID
+   - 0 : Will only associate with Coordinator operating on PAN ID that matches module ID
+   - 1 : May associate with Coordinator operating on any PAN ID
+   .
+ - <b>bit 1</b> - ReassignChannel
+   - 0 : Will only associate with Coordinator operating on matching CH Channel setting
+   - 1 : May associate with Coordinator operating on any Channel
+   .
+ - <b>bit 2</b> - AutoAssociate
+   - 0 : Device will not attempt Association
+   - 1 : Device attempts Association until success
+   @note This bit is used only for Non-Beacon systems. End Devices in Beacon-enabled
+   system must always associate to a Coordinator
+   .
+ - <b>bit 3</b> - PollCoordOnPinWake
+   - 0 : Pin Wake will not poll the Coordinator for indirect (pending) data
+   - 1 : Pin Wake will send Poll Request to Coordinator to extract any pending data bits 4 - 7 are reserved
+   .
+ .
+
+Parameter range : 0 - 0x0F <br>
+Default : 0
+
+@var ATCommand::ATA2
+<b>Coordinator Association</b>.
+Set/Read Coordinator association options.
+ - <b>bit 0</b> - ReassignPanID
+   - 0 : Coordinator will not perform Active Scan to locate available PAN ID. It will operate on ID (PAN ID).
+   - 1 : Coordinator will perform Active Scan to determine an available ID (PAN ID).
+         If a PAN ID conflict is found, the ID parameter will change.
+   .
+ - <b>bit 1</b> - ReassignChannel
+   - 0 : Coordinator will not perform Energy Scan to determine free channel.
+         It will operate on the channel determined by the CH parameter.
+   - 1 : Coordinator will perform Energy Scan to find a free channel, then operate on that channel.
+   .
+ - <b>bit 2</b> - AutoAssociate
+   - 0 : Coordinator will not allow any devices to associate to it.
+   - 1 : Coordinator will allow devices to associate to it.
+   .
+ - <b>bits 3 - 7</b> - Reserved
+ .
+
+Parameter range : 0 - 0x0F <br>
+Default : 0
+
+@var ATCommand::ATZS
+0x5A53
+@var ATCommand::ATNJ
+0x4E4A
+@var ATCommand::ATJV
+0x4A56
+@var ATCommand::ATNW
+0x4E57
+@var ATCommand::ATJN
+0x4A4E
+@var ATCommand::ATAR
+0x4152
+@var ATCommand::ATEE
+<b>AES Encryption Enable</b>.
+Disable/Enable 128-bit AES encryption support. Use in conjunction with the KY command.
+
+Parameter range: 0-1<br>
+Default: 0 (disabled)
+
+@var ATCommand::ATEO
+0x454F
+@var ATCommand::ATNK
+0x4E4B
+@var ATCommand::ATKY
+<b>AES Encryption Key</b>.
+Set the 128-bit AES (Advanced Encryption Standard) key for
+encrypting/decrypting data. The KY register cannot be read.
+
+Parameter range: 0 - (any 16-Byte value)
+
+@var ATCommand::ATPL
+<b>Power Level</b>.
+Select/Read the power level at which the RF module transmits conducted power.
+
+Parameter range: 0 - 4 (XBee / XBee-PRO)
+ - 0 = -10 / 10 dBm
+ - 1 = -6 / 12 dBm
+ - 2 = -4 / 14 dBm
+ - 3 = -2 / 16 dBm
+ - 4 = 0 / 18 dBm
+ .
+ XBee-PRO International variant:
+ - PL=4: 10 dBm
+ - PL=3: 8 dBm
+ - PL=2: 2 dBm
+ - PL=1: -3 dBm
+ - PL=0: -3 dBm
+ .
+Default: 4
+
+@var ATCommand::ATCA
+<b>CCA Threshold</b>.
+Set/read the CCA (Clear Channel Assessment) threshold. Prior to
+transmitting a packet, a CCA is performed to detect energy on the channel. If the
+detected energy is above the CCA Threshold, the module will not transmit the packet.
+
+Parameter range: 0x24 - 0x50 [-dBm]<br>
+Default: 0x2C (-44d dBm)
+
+@var ATCommand::ATPM
+0x504D
+@var ATCommand::ATDB
+0x4442
+@var ATCommand::ATPP
+0x5050
+// Serial Interfacing (I/O)
+@var ATCommand::ATAP
+0x4150
+@var ATCommand::ATAO
+0x414F
+@var ATCommand::ATBD
+0x4244
+@var ATCommand::ATNB
+0x4E42
+@var ATCommand::ATSB
+0x5342
+@var ATCommand::ATRO
+0x524F
+@var ATCommand::ATD7
+0x4437
+@var ATCommand::ATD6
+0x4436
+// I/O
+@var ATCommand::ATIR
+0x4952
+@var ATCommand::ATIC
+0x4943
+@var ATCommand::ATP0
+0x5030
+@var ATCommand::ATP1
+0x5031
+@var ATCommand::ATP2
+0x5032
+@var ATCommand::ATP3
+0x5033
+@var ATCommand::ATD0
+0x4430
+@var ATCommand::ATD1
+0x4431
+@var ATCommand::ATD2
+0x4432
+@var ATCommand::ATD3
+0x4433
+@var ATCommand::ATD4
+0x4434
+@var ATCommand::ATD5
+0x4435
+@var ATCommand::ATD8
+0x4438
+@var ATCommand::ATLT
+0x4C54
+@var ATCommand::ATPR
+0x5052
+@var ATCommand::ATRP
+0x5250
+@var ATCommand::ATV
+0x2556
+@var ATCommand::ATVP
+0x562B
+@var ATCommand::ATTP
+0x5450
+@var ATCommand::ATVR
+0x5652
+@var ATCommand::ATHV
+0x4856
+@var ATCommand::ATAI
+<b>Association Indication</b>. Read errors with the last association request:
+ - 0x00 - Successful Completion - Coordinator successfully started or End Device association complete
+ - 0x01 - Active Scan Timeout
+ - 0x02 - Active Scan found no PANs
+ - 0x03 - Active Scan found PAN, but the CoordinatorAllowAssociation bit is not set
+ - 0x04 - Active Scan found PAN, but Coordinator and End Device are not configured to support beacons
+ - 0x05 - Active Scan found PAN, but the Coordinator ID parameter does not match the ID parameter of the End Device
+ - 0x06 - Active Scan found PAN, but the Coordinator CH parameter does not match the CH parameter of the End Device
+ - 0x07 - Energy Scan Timeout
+ - 0x08 - Coordinator start request failed
+ - 0x09 - Coordinator could not start due to invalid parameter
+ - 0x0A - Coordinator Realignment is in progress
+ - 0x0B - Association Request not sent
+ - 0x0C - Association Request timed out - no reply was received
+ - 0x0D - Association Request had an Invalid Parameter
+ - 0x0E - Association Request Channel Access Failure. Request was not transmitted - CCA failure
+ - 0x0F - Remote Coordinator did not send an ACK after Association Request was sent
+ - 0x10 - Remote Coordinator did not reply to the Association Request, but an ACK was received after sending the request
+ - 0x11 - [reserved]
+ - 0x12 - Sync-Loss - Lost synchronization with a Beaconing Coordinator
+ - 0x13 - Disassociated - No longer associated to Coordinator
+ - 0xFF - RF Module is attempting to associate
+ .
+ Parameter range: 0 - 0x13 [read-only]
+
+@var ATCommand::ATFP
+<b>Force Poll</b>. Request indirect messages being held by a coordinator.
+
+@var ATCommand::ATAS
+<b>Active Scan</b>.
+Send Beacon Request to Broadcast Address (0xFFFF) and Broadcast
+PAN (0xFFFF) on every channel. The parameter determines the time the radio will
+listen for Beacons on each channel. A PanDescriptor is created and returned for every
+Beacon received from the scan. Each PanDescriptor contains the following information:
+CoordAddress (SH, SL)<CR>
+CoordPanID (ID)<CR>
+CoordAddrMode <CR>
+ - 0x02 = 16-bit Short Address
+ - 0x03 = 64-bit Long Address
+ .
+Channel (CH parameter) <CR>
+SecurityUse<CR>
+ACLEntry<CR>
+SecurityFailure<CR>
+SuperFrameSpec<CR> (2 bytes):
+ - bit 15 - Association Permitted (MSB)
+ - bit 14 - PAN Coordinator
+ - bit 13 - Reserved
+ - bit 12 - Battery Life Extension
+ - bits 8-11 - Final CAP Slot
+ - bits 4-7 - Superframe Order
+ - bits 0-3 - Beacon Order
+ .
+GtsPermit<CR>
+RSSI<CR> (RSSI is returned as -dBm)
+TimeStamp<CR> (3 bytes)
+<CR>
+A carriage return <CR> is sent at the end of the AS command. The Active Scan is
+capable of returning up to 5 PanDescriptors in a scan. The actual scan time on each
+channel is measured as Time = [(2 ^SD PARAM) * 15.36] ms. Note the total scan time is
+this time multiplied by the number of channels to be scanned (16 for the XBee and 13
+for the XBee-PRO). Also refer to SD command description.
+
+Parameter range: 0-6
+
+@var ATCommand::ATED
+<b>Energy Scan</b>.
+Send an Energy Detect Scan. This parameter determines the length of
+scan on each channel. The maximal energy on each channel is returned & each value
+is followed by a carriage return. An additional carriage return is sent at the end of the
+command. The values returned represent the detected energy level in units of -dBm.
+The actual scan time on each channel is measured as Time = [(2 ^ED) * 15.36] ms.
+Note the total scan time is this time multiplied by the number of channels to be scanned
+(refer to SD parameter).
+
+Parameter range: 0-6
+
+@var ATCommand::ATCT
+0x4354
+@var ATCommand::ATCN
+0x434E
+@var ATCommand::ATGT
+0x4754
+@var ATCommand::ATCC
+0x4343
+@var ATCommand::ATSM
+<b>Sleep Mode</b>.
+Set/Read Sleep Mode configurations.
+
+Parameter range: 0-5
+ - 0 = No Sleep
+ - 1 = Pin Hibernate
+ - 2 = Pin Doze
+ - 3 = Reserved
+ - 4 = Cyclic sleep remote
+ - 5 = Cyclic sleep remote w/ pin wake-up
+ - 6 = [Sleep Coordinator] for backwards compatibility
+       w/ v1.x6 only; otherwise, use ATCommand::ATCE command.
+ .
+Default: 0
+
+@var ATCommand::ATSO
+<b>Sleep Options</b>.
+Set/Read the sleep mode options.
+ - Bit 0 - Poll wakeup disable
+    - 0 - Normal operations. A module configured for cyclic sleep will poll for data on waking.
+    - 1 - Disable wakeup poll. A module configured for cyclic sleep will not poll for data on waking.
+    .
+ .
+ - Bit 1 - ADC/DIO wakeup sampling disable.
+    - 0 - Normal operations. A module configured in a sleep mode with ADC/DIO sampling
+       enabled will automatically perform a sampling on wakeup.
+    - 1 - Suppress sample on wakeup. A module configured in a sleep mode with ADC/DIO
+       sampling enabled will not automatically sample on wakeup.
+    .
+ .
+Paramerter range: 0-4<br>
+Default: 0
+
+@var ATCommand::ATST
+<b>Time Before Sleep</b>.
+\<NonBeacon firmware\> Set/Read time period of inactivity (no
+serial or RF data is sent or received) before activating Sleep Mode. ST parameter is
+only valid with Cyclic Sleep settings (SM = 4 - 5).
+Coordinator and End Device ST values must be equal.
+
+Also note, the GT parameter value must always be less than the ST value. (If GT > ST,
+the configuration will render the module unable to enter into command mode.) If the ST
+parameter is modified, also modify the GT parameter accordingly.
+
+Parameter range: 1 - 0xFFFF [x 1 ms] <br>
+Default: 0x1388 (5000d)
+
+@var ATCommand::ATSP
+<b>Cyclic Sleep Period</b>.
+\<NonBeacon firmware\> Set/Read sleep period for cyclic sleeping
+remotes. Coordinator and End Device SP values should always be equal. To send
+Direct Messages, set SP = 0.
+
+End Device - SP determines the sleep period for cyclic sleeping remotes. Maximum
+sleep period is 268 seconds (0x68B0).
+
+Coordinator - If non-zero, SP determines the time to hold an indirect message before
+discarding it. A Coordinator will discard indirect messages after a period of (2.5 * SP).
+
+Parameter range: 0 - 0x68B0 [x 10 ms] <br>
+Default: 0
+
+@var ATCommand::ATDP
+<b>Disassociated Cyclic Sleep Period</b>.
+\<NonBeacon firmware\>
+End Device - Set/Read time period of sleep for cyclic sleeping remotes that are
+configured for Association but are not associated to a Coordinator. (i.e. If a device is
+configured to associate, configured as a Cyclic Sleep remote, but does not find a
+Coordinator, it will sleep for DP time before reattempting association.) Maximum sleep
+period is 268 seconds (0x68B0). DP should be > 0 for NonBeacon systems.
+
+Paramerter range: 1 - 0x68B0 [x 10 ms] <br>
+Default: 0x3E8 (1000d)
+
+@var ATCommand::ATSN
+0x534E
+@var ATCommand::ATWH
+0x5748
+@var ATCommand::ATSI
+0x5349
+@var ATCommand::ATPO
+0x504F
+@var ATCommand::ATAC
+0x4143
+@var ATCommand::ATNR
+0x4E52
+@var ATCommand::ATCB
+0x4342
+@var ATCommand::ATND
+<b>Node Discover </b>.
+Discovers and reports all RF modules found. The following information
+is reported for each module discovered (the example cites use of Transparent operation
+(AT command format) - refer to the long ND command description regarding differences
+between Transparent and API operation).
+ - MY<CR>
+ - SH<CR>
+ - SL<CR>
+ - DB<CR>
+ - NI<CR><CR>
+The amount of time the module allows for responses is determined by the NT
+parameter. In Transparent operation, command completion is designated by a <CR>
+(carriage return). ND also accepts a Node Identifier as a parameter. In this case, only a
+module matching the supplied identifier will respond. If ND self-response is enabled
+(NO=1) the module initiating the node discover will also output a response for itself.
+
+Parameter range : optional 20-character NI value
+
+@var ATCommand::ATDN
+<b>Distination Node</b>.
+Resolves an NI (Node Identifier) string to a physical address.
+The following events occur upon successful command execution:
+1. DL and DH are set to the address of the module with the matching Node Identifier.
+2. “OK” is returned.
+3. RF module automatically exits AT Command Mode
+   If there is no response from a module within 200 msec or a parameter is not specified
+   (left blank), the command is terminated and an “ERROR” message is returned.
+
+Parameter range : 20-character ASCII string
+
+@var ATCommand::ATIS
+0x4953
+@var ATCommand::AT1S
+0x3153
+*/

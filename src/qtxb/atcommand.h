@@ -122,6 +122,8 @@ public:
         ATD3 = 0x4433,
         ATD4 = 0x4434,
         ATD5 = 0x4435,
+        ATD6 = 0x4436,
+        ATD7 = 0x4437,
         ATD8 = 0x4438,
         ATLT = 0x4C54,
         ATPR = 0x5052,

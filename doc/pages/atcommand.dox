@@ -1,9 +1,13 @@
 /**
 @enum QtXBee::ATCommand::ATCommandType
 @brief The ATCommand enum defines the AT commands codes
-@note This list may be uncomplete. If Some AT commands are missing here, please let me know.
+@note This list may be uncomplete. If some AT commands are missing here, please let me know.
 @note Some of theses AT commands are only for XBee S1 or XBee S2.
 Also there can be some differences about the commands parameters between the two modules series.
+Note also that there can be some differences between the firmware version.
+The QtXBee::ATCommand::ATCommandType documentation is made with the documentation
+I have from Digi, and the commands' explanation may be not valid in some cases.
+So if you have doudts, please check your module's datasheet.
 
 @var ATCommand::ATWR
 <b>Write</b>.
@@ -390,17 +394,62 @@ Default: 0x2C (-44d dBm)
 0x5050
 // Serial Interfacing (I/O)
 @var ATCommand::ATAP
-0x4150
+<b>API Enable</b>.
+Disable/Enable API Mode.
+
+Parameter range: 0-2
+ - 0 : disabled
+ - 1 : API enabled
+ - 2 : API enabled (with escaped control characters)
+ .
+Default: 0
+
 @var ATCommand::ATAO
 0x414F
 @var ATCommand::ATBD
-0x4244
+<b>Interface Data Reate</b>.
+Set/Read the serial interface data rate for communications
+between the RF module serial port and host.
+Request non-standard baud rates with values above 0x80 using a terminal window.
+Read the BD register to find actual baud rate achieved.
+
+Parameter range: 0-7 (standard baud rates)
+ - 0 = 1200 bps
+ - 1 = 2400
+ - 2 = 4800
+ - 3 = 9600
+ - 4 = 19200
+ - 5 = 38400
+ - 6 = 57600
+ - 7 = 115200
+ .
+ 0x80 - 0x3D090 (non-standard baud rates up to 250 Kbps)<br>
+ Default: 3
+
 @var ATCommand::ATNB
-0x4E42
+<b>Parity</b>.
+Set/Read parity settings.
+
+Parameter range: 0-4
+ - 0 = 8-bit no parity
+ - 1 = 8-bit even
+ - 2 = 8-bit odd
+ - 3 = 8-bit mark
+ - 4 = 8-bit space
+ .
+Default: 0
+
 @var ATCommand::ATSB
 0x5342
 @var ATCommand::ATRO
-0x524F
+<b>Packetization Timeout</b>.
+Set/Read number of character times of inter-character delay
+required before transmission. Set to zero to transmit characters as they arrive instead of
+buffering them into one RF packet.
+
+Parameter range: 0 - 0xFF [x character times]<br>
+Default: 3
+
 @var ATCommand::ATD7
 0x4437
 @var ATCommand::ATD6
@@ -419,23 +468,161 @@ Default: 0x2C (-44d dBm)
 @var ATCommand::ATP3
 0x5033
 @var ATCommand::ATD0
-0x4430
+<b>AD0/DIO0 Configuration</b>. Select/Read settings for AD0/DIO0 (pin 20 for Serie 1)
+Options include: Analog-to-digital converter, Digital Input and Digital Output.
+
+Parameter range: 0-5
+ - 0 = Disabled
+ - 1 = (n/a)
+ - 2 = ADC
+ - 3 = DI
+ - 4 = DO low
+ - 5 = DO high
+ .
+Default: 0
+
 @var ATCommand::ATD1
-0x4431
+<b>AD1/DIO1 Configuration</b>. Select/Read settings for AD1/DIO1 (pin 19 for Serie 1)
+Options include: Analog-to-digital converter, Digital Input and Digital Output.
+
+Parameter range: 0-5
+ - 0 = Disabled
+ - 1 = (n/a)
+ - 2 = ADC
+ - 3 = DI
+ - 4 = DO low
+ - 5 = DO high
+ .
+Default: 0
+
 @var ATCommand::ATD2
-0x4432
+<b>AD2/DIO2 Configuration</b>. Select/Read settings for AD2/DIO2 (pin 18 for Serie 1)
+Options include: Analog-to-digital converter, Digital Input and Digital Output.
+
+Parameter range: 0-5
+ - 0 = Disabled
+ - 1 = (n/a)
+ - 2 = ADC
+ - 3 = DI
+ - 4 = DO low
+ - 5 = DO high
+ .
+Default: 0
 @var ATCommand::ATD3
-0x4433
+<b>AD3/DIO3 Configuration</b>. Select/Read settings for AD3/DIO3 (pin 17 for Serie 1)
+Options include: Analog-to-digital converter, Digital Input and Digital Output.
+
+Parameter range: 0-5
+ - 0 = Disabled
+ - 1 = (n/a)
+ - 2 = ADC
+ - 3 = DI
+ - 4 = DO low
+ - 5 = DO high
+ .
+Default: 0
 @var ATCommand::ATD4
-0x4434
+<b>AD4/DIO4 Configuration</b>. Select/Read settings for AD4/DIO4 (pin 11 for Serie 1)
+Options include: Analog-to-digital converter, Digital Input and Digital Output.
+
+Parameter range: 0-5
+ - 0 = Disabled
+ - 1 = (n/a)
+ - 2 = ADC
+ - 3 = DI
+ - 4 = DO low
+ - 5 = DO high
+ .
+Default: 0
+
 @var ATCommand::ATD5
-0x4435
+<b>DIO5 Configuration</b>.
+Configure settings for the DIO5 line (pin 15 for Serie 1) of the RF module.
+Options include Associated LED indicator (blinks when associated) and I/O line
+settings.
+
+Parameter range: 0-5
+ - 0 = Disabled
+ - 1 = Associated indicator
+ - 2 = ADC
+ - 3 = DI
+ - 4 = DO low
+ - 5 = DO high
+ .
+Default: 0
+
+@var ATCommand::ATD6
+<b>DIO6 Configuration</b>.
+Select/Read settings for the DIO6 line (pin 16 for Serie 1) of the RF module.
+Options include RTS flow control and I/O line settings.
+Parameter range: 0-5
+ - 0 = Disabled
+ - 1 = RTS flow control
+ - 2 = (n/a)
+ - 3 = DI
+ - 4 = DO low
+ - 5 = DO high
+ .
+Default: 0
+
+@var ATCommand::ATD7
+<b>DIO7 Configuration</b>.
+Select/Read settings for the DIO7 line (pin 12 for Serie 1) of the RF module.
+Options include CTS flow control and I/O line settings.
+
+Parameter range: 0-7
+ - 0 = Disabled
+ - 1 = CTS Flow Control
+ - 2 = (n/a)
+ - 3 = DI
+ - 4 = DO low
+ - 5 = DO high
+ - 6 = RS485 Tx Enable Low
+ - 7 = RS485 Tx Enable High
+ .
+Default: 1
+
 @var ATCommand::ATD8
-0x4438
+<b>DI8 Configuration</b>.
+Select/Read options for the DI8 line (pin 9 for Serie 1) of the RF module.
+
+Parameter range: 0-5
+ - 0 = Disabled
+ - 1 = N/A
+ - 2 = N/A
+ - 1 = N/A
+ - 3 = DI
+ - 4 = N/A
+ - 5 = N/A
+ .
+Default: 0
+
 @var ATCommand::ATLT
 0x4C54
 @var ATCommand::ATPR
-0x5052
+@todo Check XBee Serie2
+
+<b>Pull-up Resistor Enable</b>.
+Set/Read bitfield to configure internal pull-up resistor status
+for I/O lines.
+
+Bitfield map (XBee Serie1):
+| Bit  | Signification              |
+|------|----------------------------|
+| bit0 | AD4/DIO4 (pin11)           |
+| bit1 | AD3 / DIO3 (pin17)         |
+| bit2 | AD2/DIO2 (pin18)           |
+| bit3 | AD1/DIO1 (pin19)           |
+| bit4 | AD0 / DIO0 (pin20)         |
+| bit5 | RTS / AD6 / DIO6 (pin16)   |
+| bit6 | DTR / SLEEP_RQ / DI8 (pin9)|
+| bit7 | DIN/CONFIG (pin3)          |
+
+Bit set to "1" specifies pull-up enabled; "0" specifies no pull-up.
+
+Parameter range: 0-0xFF<br>
+Default: 0xFF
+
 @var ATCommand::ATRP
 0x5250
 @var ATCommand::ATV
@@ -482,17 +669,17 @@ Default: 0x2C (-44d dBm)
 Send Beacon Request to Broadcast Address (0xFFFF) and Broadcast
 PAN (0xFFFF) on every channel. The parameter determines the time the radio will
 listen for Beacons on each channel. A PanDescriptor is created and returned for every
-Beacon received from the scan. Each PanDescriptor contains the following information:
-CoordAddress (SH, SL)<CR>
-CoordPanID (ID)<CR>
-CoordAddrMode <CR>
+Beacon received from the scan. Each PanDescriptor contains the following information:<br>
+CoordAddress (SH, SL)<CR><br>
+CoordPanID (ID)<CR><br>
+CoordAddrMode <CR><br>
  - 0x02 = 16-bit Short Address
  - 0x03 = 64-bit Long Address
  .
-Channel (CH parameter) <CR>
-SecurityUse<CR>
-ACLEntry<CR>
-SecurityFailure<CR>
+Channel (CH parameter) <CR><br>
+SecurityUse<CR><br>
+ACLEntry<CR><br>
+SecurityFailure<CR><br>
 SuperFrameSpec<CR> (2 bytes):
  - bit 15 - Association Permitted (MSB)
  - bit 14 - PAN Coordinator
@@ -502,10 +689,10 @@ SuperFrameSpec<CR> (2 bytes):
  - bits 4-7 - Superframe Order
  - bits 0-3 - Beacon Order
  .
-GtsPermit<CR>
-RSSI<CR> (RSSI is returned as -dBm)
-TimeStamp<CR> (3 bytes)
-<CR>
+GtsPermit<CR><br>
+RSSI<CR> (RSSI is returned as -dBm)<br>
+TimeStamp<CR> (3 bytes)<br>
+<CR><br>
 A carriage return <CR> is sent at the end of the AS command. The Active Scan is
 capable of returning up to 5 PanDescriptors in a scan. The actual scan time on each
 channel is measured as Time = [(2 ^SD PARAM) * 15.36] ms. Note the total scan time is
@@ -634,6 +821,7 @@ between Transparent and API operation).
  - SL<CR>
  - DB<CR>
  - NI<CR><CR>
+ .
 The amount of time the module allows for responses is determined by the NT
 parameter. In Transparent operation, command completion is designated by a <CR>
 (carriage return). ND also accepts a Node Identifier as a parameter. In this case, only a

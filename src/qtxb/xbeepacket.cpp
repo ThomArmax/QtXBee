@@ -52,6 +52,7 @@ void XBeePacket::setStartDelimiter(unsigned sd)
  * @brief Sets the frame's length
  * @param length
  * @sa XBeePacket::length()
+ * @todo Does it make sense that this method is public ? If not, make it protected.
  */
 void XBeePacket::setLength(unsigned length)
 {
@@ -62,6 +63,7 @@ void XBeePacket::setLength(unsigned length)
  * @brief Sets the frame's type
  * @param type
  * @sa XBeePacket::frameType()
+ * @todo Does it make sense that this method is public ? If not, make it protected.
  */
 void XBeePacket::setFrameType(ApiId type)
 {
@@ -71,7 +73,7 @@ void XBeePacket::setFrameType(ApiId type)
 /**
  * @brief Sets the frame's id
  * @param id
- * @sa XBeePacket::frameType()
+ * @sa XBeePacket::frameId()
  */
 void XBeePacket::setFrameId(unsigned id)
 {
@@ -82,6 +84,7 @@ void XBeePacket::setFrameId(unsigned id)
  * @brief Sets the checksum
  * @param cs
  * @sa XBeePacket::checksum()
+ * @todo Does it make sense that this method is public ? If not, make it protected.
  */
 void XBeePacket::setChecksum(unsigned cs)
 {
@@ -92,6 +95,7 @@ void XBeePacket::setChecksum(unsigned cs)
  * @brief Returns the frame's start delimiter
  * @returns the frame's start delimiter
  * @sa XBeePacket::setStartDelimiter()
+ * @todo Does it make sense that this method is public ? If not, make it protected.
  */
 unsigned XBeePacket::startDelimiter() const
 {
@@ -214,7 +218,14 @@ bool XBeePacket::setPacket(const QByteArray &packet)
 }
 
 /**
- * @brief Parses the packet API specific data
+ * @brief Parses the packet API specific data.
+ *
+ * Are conciderated as packet specific data, the data between API frame Id and checksum.
+ *
+ * For example, the AT command response frame:
+ * @image html at_command_response_frame.jpg
+ * The specific part is bytes [6 - (#length() -1)] (AT command, Status, Value)
+ *
  * @param data
  * @return true if succeeded; false otherwise.
  * @note All subclasses must reimplement this method, which is called by XBeePacket::setPacket()
@@ -228,7 +239,9 @@ bool XBeePacket::parseApiSpecificData(const QByteArray &data)
 /**
  * @brief Assembles the packet to be able to send it.
  *
- * Overload this function to create your own packet.
+ * This function is called by the XBee class, when the packet in being sent.
+ *
+ * @note Overload this function to create your own packet.
  */
 void XBeePacket::assemblePacket()
 {
@@ -266,8 +279,8 @@ QString XBeePacket::toString()
 }
 
 /**
- * @brief Returns the given frame type APIFrameType into a human readable string
- * @returns the given frame type APIFrameType into a human readable string
+ * @brief Returns the given frame type ApiId into a human readable string
+ * @returns the given frame type ApiId into a human readable string
  * @param type
  * @sa ApiId
  */

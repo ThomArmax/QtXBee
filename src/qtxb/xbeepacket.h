@@ -32,29 +32,8 @@ namespace QtXBee {
  * As an alternative to Transparent Operation, API (Application Programming Interface) Operations are available.
  * API operation requires that communication with the module be done through a structured interface (data is communicated in frames in a defined order).
  * The API specifies how commands, command responses and module status messages are sent and received from the module using a UART Data Frame.
- *
- * Currently, there are 18 API frames types designed by Digi :
- *  - AT Command
- *  - AT Command - Queue Parameter value
- *  - ZigBee Transmit Request
- *  - Explicitit Adressing ZigBee Command Frame
- *  - Remote Command Request
- *  - Create Source Route
- *  - AT Command Response
- *  - Modem Status
- *  - ZigBee Transmit Status
- *  - ZigBee Receive Packet (AO=0)
- *  - ZigBee Explicit Rx Indicator (AO=1)
- *  - ZigBee IO Data Sample Rx Indicator
- *  - XBee Sensor Read Indicator (AO=0)
- *  - Node Identification Indicator (AO=0)
- *  - Remote Command Response
- *  - Over-the-Air Firmware Update Status
- *  - Route Record Indicator
- *  - Many-to-One Route Request Indicator
- *
- * @note Digi may add new API frames to future versions of firmware, so please build into your software interface the ability to
- * filter out additional API frames with unknown Frame Types.
+ * @todo Create the XBeeRequest class, based on XBeePacket to implement the request packet
+ * specific part and remove them from XBeePacket (XBeePacket::assemblePacket(), ...)
  */
 class XBeePacket : public QObject
 {

@@ -8,7 +8,7 @@ You can :
   - Send/Receive packets to/from other remote XBees
 
 @todo What to do when the XBee is in XBee::CommandMode at the user wants to send API packets ?
-Auto switch to the correct mode ? Stay in XBee::CommandMode and do nothing but warn the user ?
+Auto switch to the correct mode ? Stay in QtXBee::XBee::CommandMode and do nothing but warn the user ?
 @note The whole QtXBee lib is mainly designed to work in API Mode
 
 @enum XBee::Mode The Mode enum defines the mode the XBee is.

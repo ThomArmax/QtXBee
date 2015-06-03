@@ -107,8 +107,6 @@ public:
         ATNB = 0x4E42,
         ATSB = 0x5342,
         ATRO = 0x524F,
-        ATD7 = 0x4437,
-        ATD6 = 0x4436,
         // I/O ATs
         ATIR = 0x4952,
         ATIC = 0x4943,

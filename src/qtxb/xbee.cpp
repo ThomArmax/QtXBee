@@ -766,7 +766,6 @@ void XBee::readData()
 XBeeResponse * XBee::processPacket(QByteArray packet, const bool async)
 {
     unsigned packetType = (unsigned char)packet.at(3);
-    qDebug() << Q_FUNC_INFO << "packet type :" << QString::number(packetType, 16).prepend("0x");
 
     switch (packetType) {
     /********************** WPAN **********************/
@@ -787,8 +786,6 @@ XBeeResponse * XBee::processPacket(QByteArray packet, const bool async)
         response->setPacket(packet);
         if(async) {
             emit receivedRxResponse64(response);
-            qDebug() << Q_FUNC_INFO;
-            qDebug() << qPrintable(response->toString());
             response->deleteLater();
         }
         else {
@@ -801,8 +798,6 @@ XBeeResponse * XBee::processPacket(QByteArray packet, const bool async)
         response->setPacket(packet);
         if(async) {
             emit receivedTransmitStatus(response);
-            qDebug() << Q_FUNC_INFO << "TxStatusResponseId";
-            qDebug() << qPrintable(response->toString());
             response->deleteLater();
         }
         else {
@@ -815,7 +810,6 @@ XBeeResponse * XBee::processPacket(QByteArray packet, const bool async)
         ATCommandResponse *response = new ATCommandResponse(packet);
         if(async) {
             processATCommandRespone(response);
-            qDebug() << qPrintable(response->toString());
             response->deleteLater();
         }
         else {
@@ -895,7 +889,6 @@ XBeeResponse * XBee::processPacket(QByteArray packet, const bool async)
                                               arg(packetType,0,16).
                                               arg(QString(packet.toHex())));
     }
-
     return NULL;
 }
 

@@ -16,8 +16,8 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-        <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
@@ -247,6 +247,7 @@ Additional Inherited Members</h2></td></tr>
 <b>RegisterJoiningDeviceStatusId</b> = 0xA4, 
 <br/>
 &#160;&#160;<b>JoinNotificationStatusId</b> = 0xA5, 
+<b>UserDefinedId</b> = 0xB0, 
 <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fba4a4693ca8dfc624c4283945b1c57f058">UndefinedId</a> = 0xFF
 <br/>
  }</td></tr>
@@ -260,7 +261,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac03b5ed1c6b3af8eb0edee1d8219dc34 inherit pub_types_class_qt_x_bee_1_1_x_bee_packet"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_qt_x_bee_1_1_x_bee_packet')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html">QtXBee::XBeePacket</a></td></tr>
 <tr class="memitem:adee68fff9ddcaa2fc9e76b935f01a907 inherit pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#adee68fff9ddcaa2fc9e76b935f01a907">frameTypeToString</a> (const <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fb">ApiId</a> type)</td></tr>
-<tr class="memdesc:adee68fff9ddcaa2fc9e76b935f01a907 inherit pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the given frame type APIFrameType into a human readable string.  <a href="#adee68fff9ddcaa2fc9e76b935f01a907">More...</a><br/></td></tr>
+<tr class="memdesc:adee68fff9ddcaa2fc9e76b935f01a907 inherit pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the given frame type ApiId into a human readable string.  <a href="#adee68fff9ddcaa2fc9e76b935f01a907">More...</a><br/></td></tr>
 <tr class="separator:adee68fff9ddcaa2fc9e76b935f01a907 inherit pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_qt_x_bee_1_1_x_bee_packet"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_qt_x_bee_1_1_x_bee_packet')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html">QtXBee::XBeePacket</a></td></tr>
 <tr class="memitem:ad952b7fd5c54fa62f39b709527eb27a7 inherit pro_methods_class_qt_x_bee_1_1_x_bee_packet"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ad952b7fd5c54fa62f39b709527eb27a7">parseApiSpecificData</a> (const QByteArray &amp;data)</td></tr>
@@ -301,7 +302,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Assembles the packet to be able to send it. </p>
-<p>Overload this function to create your own packet. </p>
+<p>This function is called by the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> class, when the packet in being sent.</p>
+<dl class="section note"><dt>Note</dt><dd>Overload this function to create your own packet. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ac38bef99b73812ba8e0a1e0669d8fe42">QtXBee::XBeePacket</a>.</p>
 
@@ -320,7 +322,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 9 2015 13:11:30 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

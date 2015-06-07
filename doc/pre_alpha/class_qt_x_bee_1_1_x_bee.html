@@ -16,8 +16,8 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-        <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
@@ -106,8 +106,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>The <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> class is used to represents the local <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a>.  
  <a href="class_qt_x_bee_1_1_x_bee.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="xbee_8h_source.html">xbee.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for QtXBee::XBee:</div>
 <div class="dyncontent">
@@ -119,11 +117,10 @@ Inheritance diagram for QtXBee::XBee:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a1e82183fe955e0d3d59655757d4076d0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0">Mode</a> { <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a500364f6fdea6e9b6cb8960ad56c87be">CommandMode</a>, 
-<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a7747199fa10117a8f9a76b9dabecff25">API1Mode</a>, 
-<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a4da924c10060ac57da56f7faf9d5692f">API2Mode</a>
+<tr class="memitem:a1e82183fe955e0d3d59655757d4076d0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0">Mode</a> { <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">CommandMode</a>, 
+<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a7c58a4c65b83bd688d75b47ea576eae6">API1Mode</a>, 
+<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0ad873af0ca136bf4fec1f1c6db2ae3768">API2Mode</a>
  }</td></tr>
-<tr class="memdesc:a1e82183fe955e0d3d59655757d4076d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Mode enum defines the mode the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> is.  <a href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0">More...</a><br/></td></tr>
 <tr class="separator:a1e82183fe955e0d3d59655757d4076d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
@@ -161,46 +158,49 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>displayRemoteCommandR
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
-<tr class="memitem:ac8b2aa324e688cc8fe94e6d47d626828"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8b2aa324e688cc8fe94e6d47d626828"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#ac8b2aa324e688cc8fe94e6d47d626828">receivedATCommandResponse</a> (<a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html">ATCommandResponse</a> *response)</td></tr>
-<tr class="memdesc:ac8b2aa324e688cc8fe94e6d47d626828"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html" title="In response to an ATCommand message, the module will send an ATCommandResponse message.">ATCommandResponse</a> frame is received. <br/></td></tr>
-<tr class="separator:ac8b2aa324e688cc8fe94e6d47d626828"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a656acd16b3bbee0eaef87fc2b0ee97bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a656acd16b3bbee0eaef87fc2b0ee97bf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a656acd16b3bbee0eaef87fc2b0ee97bf">receivedModemStatus</a> (<a class="el" href="class_qt_x_bee_1_1_modem_status.html">ModemStatus</a> *response)</td></tr>
-<tr class="memdesc:a656acd16b3bbee0eaef87fc2b0ee97bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_modem_status.html" title="The ModemStatus class represents the XBee module status.">ModemStatus</a> frame is received. <br/></td></tr>
-<tr class="separator:a656acd16b3bbee0eaef87fc2b0ee97bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7d3a3827bcc2f8a8dacb9bff4427e2b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7d3a3827bcc2f8a8dacb9bff4427e2b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#af7d3a3827bcc2f8a8dacb9bff4427e2b">receivedTransmitStatus</a> (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_tx_status_response.html">ZBTxStatusResponse</a> *response)</td></tr>
-<tr class="memdesc:af7d3a3827bcc2f8a8dacb9bff4427e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a TransmitStatus frame is received. <br/></td></tr>
-<tr class="separator:af7d3a3827bcc2f8a8dacb9bff4427e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5804505b6becccb60486e325d62805f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5804505b6becccb60486e325d62805f0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>receivedTransmitStatus</b> (<a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html">Wpan::TxStatusResponse</a> *response)</td></tr>
-<tr class="separator:a5804505b6becccb60486e325d62805f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5621b0642902802578a301aefb98ad85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5621b0642902802578a301aefb98ad85"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a5621b0642902802578a301aefb98ad85">receivedRxIndicator</a> (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_rx_response.html">ZBRxResponse</a> *response)</td></tr>
-<tr class="memdesc:a5621b0642902802578a301aefb98ad85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a RxIndicator frame is received. <br/></td></tr>
-<tr class="separator:a5621b0642902802578a301aefb98ad85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad75e8bf7323bf3ca0c7ddfb9ac4079ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad75e8bf7323bf3ca0c7ddfb9ac4079ea"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#ad75e8bf7323bf3ca0c7ddfb9ac4079ea">receivedRxIndicatorExplicit</a> (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_explicit_rx_response.html">ZBExplicitRxResponse</a> *response)</td></tr>
-<tr class="memdesc:ad75e8bf7323bf3ca0c7ddfb9ac4079ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a RxIndicatorExplicit frame is received. <br/></td></tr>
-<tr class="separator:ad75e8bf7323bf3ca0c7ddfb9ac4079ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dc479e102f392742f7001d2694724c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0dc479e102f392742f7001d2694724c8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a0dc479e102f392742f7001d2694724c8">receivedNodeIdentificationIndicator</a> (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_i_o_node_identification_response.html">ZBIONodeIdentificationResponse</a> *response)</td></tr>
-<tr class="memdesc:a0dc479e102f392742f7001d2694724c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a NodeIdentificationIndicator frame is received. <br/></td></tr>
-<tr class="separator:a0dc479e102f392742f7001d2694724c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf63fc86005466224453df63480c043c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf63fc86005466224453df63480c043c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#acf63fc86005466224453df63480c043c">receivedRemoteCommandResponse</a> (<a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html">RemoteATCommandResponse</a> *response)</td></tr>
-<tr class="memdesc:acf63fc86005466224453df63480c043c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a RemoteCommandResponse frame is received. <br/></td></tr>
-<tr class="separator:acf63fc86005466224453df63480c043c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b23234d10d3ebe8594173cefe04af61"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b23234d10d3ebe8594173cefe04af61"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>receivedRxResponse16</b> (<a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html">Wpan::RxResponse16</a> *response)</td></tr>
-<tr class="separator:a0b23234d10d3ebe8594173cefe04af61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a917f9ffeac2009660b3c4581b4780001"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a917f9ffeac2009660b3c4581b4780001"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>receivedRxResponse64</b> (<a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html">Wpan::RxResponse64</a> *response)</td></tr>
-<tr class="separator:a917f9ffeac2009660b3c4581b4780001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5c427d78c51560ef827f08aa8567218"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#aa5c427d78c51560ef827f08aa8567218">rawDataReceived</a> (const QByteArray &amp;data)</td></tr>
-<tr class="memdesc:aa5c427d78c51560ef827f08aa8567218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when raw data are received on the serial port (only in NormalMode).  <a href="#aa5c427d78c51560ef827f08aa8567218">More...</a><br/></td></tr>
+<tr class="memdesc:aa5c427d78c51560ef827f08aa8567218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when raw data are received on the serial port (only in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">XBee::CommandMode</a>).  <a href="#aa5c427d78c51560ef827f08aa8567218">More...</a><br/></td></tr>
 <tr class="separator:aa5c427d78c51560ef827f08aa8567218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a6becf001c3226ee0e803beac0559d7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6a6becf001c3226ee0e803beac0559d7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a6a6becf001c3226ee0e803beac0559d7">receivedATCommandResponse</a> (<a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html">QtXBee::ATCommandResponse</a> *response)</td></tr>
+<tr class="memdesc:a6a6becf001c3226ee0e803beac0559d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html" title="In response to an ATCommand message, the module will send an ATCommandResponse message.">ATCommandResponse</a> frame is received. <br/></td></tr>
+<tr class="separator:a6a6becf001c3226ee0e803beac0559d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab66825f5a75713248a8ed67d69c8fccf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab66825f5a75713248a8ed67d69c8fccf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#ab66825f5a75713248a8ed67d69c8fccf">receivedModemStatus</a> (<a class="el" href="class_qt_x_bee_1_1_modem_status.html">QtXBee::ModemStatus</a> *response)</td></tr>
+<tr class="memdesc:ab66825f5a75713248a8ed67d69c8fccf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_modem_status.html" title="The ModemStatus class represents the XBee module status.">ModemStatus</a> frame is received. <br/></td></tr>
+<tr class="separator:ab66825f5a75713248a8ed67d69c8fccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0d19c91459d83f662ab24f0ec11450f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af0d19c91459d83f662ab24f0ec11450f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#af0d19c91459d83f662ab24f0ec11450f">receivedRemoteCommandResponse</a> (<a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html">QtXBee::RemoteATCommandResponse</a> *response)</td></tr>
+<tr class="memdesc:af0d19c91459d83f662ab24f0ec11450f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html" title="The RemoteATCommandResponse class represents the response to a RemoteATCommandRequest.">RemoteATCommandResponse</a> frame is received. <br/></td></tr>
+<tr class="separator:af0d19c91459d83f662ab24f0ec11450f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a657962fe2a22c4bc3895ea504fb040a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a657962fe2a22c4bc3895ea504fb040a7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a657962fe2a22c4bc3895ea504fb040a7">receivedTransmitStatus</a> (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_tx_status_response.html">QtXBee::ZigBee::ZBTxStatusResponse</a> *response)</td></tr>
+<tr class="memdesc:a657962fe2a22c4bc3895ea504fb040a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_tx_status_response.html" title="The ZBTxStatusResponse class indicate if the packet was transmitted successfully or not...">ZigBee::ZBTxStatusResponse</a> frame is received. <br/></td></tr>
+<tr class="separator:a657962fe2a22c4bc3895ea504fb040a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1589523eeda3e8432f3ab2444ffccdc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1589523eeda3e8432f3ab2444ffccdc8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1589523eeda3e8432f3ab2444ffccdc8">receivedRxIndicator</a> (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_rx_response.html">QtXBee::ZigBee::ZBRxResponse</a> *response)</td></tr>
+<tr class="memdesc:a1589523eeda3e8432f3ab2444ffccdc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_rx_response.html">ZigBee::ZBRxResponse</a> frame is received. <br/></td></tr>
+<tr class="separator:a1589523eeda3e8432f3ab2444ffccdc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1814a69b1cf2476cb185644a3d364412"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1814a69b1cf2476cb185644a3d364412"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1814a69b1cf2476cb185644a3d364412">receivedRxIndicatorExplicit</a> (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_explicit_rx_response.html">QtXBee::ZigBee::ZBExplicitRxResponse</a> *response)</td></tr>
+<tr class="memdesc:a1814a69b1cf2476cb185644a3d364412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_explicit_rx_response.html">ZigBee::ZBExplicitRxResponse</a> frame is received. <br/></td></tr>
+<tr class="separator:a1814a69b1cf2476cb185644a3d364412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4755213965b98c6aaf2be2b28b6df5e0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4755213965b98c6aaf2be2b28b6df5e0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a4755213965b98c6aaf2be2b28b6df5e0">receivedNodeIdentificationIndicator</a> (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_i_o_node_identification_response.html">QtXBee::ZigBee::ZBIONodeIdentificationResponse</a> *response)</td></tr>
+<tr class="memdesc:a4755213965b98c6aaf2be2b28b6df5e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_i_o_node_identification_response.html" title="The NodeIdentificationIndicator frame is received when a module transmits a node identification messa...">ZigBee::ZBIONodeIdentificationResponse</a> frame is received. <br/></td></tr>
+<tr class="separator:a4755213965b98c6aaf2be2b28b6df5e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a1d4326a708a64ebd021e40e8de8f86"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a1d4326a708a64ebd021e40e8de8f86"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a5a1d4326a708a64ebd021e40e8de8f86">receivedTransmitStatus</a> (<a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html">QtXBee::Wpan::TxStatusResponse</a> *response)</td></tr>
+<tr class="memdesc:a5a1d4326a708a64ebd021e40e8de8f86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html" title="The TxStatusResponse class is used to indicate if a packet (TxRequest64 or TxRequest16) was transmitt...">Wpan::TxStatusResponse</a> frame is received. <br/></td></tr>
+<tr class="separator:a5a1d4326a708a64ebd021e40e8de8f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a837e99358a386758080626d74919ddec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a837e99358a386758080626d74919ddec"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a837e99358a386758080626d74919ddec">receivedRxResponse16</a> (<a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html">QtXBee::Wpan::RxResponse16</a> *response)</td></tr>
+<tr class="memdesc:a837e99358a386758080626d74919ddec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html" title="The RxResponse16 class represents the reponse to a TxRequest16.">Wpan::RxResponse16</a> frame is received. <br/></td></tr>
+<tr class="separator:a837e99358a386758080626d74919ddec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8efb2a64e327e657c8cae44e1f411df7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8efb2a64e327e657c8cae44e1f411df7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a8efb2a64e327e657c8cae44e1f411df7">receivedRxResponse64</a> (<a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html">QtXBee::Wpan::RxResponse64</a> *response)</td></tr>
+<tr class="memdesc:a8efb2a64e327e657c8cae44e1f411df7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html" title="The RxResponse64 class represents the reponse to a RxResponse64.">Wpan::RxResponse64</a> frame is received. <br/></td></tr>
+<tr class="separator:a8efb2a64e327e657c8cae44e1f411df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb97b7ce2e7d8f7a12e79db8e6397b6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#adb97b7ce2e7d8f7a12e79db8e6397b6a">DHChanged</a> (const quint32 dh)</td></tr>
 <tr class="memdesc:adb97b7ce2e7d8f7a12e79db8e6397b6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when DH property changes.  <a href="#adb97b7ce2e7d8f7a12e79db8e6397b6a">More...</a><br/></td></tr>
 <tr class="separator:adb97b7ce2e7d8f7a12e79db8e6397b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -406,7 +406,7 @@ quint8&#160;</td><td class="memItemRight" valign="bottom"><b>CR</b> () const </t
 <li>Get/Set all <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a>'s parameters</li>
 <li>Send/Receive packets to/from other remote XBees</li>
 </ul>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000011">Todo:</a></b></dt><dd>What to do when the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> is in XBee::NormalMode at the user wants to send API packets ? Auto switch to the correct mode ? Stay in XBee::NormalMode and do nothing but warn the user ? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000018">Todo:</a></b></dt><dd>What to do when the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> is in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">XBee::CommandMode</a> at the user wants to send API packets ? Auto switch to the correct mode ? Stay in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">QtXBee::XBee::CommandMode</a> and do nothing but warn the user ? </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The whole <a class="el" href="namespace_qt_x_bee.html" title="Namespace common to XBee Serie1 (802.15.4) and Serie2 (ZigBee)">QtXBee</a> lib is mainly designed to work in API Mode </dd></dl>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="a1e82183fe955e0d3d59655757d4076d0"></a>
@@ -418,22 +418,19 @@ quint8&#160;</td><td class="memItemRight" valign="bottom"><b>CR</b> () const </t
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>The Mode enum defines the mode the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> is. </p>
-<dl class="section note"><dt>Note</dt><dd>The mode affects the way the data are read on serial port. </dd></dl>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a1e82183fe955e0d3d59655757d4076d0a500364f6fdea6e9b6cb8960ad56c87be"></a>CommandMode</em>&nbsp;</td><td class="fielddoc">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a"></a>CommandMode</em>&nbsp;</td><td class="fielddoc">
 <p>Command mode. This mode is used to configure the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> module. Once the mode is set to CommandMode, you need to send the command '+++' </p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a34f1257753f03b2809d2c79b6c7c954e" title="Sends synchronously the given command.">sendCommandSync()</a></dd>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a34f1257753f03b2809d2c79b6c7c954e" title="Sends synchronously the given command.">sendCommandSync()</a> </dd>
 <dd>
-<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a0b8912be772759afbe7f3a94ae0836d4" title="Sends asynchronously the given command.">sendCommandAsync()</a></dd>
+<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a0b8912be772759afbe7f3a94ae0836d4" title="Sends asynchronously the given command.">sendCommandAsync()</a> </dd>
 <dd>
 <a href="http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set">http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set</a> </dd></dl>
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a1e82183fe955e0d3d59655757d4076d0a7747199fa10117a8f9a76b9dabecff25"></a>API1Mode</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a1e82183fe955e0d3d59655757d4076d0a7c58a4c65b83bd688d75b47ea576eae6"></a>API1Mode</em>&nbsp;</td><td class="fielddoc">
 <p>API Operation (AP=1) </p>
 </td></tr>
-<tr><td class="fieldname"><em><a class="anchor" id="a1e82183fe955e0d3d59655757d4076d0a4da924c10060ac57da56f7faf9d5692f"></a>API2Mode</em>&nbsp;</td><td class="fielddoc">
+<tr><td class="fieldname"><em><a class="anchor" id="a1e82183fe955e0d3d59655757d4076d0ad873af0ca136bf4fec1f1c6db2ae3768"></a>API2Mode</em>&nbsp;</td><td class="fielddoc">
 <p>API Operation with escaped characters (AP=2) </p>
 </td></tr>
 </table>
@@ -814,7 +811,7 @@ XBee::DL() </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a>'s mode </dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#acb8ba7a58391653a79fd325afa488f8b" title="Sets the XBee&#39;s mode.">XBee::setMode()</a> </dd>
 <dd>
-<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0" title="The Mode enum defines the mode the XBee is.">XBee::Mode</a> </dd></dl>
+<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0">XBee::Mode</a> </dd></dl>
 
 </div>
 </div>
@@ -1014,10 +1011,10 @@ XBee::NP() </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Emitted when raw data are received on the serial port (only in NormalMode). </p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#acb8ba7a58391653a79fd325afa488f8b" title="Sets the XBee&#39;s mode.">XBee::setMode()</a></dd>
+<p>Emitted when raw data are received on the serial port (only in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">XBee::CommandMode</a>). </p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#acb8ba7a58391653a79fd325afa488f8b" title="Sets the XBee&#39;s mode.">XBee::setMode()</a> </dd>
 <dd>
-<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0" title="The Mode enum defines the mode the XBee is.">XBee::Mode</a> </dd></dl>
+<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0">XBee::Mode</a> </dd></dl>
 
 </div>
 </div>
@@ -1072,7 +1069,7 @@ XBee::SE() </dd></dl>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>A signal (corresponding the given packet) will be emitted when a response is received.</dd></dl>
-<p>For example, if the given packet is an <a class="el" href="class_qt_x_bee_1_1_a_t_command.html" title="The ATCommand class is used to query or set module parameters on the local device.">ATCommand</a>, the <a class="el" href="class_qt_x_bee_1_1_x_bee.html#ac8b2aa324e688cc8fe94e6d47d626828" title="Emitted when a ATCommandResponse frame is received.">XBee::receivedATCommandResponse()</a> will be emitted. </p>
+<p>For example, if the given packet is an <a class="el" href="class_qt_x_bee_1_1_a_t_command.html" title="The ATCommand class is used to query or set module parameters on the local device.">ATCommand</a>, the <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a6a6becf001c3226ee0e803beac0559d7" title="Emitted when a ATCommandResponse frame is received.">XBee::receivedATCommandResponse()</a> will be emitted. </p>
 
 </div>
 </div>
@@ -1091,7 +1088,7 @@ XBee::SE() </dd></dl>
 </div><div class="memdoc">
 
 <p>Sends an <a class="el" href="class_qt_x_bee_1_1_a_t_command.html" title="The ATCommand class is used to query or set module parameters on the local device.">ATCommand</a> asynchronously. </p>
-<p>The <a class="el" href="class_qt_x_bee_1_1_x_bee.html#ac8b2aa324e688cc8fe94e6d47d626828" title="Emitted when a ATCommandResponse frame is received.">XBee::receivedATCommandResponse()</a> signal will be emmited when a response to the sent <a class="el" href="class_qt_x_bee_1_1_a_t_command.html" title="The ATCommand class is used to query or set module parameters on the local device.">ATCommand</a> is received. </p>
+<p>The <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a6a6becf001c3226ee0e803beac0559d7" title="Emitted when a ATCommandResponse frame is received.">XBee::receivedATCommandResponse()</a> signal will be emmited when a response to the sent <a class="el" href="class_qt_x_bee_1_1_a_t_command.html" title="The ATCommand class is used to query or set module parameters on the local device.">ATCommand</a> is received. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">command</td><td></td></tr>
@@ -1116,7 +1113,7 @@ XBee::SE() </dd></dl>
 </div><div class="memdoc">
 
 <p>Sends an <a class="el" href="class_qt_x_bee_1_1_a_t_command.html" title="The ATCommand class is used to query or set module parameters on the local device.">ATCommand</a> asynchronously. </p>
-<p>The <a class="el" href="class_qt_x_bee_1_1_x_bee.html#ac8b2aa324e688cc8fe94e6d47d626828" title="Emitted when a ATCommandResponse frame is received.">XBee::receivedATCommandResponse()</a> signal will be emmited when a response to the sent <a class="el" href="class_qt_x_bee_1_1_a_t_command.html" title="The ATCommand class is used to query or set module parameters on the local device.">ATCommand</a> is received. </p>
+<p>The <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a6a6becf001c3226ee0e803beac0559d7" title="Emitted when a ATCommandResponse frame is received.">XBee::receivedATCommandResponse()</a> signal will be emmited when a response to the sent <a class="el" href="class_qt_x_bee_1_1_a_t_command.html" title="The ATCommand class is used to query or set module parameters on the local device.">ATCommand</a> is received. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">command</td><td></td></tr>
@@ -1193,7 +1190,7 @@ XBee::SE() </dd></dl>
 </div><div class="memdoc">
 
 <p>Sends asynchronously the given command. </p>
-<p>To put the module in command mode, you need first to send '+++' When a response is received, the signal <a class="el" href="class_qt_x_bee_1_1_x_bee.html#aa5c427d78c51560ef827f08aa8567218" title="Emitted when raw data are received on the serial port (only in NormalMode).">rawDataReceived()</a> will be emitted. </p>
+<p>To put the module in command mode, you need first to send '+++' When a response is received, the signal <a class="el" href="class_qt_x_bee_1_1_x_bee.html#aa5c427d78c51560ef827f08aa8567218" title="Emitted when raw data are received on the serial port (only in XBee::CommandMode).">rawDataReceived()</a> will be emitted. </p>
 <dl class="section see"><dt>See Also</dt><dd><a href="http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set">http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1202,7 +1199,7 @@ XBee::SE() </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if succeeded; false otherwise. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> must be in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a500364f6fdea6e9b6cb8960ad56c87be">XBee::CommandMode</a>,</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> must be in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">XBee::CommandMode</a>,</dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#acb8ba7a58391653a79fd325afa488f8b" title="Sets the XBee&#39;s mode.">XBee::setMode()</a> </dd></dl>
 
 </div>
@@ -1231,7 +1228,7 @@ XBee::SE() </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the response (the read data from the serial port are appended until the last received character is &lt;CR&gt; (0x0D)) </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> must be in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a500364f6fdea6e9b6cb8960ad56c87be">XBee::CommandMode</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> must be in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">XBee::CommandMode</a> </dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#acb8ba7a58391653a79fd325afa488f8b" title="Sets the XBee&#39;s mode.">XBee::setMode()</a> </dd></dl>
 
 </div>
@@ -1284,7 +1281,7 @@ XBee::SE() </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if succeeded; false otherwise. </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>Set the mode into the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a>, not only the class attribute </dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0" title="The Mode enum defines the mode the XBee is.">XBee::Mode</a> </dd>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0">XBee::Mode</a> </dd>
 <dd>
 <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a00941dc636eead9e5d7a1dcbb6009951" title="Returns the XBee&#39;s mode.">XBee::mode()</a> </dd></dl>
 
@@ -1539,6 +1536,7 @@ XBee::TO() </dd></dl>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/thomas/Projects/QtXBee/src/qtxb/<a class="el" href="xbee_8h_source.html">xbee.h</a></li>
 <li>/home/thomas/Projects/QtXBee/src/qtxb/xbee.cpp</li>
+<li>pages/xbee.dox</li>
 </ul>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
@@ -1549,7 +1547,7 @@ XBee::TO() </dd></dl>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 9 2015 13:11:30 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

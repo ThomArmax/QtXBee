@@ -16,8 +16,8 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-        <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
@@ -173,6 +173,7 @@ Public Types</h2></td></tr>
 <b>RegisterJoiningDeviceStatusId</b> = 0xA4, 
 <br/>
 &#160;&#160;<b>JoinNotificationStatusId</b> = 0xA5, 
+<b>UserDefinedId</b> = 0xB0, 
 <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fba4a4693ca8dfc624c4283945b1c57f058">UndefinedId</a> = 0xFF
 <br/>
  }</td></tr>
@@ -245,7 +246,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>unescapePacket</b> ()
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:adee68fff9ddcaa2fc9e76b935f01a907"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#adee68fff9ddcaa2fc9e76b935f01a907">frameTypeToString</a> (const <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fb">ApiId</a> type)</td></tr>
-<tr class="memdesc:adee68fff9ddcaa2fc9e76b935f01a907"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the given frame type APIFrameType into a human readable string.  <a href="#adee68fff9ddcaa2fc9e76b935f01a907">More...</a><br/></td></tr>
+<tr class="memdesc:adee68fff9ddcaa2fc9e76b935f01a907"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the given frame type ApiId into a human readable string.  <a href="#adee68fff9ddcaa2fc9e76b935f01a907">More...</a><br/></td></tr>
 <tr class="separator:adee68fff9ddcaa2fc9e76b935f01a907"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -264,29 +265,8 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html" title="The XBeePacket class is the base class to implement XBee API frames (API Operations)">XBeePacket</a> class is the base class to implement <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> API frames (API Operations) </p>
-<p>As an alternative to Transparent Operation, API (Application Programming Interface) Operations are available. API operation requires that communication with the module be done through a structured interface (data is communicated in frames in a defined order). The API specifies how commands, command responses and module status messages are sent and received from the module using a UART Data Frame.</p>
-<p>Currently, there are 18 API frames types designed by Digi :</p>
-<ul>
-<li>AT Command</li>
-<li>AT Command - Queue Parameter value</li>
-<li><a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> Transmit Request</li>
-<li>Explicitit Adressing <a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> Command Frame</li>
-<li>Remote Command Request</li>
-<li>Create Source Route</li>
-<li>AT Command Response</li>
-<li>Modem Status</li>
-<li><a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> Transmit Status</li>
-<li><a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> Receive Packet (AO=0)</li>
-<li><a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> Explicit Rx Indicator (AO=1)</li>
-<li><a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> IO Data Sample Rx Indicator</li>
-<li><a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> Sensor Read Indicator (AO=0)</li>
-<li>Node Identification Indicator (AO=0)</li>
-<li>Remote Command Response</li>
-<li>Over-the-Air Firmware Update Status</li>
-<li>Route Record Indicator</li>
-<li>Many-to-One Route Request Indicator</li>
-</ul>
-<dl class="section note"><dt>Note</dt><dd>Digi may add new API frames to future versions of firmware, so please build into your software interface the ability to filter out additional API frames with unknown Frame Types. </dd></dl>
+<p>As an alternative to Transparent Operation, API (Application Programming Interface) Operations are available. API operation requires that communication with the module be done through a structured interface (data is communicated in frames in a defined order). The API specifies how commands, command responses and module status messages are sent and received from the module using a UART Data Frame. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000015">Todo:</a></b></dt><dd>Create the XBeeRequest class, based on <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html" title="The XBeePacket class is the base class to implement XBee API frames (API Operations)">XBeePacket</a> to implement the request packet specific part and remove them from <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html" title="The XBeePacket class is the base class to implement XBee API frames (API Operations)">XBeePacket</a> (<a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ac38bef99b73812ba8e0a1e0669d8fe42" title="Assembles the packet to be able to send it.">XBeePacket::assemblePacket()</a>, ...) </dd></dl>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="a853e501864eaa735624c5c0b26bd13fb"></a>
 <div class="memitem">
@@ -478,9 +458,10 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Assembles the packet to be able to send it. </p>
-<p>Overload this function to create your own packet. </p>
+<p>This function is called by the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> class, when the packet in being sent.</p>
+<dl class="section note"><dt>Note</dt><dd>Overload this function to create your own packet. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#aaf497c8b035ef639f25e670c12701207">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_tx_request.html#a59ce9035fedefa3c6888224bbf8af62b">QtXBee::ZigBee::ZBTxRequest</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a306070be6958dc7688f3ea72450695c7">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#a79427064441e6e867440f2ce54c7fd6a">QtXBee::Wpan::TxRequest16</a>, and <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#ad74e35dcf2b463022600b13a2117e7ad">QtXBee::Wpan::TxRequest64</a>.</p>
+<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#aaf497c8b035ef639f25e670c12701207">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a306070be6958dc7688f3ea72450695c7">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_tx_request.html#a59ce9035fedefa3c6888224bbf8af62b">QtXBee::ZigBee::ZBTxRequest</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#a79427064441e6e867440f2ce54c7fd6a">QtXBee::Wpan::TxRequest16</a>, and <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#ad74e35dcf2b463022600b13a2117e7ad">QtXBee::Wpan::TxRequest64</a>.</p>
 
 </div>
 </div>
@@ -527,7 +508,7 @@ Protected Attributes</h2></td></tr>
 <p>Clears the packet by reseting all attributes to their default value. </p>
 <dl class="section note"><dt>Note</dt><dd>All subclass should reimplement this method. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#a0e858d9fbd44f312a60f1a33de92c294">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#ac3b4b4b5ed9c4dc028a9101132f00823">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a158b1664b3375142dc23bfe90c28462f">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_x_bee_response.html#a1101c2cd79aaccd3ec57001a074ebb14">QtXBee::XBeeResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a4471084069b4414080f5e979e3be06d4">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#ac40408cdd325b5a3aa087a74d5538f3a">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#ab1946a555ff3524957a4e99c52f07f8e">QtXBee::Wpan::TxRequest16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a9994ced3464c0f772c91d4ee4ccced85">QtXBee::Wpan::TxRequest64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#a1d5970eea6625c8dd6760278c6124119">QtXBee::Wpan::RxBaseResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#abeba1f2ba7974693f1a0065f7a848db9">QtXBee::Wpan::RxResponse16</a>, and <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#af1e7d66cda8dcf6b4d3c9a24864af900">QtXBee::Wpan::RxResponse64</a>.</p>
+<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#a0e858d9fbd44f312a60f1a33de92c294">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#ac3b4b4b5ed9c4dc028a9101132f00823">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a158b1664b3375142dc23bfe90c28462f">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a4471084069b4414080f5e979e3be06d4">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_x_bee_response.html#a1101c2cd79aaccd3ec57001a074ebb14">QtXBee::XBeeResponse</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#ac40408cdd325b5a3aa087a74d5538f3a">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#abeba1f2ba7974693f1a0065f7a848db9">QtXBee::Wpan::RxResponse16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#af1e7d66cda8dcf6b4d3c9a24864af900">QtXBee::Wpan::RxResponse64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#ab1946a555ff3524957a4e99c52f07f8e">QtXBee::Wpan::TxRequest16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a9994ced3464c0f772c91d4ee4ccced85">QtXBee::Wpan::TxRequest64</a>, and <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#a1d5970eea6625c8dd6760278c6124119">QtXBee::Wpan::RxBaseResponse</a>.</p>
 
 </div>
 </div>
@@ -628,8 +609,8 @@ XBeePacket::APIFrameType </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the given frame type APIFrameType into a human readable string. </p>
-<dl class="section return"><dt>Returns</dt><dd>the given frame type APIFrameType into a human readable string </dd></dl>
+<p>Returns the given frame type ApiId into a human readable string. </p>
+<dl class="section return"><dt>Returns</dt><dd>the given frame type ApiId into a human readable string </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">type</td><td></td></tr>
@@ -700,6 +681,12 @@ XBeePacket::APIFrameType </dd></dl>
 </div><div class="memdoc">
 
 <p>Parses the packet API specific data. </p>
+<p>Are conciderated as packet specific data, the data between API frame Id and checksum.</p>
+<p>For example, the AT command response frame: </p>
+<div class="image">
+<img src="at_command_response_frame.jpg" alt="at_command_response_frame.jpg"/>
+</div>
+<p> The specific part is bytes [6 - (<a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a245c6b834e9ffa221f48237982a93971" title="Returns the frame-specific data length (Number of bytes between the length and the checksum)...">length()</a> -1)] (AT command, Status, Value)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td></td></tr>
@@ -735,6 +722,7 @@ XBeePacket::APIFrameType </dd></dl>
   </dd>
 </dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ac4362ea4ae3a049f3bae1561b9d4469f" title="Returns the packet&#39;s checksum.">XBeePacket::checksum()</a> </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>Does it make sense that this method is public ? If not, make it protected. </dd></dl>
 
 </div>
 </div>
@@ -759,7 +747,7 @@ XBeePacket::APIFrameType </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a54a39e6114c8a870062ebf329b9bfa18" title="Returns the frame&#39;s type.">XBeePacket::frameType()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ab1a2c704e3c22dd7ae86afaa9d3fc4e4" title="Returns the frame&#39;s id.">XBeePacket::frameId()</a> </dd></dl>
 
 </div>
 </div>
@@ -785,6 +773,7 @@ XBeePacket::APIFrameType </dd></dl>
   </dd>
 </dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a54a39e6114c8a870062ebf329b9bfa18" title="Returns the frame&#39;s type.">XBeePacket::frameType()</a> </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000012">Todo:</a></b></dt><dd>Does it make sense that this method is public ? If not, make it protected. </dd></dl>
 
 </div>
 </div>
@@ -810,6 +799,7 @@ XBeePacket::APIFrameType </dd></dl>
   </dd>
 </dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a245c6b834e9ffa221f48237982a93971" title="Returns the frame-specific data length (Number of bytes between the length and the checksum)...">XBeePacket::length()</a> </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000011">Todo:</a></b></dt><dd>Does it make sense that this method is public ? If not, make it protected. </dd></dl>
 
 </div>
 </div>
@@ -879,6 +869,7 @@ XBeePacket::APIFrameType </dd></dl>
 <p>Returns the frame's start delimiter. </p>
 <dl class="section return"><dt>Returns</dt><dd>the frame's start delimiter </dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a67932e40994e69b338eb596f81aea58a" title="Sets the frame&#39;s start delimiter. By default the start delemiter is set to 0x7E.">XBeePacket::setStartDelimiter()</a> </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd>Does it make sense that this method is public ? If not, make it protected. </dd></dl>
 
 </div>
 </div>
@@ -906,7 +897,7 @@ XBeePacket::APIFrameType </dd></dl>
 <p>Returns a debug string containing all packet's informations. </p>
 <dl class="section return"><dt>Returns</dt><dd>a debug string containing all packet's informations. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#a486b3ab1192a422f447d1f4e7b6413a3">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#a13e1dd98c94880c5055c067008be65e2">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a761fd0039275595f08be193243fe991b">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a73e06a4ea5e524412018baf9ccc6fce8">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_modem_status.html#a37a4d78fa5894c407973214f08f77a0e">QtXBee::ModemStatus</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#a210825658162a86eaf6c1e7a5d446749">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#ab8a60e51ed734ffeb5f8f138e576116a">QtXBee::Wpan::TxRequest16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a4afe423dd32aa53bdf8074e12bd98c65">QtXBee::Wpan::TxRequest64</a>, <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html#a07ddc05ed147121f2843afc9abfbf61d">QtXBee::ATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#af192226a0065eaeb7bd3c6d085a6bb24">QtXBee::Wpan::RxBaseResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#a190a3063b5b111591328a9a61c76dfbe">QtXBee::Wpan::RxResponse16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4d673b71bd05f93a9e4c124bfecc7a08">QtXBee::Wpan::RxResponse64</a>, and <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_i_o_node_identification_response.html#a3dd89df3bb69da7ebdeb3224ccb03bb6">QtXBee::ZigBee::ZBIONodeIdentificationResponse</a>.</p>
+<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#a486b3ab1192a422f447d1f4e7b6413a3">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#a13e1dd98c94880c5055c067008be65e2">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a761fd0039275595f08be193243fe991b">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a73e06a4ea5e524412018baf9ccc6fce8">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_modem_status.html#a37a4d78fa5894c407973214f08f77a0e">QtXBee::ModemStatus</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#a210825658162a86eaf6c1e7a5d446749">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html#a07ddc05ed147121f2843afc9abfbf61d">QtXBee::ATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#a190a3063b5b111591328a9a61c76dfbe">QtXBee::Wpan::RxResponse16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4d673b71bd05f93a9e4c124bfecc7a08">QtXBee::Wpan::RxResponse64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#ab8a60e51ed734ffeb5f8f138e576116a">QtXBee::Wpan::TxRequest16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a4afe423dd32aa53bdf8074e12bd98c65">QtXBee::Wpan::TxRequest64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#af192226a0065eaeb7bd3c6d085a6bb24">QtXBee::Wpan::RxBaseResponse</a>, and <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_i_o_node_identification_response.html#a3dd89df3bb69da7ebdeb3224ccb03bb6">QtXBee::ZigBee::ZBIONodeIdentificationResponse</a>.</p>
 
 </div>
 </div>
@@ -946,7 +937,7 @@ XBeePacket::APIFrameType </dd></dl>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 9 2015 13:11:30 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

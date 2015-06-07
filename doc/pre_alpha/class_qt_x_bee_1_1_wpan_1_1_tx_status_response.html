@@ -16,8 +16,8 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-        <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
@@ -182,6 +182,7 @@ Public Types</h2></td></tr>
 <b>RegisterJoiningDeviceStatusId</b> = 0xA4, 
 <br/>
 &#160;&#160;<b>JoinNotificationStatusId</b> = 0xA5, 
+<b>UserDefinedId</b> = 0xB0, 
 <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fba4a4693ca8dfc624c4283945b1c57f058">UndefinedId</a> = 0xFF
 <br/>
  }</td></tr>
@@ -288,7 +289,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:acd0a3137eabd7a8890c5b520b9783d3f inherit pub_static_methods_class_qt_x_bee_1_1_x_bee_response"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_qt_x_bee_1_1_x_bee_packet')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html">QtXBee::XBeePacket</a></td></tr>
 <tr class="memitem:adee68fff9ddcaa2fc9e76b935f01a907 inherit pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#adee68fff9ddcaa2fc9e76b935f01a907">frameTypeToString</a> (const <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fb">ApiId</a> type)</td></tr>
-<tr class="memdesc:adee68fff9ddcaa2fc9e76b935f01a907 inherit pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the given frame type APIFrameType into a human readable string.  <a href="#adee68fff9ddcaa2fc9e76b935f01a907">More...</a><br/></td></tr>
+<tr class="memdesc:adee68fff9ddcaa2fc9e76b935f01a907 inherit pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the given frame type ApiId into a human readable string.  <a href="#adee68fff9ddcaa2fc9e76b935f01a907">More...</a><br/></td></tr>
 <tr class="separator:adee68fff9ddcaa2fc9e76b935f01a907 inherit pub_static_methods_class_qt_x_bee_1_1_x_bee_packet"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -309,6 +310,7 @@ QByteArray&#160;</td><td class="memItemRight" valign="bottom"><b>m_data</b></td>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html" title="The TxStatusResponse class is used to indicate if a packet (TxRequest64 or TxRequest16) was transmitt...">TxStatusResponse</a> class is used to indicate if a packet (<a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html" title="The TxRequest64 class is used to send a message over 802.15.4 network using 64 bits addresses...">TxRequest64</a> or <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html" title="The TxRequest16 class is used to send a message over 802.15.4 network using 16 bits addresses...">TxRequest16</a>) was transmitted successfully or if there was a failure. </p>
+<p>API identifier value: 0x89 </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="a372dd26640bdd1049d8a46d8f88ef38b"></a>
 <div class="memitem">
@@ -393,6 +395,12 @@ QByteArray&#160;</td><td class="memItemRight" valign="bottom"><b>m_data</b></td>
 </div><div class="memdoc">
 
 <p>Parses the packet API specific data. </p>
+<p>Are conciderated as packet specific data, the data between API frame Id and checksum.</p>
+<p>For example, the AT command response frame: </p>
+<div class="image">
+<img src="at_command_response_frame.jpg" alt="at_command_response_frame.jpg"/>
+</div>
+<p> The specific part is bytes [6 - (<a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a245c6b834e9ffa221f48237982a93971" title="Returns the frame-specific data length (Number of bytes between the length and the checksum)...">length()</a> -1)] (AT command, Status, Value)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td></td></tr>
@@ -528,7 +536,7 @@ QByteArray&#160;</td><td class="memItemRight" valign="bottom"><b>m_data</b></td>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 9 2015 13:11:30 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

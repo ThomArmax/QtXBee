@@ -16,8 +16,8 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-        <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
@@ -117,37 +117,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifndef RxRESPONSE64_H</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define RxRESPONSE64_H</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;rxbaseresponse.h&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;RxBaseResponse&quot;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span>QtXBee {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span>Wpan {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html" title="The RxResponse64 class represents the reponse to a RxResponse64.">RxResponse64</a> : <span class="keyword">public</span> <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html" title="The RxBaseResponse class is the base to implement a Wpan Response.">RxBaseResponse</a></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">explicit</span>        <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html" title="The RxResponse64 class represents the reponse to a RxResponse64.">RxResponse64</a>        (QObject * parent = 0);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">virtual</span>         ~<a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html" title="The RxResponse64 class represents the reponse to a RxResponse64.">RxResponse64</a>       ();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// Reimplemented from RxBaseResponse</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span>    <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#af1e7d66cda8dcf6b4d3c9a24864af900" title="Clears the packet by reseting all attributes to their default value.">clear</a>               ();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">virtual</span> QString <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4d673b71bd05f93a9e4c124bfecc7a08" title="Returns a debug string containing all packet&#39;s informations.">toString</a>            ();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span>            <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#ae81d1988aaccb06d0e147ca94b2d7ece" title="Sets the 64-bits packet&#39;s source address.">setSourceAddress</a>    (<span class="keyword">const</span> quint64 <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a3b8576c465e52f165da0b08c311f498e" title="Returns the 64-bits packet&#39;s source address.">sourceAddress</a>);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    quint64         <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a3b8576c465e52f165da0b08c311f498e" title="Returns the 64-bits packet&#39;s source address.">sourceAddress</a>       () <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span>    <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4472a8d511b5d31bdfb313054838bc63" title="Parses the packet API specific data.">parseApiSpecificData</a>(<span class="keyword">const</span> QByteArray &amp;<a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#ad0b03b35f45eace6253ac987416c1087" title="Returns the response&#39;s data.">data</a>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    quint64         m_sourceAddress;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}} <span class="comment">// END namespace</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html" title="The RxResponse64 class represents the reponse to a RxResponse64.">RxResponse64</a> : <span class="keyword">public</span> <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html" title="The RxBaseResponse class is the base to implement a Wpan Response.">RxBaseResponse</a></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">explicit</span>        <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html" title="The RxResponse64 class represents the reponse to a RxResponse64.">RxResponse64</a>        (QObject * parent = 0);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">virtual</span>         ~<a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html" title="The RxResponse64 class represents the reponse to a RxResponse64.">RxResponse64</a>       ();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// Reimplemented from RxBaseResponse</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span>    <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#af1e7d66cda8dcf6b4d3c9a24864af900" title="Clears the packet by reseting all attributes to their default value.">clear</a>               ();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">virtual</span> QString <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4d673b71bd05f93a9e4c124bfecc7a08" title="Returns a debug string containing all packet&#39;s informations.">toString</a>            ();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span>            <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#ae81d1988aaccb06d0e147ca94b2d7ece" title="Sets the 64-bits packet&#39;s source address.">setSourceAddress</a>    (<span class="keyword">const</span> quint64 <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a3b8576c465e52f165da0b08c311f498e" title="Returns the 64-bits packet&#39;s source address.">sourceAddress</a>);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    quint64         <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a3b8576c465e52f165da0b08c311f498e" title="Returns the 64-bits packet&#39;s source address.">sourceAddress</a>       () <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span>    <a class="code" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4472a8d511b5d31bdfb313054838bc63" title="Parses the packet API specific data.">parseApiSpecificData</a>(<span class="keyword">const</span> QByteArray &amp;<a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#ad0b03b35f45eace6253ac987416c1087" title="Returns the response&#39;s data.">data</a>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    quint64         m_sourceAddress;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif // RxRESPONSE64_H</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}} <span class="comment">// END namespace</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif // RxRESPONSE64_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -157,7 +157,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 9 2015 13:11:29 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

@@ -16,8 +16,8 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-        <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
+        <link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="bootstrap.min.js"></script>
         <script type="text/javascript" src="doxy-boot.js"></script>
     </head>
@@ -182,6 +182,7 @@ Public Types</h2></td></tr>
 <b>RegisterJoiningDeviceStatusId</b> = 0xA4, 
 <br/>
 &#160;&#160;<b>JoinNotificationStatusId</b> = 0xA5, 
+<b>UserDefinedId</b> = 0xB0, 
 <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fba4a4693ca8dfc624c4283945b1c57f058">UndefinedId</a> = 0xFF
 <br/>
  }</td></tr>
@@ -303,7 +304,8 @@ QByteArray&#160;</td><td class="memItemRight" valign="bottom"><b>m_data</b></td>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_qt_x_bee_1_1_modem_status.html" title="The ModemStatus class represents the XBee module status.">ModemStatus</a> class represents the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> module status. </p>
-<p>RF module status messages are sent from the module in response to specific conditions. </p>
+<p>RF module status messages are sent from the module in response to specific conditions.</p>
+<p>API identifier value: 0x8A </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a37a4d78fa5894c407973214f08f77a0e"></a>
 <div class="memitem">
@@ -346,7 +348,7 @@ QByteArray&#160;</td><td class="memItemRight" valign="bottom"><b>m_data</b></td>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat May 9 2015 13:11:29 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

@@ -8,7 +8,8 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     xbee_terminal \
-    xbee_chat
+    xbee_chat \
+    example_temp_monitor
 
 OTHER_FILES += \
     examples.pri

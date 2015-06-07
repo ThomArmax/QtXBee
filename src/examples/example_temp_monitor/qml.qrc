@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>monitor.js</file>
+    </qresource>
+    <qresource prefix="/qchartjs">
+        <file alias="QChart.js">qchartjs/QChart.js</file>
+        <file alias="QChart.qml">qchartjs/QChart.qml</file>
+    </qresource>
+</RCC>

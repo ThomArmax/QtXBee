@@ -17,4 +17,5 @@ DISTFILES += \
     pages/example_xbee_terminal.dox \
     pages/example_xbee_chat.dox \
     pages/xbee.dox \
-    pages/atcommand.dox
+    pages/atcommand.dox \
+    pages/example_temp_monitor.dox

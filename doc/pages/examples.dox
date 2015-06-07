@@ -5,5 +5,6 @@ Make sure you have first read \ref getting_started "the getting started guide".
 
  - @subpage example_xbee_serial_terminal
  - @subpage example_xbee_chat
+ - @subpage example_temperature_monitor
 
 */

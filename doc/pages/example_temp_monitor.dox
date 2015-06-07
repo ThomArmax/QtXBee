@@ -1,0 +1,97 @@
+/**
+@page example_temperature_monitor Temperature monitor using QtXBee and Arduino
+This example shows how to create a simple temperature monitor, using one computeur and one Arduino.
+
+@image html xbee_temp_sensor.png
+
+
+In this very simple case, the monitor (computer) will send each second a QtXBee::Wpan::TxRequest16 with data 'temp' to query the temperature.
+On each reception of this frame, the temperature sensor node will send back a QtXBee::Wpan::RxResponse16 and its data field will represent the temperature.
+On each reception of a QtXBee::Wpan::RxResponse16, the monitor will emit the temperatureReceived(float temperature) signal, which will update the UI.
+
+<hr>
+
+@section example_temperature_monitor_summary Summary
+ - @ref example_temperature_monitor_recipe
+ - @ref example_temperature_monitor_elec
+   - @ref example_temperature_monitor_elec_onewire
+   - @ref example_temperature_monitor_elec_xbee_shield_hack
+   - @ref example_temperature_monitor_elec_final
+   .
+ - @ref example_temperature_monitor_xbee_config
+ - @ref example_temperature_monitor_code
+
+<hr>
+
+@section example_temperature_monitor_recipe Recipe
+
+For this example, I used:
+ - a [XBee explorer](http://www.matlog.fr/fr/106-cartes-interfaces-pour-modules-xbee.html#/digi_cartes_interfaces-xbee_int_usb)
+ (which will be connected to the computer)
+ - 2 [XBee Serie 1](http://www.matlog.fr/fr/57-modules-xbee-802154-serie-1.html) modules
+ - one [Arduino Uno](http://www.matlog.fr/fr/179-cartes-controleurs-arduino.html#/arduino_contrleurs-arduino_uno)
+ - one [XBee shield](http://www.matlog.fr/fr/181-shields-radio-arduino.html)
+ - [QChart.js](https://github.com/jwintz/qchart.js) (QML binding for Chart.js)
+ - [xbee-arduino](https://github.com/andrewrapp/xbee-arduino) library (XBee library for Arduino)
+ - [OneWire](http://www.pjrc.com/teensy/td_libs_OneWire.html) arduino library (1-Wire library for Arduino)
+ - a 4.7 kΩ resistor
+ - a [DS18S20](http://www.maximintegrated.com/en/products/analog/sensors-and-sensor-interface/DS18S20.html) (One wire digital temperature sensor)
+ - some wires
+ - a breadboard
+
+@section example_temperature_monitor_elec Electronic part
+@subsection example_temperature_monitor_elec_onewire 1-Wire bus
+[Wikipedia] 1-Wire is a device communications bus system designed by Dallas Semiconductor Corp.
+that provides low-speed data, signaling, and power over a single signal.
+1-Wire is similar in concept to I²C, but with lower data rates and longer range.
+It is typically used to communicate with small inexpensive devices such as digital thermometers and weather instruments.
+A network of 1-Wire devices with an associated master device is called a MicroLAN.
+
+This scheme shows how to wire 1-Wire devices:
+@image html onewire-3fils.png
+
+Here is the scheme I used to plug the DS18S20 to my arduino:
+@image html DS18S20-hookup.png
+
+
+@subsection example_temperature_monitor_elec_xbee_shield_hack XBee shield hack
+Because I only have one Arduino shield ([XBee shield](http://www.matlog.fr/fr/181-shields-radio-arduino.html)) on which I don't have access
+to power pins (5V, GND), I had to 'hack' it by soldering a header on the shield:
+@image html xbee_shield_hack.jpg
+
+@subsection example_temperature_monitor_elec_final Final result:
+@image html xbee_temp_sensore_arduino.jpg
+
+@section example_temperature_monitor_xbee_config XBee modules configuration
+
+The temperature monitor node, will be the Coordinator, plugged to the computer.
+The temperature sensor node will be a End Device, plugged to the Arduino.
+
+To be sure the modules will be able to comminicate, we should check their configurations:
+
+| Parameter | Coordinator | Sensor | Description        |
+|-----------|-------------|--------|--------------------|
+| MY        | 0           | 2      | Node addr (16bits) |
+| ID        | 3332        | 3332   | Pan Id             |
+| AP        | 1           | 1      | API mode           |
+
+@section example_temperature_monitor_code Code
+
+@subsection example_temperature_monitor_code_maincpp main.cpp
+@include ../src/examples/example_temp_monitor/main.cpp
+
+@subsection example_temperature_monitor_code_tempmonitorh tempmonitor.h
+@include ../src/examples/example_temp_monitor/tempmonitor.h
+
+@subsection example_temperature_monitor_code_tempmonitorcpp tempmonitor.cpp
+@include ../src/examples/example_temp_monitor/tempmonitor.cpp
+
+@subsection example_temperature_monitor_code_mainqml main.qml
+@include ../src/examples/example_temp_monitor/main.qml
+
+@subsection example_temperature_monitor_code_monitorjs monitor.js
+@include ../src/examples/example_temp_monitor/monitor.js
+
+@subsection example_temperature_monitor_code_arduino Arduino's code
+@include ../src/examples/example_temp_monitor/xbee_temp_sensor/xbee_temp_sensor.ino
+*/

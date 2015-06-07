@@ -128,16 +128,16 @@ public:
 
 signals:
     void                rawDataReceived                     (const QByteArray & data);
-    void                receivedATCommandResponse           (ATCommandResponse *response);
-    void                receivedModemStatus                 (ModemStatus *response);
-    void                receivedRemoteCommandResponse       (RemoteATCommandResponse *response);
-    void                receivedTransmitStatus              (ZigBee::ZBTxStatusResponse *response);
-    void                receivedRxIndicator                 (ZigBee::ZBRxResponse *response);
-    void                receivedRxIndicatorExplicit         (ZigBee::ZBExplicitRxResponse *response);
-    void                receivedNodeIdentificationIndicator (ZigBee::ZBIONodeIdentificationResponse *response);
-    void                receivedTransmitStatus              (Wpan::TxStatusResponse *response);
-    void                receivedRxResponse16                (Wpan::RxResponse16 * response);
-    void                receivedRxResponse64                (Wpan::RxResponse64 * response);
+    void                receivedATCommandResponse           (QtXBee::ATCommandResponse *response);
+    void                receivedModemStatus                 (QtXBee::ModemStatus *response);
+    void                receivedRemoteCommandResponse       (QtXBee::RemoteATCommandResponse *response);
+    void                receivedTransmitStatus              (QtXBee::ZigBee::ZBTxStatusResponse *response);
+    void                receivedRxIndicator                 (QtXBee::ZigBee::ZBRxResponse *response);
+    void                receivedRxIndicatorExplicit         (QtXBee::ZigBee::ZBExplicitRxResponse *response);
+    void                receivedNodeIdentificationIndicator (QtXBee::ZigBee::ZBIONodeIdentificationResponse *response);
+    void                receivedTransmitStatus              (QtXBee::Wpan::TxStatusResponse *response);
+    void                receivedRxResponse16                (QtXBee::Wpan::RxResponse16 * response);
+    void                receivedRxResponse64                (QtXBee::Wpan::RxResponse64 * response);
     // Addressing signals
     void                DHChanged                           (const quint32 dh);                                 /**< @brief Emitted when DH property changes. @sa XBee::setDH() @sa XBee::DH()*/
     void                DLChanged                           (const quint32 dl);                                 /**< @brief Emitted when DL property changes. @sa XBee::setDL() @sa XBee::DL()*/

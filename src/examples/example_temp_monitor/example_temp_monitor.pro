@@ -22,7 +22,5 @@ HEADERS += \
 DISTFILES += \
     main.qml \
     qchartjs/QChart.js \
-    qchartjs/QChartGallery.js \
     qchartjs/QChart.qml \
-    qchartjs/QChartGallery.qml \
     monitor.js

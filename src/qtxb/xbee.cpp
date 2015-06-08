@@ -202,11 +202,11 @@ bool XBee::setSerialPort(const QString &serialPort)
         delete m_serial;
         m_serial = NULL;
     }
-    else {
-        m_serial = new QSerialPort(serialPort, this);
-        connect(m_serial, SIGNAL(readyRead()), SLOT(readData()));
-    }
+    m_serial = new QSerialPort(serialPort, this);
+    connect(m_serial, SIGNAL(readyRead()), SLOT(readData()));
+
     bRet = applyDefaultSerialPortConfig();
+
     return bRet;
 }
 
@@ -242,8 +242,10 @@ bool XBee::setSerialPort(const QString &serialPort, const QSerialPort::BaudRate 
  */
 bool XBee::setSerialPortConfiguration(const QSerialPort::BaudRate baudRate, const QSerialPort::DataBits dataBits, const QSerialPort::Parity parity, const QSerialPort::StopBits stopBits, const QSerialPort::FlowControl flowControl)
 {
-    if(m_serial == NULL)
+    if(m_serial == NULL) {
+        qWarning() << Q_FUNC_INFO << "No serial port has been defined";
         return false;
+    }
 
     return  m_serial->setBaudRate(baudRate) &&
             m_serial->setDataBits(dataBits) &&
@@ -267,8 +269,10 @@ bool XBee::setSerialPortConfiguration(const QSerialPort::BaudRate baudRate, cons
  */
 bool XBee::applyDefaultSerialPortConfig()
 {
-    if(m_serial == NULL)
+    if(m_serial == NULL) {
+        qWarning() << "Applying serial port configuration to NULL QSerialPort !";
         return false;
+    }
 
     return  m_serial->setBaudRate(QSerialPort::Baud9600) &&
             m_serial->setDataBits(QSerialPort::Data8) &&

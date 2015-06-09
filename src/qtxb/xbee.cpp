@@ -176,6 +176,7 @@ bool XBee::close()
     if(m_serial) {
         m_serial->close();
     }
+    xbeeFound = false;
     return true;
 }
 
@@ -393,14 +394,25 @@ QByteArray XBee::sendCommandSync(const QByteArray &command)
 /**
  * @brief Sends synchronously the given packet
  * @param packet the packet to send.
- * @return the associated XBeeResponse
+ * @retval the associated XBeeResponse in case of success
+ * @retval NULL if failed
+ * @note XBee don't take the XBeeResponse's ownership, you have to.
  */
 XBeeResponse * XBee::sendSync(XBeePacket *packet)
 {
-    Q_ASSERT(packet);
     XBeeResponse * rep = NULL;
     QByteArray repPacket;
     QByteArray tmp;
+
+    if(!xbeeFound) {
+        qWarning() << Q_FUNC_INFO << "No serial configured, can't send packet";
+        return NULL;
+    }
+
+    if(packet == NULL) {
+        qWarning() << Q_FUNC_INFO << "Invalid argument: null packet";
+        return NULL;
+    }
 
     packet->setFrameId(m_frameIdCounter);
     if(m_frameIdCounter >= 255)
@@ -468,6 +480,7 @@ void XBee::sendATCommandAsync(const QByteArray &data)
  * @brief Sends an ATCommand synchronously
  * @param command
  * @return the corresponding ATCommandResponse; or null.
+ * @note XBee don't take the ATCommandResponse's ownership, you have to.
  */
 ATCommandResponse * XBee::sendATCommandSync(ATCommand *command)
 {
@@ -475,6 +488,16 @@ ATCommandResponse * XBee::sendATCommandSync(ATCommand *command)
     ATCommandResponse * rep = NULL;
     QByteArray repPacket;
     QByteArray tmp;
+
+    if(!xbeeFound) {
+        qWarning() << Q_FUNC_INFO << "No serial configured, can't send packet";
+        return NULL;
+    }
+
+    if(command == NULL) {
+        qWarning() << Q_FUNC_INFO << "Invalid argument: null packet";
+        return NULL;
+    }
 
     command->setFrameId(m_frameIdCounter);
     if(m_frameIdCounter >= 255)
@@ -515,6 +538,7 @@ ATCommandResponse * XBee::sendATCommandSync(ATCommand *command)
  * @brief Sends an ATCommand synchronously
  * @param atcommand
  * @return the corresponding ATCommandResponse; or null.
+ * @note XBee don't take the ATCommandResponse's ownership, you have to.
  */
 ATCommandResponse * XBee::sendATCommandSync(const QByteArray &atcommand)
 {

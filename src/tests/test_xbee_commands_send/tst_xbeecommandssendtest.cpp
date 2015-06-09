@@ -106,16 +106,22 @@ void XbeeCommandsSendTest::testATCommandSet()
 
     // Send invalid AT command
     at.setCommand(ATCommand::ATUndefined);
+    rep = m_xbee->sendATCommandSync(&at);
+
     QVERIFY2(rep != NULL, "No response to AT command");
     QVERIFY2(rep->commandStatus() == ATCommandResponse::InvalidCommand,
-             QString("Bad command status (expected %1, got %2").
+             QString("Bad command status (expected %1, got %2)").
              arg(ATCommandResponse::InvalidCommand).
              arg(rep->commandStatus()).
              toStdString().c_str());
 
+    delete rep;
+
     // Send invalid AT command parameter
     at.setCommand(ATCommand::ATMY);
     at.setParameter("invalid_param");
+    rep = m_xbee->sendATCommandSync(&at);
+
     QVERIFY2(rep != NULL, "No response to AT command");
 
     QVERIFY2(rep->commandStatus() == ATCommandResponse::InvalidParameter,

@@ -7,7 +7,8 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    test_xbee_serial_port
+    test_xbee_serial_port \
+    test_xbee_commands_send
 
 OTHER_FILES += \
     tests.pri

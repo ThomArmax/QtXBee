@@ -39,6 +39,9 @@
  * - Libraries will be installed in <install/prefix>/usr/lib/QtXBee
  * - Includes will be installed in <install/prefix>/usr/include/QtXBee
  *
- * \section getting_starter_sec Getting Started
+ * \section getting_started_sec Getting Started
  * Once you are done with the installation, you can go the @ref getting_started
+ *
+ * \section examples_sec Examples
+ * Once you are done with the @ref getting_started, you can check the @ref examples
  */

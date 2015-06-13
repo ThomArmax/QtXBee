@@ -1,7 +1,4 @@
 /**
- * @enum XBeePacket::ApiId
- * @brief The ApiId enum identifies sent/received frame's type
- *
  * @var XBeePacket::TxRequest64Id
  * Identifies a Transmit request with a 64-bits addressing (Wpan::TxRequest64)
  *
@@ -52,7 +49,7 @@
  * @var XBeePacket::ZBExplicitTxRequestId
  * Identifies an Explicit Addressing Command Frame (ZigBee::ZBExplicitTxRequest)<BR>
  * Allows ZigBee application layer fields (endpoint and cluster ID) to be specified for a data transmission.
- * Similar to the XBeePacket::TxRequestFrame, but also requires ZigBee application layer addressing fields to be specified
+ * Similar to the XBeePacket::ZBTxRequestId, but also requires ZigBee application layer addressing fields to be specified
  * (endpoints, cluster ID, profile ID). An Explicit Addressing Request API frame causes the module to send data as an RF
  * packet to the specified destination, using the specified source and destination endpoints, cluster ID, and profile ID.
  * The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices).
@@ -72,7 +69,7 @@
  * changes must be applied, either by setting the apply changes options bit, or by sending an AC command to the remote.
  *
  * @var XBeePacket::CreateSourceRouteId
- * Identifies A Create Source Route Frame (CreateSourceRoute)
+ * Identifies A Create Source Route Frame.
  * This frame creates a source route in the module.
  * A source route specifies the complete route a packet should traverse to get from source to destination.
  * Source routing should be used with many-to-one routing for best results.
@@ -90,7 +87,7 @@
  *
  * @var XBeePacket::ZBTxStatusResponseId
  * Identifies a ZigBee Transmit Status (ZigBee::ZBTxStatusResponse)<BR>
- * When a XBeePacket::TxRequestFrame is completed, the module sends a Tx Status message.
+ * When a ZigBee::ZBExplicitTxRequest is completed, the module sends a Tx Status message.
  * This message will indicate if the packet was transmitted successfully or if there was a failure.
  *
  * @var XBeePacket::ZBRxResponseId

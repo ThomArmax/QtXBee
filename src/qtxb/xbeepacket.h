@@ -40,6 +40,9 @@ class XBeePacket : public QObject
     Q_OBJECT
 public:
 
+    /**
+     * @brief The ApiId enum identifies sent/received frame's type
+     */
     enum ApiId {
         TxRequest64Id                   = 0x00, // 802.15.4
         TxRequest16Id                   = 0x01, // 802.15.4

@@ -100,7 +100,7 @@ ATCommand::ATCommandType ATCommandResponse::atCommand() const
 /**
  * @brief Sets the command status
  * @param status
- * @see CommandStatus
+ * @see ATCommandResponse::CommandStatus
  */
 void ATCommandResponse::setStatus(const Status status)
 {
@@ -110,7 +110,7 @@ void ATCommandResponse::setStatus(const Status status)
 /**
  * @brief Returns the command' status
  * @return the command' status
- * @see CommandStatus
+ * @see ATCommandResponse::CommandStatus
  */
 ATCommandResponse::Status ATCommandResponse::status() const
 {
@@ -118,8 +118,9 @@ ATCommandResponse::Status ATCommandResponse::status() const
 }
 
 /**
- * @brief Returns the Status as a human readable string
- * @return the given Status as a human readable string
+ * @brief Returns the ATCommandResponse::Status as a human readable string
+ * @return the given ATCommandResponse::Status as a human readable string
+ * @see ATCommandResponse::Status
  */
 QString ATCommandResponse::statusToString() const
 {
@@ -127,9 +128,10 @@ QString ATCommandResponse::statusToString() const
 }
 
 /**
- * @brief Returns the given Status as a human readable string
+ * @brief Returns the given ATCommandResponse::Status as a human readable string
  * @param status
- * @return the given Status as a human readable string
+ * @return the given ATCommandResponse::Status as a human readable string
+ * @see ATCommandResponse::Status
  */
 QString ATCommandResponse::statusToString(const ATCommandResponse::Status status)
 {

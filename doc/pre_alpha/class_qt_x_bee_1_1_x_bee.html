@@ -262,14 +262,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adb2c7e45c9566fb06a236a3bf40e77dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#adb2c7e45c9566fb06a236a3bf40e77dd">applyDefaultSerialPortConfig</a> ()</td></tr>
 <tr class="memdesc:adb2c7e45c9566fb06a236a3bf40e77dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the default configuration to the serial port.  <a href="#adb2c7e45c9566fb06a236a3bf40e77dd">More...</a><br/></td></tr>
 <tr class="separator:adb2c7e45c9566fb06a236a3bf40e77dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ba72096632afc562477b026e62a18aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ba72096632afc562477b026e62a18aa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>broadcast</b> (QString data)</td></tr>
-<tr class="separator:a8ba72096632afc562477b026e62a18aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb5c0e2199e6f2a37c1c536688056edd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb5c0e2199e6f2a37c1c536688056edd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unicast</b> (QByteArray address, QString data)</td></tr>
-<tr class="separator:aeb5c0e2199e6f2a37c1c536688056edd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b8912be772759afbe7f3a94ae0836d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a0b8912be772759afbe7f3a94ae0836d4">sendCommandAsync</a> (const QByteArray &amp;command)</td></tr>
-<tr class="memdesc:a0b8912be772759afbe7f3a94ae0836d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends asynchronously the given command.  <a href="#a0b8912be772759afbe7f3a94ae0836d4">More...</a><br/></td></tr>
+<tr class="memdesc:a0b8912be772759afbe7f3a94ae0836d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends asynchronously the given command in command mode.  <a href="#a0b8912be772759afbe7f3a94ae0836d4">More...</a><br/></td></tr>
 <tr class="separator:a0b8912be772759afbe7f3a94ae0836d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e5a35235091f8b2280bb291999ff4fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_qt_x_bee_1_1_x_bee_response.html">XBeeResponse</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a4e5a35235091f8b2280bb291999ff4fa">sendSync</a> (<a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html">XBeePacket</a> *packet)</td></tr>
 <tr class="memdesc:a4e5a35235091f8b2280bb291999ff4fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends synchronously the given packet.  <a href="#a4e5a35235091f8b2280bb291999ff4fa">More...</a><br/></td></tr>
@@ -281,7 +275,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>unicast</b> (QByteArr
 <tr class="memdesc:af0555218057833e1f42f39917a82d3ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends an <a class="el" href="class_qt_x_bee_1_1_a_t_command.html" title="The ATCommand class is used to query or set module parameters on the local device.">ATCommand</a> synchronously.  <a href="#af0555218057833e1f42f39917a82d3ae">More...</a><br/></td></tr>
 <tr class="separator:af0555218057833e1f42f39917a82d3ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34f1257753f03b2809d2c79b6c7c954e"><td class="memItemLeft" align="right" valign="top">QByteArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a34f1257753f03b2809d2c79b6c7c954e">sendCommandSync</a> (const QByteArray &amp;command)</td></tr>
-<tr class="memdesc:a34f1257753f03b2809d2c79b6c7c954e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends synchronously the given command.  <a href="#a34f1257753f03b2809d2c79b6c7c954e">More...</a><br/></td></tr>
+<tr class="memdesc:a34f1257753f03b2809d2c79b6c7c954e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends synchronously the given command using in command mode.  <a href="#a34f1257753f03b2809d2c79b6c7c954e">More...</a><br/></td></tr>
 <tr class="separator:a34f1257753f03b2809d2c79b6c7c954e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a325005a816129af674299bd695982c10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a325005a816129af674299bd695982c10">sendAsync</a> (<a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html">XBeePacket</a> *packet)</td></tr>
 <tr class="memdesc:a325005a816129af674299bd695982c10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends asynchronously the given packet.  <a href="#a325005a816129af674299bd695982c10">More...</a><br/></td></tr>
@@ -406,7 +400,7 @@ quint8&#160;</td><td class="memItemRight" valign="bottom"><b>CR</b> () const </t
 <li>Get/Set all <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a>'s parameters</li>
 <li>Send/Receive packets to/from other remote XBees</li>
 </ul>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000018">Todo:</a></b></dt><dd>What to do when the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> is in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">XBee::CommandMode</a> at the user wants to send API packets ? Auto switch to the correct mode ? Stay in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">QtXBee::XBee::CommandMode</a> and do nothing but warn the user ? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo:</a></b></dt><dd>What to do when the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> is in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">XBee::CommandMode</a> at the user wants to send API packets ? Auto switch to the correct mode ? Stay in <a class="el" href="class_qt_x_bee_1_1_x_bee.html#a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a">QtXBee::XBee::CommandMode</a> and do nothing but warn the user ? </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The whole <a class="el" href="namespace_qt_x_bee.html" title="Namespace common to XBee Serie1 (802.15.4) and Serie2 (ZigBee)">QtXBee</a> lib is mainly designed to work in API Mode </dd></dl>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="a1e82183fe955e0d3d59655757d4076d0"></a>
@@ -421,9 +415,9 @@ quint8&#160;</td><td class="memItemRight" valign="bottom"><b>CR</b> () const </t
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a1e82183fe955e0d3d59655757d4076d0a05b389b91347a95a2ec8b3d57dd6cc5a"></a>CommandMode</em>&nbsp;</td><td class="fielddoc">
 <p>Command mode. This mode is used to configure the <a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> module. Once the mode is set to CommandMode, you need to send the command '+++' </p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a34f1257753f03b2809d2c79b6c7c954e" title="Sends synchronously the given command.">sendCommandSync()</a> </dd>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html#a34f1257753f03b2809d2c79b6c7c954e" title="Sends synchronously the given command using in command mode.">sendCommandSync()</a> </dd>
 <dd>
-<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a0b8912be772759afbe7f3a94ae0836d4" title="Sends asynchronously the given command.">sendCommandAsync()</a> </dd>
+<a class="el" href="class_qt_x_bee_1_1_x_bee.html#a0b8912be772759afbe7f3a94ae0836d4" title="Sends asynchronously the given command in command mode.">sendCommandAsync()</a> </dd>
 <dd>
 <a href="http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set">http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set</a> </dd></dl>
 </td></tr>
@@ -1147,6 +1141,7 @@ XBee::SE() </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the corresponding <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html" title="In response to an ATCommand message, the module will send an ATCommandResponse message.">ATCommandResponse</a>; or null. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> don't take the <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html" title="In response to an ATCommand message, the module will send an ATCommandResponse message.">ATCommandResponse</a>'s ownership, you have to. </dd></dl>
 
 </div>
 </div>
@@ -1172,6 +1167,7 @@ XBee::SE() </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the corresponding <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html" title="In response to an ATCommand message, the module will send an ATCommandResponse message.">ATCommandResponse</a>; or null. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> don't take the <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html" title="In response to an ATCommand message, the module will send an ATCommandResponse message.">ATCommandResponse</a>'s ownership, you have to. </dd></dl>
 
 </div>
 </div>
@@ -1189,7 +1185,7 @@ XBee::SE() </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Sends asynchronously the given command. </p>
+<p>Sends asynchronously the given command in command mode. </p>
 <p>To put the module in command mode, you need first to send '+++' When a response is received, the signal <a class="el" href="class_qt_x_bee_1_1_x_bee.html#aa5c427d78c51560ef827f08aa8567218" title="Emitted when raw data are received on the serial port (only in XBee::CommandMode).">rawDataReceived()</a> will be emitted. </p>
 <dl class="section see"><dt>See Also</dt><dd><a href="http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set">http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -1218,7 +1214,7 @@ XBee::SE() </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Sends synchronously the given command. </p>
+<p>Sends synchronously the given command using in command mode. </p>
 <p>To put the module in command mode, you need first to send '+++' </p>
 <dl class="section see"><dt>See Also</dt><dd><a href="http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set">http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -1254,7 +1250,14 @@ XBee::SE() </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the associated <a class="el" href="class_qt_x_bee_1_1_x_bee_response.html" title="The XBeeResponse class is the base to create API frames responses.">XBeeResponse</a> </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">the</td><td>associated <a class="el" href="class_qt_x_bee_1_1_x_bee_response.html" title="The XBeeResponse class is the base to create API frames responses.">XBeeResponse</a> in case of success </td></tr>
+    <tr><td class="paramname">NULL</td><td>if failed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee.html" title="The XBee class is used to represents the local XBee.">XBee</a> don't take the <a class="el" href="class_qt_x_bee_1_1_x_bee_response.html" title="The XBeeResponse class is the base to create API frames responses.">XBeeResponse</a>'s ownership, you have to. </dd></dl>
 
 </div>
 </div>
@@ -1547,7 +1550,7 @@ XBee::TO() </dd></dl>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 13 2015 19:02:02 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

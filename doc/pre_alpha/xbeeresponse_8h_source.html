@@ -127,36 +127,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4">   41</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4" title="The CommandStatus enum.">CommandStatus</a> {</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a8ce0f2233497d5b68d2813de2aaf5453">   42</a></span>&#160;        <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a8ce0f2233497d5b68d2813de2aaf5453">Ok</a>                  = 0,    </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a023782a1c5cf37afdbc3d4ea272b839f">   43</a></span>&#160;        <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a023782a1c5cf37afdbc3d4ea272b839f">Error</a>               = 1,    </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a1baf6eb8a5e45d587a368ed1dc84b3c5">   44</a></span>&#160;        <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a1baf6eb8a5e45d587a368ed1dc84b3c5">InvalidCommand</a>      = 2,    </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a5f9989699e5f127b45ff9456e16b2fa9">   45</a></span>&#160;        <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a5f9989699e5f127b45ff9456e16b2fa9">InvalidParameter</a>    = 3,    </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a2c63c1ec3c74dde31ab14e42ba936eae">   46</a></span>&#160;        <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a2c63c1ec3c74dde31ab14e42ba936eae">TxFailure</a>           = 4     </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    };</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">explicit</span>        <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html" title="The XBeeResponse class is the base to create API frames responses.">XBeeResponse</a>    (QObject *parent = 0);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    ~<a class="code" href="class_qt_x_bee_1_1_x_bee_response.html" title="The XBeeResponse class is the base to create API frames responses.">XBeeResponse</a>   ();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">explicit</span>        <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#ae0efdff4b356e6495a3e42115ea71cd5" title="XBeeResponse&#39;s constructor.">XBeeResponse</a>    (QObject *parent = 0);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                    <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#ad7e4bd03b9fd5a672086b116bf49dd4d" title="XBeeResponse&#39;s destructor.">~XBeeResponse</a>   ();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// Reimplemented from XBeePacket</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span>    <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a1101c2cd79aaccd3ec57001a074ebb14" title="Clears the packet by reseting all attributes to their default value.">clear</a>           ();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span>            <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a7c9d53a61b0a667d13b12e6ad14c309b" title="Sets the response&#39;s data.">setData</a>         (<span class="keyword">const</span> QByteArray &amp; <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#ad0b03b35f45eace6253ac987416c1087" title="Returns the response&#39;s data.">data</a>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    QByteArray      <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#ad0b03b35f45eace6253ac987416c1087" title="Returns the response&#39;s data.">data</a>            () <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    QByteArray      m_data;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;} <span class="comment">// END namepsace</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Reimplemented from XBeePacket</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span>    <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a1101c2cd79aaccd3ec57001a074ebb14" title="Clears the packet by reseting all attributes to their default value.">clear</a>           ();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span>            <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a7c9d53a61b0a667d13b12e6ad14c309b" title="Sets the response&#39;s data.">setData</a>         (<span class="keyword">const</span> QByteArray &amp; <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#ad0b03b35f45eace6253ac987416c1087" title="Returns the response&#39;s data.">data</a>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span>            <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a915ab43df5c61036a429a35e78cae7f4" title="Sets the command status.">setCommandStatus</a>(<span class="keyword">const</span> <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4" title="The CommandStatus enum.">CommandStatus</a> status);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    QByteArray      <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#ad0b03b35f45eace6253ac987416c1087" title="Returns the response&#39;s data.">data</a>            () <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4" title="The CommandStatus enum.">CommandStatus</a>   <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a5c0b10cccfbf31d64a6ddb79cee3a49a" title="Returns the command&#39; status.">commandStatus</a>   () <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">static</span> QString  <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#acd0a3137eabd7a8890c5b520b9783d3f" title="Returns the given XBeeResponse::CommandStatus as a human readable string.">statusToString</a>  (<span class="keyword">const</span> <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4" title="The CommandStatus enum.">XBeeResponse::CommandStatus</a> status);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    QByteArray      m_data;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4" title="The CommandStatus enum.">CommandStatus</a>   m_status;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;} <span class="comment">// END namepsace</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif // XBEERESPONSE_H</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif // XBEERESPONSE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
@@ -166,7 +152,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 13 2015 19:02:02 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

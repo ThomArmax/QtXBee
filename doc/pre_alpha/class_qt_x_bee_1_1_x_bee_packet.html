@@ -173,10 +173,10 @@ Public Types</h2></td></tr>
 <b>RegisterJoiningDeviceStatusId</b> = 0xA4, 
 <br/>
 &#160;&#160;<b>JoinNotificationStatusId</b> = 0xA5, 
-<b>UserDefinedId</b> = 0xB0, 
 <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fba4a4693ca8dfc624c4283945b1c57f058">UndefinedId</a> = 0xFF
 <br/>
  }</td></tr>
+<tr class="memdesc:a853e501864eaa735624c5c0b26bd13fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ApiId enum identifies sent/received frame's type.  <a href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fb">More...</a><br/></td></tr>
 <tr class="separator:a853e501864eaa735624c5c0b26bd13fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac03b5ed1c6b3af8eb0edee1d8219dc34"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ac03b5ed1c6b3af8eb0edee1d8219dc34">SpecialByte</a> { <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ac03b5ed1c6b3af8eb0edee1d8219dc34a7eede677fe955d5b6366d80aaa682060">StartDelimiter</a> = 0x7E, 
 <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ac03b5ed1c6b3af8eb0edee1d8219dc34a8d742dfc0f3a9b10e465826bbfc58cd8">Escape</a> = 0x7D, 
@@ -200,9 +200,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a96e76f630e9cddce428ee8b0bc4af239"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a96e76f630e9cddce428ee8b0bc4af239">setFrameType</a> (<a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fb">ApiId</a> type)</td></tr>
 <tr class="memdesc:a96e76f630e9cddce428ee8b0bc4af239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the frame's type.  <a href="#a96e76f630e9cddce428ee8b0bc4af239">More...</a><br/></td></tr>
 <tr class="separator:a96e76f630e9cddce428ee8b0bc4af239"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ceda7ce3fc6cbe7ea0668ac5378950c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a5ceda7ce3fc6cbe7ea0668ac5378950c">setFrameId</a> (unsigned id)</td></tr>
-<tr class="memdesc:a5ceda7ce3fc6cbe7ea0668ac5378950c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the frame's id.  <a href="#a5ceda7ce3fc6cbe7ea0668ac5378950c">More...</a><br/></td></tr>
-<tr class="separator:a5ceda7ce3fc6cbe7ea0668ac5378950c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ab8ddcc8cdba3d269e95e7296839129"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a0ab8ddcc8cdba3d269e95e7296839129">setFrameId</a> (quint8 id)</td></tr>
+<tr class="memdesc:a0ab8ddcc8cdba3d269e95e7296839129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the frame's id.  <a href="#a0ab8ddcc8cdba3d269e95e7296839129">More...</a><br/></td></tr>
+<tr class="separator:a0ab8ddcc8cdba3d269e95e7296839129"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f5e8c52d1577a23ba256a5115542801"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a6f5e8c52d1577a23ba256a5115542801">setChecksum</a> (unsigned cs)</td></tr>
 <tr class="memdesc:a6f5e8c52d1577a23ba256a5115542801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the checksum.  <a href="#a6f5e8c52d1577a23ba256a5115542801">More...</a><br/></td></tr>
 <tr class="separator:a6f5e8c52d1577a23ba256a5115542801"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,9 +221,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a54a39e6114c8a870062ebf329b9bfa18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fb">ApiId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a54a39e6114c8a870062ebf329b9bfa18">frameType</a> () const </td></tr>
 <tr class="memdesc:a54a39e6114c8a870062ebf329b9bfa18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the frame's type.  <a href="#a54a39e6114c8a870062ebf329b9bfa18">More...</a><br/></td></tr>
 <tr class="separator:a54a39e6114c8a870062ebf329b9bfa18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1a2c704e3c22dd7ae86afaa9d3fc4e4"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ab1a2c704e3c22dd7ae86afaa9d3fc4e4">frameId</a> () const </td></tr>
-<tr class="memdesc:ab1a2c704e3c22dd7ae86afaa9d3fc4e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the frame's id.  <a href="#ab1a2c704e3c22dd7ae86afaa9d3fc4e4">More...</a><br/></td></tr>
-<tr class="separator:ab1a2c704e3c22dd7ae86afaa9d3fc4e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aef7931fdf6dd194481b24b6c27ad76"><td class="memItemLeft" align="right" valign="top">quint8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a7aef7931fdf6dd194481b24b6c27ad76">frameId</a> () const </td></tr>
+<tr class="memdesc:a7aef7931fdf6dd194481b24b6c27ad76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the frame's id.  <a href="#a7aef7931fdf6dd194481b24b6c27ad76">More...</a><br/></td></tr>
+<tr class="separator:a7aef7931fdf6dd194481b24b6c27ad76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4362ea4ae3a049f3bae1561b9d4469f"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ac4362ea4ae3a049f3bae1561b9d4469f">checksum</a> () const </td></tr>
 <tr class="memdesc:ac4362ea4ae3a049f3bae1561b9d4469f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the packet's checksum.  <a href="#ac4362ea4ae3a049f3bae1561b9d4469f">More...</a><br/></td></tr>
 <tr class="separator:ac4362ea4ae3a049f3bae1561b9d4469f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -277,6 +277,8 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The ApiId enum identifies sent/received frame's type. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><em><a class="anchor" id="a853e501864eaa735624c5c0b26bd13fba0807bfcdc1a604a633959733f4b44da4"></a>TxRequest64Id</em>&nbsp;</td><td class="fielddoc">
 <p>Identifies a Transmit request with a 64-bits addressing (<a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html" title="The TxRequest64 class is used to send a message over 802.15.4 network using 64 bits addresses...">Wpan::TxRequest64</a>) </p>
@@ -298,7 +300,7 @@ Protected Attributes</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a853e501864eaa735624c5c0b26bd13fba65d64bb01d153fc8ce618c9e3de7ca0b"></a>ZBExplicitTxRequestId</em>&nbsp;</td><td class="fielddoc">
 <p>Identifies an Explicit Addressing Command Frame (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_explicit_tx_request.html">ZigBee::ZBExplicitTxRequest</a>)<br/>
- Allows <a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> application layer fields (endpoint and cluster ID) to be specified for a data transmission. Similar to the XBeePacket::TxRequestFrame, but also requires <a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> application layer addressing fields to be specified (endpoints, cluster ID, profile ID). An Explicit Addressing Request API frame causes the module to send data as an RF packet to the specified destination, using the specified source and destination endpoints, cluster ID, and profile ID. The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices). The coordinator can be addressed by either setting the 64-bit address to all 0x00s and the 16-bit address to 0xFFFE, OR by setting the 64-bit address to the coordinator's 64-bit address and the 16-bit address to 0x0000. For all other transmissions, setting the 16-bit address to the correct 16-bit address can help improve performance when transmitting to multiple destinations. If a 16-bit address is not known, this field should be set to 0xFFFE (unknown). The Transmit Status frame (0x8B) will indicate the discovered 16-bit address, if successful. The broadcast radius can be set from 0 up to NH. If set to 0, the value of NH specifies the broadcast radius (recommended). This parameter is only used for broadcast transmissions. The maximum number of payload bytes can be read with the NP command. </p>
+ Allows <a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> application layer fields (endpoint and cluster ID) to be specified for a data transmission. Similar to the <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fbad3a7e5ee87ca223206dc272c26be6c51">XBeePacket::ZBTxRequestId</a>, but also requires <a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> application layer addressing fields to be specified (endpoints, cluster ID, profile ID). An Explicit Addressing Request API frame causes the module to send data as an RF packet to the specified destination, using the specified source and destination endpoints, cluster ID, and profile ID. The 64-bit destination address should be set to 0x000000000000FFFF for a broadcast transmission (to all devices). The coordinator can be addressed by either setting the 64-bit address to all 0x00s and the 16-bit address to 0xFFFE, OR by setting the 64-bit address to the coordinator's 64-bit address and the 16-bit address to 0x0000. For all other transmissions, setting the 16-bit address to the correct 16-bit address can help improve performance when transmitting to multiple destinations. If a 16-bit address is not known, this field should be set to 0xFFFE (unknown). The Transmit Status frame (0x8B) will indicate the discovered 16-bit address, if successful. The broadcast radius can be set from 0 up to NH. If set to 0, the value of NH specifies the broadcast radius (recommended). This parameter is only used for broadcast transmissions. The maximum number of payload bytes can be read with the NP command. </p>
 <dl class="section note"><dt>Note</dt><dd>if source routing is used, the RF payload will be reduced by two bytes per intermediate hop in the source route. </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a853e501864eaa735624c5c0b26bd13fba2360728c0c3c288a2e16a69c1fb1f360"></a>RemoteATCommandRequestId</em>&nbsp;</td><td class="fielddoc">
@@ -306,7 +308,7 @@ Protected Attributes</h2></td></tr>
  Used to query or set module parameters on a remote device. For parameter changes on the remote device to take effect, changes must be applied, either by setting the apply changes options bit, or by sending an AC command to the remote. </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a853e501864eaa735624c5c0b26bd13fba5345bb47b7abbcf19451f97a2a099d5e"></a>CreateSourceRouteId</em>&nbsp;</td><td class="fielddoc">
-<p>Identifies A Create Source Route Frame (CreateSourceRoute) This frame creates a source route in the module. A source route specifies the complete route a packet should traverse to get from source to destination. Source routing should be used with many-to-one routing for best results. </p>
+<p>Identifies A Create Source Route Frame. This frame creates a source route in the module. A source route specifies the complete route a packet should traverse to get from source to destination. Source routing should be used with many-to-one routing for best results. </p>
 <dl class="section note"><dt>Note</dt><dd>Both the 64-bit and 16-bit destination addresses are required when creating a source route. These are obtained when a XBeePacket::RouteRecordIndicatorFrame (0xA1) frame is received. </dd></dl>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a853e501864eaa735624c5c0b26bd13fbaba5cd949be3fd46da4549d542a9c05d2"></a>Rx64ResponseId</em>&nbsp;</td><td class="fielddoc">
@@ -334,7 +336,7 @@ Protected Attributes</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a853e501864eaa735624c5c0b26bd13fba3b1974fe5a603aa9387e1e1f76eff1cd"></a>ZBTxStatusResponseId</em>&nbsp;</td><td class="fielddoc">
 <p>Identifies a <a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> Transmit Status (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_tx_status_response.html" title="The ZBTxStatusResponse class indicate if the packet was transmitted successfully or not...">ZigBee::ZBTxStatusResponse</a>)<br/>
- When a XBeePacket::TxRequestFrame is completed, the module sends a Tx Status message. This message will indicate if the packet was transmitted successfully or if there was a failure. </p>
+ When a <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_explicit_tx_request.html">ZigBee::ZBExplicitTxRequest</a> is completed, the module sends a Tx Status message. This message will indicate if the packet was transmitted successfully or if there was a failure. </p>
 </td></tr>
 <tr><td class="fieldname"><em><a class="anchor" id="a853e501864eaa735624c5c0b26bd13fba22097724572d8ea6eba5e0a0090ce62c"></a>ZBRxResponseId</em>&nbsp;</td><td class="fielddoc">
 <p>Identifies a <a class="el" href="namespace_qt_x_bee_1_1_zig_bee.html" title="XBee Serie2/Serie 2 Pro (ZigBee) specific namespace.">ZigBee</a> Receive Packet Frame when AO=0 (<a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_rx_response.html">ZigBee::ZBRxResponse</a>)<br/>
@@ -508,7 +510,7 @@ Protected Attributes</h2></td></tr>
 <p>Clears the packet by reseting all attributes to their default value. </p>
 <dl class="section note"><dt>Note</dt><dd>All subclass should reimplement this method. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#a0e858d9fbd44f312a60f1a33de92c294">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#ac3b4b4b5ed9c4dc028a9101132f00823">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a158b1664b3375142dc23bfe90c28462f">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a4471084069b4414080f5e979e3be06d4">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_x_bee_response.html#a1101c2cd79aaccd3ec57001a074ebb14">QtXBee::XBeeResponse</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#ac40408cdd325b5a3aa087a74d5538f3a">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#abeba1f2ba7974693f1a0065f7a848db9">QtXBee::Wpan::RxResponse16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#af1e7d66cda8dcf6b4d3c9a24864af900">QtXBee::Wpan::RxResponse64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#ab1946a555ff3524957a4e99c52f07f8e">QtXBee::Wpan::TxRequest16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a9994ced3464c0f772c91d4ee4ccced85">QtXBee::Wpan::TxRequest64</a>, and <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#a1d5970eea6625c8dd6760278c6124119">QtXBee::Wpan::RxBaseResponse</a>.</p>
+<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#a0e858d9fbd44f312a60f1a33de92c294">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#ac3b4b4b5ed9c4dc028a9101132f00823">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html#a41217c9484ae0f5114cc54956f42f676">QtXBee::ATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a158b1664b3375142dc23bfe90c28462f">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a4471084069b4414080f5e979e3be06d4">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#ac40408cdd325b5a3aa087a74d5538f3a">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#abeba1f2ba7974693f1a0065f7a848db9">QtXBee::Wpan::RxResponse16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#af1e7d66cda8dcf6b4d3c9a24864af900">QtXBee::Wpan::RxResponse64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#ab1946a555ff3524957a4e99c52f07f8e">QtXBee::Wpan::TxRequest16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a9994ced3464c0f772c91d4ee4ccced85">QtXBee::Wpan::TxRequest64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#a1d5970eea6625c8dd6760278c6124119">QtXBee::Wpan::RxBaseResponse</a>, and <a class="el" href="class_qt_x_bee_1_1_x_bee_response.html#a1101c2cd79aaccd3ec57001a074ebb14">QtXBee::XBeeResponse</a>.</p>
 
 </div>
 </div>
@@ -547,12 +549,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab1a2c704e3c22dd7ae86afaa9d3fc4e4"></a>
+<a class="anchor" id="a7aef7931fdf6dd194481b24b6c27ad76"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned QtXBee::XBeePacket::frameId </td>
+          <td class="memname">quint8 QtXBee::XBeePacket::frameId </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -562,7 +564,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Returns the frame's id. </p>
 <dl class="section return"><dt>Returns</dt><dd>the frame's id </dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a5ceda7ce3fc6cbe7ea0668ac5378950c" title="Sets the frame&#39;s id.">XBeePacket::setFrameId()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a0ab8ddcc8cdba3d269e95e7296839129" title="Sets the frame&#39;s id.">XBeePacket::setFrameId()</a> </dd></dl>
 
 </div>
 </div>
@@ -617,7 +619,7 @@ XBeePacket::APIFrameType </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fb">ApiId</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a853e501864eaa735624c5c0b26bd13fb" title="The ApiId enum identifies sent/received frame&#39;s type.">ApiId</a> </dd></dl>
 
 </div>
 </div>
@@ -696,7 +698,7 @@ XBeePacket::APIFrameType </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true if succeeded; false otherwise. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>All subclasses must reimplement this method, which is called by <a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a397f00887106a794bca7f8276e6e0cb9" title="Sets the packet&#39;s raw data.">XBeePacket::setPacket()</a> </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#af96bd28b555452aa43ad5681f40d2560">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#ad726e5ae56a9c2b6d056260002bd0769">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#a08cc1468f480433eb15f028d9ccae01e">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html#aabbf0a6f55bc17730f611c2d82648600">QtXBee::ATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#a27eb3a3a9c6ba7a51da2ca4d738b8b69">QtXBee::Wpan::RxResponse16</a>, and <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4472a8d511b5d31bdfb313054838bc63">QtXBee::Wpan::RxResponse64</a>.</p>
+<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#af96bd28b555452aa43ad5681f40d2560">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html#aabbf0a6f55bc17730f611c2d82648600">QtXBee::ATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#ad726e5ae56a9c2b6d056260002bd0769">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#a08cc1468f480433eb15f028d9ccae01e">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#a27eb3a3a9c6ba7a51da2ca4d738b8b69">QtXBee::Wpan::RxResponse16</a>, and <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4472a8d511b5d31bdfb313054838bc63">QtXBee::Wpan::RxResponse64</a>.</p>
 
 </div>
 </div>
@@ -726,14 +728,14 @@ XBeePacket::APIFrameType </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a5ceda7ce3fc6cbe7ea0668ac5378950c"></a>
+<a class="anchor" id="a0ab8ddcc8cdba3d269e95e7296839129"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void QtXBee::XBeePacket::setFrameId </td>
           <td>(</td>
-          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramtype">quint8&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -747,7 +749,7 @@ XBeePacket::APIFrameType </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#ab1a2c704e3c22dd7ae86afaa9d3fc4e4" title="Returns the frame&#39;s id.">XBeePacket::frameId()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_qt_x_bee_1_1_x_bee_packet.html#a7aef7931fdf6dd194481b24b6c27ad76" title="Returns the frame&#39;s id.">XBeePacket::frameId()</a> </dd></dl>
 
 </div>
 </div>
@@ -897,7 +899,7 @@ XBeePacket::APIFrameType </dd></dl>
 <p>Returns a debug string containing all packet's informations. </p>
 <dl class="section return"><dt>Returns</dt><dd>a debug string containing all packet's informations. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#a486b3ab1192a422f447d1f4e7b6413a3">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#a13e1dd98c94880c5055c067008be65e2">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a761fd0039275595f08be193243fe991b">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a73e06a4ea5e524412018baf9ccc6fce8">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_modem_status.html#a37a4d78fa5894c407973214f08f77a0e">QtXBee::ModemStatus</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#a210825658162a86eaf6c1e7a5d446749">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html#a07ddc05ed147121f2843afc9abfbf61d">QtXBee::ATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#a190a3063b5b111591328a9a61c76dfbe">QtXBee::Wpan::RxResponse16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4d673b71bd05f93a9e4c124bfecc7a08">QtXBee::Wpan::RxResponse64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#ab8a60e51ed734ffeb5f8f138e576116a">QtXBee::Wpan::TxRequest16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a4afe423dd32aa53bdf8074e12bd98c65">QtXBee::Wpan::TxRequest64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#af192226a0065eaeb7bd3c6d085a6bb24">QtXBee::Wpan::RxBaseResponse</a>, and <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_i_o_node_identification_response.html#a3dd89df3bb69da7ebdeb3224ccb03bb6">QtXBee::ZigBee::ZBIONodeIdentificationResponse</a>.</p>
+<p>Reimplemented in <a class="el" href="class_qt_x_bee_1_1_a_t_command.html#a486b3ab1192a422f447d1f4e7b6413a3">QtXBee::ATCommand</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response_io_sample_base.html#a13e1dd98c94880c5055c067008be65e2">QtXBee::Wpan::RxResponseIoSampleBase</a>, <a class="el" href="class_qt_x_bee_1_1_a_t_command_response.html#a07ddc05ed147121f2843afc9abfbf61d">QtXBee::ATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_request.html#a761fd0039275595f08be193243fe991b">QtXBee::RemoteATCommandRequest</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_status_response.html#a73e06a4ea5e524412018baf9ccc6fce8">QtXBee::Wpan::TxStatusResponse</a>, <a class="el" href="class_qt_x_bee_1_1_modem_status.html#a37a4d78fa5894c407973214f08f77a0e">QtXBee::ModemStatus</a>, <a class="el" href="class_qt_x_bee_1_1_remote_a_t_command_response.html#a210825658162a86eaf6c1e7a5d446749">QtXBee::RemoteATCommandResponse</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response16.html#a190a3063b5b111591328a9a61c76dfbe">QtXBee::Wpan::RxResponse16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_response64.html#a4d673b71bd05f93a9e4c124bfecc7a08">QtXBee::Wpan::RxResponse64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request16.html#ab8a60e51ed734ffeb5f8f138e576116a">QtXBee::Wpan::TxRequest16</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_tx_request64.html#a4afe423dd32aa53bdf8074e12bd98c65">QtXBee::Wpan::TxRequest64</a>, <a class="el" href="class_qt_x_bee_1_1_wpan_1_1_rx_base_response.html#af192226a0065eaeb7bd3c6d085a6bb24">QtXBee::Wpan::RxBaseResponse</a>, and <a class="el" href="class_qt_x_bee_1_1_zig_bee_1_1_z_b_i_o_node_identification_response.html#a3dd89df3bb69da7ebdeb3224ccb03bb6">QtXBee::ZigBee::ZBIONodeIdentificationResponse</a>.</p>
 
 </div>
 </div>
@@ -937,7 +939,7 @@ XBeePacket::APIFrameType </dd></dl>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 13 2015 19:02:02 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

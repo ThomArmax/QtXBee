@@ -230,8 +230,8 @@ Synchronous AT command</h1>
 <div class="line">        qFatal(<span class="stringliteral">&quot;No response&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    <span class="keywordflow">if</span>(rep-&gt;<a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a5c0b10cccfbf31d64a6ddb79cee3a49a" title="Returns the command&#39; status.">commandStatus</a>() != <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a58249a2095cae7a6221bed25c1eea6c4a8ce0f2233497d5b68d2813de2aaf5453">ATCommandResponse::Ok</a>) {</div>
-<div class="line">        qWarning() &lt;&lt; <span class="stringliteral">&quot;AT Command Failed with status&quot;</span> &lt;&lt; <a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#acd0a3137eabd7a8890c5b520b9783d3f" title="Returns the given XBeeResponse::CommandStatus as a human readable string.">XBeeResponse::statusToString</a>(rep-&gt;<a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#a5c0b10cccfbf31d64a6ddb79cee3a49a" title="Returns the command&#39; status.">commandStatus</a>());</div>
+<div class="line">    <span class="keywordflow">if</span>(rep-&gt;<a class="code" href="class_qt_x_bee_1_1_a_t_command_response.html#ad32b11f26ea59c86edf74f52b4007bad" title="Returns the command&#39; status.">status</a>() != <a class="code" href="class_qt_x_bee_1_1_a_t_command_response.html#a47b7ab26b3c363d634889ccc4aff490ba2cef6e4a794aaa86cbf63d75acf189db">ATCommandResponse::Ok</a>) {</div>
+<div class="line">        qWarning() &lt;&lt; <span class="stringliteral">&quot;AT Command Failed with status&quot;</span> &lt;&lt; rep-&gt;<a class="code" href="class_qt_x_bee_1_1_a_t_command_response.html#ad32b11f26ea59c86edf74f52b4007bad" title="Returns the command&#39; status.">status</a>();</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span> {</div>
 <div class="line">        qDebug() &lt;&lt; <span class="stringliteral">&quot;PAN ID =&quot;</span> &lt;&lt; rep-&gt;<a class="code" href="class_qt_x_bee_1_1_x_bee_response.html#ad0b03b35f45eace6253ac987416c1087" title="Returns the response&#39;s data.">data</a>().toHex();</div>
@@ -565,7 +565,7 @@ Wpan transmit request (64 bits addressing)</h1>
 </div>
 </div>
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2015 17:06:11 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 13 2015 19:02:02 for QtXBee by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

@@ -28,6 +28,7 @@
     </style>
     <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
     <link href="stylesheets/bootstrap-custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -52,9 +53,9 @@
               <li class="active"><a href="#">Home</a></li>
             </ul>
           </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+        </div><!--/.container-fluid -->
+      </div><!--/.navbar-inner -->
+    </div><!--/.navbar -->
 
     <div class="container-fluid">
       <div class="row-fluid">
@@ -104,13 +105,8 @@
                 <li>Working WPAN received packets (16-bits and 64-bits addressing)</li>
                 <li>Working WPAN transmit status response</li>
             </ul>
-          </div>
+          </div><!--/.hero-unit -->
           <div class="row-fluid">
-            <div class="span4">
-              <h2>Contact</h2>
-              <p>If you have any question, suggestion or trouble, you can contact me at
-              <a href="#">esvcorp@gmail.com</a></p>
-            </div><!--/span-->
             <div class="span4">
               <h2>Getting Started</h2>
               <p>Once you have downloaded QtXBee, you are ready to get started.</p>
@@ -121,20 +117,37 @@
               <p>Once your are done with the getting started, take a look to the examples</p>
               <p><a class="btn" href="doc/pre_alpha/examples.html" target="_blank">Examples »</a></p>
             </div><!--/span-->
+            <div class="span4">
+              <h2>Contact</h2>
+              <p>If you have any question, suggestion or trouble, you can contact me at
+              <a href="#">esvcorp@gmail.com</a></p>
+            </div><!--/span-->
           </div><!--/row-->
-      </div><!--/row-->
-
-      <hr>
-
+        </div><!--/span-->
+        <hr>
+      </div><!--/.row-fluid-->
     </div><!--/.fluid-container-->
 
-    <footer>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          Current version: pre-alpha -
-          Code licensed under <a href="https://github.com/ThomArmax/QtXBee/blob/develop/LICENSE" target="_blank">LGPL V2.1</a> - © 2015 ThomArmax (Thomas COIN)
+    <footer class="footer-distributed">
+        <div class="container-fluid">
+        <div class="footer-left">
+            <h3>Qt<span>XBee</span></h3>
+            <p class="footer-company-name">ThomArmax (Thomas COIN) &copy; 2015</p>
         </div>
-      </div>
+
+        <div class="footer-center">
+            <p>Currently <span>pre-alpha</span></p>
+            <p>Code licensed under <a href="https://github.com/ThomArmax/QtXBee/blob/develop/LICENSE" target="_blank">LGPL V2.1</a></p>
+        </div>
+
+        <div class="footer-right">
+            <div class="footer-icons">
+                <a href="https://github.com/ThomArmax/QtXBee"><i class="fa fa-github"></i></a>
+                <a href="https://linkedin.com/in/thomascoin"><i class="fa fa-linkedin"></i></a>
+                <a href="mailto:esvcorp@gmail.com"><i class="fa fa-envelope"></i></a>
+            </div>
+        </div>
+        </div>
     </footer>
 
     <!-- Le javascript

@@ -88,7 +88,7 @@ public:
     void            setStartDelimiter       (unsigned sd);
     void            setLength               (unsigned length);
     void            setFrameType            (ApiId type);
-    void            setFrameId              (unsigned id);
+    void            setFrameId              (quint8 id);
     void            setChecksum             (unsigned cs);
     bool            setPacket               (const QByteArray & packet);
 
@@ -96,7 +96,7 @@ public:
     unsigned        startDelimiter          () const;
     quint16         length                  () const;
     ApiId           frameType               () const;
-    unsigned        frameId                 () const;
+    quint8          frameId                 () const;
     unsigned        checksum                () const;
 
     virtual void    assemblePacket          ();
@@ -120,7 +120,7 @@ private:
     unsigned        m_startDelimiter;       /**< The packet start delimiter */
     quint16         m_length;               /**< Frame-specific data length (Number of bytes between the length and the checksum) */
     ApiId           m_frameType;            /**< The frame's type */
-    unsigned        m_frameId;              /**< The frame's id */
+    quint8          m_frameId;              /**< The frame's id */
     unsigned        m_checksum;             /**< Packet checksum */
 };
 

@@ -75,7 +75,7 @@ void XBeePacket::setFrameType(ApiId type)
  * @param id
  * @sa XBeePacket::frameId()
  */
-void XBeePacket::setFrameId(unsigned id)
+void XBeePacket::setFrameId(quint8 id)
 {
     m_frameId = id;
 }
@@ -128,7 +128,7 @@ XBeePacket::ApiId XBeePacket::frameType() const
  * @returns the frame's id
  * @sa XBeePacket::setFrameId()
  */
-unsigned XBeePacket::frameId() const
+quint8 XBeePacket::frameId() const
 {
     return m_frameId;
 }

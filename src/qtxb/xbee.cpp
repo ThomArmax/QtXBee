@@ -339,7 +339,7 @@ void XBee::sendAsync(XBeePacket *packet)
 }
 
 /**
- * @brief Sends asynchronously the given command.
+ * @brief Sends asynchronously the given command in command mode
  *
  * To put the module in command mode, you need first to send '+++'
  * When a response is received, the signal rawDataReceived() will be emitted.
@@ -361,7 +361,7 @@ bool XBee::sendCommandAsync(const QByteArray &command)
 }
 
 /**
- * @brief Sends synchronously the given command
+ * @brief Sends synchronously the given command using in command mode
  *
  * To put the module in command mode, you need first to send '+++'
  * @see http://knowledge.digi.com/articles/Knowledge_Base_Article/The-AT-Command-Set
@@ -419,7 +419,6 @@ XBeeResponse * XBee::sendSync(XBeePacket *packet)
         m_frameIdCounter = 1;
     else m_frameIdCounter++;
 
-    packet->setFrameId(m_frameIdCounter);
     packet->assemblePacket();
 
     m_serial->blockSignals(true);
@@ -504,7 +503,6 @@ ATCommandResponse * XBee::sendATCommandSync(ATCommand *command)
         m_frameIdCounter = 1;
     else m_frameIdCounter++;
 
-    command->setFrameId(m_frameIdCounter);
     command->assemblePacket();
 
     m_serial->blockSignals(true);

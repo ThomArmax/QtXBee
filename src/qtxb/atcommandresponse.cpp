@@ -25,14 +25,16 @@ namespace QtXBee {
 
 ATCommandResponse::ATCommandResponse(QObject *parent) :
     XBeeResponse(parent),
-    m_atCommand(ATCommand::ATUndefined)
+    m_atCommand(ATCommand::ATUndefined),
+    m_status(Error)
 {
     setFrameType(ATCommandResponseId);
 }
 
 ATCommandResponse::ATCommandResponse(const QByteArray &packet, QObject *parent)  :
     XBeeResponse(parent),
-    m_atCommand(ATCommand::ATUndefined)
+    m_atCommand(ATCommand::ATUndefined),
+    m_status(Error)
 {
     setFrameType(ATCommandResponseId);
     setPacket(packet);
@@ -51,7 +53,7 @@ Q_DECL_OVERRIDE
     at.append(data.at(1));
     at.append(data.at(2));
     setATCommand(at);
-    setCommandStatus((CommandStatus)(unsigned char)data.at(3));
+    setStatus((Status)(unsigned char)data.at(3));
     for(i=4; i<data.size();i++) {
         m_data.append(data.at(i));
     }
@@ -95,6 +97,54 @@ ATCommand::ATCommandType ATCommandResponse::atCommand() const
     return m_atCommand;
 }
 
+/**
+ * @brief Sets the command status
+ * @param status
+ * @see CommandStatus
+ */
+void ATCommandResponse::setStatus(const Status status)
+{
+    m_status = status;
+}
+
+/**
+ * @brief Returns the command' status
+ * @return the command' status
+ * @see CommandStatus
+ */
+ATCommandResponse::Status ATCommandResponse::status() const
+{
+    return m_status;
+}
+
+/**
+ * @brief Returns the Status as a human readable string
+ * @return the given Status as a human readable string
+ */
+QString ATCommandResponse::statusToString() const
+{
+    return statusToString(status());
+}
+
+/**
+ * @brief Returns the given Status as a human readable string
+ * @param status
+ * @return the given Status as a human readable string
+ */
+QString ATCommandResponse::statusToString(const ATCommandResponse::Status status)
+{
+    QString st = "Unknown";
+    switch(status) {
+    case Ok                 : st = "OK"                 ; break;
+    case Error              : st = "Error"              ; break;
+    case InvalidCommand     : st = "Invalid Command"    ; break;
+    case InvalidParameter   : st = "Invalid Parameter"  ; break;
+    case TxFailure          : st = "Tx Failure"         ; break;
+    }
+
+    return st;
+}
+
 QString ATCommandResponse::toString()
 Q_DECL_OVERRIDE
 {
@@ -110,9 +160,17 @@ Q_DECL_OVERRIDE
     else
     str.append(QString("Data            : No data\n"));
     str.append(QString("Checksum        : %1\n").arg(checksum()));
-    str.append(QString("Command Status  : %1 (0x%2)").arg(statusToString(m_status)).arg(m_status,0,16));
+    str.append(QString("Command Status  : %1 (0x%2)").arg(statusToString()).arg(m_status,0,16));
 
     return str;
+}
+
+void ATCommandResponse::clear()
+Q_DECL_OVERRIDE
+{
+    XBeeResponse::clear();
+    setATCommand(ATCommand::ATUndefined);
+    setStatus(Error);
 }
 
 } // END namepsace

@@ -21,7 +21,7 @@ private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
     void testFrameId();
-    void testATCommandSet();
+    void testATCommand();
 
 private:
     XBee * m_xbee;
@@ -58,12 +58,13 @@ void XbeeCommandsSendTest::testFrameId()
 
     at.setCommand(ATCommand::ATMY);
 
-    for(int i=1; i<=200; i++) {
+    // Auto frame id
+    for(int i=1; i<=512; i++) {
         rep = m_xbee->sendATCommandSync(&at);
         QVERIFY2(rep != NULL, "No response to AT command");
 
         QVERIFY2(at.frameId() == rep->frameId(),
-                 QString("Mistmatching frame id for iteration %1 (expected %2, got %3").
+                 QString("Mistmatching frame id for iteration %1, the request and the response have a different frame id (expected %2, got %3").
                  arg(i).
                  arg(at.frameId()).
                  arg(rep->frameId()).
@@ -71,9 +72,31 @@ void XbeeCommandsSendTest::testFrameId()
         delete rep;
     }
 
+    // Manual frame id
+    for(int i=1; i<=512; i++) {
+        quint8 frameId = 12;
+        at.setFrameId(frameId);
+        rep = m_xbee->sendATCommandSync(&at);
+        QVERIFY2(rep != NULL, "No response to AT command");
+
+        QVERIFY2(at.frameId() == frameId,
+                 QString("Mistmatching frame id for iteration %1, the request's frame id changed after calling send (expected %2, got %3").
+                 arg(i).
+                 arg(frameId).
+                 arg(at.frameId()).
+                 toStdString().c_str());
+
+        QVERIFY2(at.frameId() == rep->frameId(),
+                 QString("Mistmatching frame id for iteration %1, the request and the response have a different frame id (expected %2, got %3").
+                 arg(i).
+                 arg(at.frameId()).
+                 arg(rep->frameId()).
+                 toStdString().c_str());
+        delete rep;
+    }
 }
 
-void XbeeCommandsSendTest::testATCommandSet()
+void XbeeCommandsSendTest::testATCommand()
 {
     ATCommand at;
     ATCommandResponse * rep = NULL;
@@ -88,6 +111,7 @@ void XbeeCommandsSendTest::testATCommandSet()
     QVERIFY2(at.parameter() == param, "Mismatching AT command parameter");
 
     for(int i=1; i<=count; i++) {
+        // Set NI
         rep = m_xbee->sendATCommandSync(&at);
         QVERIFY2(rep != NULL, "No response to AT command");
 
@@ -99,8 +123,28 @@ void XbeeCommandsSendTest::testATCommandSet()
                  arg(rep->atCommand()).
                  toStdString().c_str());
 
-        QVERIFY2(rep->commandStatus() == ATCommandResponse::Ok, "AT command failed");
+        QVERIFY2(rep->status() == ATCommandResponse::Ok, "AT command failed");
+        delete rep;
 
+        // Get NI
+        rep = m_xbee->sendATCommandSync("NI");
+        QVERIFY2(rep != NULL, "No response to AT command");
+
+        QVERIFY2(at.command() == rep->atCommand(),
+                 QString("Mistmatching AT command for iteration %1/%2 (expected %3, got %4").
+                 arg(i).
+                 arg(count).
+                 arg(at.command()).
+                 arg(rep->atCommand()).
+                 toStdString().c_str());
+
+        QVERIFY2(rep->status() == ATCommandResponse::Ok, "AT command failed");
+        QVERIFY2(rep->data() == param, QString("Mistmatching datafor iteration %1/%2 (expected %3, got %4").
+                 arg(i).
+                 arg(count).
+                 arg(QString(param)).
+                 arg(QString(rep->data())).
+                 toStdString().c_str());
         delete rep;
     }
 
@@ -109,10 +153,10 @@ void XbeeCommandsSendTest::testATCommandSet()
     rep = m_xbee->sendATCommandSync(&at);
 
     QVERIFY2(rep != NULL, "No response to AT command");
-    QVERIFY2(rep->commandStatus() == ATCommandResponse::InvalidCommand,
+    QVERIFY2(rep->status() == ATCommandResponse::InvalidCommand,
              QString("Bad command status (expected %1, got %2)").
              arg(ATCommandResponse::InvalidCommand).
-             arg(rep->commandStatus()).
+             arg(rep->status()).
              toStdString().c_str());
 
     delete rep;
@@ -124,10 +168,10 @@ void XbeeCommandsSendTest::testATCommandSet()
 
     QVERIFY2(rep != NULL, "No response to AT command");
 
-    QVERIFY2(rep->commandStatus() == ATCommandResponse::InvalidParameter,
+    QVERIFY2(rep->status() == ATCommandResponse::InvalidParameter,
              QString("Bad command status (expected %1, got %2").
              arg(ATCommandResponse::InvalidParameter).
-             arg(rep->commandStatus()).
+             arg(rep->status()).
              toStdString().c_str()
              );
 }

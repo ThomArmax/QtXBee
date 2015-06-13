@@ -556,21 +556,6 @@ ATCommandResponse * XBee::sendATCommandSync(const QByteArray &atcommand)
     return rep;
 }
 
-void XBee::broadcast(QString data)
-{
-    ZBTxRequest request;
-    request.setData(data.toLatin1());
-    sendAsync(&request);
-}
-
-void XBee::unicast(QByteArray address, QString data)
-{
-    ZBTxRequest request;
-    request.setDestAddr64(address);
-    request.setData(data.toLatin1());
-    sendAsync(&request);
-}
-
 /**
  * @brief Loads the XBee's addressing properties
  * - DH

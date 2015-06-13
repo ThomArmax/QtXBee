@@ -64,8 +64,6 @@ public:
                         ~XBee                               ();
 
     bool                applyDefaultSerialPortConfig        ();
-    void                broadcast                           (QString data);
-    void                unicast                             (QByteArray address, QString data);
 
     bool                sendCommandAsync                    (const QByteArray & command);
     XBeeResponse *      sendSync                            (XBeePacket * packet);

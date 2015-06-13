@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
         qFatal("No response");
     }
 
-    if(rep->commandStatus() != ATCommandResponse::Ok) {
-        qWarning() << "AT Command Failed with status" << XBeeResponse::statusToString(rep->commandStatus());
+    if(rep->status() != ATCommandResponse::Ok) {
+        qWarning() << "AT Command Failed with status" << rep->status();
     }
     else {
         qDebug() << "PAN ID =" << rep->data().toHex();

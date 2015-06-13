@@ -54,7 +54,7 @@ Q_DECL_OVERRIDE
     setSourceAddress64(data.mid(1, 8).toHex().toULong(0,16));
     setSourceAddress16(data.mid(9, 2).toHex().toUInt(0,16));
     setATCommand((ATCommand::ATCommandType) data.mid(11, 2).toHex().toUInt(0,16));
-    setCommandStatus((CommandStatus) data.at(13));
+    setStatus((Status) data.at(13));
     if(data.size() > 14) {
         for(int i=14; i < data.size(); i++) {
             m_data.append(data.at(i));
@@ -80,7 +80,7 @@ Q_DECL_OVERRIDE
     str.append(QString("Source Address 64bits        : 0x%1\n").arg(m_sourceAddress64, 0, 16));
     str.append(QString("Source Address 16bits        : 0x%1\n").arg(m_sourceAddress16, 0, 16));
     str.append(QString("AT Command                   : %1 (0x%2)\n").arg(ATCommand::atCommandToString(m_atCommand)).arg(m_atCommand, 0,16));
-    str.append(QString("Command Status               : %1 (0x%2)\n").arg(statusToString(m_status)).arg(m_status, 0, 16));
+    str.append(QString("Command Status               : %1 (0x%2)\n").arg(statusToString()).arg(m_status, 0, 16));
     str.append(QString("Checksum                     : %1\n").arg(checksum()));
 
     return  str;

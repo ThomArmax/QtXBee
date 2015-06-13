@@ -6,3 +6,4 @@ SUBDIRS += \
     qtxb \
     tests \
     examples \
+    getting_started

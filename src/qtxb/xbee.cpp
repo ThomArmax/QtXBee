@@ -1043,7 +1043,7 @@ bool XBee::startupCheck()
         rep = sendATCommandSync(&at);
         if(rep)
         {
-            if(rep->commandStatus() == ATCommandResponse::Ok) {
+            if(rep->status() == ATCommandResponse::Ok) {
                 bool ok = false;
                 int hv = rep->data().left(1).toHex().toInt(&ok,16);
                 if(ok) {

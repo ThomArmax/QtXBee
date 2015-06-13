@@ -39,22 +39,40 @@ class ATCommandResponse : public XBeeResponse
 {
     Q_OBJECT
 public:
+    /**
+     * @brief The CommandStatus enum
+     */
+    enum Status {
+        Ok                  = 0,    /**< Ok */
+        Error               = 1,    /**< Error */
+        InvalidCommand      = 2,    /**< Invalid Command */
+        InvalidParameter    = 3,    /**< Invalid Parameter */
+        TxFailure           = 4     /**< Transmission failure */
+    };
+
     explicit                    ATCommandResponse   (QObject *parent = 0);
                                 ATCommandResponse   (const QByteArray &packet, QObject * parent = 0);
 
     // Reimplemented from XBeeResponse
-    virtual QString             toString();
+    virtual QString             toString            ();
+    virtual void                clear               ();
 
     void                        setATCommand        (ATCommand::ATCommandType at);
     void                        setATCommand        (const QByteArray & at);
+    void                        setStatus    (const Status status);
 
     ATCommand::ATCommandType    atCommand           () const;
+    Status                      status              () const;
+
+    QString                     statusToString      () const;
+    static QString              statusToString      (const ATCommandResponse::Status status);
 
 protected:
     virtual bool                parseApiSpecificData(const QByteArray &data);
 
 protected:
     ATCommand::ATCommandType    m_atCommand;
+    Status                      m_status;
 };
 
 } // END namepsace

@@ -59,8 +59,8 @@ public:
     virtual         ~RxResponseIoSampleBase ();
 
     // Reimplemented from RxBaseResponse
-    virtual void    clear                   ();
-    virtual QString toString                ();
+    virtual void    clear                   () Q_DECL_OVERRIDE;
+    virtual QString toString                () Q_DECL_OVERRIDE;
 
     void            setChannelMask          (ChannelMask mask);
     ChannelMask     channelMask             () const;
@@ -69,7 +69,7 @@ public:
     quint8          sampleCount             () const;
 
 protected:
-    virtual bool    parseApiSpecificData    (const QByteArray &data);
+    virtual bool    parseApiSpecificData    (const QByteArray &data) Q_DECL_OVERRIDE;
 
 protected:
     quint8          m_samplesCount;

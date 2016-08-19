@@ -47,8 +47,8 @@ public:
                     RemoteATCommandResponse (const QByteArray & packet, QObject *parent = 0);
 
     // Reimplement from ATCommandResponse
-    virtual QString toString                ();
-    virtual void    clear                   ();
+    virtual QString toString                () Q_DECL_OVERRIDE;
+    virtual void    clear                   () Q_DECL_OVERRIDE;
 
     // Setters
     void            setSourceAddress64      (const quint64 addr);

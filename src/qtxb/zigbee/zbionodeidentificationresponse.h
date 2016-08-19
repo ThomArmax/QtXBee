@@ -39,7 +39,7 @@ public:
     explicit ZBIONodeIdentificationResponse(QObject *parent = 0);
     virtual bool setPacket(const QByteArray &packet);
 
-    virtual QString toString();
+    virtual QString toString() Q_DECL_OVERRIDE;
 
 private:
     quint64 m_senderAddr64;

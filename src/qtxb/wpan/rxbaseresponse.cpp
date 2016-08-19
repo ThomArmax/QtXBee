@@ -35,7 +35,6 @@ RxBaseResponse::~RxBaseResponse()
 }
 
 void RxBaseResponse::clear()
-Q_DECL_OVERRIDE
 {
     XBeeResponse::clear();
     m_rssi = -1;
@@ -43,7 +42,6 @@ Q_DECL_OVERRIDE
 }
 
 QString RxBaseResponse::toString()
-Q_DECL_OVERRIDE
 {
     return QString();
 }

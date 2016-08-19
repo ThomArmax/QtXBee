@@ -59,7 +59,6 @@ QHash<int,QByteArray> XBeeParamsTableModel::roleNames() const {
 }
 
 QVariant XBeeParamsTableModel::data(const QModelIndex &index, int role) const
-Q_DECL_OVERRIDE
 {
     if(index.row() < 0 || index.row() >= m_list.size()) {
         return QVariant();

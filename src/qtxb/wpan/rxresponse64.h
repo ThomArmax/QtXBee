@@ -41,14 +41,14 @@ public:
     virtual         ~RxResponse64       ();
 
     // Reimplemented from RxBaseResponse
-    virtual void    clear               ();
-    virtual QString toString            ();
+    virtual void    clear               () Q_DECL_OVERRIDE;
+    virtual QString toString            () Q_DECL_OVERRIDE;
 
     void            setSourceAddress    (const quint64 sourceAddress);
     quint64         sourceAddress       () const;
 
 protected:
-    virtual bool    parseApiSpecificData(const QByteArray &data);
+    virtual bool    parseApiSpecificData(const QByteArray &data) Q_DECL_OVERRIDE;
 
 private:
     quint64         m_sourceAddress;

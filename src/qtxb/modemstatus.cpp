@@ -39,7 +39,6 @@ ModemStatus::ModemStatus(const QByteArray &packet, QObject *parent) :
 }
 
 bool ModemStatus::parseApiSpecificData(const QByteArray &data)
-Q_DECL_OVERRIDE
 {
     if(data.size() != 1) {
         qDebug() << Q_FUNC_INFO << "bad data !";
@@ -76,7 +75,6 @@ QString ModemStatus::statusToString() const
 }
 
 QString ModemStatus::toString()
-Q_DECL_OVERRIDE
 {
     QString str;
     str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));

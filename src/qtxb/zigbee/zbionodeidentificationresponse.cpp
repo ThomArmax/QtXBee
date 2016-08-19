@@ -41,7 +41,6 @@ ZBIONodeIdentificationResponse::ZBIONodeIdentificationResponse(QObject *parent) 
 }
 
 bool ZBIONodeIdentificationResponse::setPacket(const QByteArray &packet)
-Q_DECL_OVERRIDE
 {
     qDebug() << Q_FUNC_INFO << QString(packet.toHex());
     qDebug() << Q_FUNC_INFO << "packet size" << packet.size();

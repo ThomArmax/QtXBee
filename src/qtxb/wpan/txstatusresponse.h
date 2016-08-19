@@ -51,8 +51,8 @@ public:
     virtual         ~TxStatusResponse       ();
 
     // Reimplemented from XBeeResponse
-    virtual void    clear                   ();
-    virtual QString toString                ();
+    virtual void    clear                   () Q_DECL_OVERRIDE;
+    virtual QString toString                () Q_DECL_OVERRIDE;
 
     void            setStatus               (const Status status);
     Status          status                  () const;
@@ -60,7 +60,7 @@ public:
     static QString  statusToString          (const Status status);
 
 protected:
-    virtual bool    parseApiSpecificData    (const QByteArray &data);
+    virtual bool    parseApiSpecificData    (const QByteArray &data) Q_DECL_OVERRIDE;
 
 private:
     Status          m_status;

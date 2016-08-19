@@ -11,7 +11,7 @@ class XBeeParamsTableModel : public Armax::Datamodels::ListModel
 public:
     XBeeParamsTableModel(XBee * bee, QObject * parent = 0);
 
-    QVariant data(const QModelIndex &index, int role) const;
+    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
     virtual QHash<int,QByteArray> roleNames() const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 

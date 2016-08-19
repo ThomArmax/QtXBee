@@ -50,7 +50,7 @@ public:
     explicit    ZBTxRequest         (QObject *parent = 0);
 
     // Reimplemented from XBeePacket
-    void        assemblePacket      ();
+    void        assemblePacket      () Q_DECL_OVERRIDE;
 
     void        setBroadcastRadius  (int rad);
     void        setTransmitOptions  (unsigned to);

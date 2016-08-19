@@ -35,14 +35,12 @@ RxResponse16::~RxResponse16()
 }
 
 void RxResponse16::clear()
-Q_DECL_OVERRIDE
 {
     RxBaseResponse::clear();
     m_sourceAddress = 0;
 }
 
 bool RxResponse16::parseApiSpecificData(const QByteArray &data)
-Q_DECL_OVERRIDE
 {
     if(data.size() < 4) {
         qWarning() << Q_FUNC_INFO << "Invalid data, expected at least 4 bytes, got" << data.size();
@@ -59,7 +57,6 @@ Q_DECL_OVERRIDE
 }
 
 QString RxResponse16::toString()
-Q_DECL_OVERRIDE
 {
     QString str;
     str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));

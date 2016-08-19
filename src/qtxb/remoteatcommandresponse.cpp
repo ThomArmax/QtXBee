@@ -44,7 +44,6 @@ void RemoteATCommandResponse::clear() {
 }
 
 bool RemoteATCommandResponse::parseApiSpecificData(const QByteArray &data)
-Q_DECL_OVERRIDE
 {
     if(data.size() < 13) {
         qDebug() << Q_FUNC_INFO << "bad data !";
@@ -65,7 +64,6 @@ Q_DECL_OVERRIDE
 }
 
 QString RemoteATCommandResponse::toString()
-Q_DECL_OVERRIDE
 {
     QString str;
     str.append(QString("Raw packet                   : 0x%1\n").arg(QString(packet().toHex())));

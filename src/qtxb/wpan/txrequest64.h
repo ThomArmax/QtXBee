@@ -40,9 +40,9 @@ public:
                     ~TxRequest64            ();
 
     // Reimplemented from XBeePacket
-    virtual void    assemblePacket          ();
-    virtual void    clear                   ();
-    virtual QString toString                ();
+    virtual void    assemblePacket          () Q_DECL_OVERRIDE;
+    virtual void    clear                   () Q_DECL_OVERRIDE;
+    virtual QString toString                () Q_DECL_OVERRIDE;
 
     void            setDestinationAddress   (const quint64 address);
     void            setData                 (const QByteArray & data);

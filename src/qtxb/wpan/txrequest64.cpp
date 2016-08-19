@@ -35,7 +35,6 @@ TxRequest64::~TxRequest64()
 }
 
 void TxRequest64::assemblePacket()
-Q_DECL_OVERRIDE
 {
     int i = 0;
 
@@ -64,7 +63,6 @@ Q_DECL_OVERRIDE
 }
 
 void TxRequest64::clear()
-Q_DECL_OVERRIDE
 {
     XBeePacket::clear();
     m_data.clear();
@@ -72,7 +70,6 @@ Q_DECL_OVERRIDE
 }
 
 QString TxRequest64::toString()
-Q_DECL_OVERRIDE
 {
     return QString();
 }

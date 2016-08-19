@@ -37,14 +37,12 @@ TxStatusResponse::~TxStatusResponse()
 }
 
 void TxStatusResponse::clear()
-Q_DECL_OVERRIDE
 {
     XBeePacket::clear();
     setStatus(Unknown);
 }
 
 QString TxStatusResponse::toString()
-Q_DECL_OVERRIDE
 {
     QString str;
     str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));

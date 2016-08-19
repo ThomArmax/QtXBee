@@ -37,7 +37,6 @@ RemoteATCommandRequest::RemoteATCommandRequest(QObject *parent) :
 }
 // Reimplemented from XBeePacket
 void RemoteATCommandRequest::assemblePacket()
-Q_DECL_OVERRIDE
 {
     int i;
 
@@ -61,7 +60,6 @@ Q_DECL_OVERRIDE
 }
 
 void RemoteATCommandRequest::clear()
-Q_DECL_OVERRIDE
 {
     XBeePacket::clear();
     m_destinationAddress64  = 0;
@@ -70,7 +68,6 @@ Q_DECL_OVERRIDE
 }
 
 QString RemoteATCommandRequest::toString()
-Q_DECL_OVERRIDE
 {
     return QString();
 }

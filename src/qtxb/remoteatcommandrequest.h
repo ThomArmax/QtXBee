@@ -51,9 +51,9 @@ public:
     explicit                RemoteATCommandRequest  (QObject *parent = 0);
 
     // Reimplemented from ATCommand
-    virtual void            assemblePacket          ();
-    virtual void            clear                   ();
-    virtual QString         toString                ();
+    virtual void            assemblePacket          () Q_DECL_OVERRIDE;
+    virtual void            clear                   () Q_DECL_OVERRIDE;
+    virtual QString         toString                () Q_DECL_OVERRIDE;
 
     // Setters
     void                    setDestinationAddress64 (const quint64 dest);

@@ -51,14 +51,14 @@ public:
     explicit    ModemStatus         (QObject *parent);
                 ModemStatus         (const QByteArray & packet, QObject * parent = 0);
 
-    QString     toString            ();
+    QString     toString            () Q_DECL_OVERRIDE;
 
     void        setStatus           (Status status);
     Status      status              () const;
     QString     statusToString      () const;
 
 private:
-    bool        parseApiSpecificData(const QByteArray & data);
+    bool        parseApiSpecificData(const QByteArray & data) Q_DECL_OVERRIDE;
 
 private:
     Status      m_status;

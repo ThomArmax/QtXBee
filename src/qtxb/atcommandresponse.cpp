@@ -41,7 +41,6 @@ ATCommandResponse::ATCommandResponse(const QByteArray &packet, QObject *parent) 
 }
 
 bool ATCommandResponse::parseApiSpecificData(const QByteArray &data)
-Q_DECL_OVERRIDE
 {
     QByteArray at;
     int i;
@@ -148,7 +147,6 @@ QString ATCommandResponse::statusToString(const ATCommandResponse::Status status
 }
 
 QString ATCommandResponse::toString()
-Q_DECL_OVERRIDE
 {
     QString str;
     str.append(QString("Raw packet      : 0x%1\n").arg(QString(packet().toHex())));
@@ -168,7 +166,6 @@ Q_DECL_OVERRIDE
 }
 
 void ATCommandResponse::clear()
-Q_DECL_OVERRIDE
 {
     XBeeResponse::clear();
     setATCommand(ATCommand::ATUndefined);

@@ -54,8 +54,8 @@ public:
                                 ATCommandResponse   (const QByteArray &packet, QObject * parent = 0);
 
     // Reimplemented from XBeeResponse
-    virtual QString             toString            ();
-    virtual void                clear               ();
+    virtual QString             toString            () Q_DECL_OVERRIDE;
+    virtual void                clear               () Q_DECL_OVERRIDE;
 
     void                        setATCommand        (ATCommand::ATCommandType at);
     void                        setATCommand        (const QByteArray & at);
@@ -68,7 +68,7 @@ public:
     static QString              statusToString      (const ATCommandResponse::Status status);
 
 protected:
-    virtual bool                parseApiSpecificData(const QByteArray &data);
+    virtual bool                parseApiSpecificData(const QByteArray &data) Q_DECL_OVERRIDE;
 
 protected:
     ATCommand::ATCommandType    m_atCommand;

@@ -38,7 +38,7 @@ public:
                     ~XBeeResponse   ();
 
     // Reimplemented from XBeePacket
-    virtual void    clear           ();
+    virtual void    clear           () Q_DECL_OVERRIDE;
 
     void            setData         (const QByteArray & data);
     QByteArray      data            () const;

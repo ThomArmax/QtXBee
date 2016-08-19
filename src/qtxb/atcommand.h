@@ -160,9 +160,9 @@ public:
     explicit                ATCommand               (QObject *parent = 0);
 
     // Reimplemented from XBeePacket
-    virtual QString         toString                ();
-    virtual void            assemblePacket          ();
-    virtual void            clear                   ();
+    virtual QString         toString                () Q_DECL_OVERRIDE;
+    virtual void            assemblePacket          () Q_DECL_OVERRIDE;
+    virtual void            clear                   () Q_DECL_OVERRIDE;
 
     void                    setCommand              (const ATCommandType command);
     void                    setCommand              (const QByteArray &command);

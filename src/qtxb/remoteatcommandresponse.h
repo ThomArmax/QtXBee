@@ -59,7 +59,7 @@ public:
     quint16         sourceAddress16         () const;
 
 protected:
-    virtual bool    parseApiSpecificData    (const QByteArray &data);
+    virtual bool    parseApiSpecificData    (const QByteArray &data) Q_DECL_OVERRIDE;
 
 private:
     quint64         m_sourceAddress64;

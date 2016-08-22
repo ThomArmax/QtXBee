@@ -45,16 +45,16 @@ MainWindow::MainWindow(QWidget *parent) :
     xbee = new XBee(this);              // Instanciate the XBee object
 
     // Connect to the XBee to catch the transmit statuses
-    connect(xbee, SIGNAL(receivedTransmitStatus(Wpan::TxStatusResponse*)),
-            this, SLOT(onReceivedTransmitStatus(Wpan::TxStatusResponse*)));
+    connect(xbee, SIGNAL(receivedTransmitStatus(QtXBee::Wpan::TxStatusResponse*)),
+            this, SLOT(onReceivedTransmitStatus(QtXBee::Wpan::TxStatusResponse*)));
 
     // Connects to the XBee to catch the received packets
-    connect(xbee, SIGNAL(receivedRxResponse16(Wpan::RxResponse16*)),
-            this, SLOT(onReceivedRxResponse16(Wpan::RxResponse16*)));
+    connect(xbee, SIGNAL(receivedRxResponse16(QtXBee::Wpan::RxResponse16*)),
+            this, SLOT(onReceivedRxResponse16(QtXBee::Wpan::RxResponse16*)));
 
     // Connects to the XBee to catch the received packets
-    connect(xbee, SIGNAL(receivedRxResponse64(Wpan::RxResponse64*)),
-            this, SLOT(onReceivedRxResponse64(Wpan::RxResponse64*)));
+    connect(xbee, SIGNAL(receivedRxResponse64(QtXBee::Wpan::RxResponse64*)),
+            this, SLOT(onReceivedRxResponse64(QtXBee::Wpan::RxResponse64*)));
 
     // Connects the "Open" button
     connect(ui->openButton, SIGNAL(clicked()),

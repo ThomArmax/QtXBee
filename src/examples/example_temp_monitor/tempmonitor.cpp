@@ -18,7 +18,10 @@ TempMonitor::TempMonitor(const QString & serialPort, QObject *parent) :
     QObject(parent),
     m_xbee(NULL),
     m_sensorAddr(0xFFFF),
-    m_currentTemp(0.0)
+    m_currentTemp(0.0),
+    m_minTemp(0.0),
+    m_maxTemp(0.0),
+    m_firstFrame(true)
 {
     bool xbee_success = false;
     m_xbee = new QtXBee::XBee(this);
@@ -41,6 +44,16 @@ TempMonitor::~TempMonitor()
 float TempMonitor::currentTemperature() const
 {
     return m_currentTemp;
+}
+
+float TempMonitor::minTemperature() const
+{
+    return m_minTemp;
+}
+
+float TempMonitor::maxTemperature() const
+{
+    return m_maxTemp;
 }
 
 void TempMonitor::setTempSensorAddress(const quint16 address)
@@ -85,6 +98,24 @@ void TempMonitor::onPacketReceived(QtXBee::Wpan::RxResponse16 * packet)
 
         emit temperatureReceived(temperature);
         emit currentTemperatureChanged();
+
+        if (m_currentTemp < m_minTemp) {
+            m_minTemp = m_currentTemp;
+            emit minTemperatureChanged();
+        }
+        else if (m_currentTemp > m_maxTemp) {
+            m_maxTemp = m_currentTemp;
+            emit maxTemperatureChanged();
+        }
+        else if (m_maxTemp < m_currentTemp) {
+            m_maxTemp = m_currentTemp;
+            emit maxTemperatureChanged();
+        }
+        else if (m_firstFrame) {
+            m_minTemp = m_currentTemp;
+            emit minTemperatureChanged();
+            m_firstFrame = false;
+        }
     }
     else {
         qDebug() << "Invalid packet received";

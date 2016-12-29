@@ -30,7 +30,15 @@ Window {
             chartAnimationDuration  : 2000
             chartData               : Monitor.MonitorData
             chartType               : Charts.ChartType.LINE
+            chartOptions            : chartOpt
         }
+    }
+
+    property var chartOpt: {
+        'scaleOverride' : true,
+        'scaleSteps' : 1,
+        'scaleStepWidth' : 2 * (parseInt(monitor.maxTemperature) - parseInt(monitor.minTemperature) ) + 5,
+        'scaleStartValue' : parseInt(monitor.minTemperature) - 5
     }
 
     Connections {
@@ -38,6 +46,16 @@ Window {
         onTemperatureReceived   : {
             Monitor.appendData(parseFloat(temperature).toFixed(1));
             tempChart.requestPaint();
+        }
+        onMinTemperatureChanged : {
+            tempChart.chartOptions = chartOpt;
+            tempChart.chart = null;
+            tempChart.update();
+        }
+        onMaxTemperatureChanged: {
+            tempChart.chartOptions = chartOpt;
+            tempChart.chart = null;
+            tempChart.update();
         }
     }
 }

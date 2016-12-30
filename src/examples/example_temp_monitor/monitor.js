@@ -2,7 +2,7 @@ var MonitorData = {
     labels: [/*"Temperature (°C)"*/],
     datasets: [
         {
-            fillColor: "rgba(220,220,220,0.5)",
+            fillColor: "rgba(255,102,0,1)",
             strokeColor: "rgba(220,220,220,1)",
             pointColor: "rgba(220,220,220,1)",
             pointStrokeColor: "#ffffff",

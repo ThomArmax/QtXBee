@@ -9,6 +9,12 @@ Window {
     visible : true
     width   : 800
     height  : 480
+
+    Rectangle {
+        anchors.fill: parent
+        color       : "darkgrey"
+    }
+
     Column {
         anchors.fill    : parent
         spacing         : 20
@@ -17,7 +23,8 @@ Window {
             id                  : title
             width               : parent.width
             text                : "Current temperature : " + parseFloat(monitor.currentTemperature).toFixed(1) + "°C"
-            color               : "#DCDCDC"
+            color               : "#336699"
+            font.pointSize      : 25
             horizontalAlignment : Text.AlignHCenter
         }
 

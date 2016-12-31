@@ -12,7 +12,7 @@ You can checkout the [QtXBee's home page](http://thomarmax.github.io/QtXBee/ "ho
 ```
 $ git clone http://github.com/ThomArmax/QtXBee.git
 $ cd ./QtXBee
-$ qmake
+$ qmake -recursive
 $ make
 $ sudo make install
 ```

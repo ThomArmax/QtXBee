@@ -320,13 +320,13 @@ void XBee::displayRemoteCommandResponse(RemoteATCommandResponse *digiMeshPacket)
  */
 void XBee::sendAsync(XBeePacket *packet)
 {
-    packet->assemblePacket();
     if(xbeeFound && m_serial->isOpen())
     {
         packet->setFrameId(m_frameIdCounter);
         if(m_frameIdCounter >= 255)
             m_frameIdCounter = 1;
         else m_frameIdCounter++;
+        packet->assemblePacket();
 
         qDebug() << Q_FUNC_INFO << "Transmit: " << QString("0x").append(packet->packet().toHex());
         m_serial->write(packet->packet());

@@ -11,7 +11,7 @@
 
 typedef union {
     float value;
-    u_int8_t bytes[4];
+    uint8_t bytes[4];
 } float_sensor_result;
 
 TempMonitor::TempMonitor(const QString & serialPort, QObject *parent) :
